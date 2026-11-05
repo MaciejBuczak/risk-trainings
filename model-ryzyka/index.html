@@ -871,6 +871,11 @@
 .duo.kwopen #kwc{clip-path:inset(-4px -4px -4px -4px)!important;opacity:1;pointer-events:auto}
 .wtag b{font-family:var(--body)!important;font-size:inherit!important;letter-spacing:0!important;color:var(--ink2)!important;font-weight:600!important}.wtag .mt-h{letter-spacing:.22em}.wtag .mt-r i{white-space:nowrap}
 .wtag .k{color:var(--muted);font-weight:500;white-space:nowrap}.wtag .mt-h{color:#fff!important}
+.dbx{transform-style:preserve-3d;pointer-events:none}
+.dbf{position:absolute;left:0;top:0;box-sizing:border-box;border:1.6px solid rgba(79,115,144,.8)!important;border-radius:calc(var(--s)*.02)!important;background:rgba(79,115,144,.02)!important;backface-visibility:visible!important}
+.dtag2{border-color:#4f7390!important}.dtag2 .mt-h{background:#4f7390!important}
+.dtag2.wb{background:#c9d3db!important}
+.dtag2:not(.wb){right:auto!important;left:2.6%!important;top:auto!important;bottom:6%!important}.dtag2.wb{left:auto!important;right:2.6%!important;top:auto!important;bottom:6%!important}
 </style>
 </head>
 <body>
@@ -1010,6 +1015,8 @@ const rod=(A,B,cl,l,sa=0,sb=0)=>{const E2=.004,d=(u,v)=>Math.hypot(v[0]-u[0],v[1
   let h="";for(let i=0;i<n;i++)h+=seg(pts[i],pts[i+1],cl,l);return h};
 const seg=(A,B,cl,l)=>{const dx=B[0]-A[0],dy=B[1]-A[1],dz=B[2]-A[2],h=Math.hypot(dx,dz),L=Math.hypot(dx,dy,dz);
   return`<div class="rod ${cl}" data-l="${l}" style="width:calc(var(--s)*${L.toFixed(4)});transform:${T3(A)} rotateY(${(Math.atan2(-dz,dx)*180/Math.PI).toFixed(2)}deg) rotateZ(${(Math.atan2(dy,h)*180/Math.PI).toFixed(2)}deg)"><i></i><i style="transform:rotateX(90deg)"></i></div>`};
+function dbox(){const W=.84,D=.8,Ht=.3,Y=.75,c=`calc(var(--s)*`,F=(w,h,t,cl,body="")=>{const st=`width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}`;return`<i class="dbf ${cl}" style="${st}"></i>`+(body?`<i class="wbl" style="${st}">${body}</i>`:"")},B=`<span class="mt-h">DANE</span><span class="mt-r"><span class="k">Źródła</span><b>3</b></span><span class="mt-r"><span class="k">Zasilenie</span><b>31.10.2026</b></span><span class="mt-r"><span class="k">Rekordy</span><b>4,2 mln</b></span>`;
+  return`<div class="tb dbx" data-f="db" style="transform:${T3([0,Y,0])}">${F(W,Ht,`translateZ(${c}${D/2}))`,"sd",`<span class="mtag wtag dtag2">${B}</span>`)}${F(W,Ht,`rotateY(180deg) translateZ(${c}${D/2}))`,"sd",`<span class="mtag wtag wb dtag2">${B}</span>`)}${F(D,Ht,`rotateY(90deg) translateZ(${c}${W/2}))`,"sd")}${F(D,Ht,`rotateY(-90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,D,`rotateX(90deg) translateZ(${c}${Ht/2}))`,"cp")}${F(W,D,`rotateX(-90deg) translateZ(${c}${Ht/2}))`,"cp")}</div>`}
 function table(){const W=.72,Ht=.26,c=`calc(var(--s)*`,F=(w,h,t,cl,body="")=>{const st=`width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}`;return`<i class="wbf ${cl}" style="${st}"></i>`+(body?`<i class="wbl" style="${st}">${body}</i>`:"")},WB=`<span class="mt-h">WYNIKI</span><span class="mt-r"><span class="k">Proces</span><b>ECL</b></span><span class="mt-r"><span class="k">Aktywa netto</span><b>48,2 mld zł</b></span><span class="mt-r"><span class="k">Zmiana odpisów</span><b>−126 mln zł</b></span>`,lab=`<span class="mtag wtag">${WB}</span>`,labB=`<span class="mtag wtag wb">${WB}</span>`;
   return`<div class="tb wbox" data-f="wyn" style="--c:${WY.col};transform:${T3(WY.at)}">${F(W,Ht,`translateZ(${c}${W/2}))`,"sd",lab)}${F(W,Ht,`rotateY(180deg) translateZ(${c}${W/2}))`,"sd",labB)}${F(W,Ht,`rotateY(90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,Ht,`rotateY(-90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,W,`rotateX(90deg) translateZ(${c}${Ht/2}))`,"cp")}${F(W,W,`rotateX(-90deg) translateZ(${c}${Ht/2}))`,"cp")}</div>`}
 function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
@@ -1038,7 +1045,7 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
   h+=INNER.map(k=>{const at=k.at||[0,0,0],f=t=>`<div class="kf" style="transform:${t} translateZ(calc(var(--k)/2))"></div>`,
    txt=k.mod?`<b>${E(k.n)}</b>`:`<span class="cx"><b class="ecl">ECL</b></span><span class="sp"><span class="ki">${sv("sigma")}</span><b>Model<br>statystyczny</b></span>`,lab=(t,i)=>`<div class="kt i${i}" style="transform:${t} translateZ(calc(var(--k)/2 + 1px))">${txt}</div>`;
    return`<div class="ik${k.mod?" m":" hub"}" data-f="${k.id}" style="--c:${k.col};--k:calc(var(--s)*${k.k||.26});transform:${T3(at)} scale3d(var(--sc,1),var(--sc,1),var(--sc,1))">${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)","rotateX(90deg)","rotateX(-90deg)"].map(f).join("")}${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)"].map(lab).join("")}</div>`}).join("")
-   +table()
+   +table()+dbox()
    +DBS.map(([x,z],di)=>`<div class="db" data-f="db" style="--c:${DB.col};--r:calc(var(--s)*${DB.r});--h:calc(var(--s)*${DB.h});transform:${T3([x,DB.at[1],z])}">${[-.5,-.17,.17,.5].map((y,i)=>`<div class="ring${i?"":" lid"}" style="transform:translateY(calc(var(--h)*${y})) rotateX(90deg)"></div>`).join("")}${Array.from({length:16},(_,i)=>`<div class="vl" style="transform:rotateY(${i*22.5}deg) translateZ(var(--r))"></div>`).join("")}<div class="yb sil" data-t="">${[-.5,-.17,.17,.5].map((y,i)=>`<span class="el${i?" lo":""}" style="top:calc(var(--h)*${y+.5} - var(--e)/2)"></span>`).join("")}<b class="dbn">${["DWH_KREDYTY","CRM_KLIENCI","MAKRO_SCENARIUSZE"][di]}</b></div></div>`).join("");
   document.getElementById("inr").innerHTML=h;YB=[...cube.querySelectorAll(".yb")];
   const sel=document.querySelector(".fb.on,.ib.on");if(sel)pick(sel.dataset.f,false);if(typeof set==="function")set()}
