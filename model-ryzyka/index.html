@@ -751,6 +751,12 @@
 .mf2{border:1.5px solid #8a4f8f!important}
 .circ .f,.circ.sc .f{stroke-dasharray:12 88!important;animation:circ2 3.2s linear infinite!important}
 @keyframes circ2{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+.tag.tb2{left:auto!important;right:6%!important;width:calc(var(--s)*.075);height:calc(var(--s)*.03);padding:0!important;background:#a985ac}
+.circ .t{stroke-linejoin:round}.circ .f{stroke-linejoin:round}
+.circ .f,.circ.sc .f{animation-duration:6.5s!important}
+.rod2{top:calc(var(--s)*-.035)!important;height:calc(var(--s)*.07)!important}
+@keyframes pist{0%,100%{transform:translateY(calc(var(--s)*.025))}50%{transform:translateY(calc(var(--s)*-.025))}}
+.pr{animation-duration:4.2s!important}
 </style>
 </head>
 <body>
@@ -897,17 +903,17 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
   const HS=id=>id==="stat"?.26*(CX?.6:1)/2:id==="db"||id==="wyn"?0:MODS.find(m=>m.id===id).k/2;
   let h=[...LINKS.map(l=>[...l,""]),...FEEDS.map(l=>[...l,"feed"]),...RES.map(l=>[...l,"feed res"])].map(([a,b,cl])=>{const m=[a,b].some(x=>!["stat","db","wyn"].includes(x));return rod(P(a),P(b),cl+(m?" m":""),a+" "+b,HS(a),HS(b))}).join("");
   {const by=DB.at[1]-DB.h/2;const L=(by-.5).toFixed(3);DBS.forEach(([x,z])=>{h+=`<div class="port pb" style="transform:${T3([x,.5,z])} rotateX(90deg)"></div><div class="strm" style="transform:${T3([x,by,z])}"><div class="yb sb sv1 dbs" data-t="" style="--L:calc(var(--s)*${L})"><i class="sl"></i><i class="sp"></i><i class="sp d2"></i></div></div>`})}
-  {const M=[0,.37,0];let mh="";
+  {const M=[0,.33,0];let mh="";
     const W=.44,Hh=.12,c=`calc(var(--s)*`,F=(w,h,t,cl,b="")=>`<i class="mf2 ${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}">${b}</i>`;
     let top="",inner="";const PL=(y,body)=>`<div class="pl3" style="transform:translateY(${c}${y})) rotateX(90deg)">${body}</div>`;
-    if(MV===1){const L=[["M10 20H40V50H70V80H90","M10 50H25V80H55","M90 20H60V35H45"],["M50 10V30H80V60H90","M30 90V65H45V50","M10 40H30V20"],["M20 90V60H60V40H90","M70 10V25H40"]],N=[[40,50],[70,80],[45,50],[80,60],[30,20],[60,40]];
+    if(MV===1){const L=[["M8 20H40V50H70V80H92","M8 50H25V80H55V92","M92 20H60V35H45V50","M40 8V20","M70 50H92","M25 50V35H40"],["M50 8V30H80V60H92","M30 92V65H45V50H70","M8 40H30V20H50","M8 75H18V65H30","M80 30V8","M60 60V80H80"]],N=[[40,50],[70,80],[45,50],[80,60],[30,20],[40,20],[25,50],[70,50],[25,80],[60,35],[50,30],[30,65],[45,65],[18,65],[80,30],[60,80]];
       inner=L.slice(0,2).map((ps,k)=>PL((k-.5)*Hh/2.4,`<svg viewBox="0 0 100 100" class="circ">${ps.map(d=>`<path class="t" d="${d}"/><path class="f" pathLength="100" d="${d}" style="animation-delay:${(-k*1.1-ps.indexOf(d)*.6).toFixed(1)}s"/>`).join("")}${N.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.6"/>`).join("")}</svg>`)).join("")
         +N.slice(0,4).map(([x,y],k)=>`<div class="via" style="transform:translate3d(${c}${((x-50)/100*W).toFixed(3)}),0,${c}${((y-50)/100*W).toFixed(3)}))"><i style="animation-delay:${(-k*.4).toFixed(1)}s"></i><i style="transform:rotateY(90deg);animation-delay:${(-k*.4).toFixed(1)}s"></i></div>`).join("")}
     else if(MV===3){inner=`<div class="swp"><i></i></div>`+[[-.12,-.05,.1],[.1,.04,-.12],[.14,-.02,.08],[-.08,.05,-.1],[0,0,.15],[-.15,.02,-.02],[.05,-.06,0]].map(([x,y,z],k)=>`<div class="dot3" style="transform:translate3d(${c}${x}),${c}${y}),${c}${z}))"><b class="yb" data-t="" style="animation-delay:${(Math.atan2(z,x)/Math.PI/2*3.6).toFixed(2)}s"></b></div>`).join("")}
     let pist="";if(MV===2){[[-.14,-.14],[.14,-.14],[0,0],[-.14,.14],[.14,.14]].forEach(([x,z],a)=>{const b=0;{const d=(-[0,2,4,1,3][a]*.36).toFixed(2);pist+=`<div class="pst" style="transform:translate3d(${c}${x}),0,${c}${z}))"><i class="ring" style="transform:translateY(${c}${-Hh/2})) rotateX(90deg)"></i><i class="ring" style="transform:translateY(${c}${Hh/2})) rotateX(90deg)"></i><div class="yb tube" data-t=""></div><div class="pr" style="animation-delay:${d}s"><div class="yb rod2" data-t=""></div></div></div>`}})}
     const SC=MV===1?`<svg viewBox="0 0 200 54" preserveAspectRatio="none" class="circ sc">${["M0 14H40V40H90V20H140V36H200","M0 40H22V26H60","M110 54V44H170V14H200","M70 0V14H120"].map((d,k)=>`<path class="t" d="${d}"/><path class="f" pathLength="100" d="${d}" style="animation-delay:${(-k*.8).toFixed(1)}s"/>`).join("")}${[[40,14],[40,40],[90,40],[90,20],[140,20],[140,36],[22,40],[22,26],[60,26],[110,44],[170,44],[170,14],[70,14],[120,14]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3.6"/>`).join("")}</svg>`:"";
-    const SIDES=["","rotateY(180deg) ","rotateY(90deg) ","rotateY(-90deg) "],TAG=`<span class="tag">SILNIK</span>`;
-    mh=`<div class="mbox">${SIDES.map((r,i)=>F(W,Hh,`${r}translateZ(${c}${W/2}))`,"sd")+F(W,Hh,`${r}translateZ(${c}${W/2+.001}))`,"sdx",SC+(i===0?TAG:""))).join("")}${F(W,W,`rotateX(90deg) translateZ(${c}${Hh/2}))`,"cp")}${inner}${F(W,W,`rotateX(-90deg) translateZ(${c}${Hh/2}))`,"cp")}${pist}</div>`;
+    const SIDES=["","rotateY(180deg) ","rotateY(90deg) ","rotateY(-90deg) "],TAG=`<span class="tag">SILNIK</span>`,TAGB=`<span class="tag tb2"></span>`;
+    mh=`<div class="mbox">${SIDES.map((r,i)=>F(W,Hh,`${r}translateZ(${c}${W/2}))`,"sd")+F(W,Hh,`${r}translateZ(${c}${W/2+.001}))`,"sdx",SC+(i===0?TAG:""))).join("")}${F(W,Hh,`translateZ(${c}${W/2+.002})) rotateY(180deg)`,"sdx",TAGB)}${F(W,W,`rotateX(90deg) translateZ(${c}${Hh/2}))`,"cp")}${inner}${F(W,W,`rotateX(-90deg) translateZ(${c}${Hh/2}))`,"cp")}${pist}</div>`;
     h+=`<div class="mech" data-f="stat" style="transform:${T3(M)}">${mh}</div>`}
   if(X.port){const L=Math.abs(X.at[1]+.06-X.port[1]),rnd=(a,b)=>a+Math.random()*(b-a);let body="";
     if(SV===1)body=`<i class="sl"></i><i class="sp"></i><i class="sp d2"></i>`;
