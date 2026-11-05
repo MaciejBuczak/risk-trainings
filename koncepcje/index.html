@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Koncepcje modeli – Risk Trainings | Maciej Buczak</title>
+<meta name="description" content="Koncepcje modeli ryzyka omawiane na szkoleniach: od scoringu i LGD przez VaR i LDA po kapitał ekonomiczny i stres testy – z opisem, przykładem i podstawą regulacyjną.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap">
+<link rel="stylesheet" href="../rt.css">
+<style>
+.mh{padding:clamp(24px,3vw,44px) 0 18px}
+.mh .wrap,.kw,.top .wrap,.foot .wrap{max-width:1380px}
+.mh .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 60px;align-items:end}
+.mh h1{font-size:clamp(32px,3.6vw,50px);margin:16px 0 0;letter-spacing:-.02em}
+.mh h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d)}
+.mh p{margin:0;font-size:16px;font-weight:300;color:var(--ink2);max-width:560px}
+.stats{display:flex;gap:28px;margin-top:16px}.stats b{display:block;font-family:"Archivo Black",sans-serif;font-weight:400;font-size:28px;line-height:1}.stats span{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.kw{margin:0 auto;padding:0 var(--gut,24px) 70px}
+.kf{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px 18px;background:#fffdf9;border:1px solid var(--line);border-radius:22px;margin:10px 0 20px}
+.kf>span{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tan);margin-right:4px}
+.kf .sp{flex-basis:100%;height:0}
+.ch{font:inherit;font-size:13px;font-weight:500;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:background .2s,border-color .2s,color .2s}
+.ch i{width:9px;height:9px;border-radius:50%;background:var(--dc)}.ch:hover{border-color:var(--ink)}.ch.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.ch small{font-size:11px;opacity:.55;font-weight:600}
+.clr{margin-left:auto;font:inherit;font-size:13px;font-weight:600;padding:7px 16px;border-radius:999px;border:1.5px solid var(--ink);background:#fff;cursor:pointer}.clr:hover{background:var(--ink);color:var(--paper)}
+.kg{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.dm{grid-column:span 4;border-radius:24px;padding:16px 14px 14px;background:color-mix(in srgb,var(--dc) 13%,#faf6ef);display:flex;flex-direction:column;gap:8px}
+.dm.wide{grid-column:span 8}
+.dm-h{display:flex;align-items:baseline;gap:10px;padding:0 4px 4px}
+.dm-h b{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:19px}.dm-h small{margin-left:auto;font-size:12px;color:var(--ink2)}
+.dm-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.cd{position:relative;text-align:left;font:inherit;color:var(--ink);background:#fffdf9;border:1px solid rgba(13,13,13,.07);border-radius:16px;padding:11px 40px 30px 13px;min-height:96px;cursor:pointer;transition:transform .2s,box-shadow .2s,opacity .2s,border-color .2s}
+.cd:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(13,13,13,.35);border-color:var(--dc)}
+.cd b{display:block;font-size:14px;font-weight:600;line-height:1.25}.cd small{display:block;font-size:12px;color:var(--ink2);margin-top:2px;line-height:1.35}
+.cd .k{position:absolute;right:9px;top:9px;font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:999px}
+.k.EL{background:#ead9a2;color:#5c4a12}.k.UL{background:var(--ink);color:var(--paper)}.k.W{background:#e3ddd1}.k.B{background:#dbe5ec}.k.P{background:#cfe0e6}.k.S{background:#9a3b25;color:#fff}.k.V{background:#e1e4cf}
+.cd .ot{position:absolute;left:13px;bottom:9px;font-size:10px;font-weight:600;color:var(--oc);background:color-mix(in srgb,var(--oc) 12%,#fff);border:1px solid color-mix(in srgb,var(--oc) 35%,#fff);border-radius:999px;padding:1px 8px}
+.rg{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:4px;background:var(--ink);color:var(--paper);font-family:var(--serif);font-style:normal;font-size:12px;margin-right:6px;vertical-align:1px}
+.ub{position:absolute;right:11px;bottom:9px;width:8px;height:40px;display:flex;flex-direction:column-reverse;gap:3px}.ub i{flex:1;border-radius:2px;background:rgba(13,13,13,.09)}.ub i.f{background:var(--dc)}
+.ub.inl{position:static;display:inline-flex;height:22px;width:8px;vertical-align:middle}
+.cd.old{filter:grayscale(1);opacity:.6}.cd.old b{text-decoration:line-through;text-decoration-color:rgba(13,13,13,.35)}
+.kg.fl .cd{opacity:.25}.kg.fl .cd.hit{opacity:1}
+.lgd{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--ink2);margin:14px 4px 0}
+/* okno */
+.md{position:fixed;inset:0;z-index:80;background:rgba(20,16,12,.45);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.md.open{opacity:1;pointer-events:auto}
+.mc{position:relative;width:min(780px,100%);max-height:calc(100vh - 40px);overflow:auto;background:#fffdf9;border-radius:26px;box-shadow:0 40px 90px -30px rgba(0,0,0,.55);transform:translateY(14px);transition:transform .25s}
+.md.open .mc{transform:none}
+.mt{height:10px;background:var(--dc)}
+.mx{position:absolute;right:16px;top:24px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:14px}
+.mi{padding:24px 34px 32px}
+.mi .kick{color:var(--dc)}
+.mi h2{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:clamp(26px,3vw,36px);line-height:1.05;margin:10px 0 6px;padding-right:40px}
+.mo{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:16px}
+.mr{display:flex;gap:8px;align-items:flex-start;margin:10px 0 0;font-size:13px;font-weight:600;line-height:1.45}
+.mu{display:flex;align-items:center;gap:10px;margin:12px 0 0;font-size:14px;color:var(--ink2)}.mu b{color:var(--ink)}
+.mp{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.mp span{font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:#fff}
+.mb p{font-size:15.5px;line-height:1.7;color:var(--ink2);margin:16px 0 0;font-weight:300}
+.mex{margin-top:20px;background:color-mix(in srgb,var(--dc) 12%,#faf6ef);border-radius:18px;padding:18px 22px;border-left:4px solid var(--dc)}
+.mex>span{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dc)}
+.mex h3{margin:4px 0 10px;font-size:17px}
+.mex ol{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:8px}
+.mex li{position:relative;padding-left:32px;font-size:14.5px;line-height:1.5}
+.mex li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:22px;height:22px;border-radius:50%;background:var(--dc);color:#fff;font-size:11.5px;font-weight:600;display:grid;place-items:center}
+.mh4{margin:22px 0 8px;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tan)}
+.mid{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.5;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+.mpar{display:grid;gap:8px}.mpar div{display:grid;grid-template-columns:100px 1fr;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px}
+.mpar em{font-family:var(--serif);font-size:19px;color:var(--dc)}.mpar b{display:block;font-size:14px}.mpar span{font-size:13.5px;color:var(--ink2);line-height:1.5}
+@media(max-width:1100px){.dm,.dm.wide{grid-column:span 12}.mh .wrap{grid-template-columns:1fr}}
+@media(max-width:600px){.mi{padding:20px 20px 26px}.mpar div{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="wrap">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav"><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../mapa-banku/">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a href="../o-mnie/">O mnie</a><a href="../#kontakt">Kontakt</a><a class="sci" href="https://maciejbuczak.github.io/">Strona naukowa ↗</a></nav>
+    <a class="brand" href="../"><span><b>Risk Trainings</b><small>Maciej Buczak · Risk Research</small></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a>
+  </div>
+</header>
+
+<main>
+<section class="mh"><div class="wrap">
+  <div><span class="kick">Koncepcje modeli</span><h1>Modele ryzyka, <em>które omawiam</em> na szkoleniach</h1></div>
+  <div><p>Od scoringu i LGD przez VaR i LDA po kapitał ekonomiczny i stres testy. Każda koncepcja ma opis, przykład liczbowy, wzór, parametry, które trzeba oszacować, i – jeśli dotyczy – podstawę regulacyjną. Kliknij koncepcję, żeby ją otworzyć.</p><div class="stats" id="stats"></div></div>
+</div></section>
+
+<div class="kw">
+  <div class="kf" id="kf"></div>
+  <div class="kg" id="kg"></div>
+  <div class="lgd"><span><span class="k EL" style="position:static;font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:999px">EL</span> strata oczekiwana</span><span><span class="k UL" style="position:static;font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:999px">UL</span> strata nieoczekiwana / kapitał</span><span><em class="rg">§</em>metoda regulacyjna</span><span><span class="ub inl" style="--dc:#a8694c"><i></i><i></i><i class="f"></i><i class="f"></i><i class="f"></i></span> słupek – jak często banki stosują koncepcję</span></div>
+</div>
+</main>
+
+<div class="md" id="md" role="dialog" aria-modal="true" aria-labelledby="mh2"><div class="mc" id="mc"></div></div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><a class="brand" href="../"><span><b>Risk Trainings</b></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a><p style="margin:14px 0 0;max-width:340px">Szkolenia z zarządzania ryzykiem dla banków i instytucji finansowych.</p></div>
+    <div><h4>Strony</h4><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../mapa-banku/">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a href="../o-mnie/">O mnie</a><a href="https://maciejbuczak.github.io/">Strona naukowa</a></div>
+    <div><h4>Kontakt</h4><a href="mailto:maciej.buczak@gmail.com">maciej.buczak@gmail.com</a><a href="https://www.linkedin.com/in/maciej-buczak-561b95120" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div class="bottom"><span>© 2026 Maciej Buczak | Risk Research</span><span>Wersja próbna strony</span></div>
+  </div>
+</footer>
+<script src="dane.js"></script>
+<script>
+const D=window.RT_KON;
+const esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const DI={};D.dom.forEach(x=>DI[x[0]]=x);const CI={};D.c.forEach(c=>CI[c.id]=c);
+const UT=["","niszowo","rzadko","w części banków","często","powszechnie"];
+const seg=u=>[1,2,3,4,5].map(k=>`<i${k<=u?' class="f"':""}></i>`).join("");
+const WIDE={K1:1};
+document.getElementById("stats").innerHTML=`<div><b>${D.c.length}</b><span>koncepcji</span></div><div><b>${D.dom.length}</b><span>obszarów ryzyka</span></div><div><b>${D.c.filter(c=>c.reg).length}</b><span>metod regulacyjnych</span></div>`;
+document.getElementById("kg").innerHTML=D.dom.map(d=>{const cs=D.c.filter(c=>c.d===d[0]);return`<section class="dm${WIDE[d[0]]?" wide":""}" style="--dc:${d[3]}" data-dom="${d[0]}"><div class="dm-h"><b>${d[1]}</b><small>${cs.length} · ${d[2]}</small></div><div class="dm-l">${cs.map(c=>`<button type="button" class="cd${c.old?" old":""}" data-id="${c.id}"><b>${c.reg?'<em class="rg">§</em>':""}${esc(c.n)}</b><small>${c.old?esc(c.old):esc(c.o)}</small><span class="k ${c.k}">${c.k}</span><span class="ot" style="--oc:${c.otc}">${esc(c.ot)}</span><span class="ub" title="Stosowanie w bankach: ${UT[c.u]}">${seg(c.u)}</span></button>`).join("")}</div></section>`}).join("");
+let F={d:null,k:null,r:false};
+const kf=document.getElementById("kf");
+kf.innerHTML=`<span>Obszar</span>${D.dom.map(d=>`<button type="button" class="ch" data-fd="${d[0]}" style="--dc:${d[3]}"><i></i>${d[1]}<small>${D.c.filter(c=>c.d===d[0]).length}</small></button>`).join("")}<span class="sp"></span><span>Co liczy</span>${["EL","UL"].map(k=>`<button type="button" class="ch" data-fk="${k}">${k==="EL"?"Strata oczekiwana":"Strata nieoczekiwana / kapitał"}<small>${D.c.filter(c=>c.k===k).length}</small></button>`).join("")}<button type="button" class="ch" data-fr="1"><em class="rg">§</em>Metody regulacyjne<small>${D.c.filter(c=>c.reg).length}</small></button><button type="button" class="clr" id="clr">Wyczyść filtry ✕</button>`;
+function apply(){const any=F.d||F.k||F.r;const g=document.getElementById("kg");g.classList.toggle("fl",!!any);
+  g.querySelectorAll(".cd").forEach(b=>{const c=CI[b.dataset.id];b.classList.toggle("hit",(!F.d||c.d===F.d)&&(!F.k||c.k===F.k)&&(!F.r||!!c.reg))});
+  kf.querySelectorAll("[data-fd]").forEach(b=>b.classList.toggle("on",b.dataset.fd===F.d));kf.querySelectorAll("[data-fk]").forEach(b=>b.classList.toggle("on",b.dataset.fk===F.k));kf.querySelector("[data-fr]").classList.toggle("on",F.r)}
+const md=document.getElementById("md"),mc=document.getElementById("mc");
+function open(id){const c=CI[id],d=DI[c.d],x=c.det;md.style.setProperty("--dc",d[3]);
+  mc.innerHTML=`<div class="mt"></div><button type="button" class="mx" id="mx" aria-label="Zamknij">✕</button><div class="mi"><span class="kick">${d[1]}${c.g?" · "+esc(c.g):""}</span><h2 id="mh2">${esc(c.n)}</h2><div class="mo">${esc(c.o)}</div>
+  ${c.reg?`<div class="mr"><em class="rg">§</em><span>${esc(c.reg)}</span></div>`:""}${c.old?`<div class="mr" style="color:#7a7268">${esc(c.old)}</div>`:""}
+  <div class="mu"><span class="ub inl">${seg(c.u)}</span><span>Stosowanie w bankach: <b>${UT[c.u]}</b> (${c.u} / 5)</span></div>
+  <div class="mp"><span>${c.k} · ${esc(D.KL[c.k])}</span><span>Rodzaj wyniku: ${esc(c.ot)}</span></div>
+  <div class="mb">${x?x.p.map(t=>`<p>${esc(t)}</p>`).join(""):`<p>${esc(c.s)}</p>`}</div>
+  ${x?`<div class="mex"><span>Przykład</span><h3>${esc(x.ex[0])}</h3><ol>${x.ex[1].map(t=>`<li>${esc(t)}</li>`).join("")}</ol></div>`:""}
+  <div class="mh4">Idea w jednym wzorze</div><div class="mid">${esc(c.idea)}</div>
+  ${c.par.length?`<div class="mh4">Parametry szacowane</div><div class="mpar">${c.par.map(p=>`<div><em>${esc(p[0])}</em><span><b>${esc(p[1])}</b>${esc(p[2])}</span></div>`).join("")}</div>`:""}
+  <div class="mh4">Gdzie się używa</div><p style="margin:0;font-size:15px;color:var(--ink2)">${esc(c.use)}</p></div>`;
+  md.classList.add("open");document.body.style.overflow="hidden";mc.scrollTop=0;document.getElementById("mx").focus()}
+function close(){md.classList.remove("open");document.body.style.overflow=""}
+document.addEventListener("click",e=>{const cd=e.target.closest(".cd");if(cd){open(cd.dataset.id);return}
+  if(e.target===md||e.target.closest("#mx")){close();return}
+  const fd=e.target.closest("[data-fd]");if(fd){F.d=F.d===fd.dataset.fd?null:fd.dataset.fd;apply();return}
+  const fk=e.target.closest("[data-fk]");if(fk){F.k=F.k===fk.dataset.fk?null:fk.dataset.fk;apply();return}
+  if(e.target.closest("[data-fr]")){F.r=!F.r;apply();return}
+  if(e.target.closest("#clr")){F={d:null,k:null,r:false};apply()}});
+addEventListener("keydown",e=>{if(e.key==="Escape")close()});
+apply();
+</script>
+<script src="../rt.js"></script>
+</body>
+</html>

@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mapa banku – Risk Trainings | Maciej Buczak</title>
+<meta name="description" content="Interaktywna mapa banku: bilans, rachunek zysków i strat, kapitał – i modele ryzyka, które je kształtują. Z powiązanymi szkoleniami.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap">
+<link rel="stylesheet" href="../rt.css">
+<style>
+.mh{padding:clamp(24px,3vw,44px) 0 18px}
+.mh .wrap,.mapw,.top .wrap,.foot .wrap{max-width:1380px}
+.mh .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 60px;align-items:end}
+.mh h1{font-size:clamp(32px,3.6vw,50px);margin:16px 0 0;letter-spacing:-.02em}
+.mh h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d)}
+.mh p{margin:0;font-size:16px;font-weight:300;color:var(--ink2);max-width:540px}
+/* filtry */
+.fx{display:block;justify-content:space-between;align-items:start;gap:10px 28px;padding:18px 22px;border-radius:24px;background:var(--panel);margin-bottom:22px}
+.fg{display:flex;flex-wrap:wrap;align-items:center;align-content:flex-start;gap:6px;max-width:360px}
+.flw{display:flex;flex-direction:column;gap:10px;width:100%}
+.flw-h{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tan)}
+.flw-r{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:22px}
+.ch.st{position:relative;flex-direction:column;align-items:flex-start;gap:2px;border-radius:14px;padding:10px 14px;text-align:left;line-height:1.3;min-height:58px;justify-content:center}
+.ch.st em{font-style:normal;font-size:10.5px;font-weight:600;letter-spacing:.1em;color:var(--terra)}
+.ch.st.on em{color:var(--sand)}
+.ch.st:not(:last-child)::after{content:"→";position:absolute;right:-17px;top:50%;transform:translateY(-50%);color:var(--tan);font-size:14px;pointer-events:none}
+@media(max-width:1000px){.flw-r{grid-template-columns:repeat(3,minmax(0,1fr))}.ch.st:nth-child(3)::after{display:none}}
+@media(max-width:600px){.flw-r{grid-template-columns:1fr 1fr}.ch.st::after{display:none}}
+.fx .fg{max-width:none;gap:8px}.fx .fg>span{width:auto;margin:0 12px 0 0}.fx{padding:14px 22px}
+.fg>span{width:100%;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tan);margin-bottom:2px}
+.ch{font:inherit;font-size:13px;font-weight:500;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink2);cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:background .2s,border-color .2s,color .2s}
+.ch i{width:8px;height:8px;border-radius:2px;flex:none}
+.ch:hover{border-color:var(--ink)}
+.ch.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+@media(max-width:1100px){.fx{grid-template-columns:repeat(2,auto)}}
+@media(max-width:620px){.fx{grid-template-columns:1fr}}
+/* układ */
+.lay{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;align-items:start}
+@media(max-width:1000px){.lay{grid-template-columns:1fr}}
+/* mapa */
+.bank{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 30px}
+.col{position:relative;border-radius:24px;padding:18px 14px 14px}
+.col+.col::before{content:"→";position:absolute;left:-24px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--tan)}
+.grh{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);opacity:.75;margin:6px 4px -1px}.cb>.grh:first-child{margin-top:0}
+.kp{border-radius:16px;padding:10px 8px 8px;display:flex;flex-direction:column;gap:6px}
+.kav{background:rgba(255,253,249,.55);border:1.5px solid rgba(13,13,13,.75)}.krq{background:rgba(255,253,249,.35);border:1.5px dashed var(--terra-d)}
+.kph{padding:0 4px 2px}.kg{display:grid;grid-template-columns:1fr 1fr;gap:6px}.kg .bl{padding:7px 9px}.kg .bl small{font-size:11px}.kph{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}.kph b{font-size:12.5px;font-weight:600}.kph small{font-size:11px;color:var(--muted)}
+.kvs{display:flex;justify-content:center;margin:-2px 0}.kvs span{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--terra-d);border-radius:999px;padding:3px 10px;position:relative}
+.kvs span::before{content:"↑";margin-right:5px}
+.kft{font-size:11px;color:var(--ink2);text-align:center;margin-top:4px;font-weight:500}
+.c1{background:#f3e4c4}.c2{background:#e0dccb}.c3{background:#f9d5bd}.c4{background:#e7d4c4}
+.col h3{font-family:var(--body);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin:0 0 10px;padding:0 4px}
+.col h3 b{display:block;font-family:var(--display);font-weight:400;font-size:21px;letter-spacing:0;text-transform:none;color:var(--ink);margin-top:3px}
+.cb{display:flex;flex-direction:column;gap:6px}
+.bl{position:relative;display:block;width:100%;text-align:left;font:inherit;color:var(--ink);background:#fffdf9;border:1px solid rgba(13,13,13,.08);border-radius:14px;padding:8px 11px;cursor:pointer;transition:opacity .25s,border-color .25s,box-shadow .25s,background .25s;overflow:visible}
+.bl b{display:block;font-size:13px;font-weight:600;line-height:1.3;padding-right:34px}
+.bl small{display:block;font-size:11px;color:var(--muted);line-height:1.35;margin-top:2px}
+.bl.sum{background:transparent;border-color:transparent;border-top:1.5px solid rgba(13,13,13,.55);border-radius:0}
+.bl.dark{background:var(--ink);border-color:var(--ink);color:var(--paper)}.bl.dark small{color:#b9b0a2}
+.bl .rd{position:absolute;right:8px;top:9px;display:flex;gap:3px}.bl>b{display:block;padding-right:var(--dw,0)}.kg .bl{min-width:0}@media(max-width:1300px){.kg .bl>b{padding-right:0;font-size:12.5px}.kg .bl .rd{position:static;margin-top:5px}.kg .bl{padding:7px 8px}}@media(max-width:1180px){.kg{grid-template-columns:1fr}.kg .bl .rd{position:absolute;margin:0}}.bl .rd i{width:7px;height:7px;border-radius:2px}
+.bl:hover{border-color:#a99d8b}
+.bank.sel .bl{opacity:.3}
+.bank.sel .bl.hit{opacity:1;border-color:var(--hc,var(--terra));box-shadow:0 0 0 2px var(--hc,var(--terra));background:#fff}
+.bank.sel .bl.hit.dark{background:var(--ink)}
+.bank.sel .bl.cur{opacity:1;box-shadow:0 0 0 3px var(--ink)}
+.bl .bd{position:absolute;top:-9px;right:8px;display:flex;gap:4px}
+.bl .bd span{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--hc,var(--terra));color:#fff;font-size:11px;font-weight:600;display:grid;place-items:center}
+.bl .rl{position:absolute;bottom:-9px;right:8px;display:flex;gap:4px}
+.bl .rl span{font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:var(--ink);color:var(--paper)}
+.bl .rl span.d{background:var(--terra)}
+.zb{grid-column:1/3}
+.rtb{grid-column:1/-1;border-radius:24px;background:#ece4d6;padding:18px 18px 16px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;position:relative;margin-top:6px}
+.fl{position:absolute;left:0;top:0;pointer-events:none;z-index:1;overflow:visible}.bank .bl{z-index:2}.fln{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}.fln ol{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px}.fln li::before{display:none!important;content:none!important}.fln li{display:flex;gap:8px;align-items:baseline;font-size:12.5px;line-height:1.4}.fln li i{flex:none;width:18px;height:18px;border-radius:50%;background:var(--ink);color:var(--paper);font-style:normal;font-size:10.5px;font-weight:600;display:inline-grid;place-items:center;transform:translateY(3px)}
+.rtb::before{content:"↓";position:absolute;left:87%;top:-24px;transform:translateX(-50%);font-size:18px;color:var(--tan)}
+.rtb-h span{display:block;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+.rtb-h b{display:block;font-family:var(--display);font-weight:400;font-size:21px;line-height:1.15;margin:4px 0 8px}
+.rtb-h small{display:block;font-size:12px;color:var(--muted);line-height:1.45}
+.rtb-g{display:grid;grid-template-columns:3fr 2fr 5fr;gap:14px}
+.rg>span{display:block;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tan);margin:2px 0 8px}
+.rg>div{display:grid;gap:6px}.rg:last-child>div{grid-template-columns:1fr 1fr}
+.bl.rq b{padding-right:0}.bl.rq b em{font-style:normal;color:var(--terra-d);margin-left:2px}
+.bank.sel .bl.rq.cur{opacity:1;background:var(--ink);color:var(--paper);box-shadow:none;border-color:var(--ink)}.bank.sel .bl.rq.cur small{color:#b9b0a2}.bank.sel .bl.rq.cur b em{color:var(--sand)}
+@media(max-width:1000px){.rtb{grid-template-columns:1fr}.rtb-g{grid-template-columns:1fr}.rtb::before{display:none}}
+.lg{grid-column:1/-1;justify-content:flex-end;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:11.5px;color:var(--muted);padding-top:6px}
+.lg span{display:inline-flex;align-items:center;gap:6px}.lg i{width:8px;height:8px;border-radius:2px}
+@media(max-width:1000px){.bank{grid-template-columns:1fr 1fr;gap:16px}.col+.col::before{display:none}}
+@media(max-width:560px){.bank{grid-template-columns:1fr}}
+/* modele */
+.md{background:#fffdf9;border:1px solid var(--line);border-radius:24px;padding:16px 18px 18px;margin-bottom:22px}
+.md-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin-bottom:12px;border-bottom:1px solid var(--ink);padding-bottom:8px}.md .md-h h3{border:0;padding:0;margin:0}.md-h .leg{margin:0}
+#ml{display:flex;flex-wrap:wrap;gap:10px}
+.md h3,.tr h3,.inf .k{font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid var(--ink)}
+.mg{border-radius:16px;background:var(--panel);border-top:3px solid var(--gc);padding:10px 10px 10px;display:flex;flex-wrap:wrap;align-content:flex-start;gap:5px}.mg{cursor:pointer;transition:box-shadow .25s,background .25s}.mg:hover{box-shadow:0 0 0 1px var(--gc)}.mg.cur{box-shadow:0 0 0 2px var(--gc);background:#f6efe4}
+.mg>span{width:100%;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:0 0 3px 2px}
+.mb{display:inline-flex;align-items:center;gap:7px;width:auto;text-align:left;font:inherit;font-size:12.5px;font-weight:500;color:var(--ink);background:#fffdf9;border:1px solid rgba(13,13,13,.08);border-radius:999px;padding:5px 10px;cursor:pointer;transition:background .2s,border-color .2s,opacity .2s}
+.mb i{width:9px;height:9px;border-radius:2px;flex:none}
+.mb .mn{line-height:1.25}.mb .mp{flex:none;white-space:nowrap}.mb .mp .pl{margin-left:3px}
+.md .leg{font-size:11.5px;color:var(--muted);line-height:1.5;margin:0 0 6px}
+.mb:hover{border-color:var(--ink)}
+.md.sel .mb{opacity:.35}.md.sel .mb.on{opacity:1;border-color:var(--ink)}.md.sel .mb.cur{opacity:1;background:var(--ink);color:var(--paper);border-color:var(--ink)}
+/* informacja */
+.inf{position:fixed;right:24px;bottom:88px;z-index:61;width:min(460px,calc(100vw - 32px));max-height:min(72vh,680px);overflow:auto;border-radius:24px;box-shadow:0 24px 60px -20px rgba(13,13,13,.35);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s}
+.inf.open{opacity:1;transform:none;pointer-events:auto}
+.inf .ib{min-height:0;border-radius:24px}
+.inf-x{position:absolute;right:14px;top:14px;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:13px;color:var(--ink2);z-index:1}
+.fbx{position:fixed;right:24px;bottom:24px;z-index:60;display:flex;flex-direction:row-reverse;align-items:center;gap:8px;pointer-events:none}
+.fclr{font:inherit;font-size:13.5px;font-weight:600;padding:12px 18px;border-radius:999px;border:1px solid var(--line);background:#fffdf9;color:var(--ink);cursor:pointer;box-shadow:0 14px 34px -14px rgba(13,13,13,.35);opacity:0;transform:translateY(16px);transition:opacity .25s,transform .25s}
+.fclr:hover{border-color:var(--ink)}
+.fclr{display:none}.fbx.has .fclr.on{display:block;opacity:1;transform:none;pointer-events:auto;animation:fci .25s ease}@keyframes fci{from{opacity:0;transform:translateY(10px)}}
+.ibb{position:relative;display:flex;align-items:center;gap:10px;max-width:min(380px,calc(100vw - 32px));padding:8px 18px 8px 8px;border-radius:999px;border:0;background:var(--ink);color:var(--paper);font:inherit;cursor:pointer;box-shadow:0 14px 34px -12px rgba(13,13,13,.5);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .25s,transform .25s}
+.ibb.show{opacity:1;transform:none;pointer-events:auto}
+.ibb-i{flex:none;width:34px;height:34px;border-radius:50%;background:var(--terra);display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-weight:600;font-size:17px}
+.ibb-t{display:flex;flex-direction:column;align-items:flex-start;min-width:0;line-height:1.2;text-align:left}
+.ibb-t small{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--sand)}
+.ibb-t b{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px}
+.ibb.ping .ibb-i{animation:ibp .6s ease}@keyframes ibp{50%{transform:scale(1.18)}}
+.ib{background:#fffdf9;border:1px solid var(--line);border-radius:24px;padding:22px 24px;min-height:150px}
+.ib h4{font-family:var(--display);font-weight:400;font-size:22px;margin:4px 0 6px}
+.ib p{margin:0 0 8px;font-size:14px;color:var(--ink2)}
+.ib ol{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px;counter-reset:o}
+.ib li{position:relative;padding-left:30px;font-size:13.5px;color:var(--ink2);line-height:1.45}
+.ib li::before{counter-increment:o;content:counter(o);position:absolute;left:0;top:0;width:20px;height:20px;border-radius:999px;background:var(--hc,var(--terra));color:#fff;font-size:11px;font-weight:600;display:grid;place-items:center}
+.ib li b{color:var(--ink)}
+.ib .hint{color:var(--muted);font-size:14px}
+.pl{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.06em;padding:1px 7px;border-radius:999px;margin-left:6px;vertical-align:1px}
+.pl.el{background:#ead9a2;color:#5c4a12}.pl.ul{background:var(--ink);color:var(--paper)}.pl.s{background:#9a3b25;color:#fff}.pl.nn{background:#e3ddd1;color:#6d6457}
+.lk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 14px}
+.lc{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:baseline;text-align:left;font:inherit;color:var(--ink);background:#fffdf9;border:1px solid var(--line);border-radius:16px;padding:11px 14px;cursor:pointer;transition:opacity .25s,border-color .25s,box-shadow .25s}
+.lc .pl{margin:0;grid-row:1/3;align-self:start;margin-top:2px;min-width:30px;text-align:center}
+.lc b{font-size:13px;font-weight:600}.lc small{font-size:11.5px;color:var(--muted);line-height:1.4}
+.lc.lel{--lc:#c9a43c}.lc.lul{--lc:#0d0d0d}.lc.lnn{--lc:#a69a86}
+.lc:hover{border-color:var(--lc)}
+.lk.sel .lc{opacity:.4}.lk.sel .lc.on{opacity:1;border-color:var(--lc);box-shadow:0 0 0 2px var(--lc)}
+@media(max-width:760px){.lk{grid-template-columns:1fr}}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tb{display:flex;align-items:center;gap:10px;text-align:left;font:inherit;font-size:13.5px;font-weight:500;line-height:1.3;color:var(--ink);background:#fffdf9;border:1px solid var(--line);border-radius:999px;padding:8px 14px 8px 8px;cursor:pointer;text-decoration:none;transition:opacity .25s,background .25s,border-color .25s}
+.tb i{flex:none;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:13px;color:var(--ink)}
+.tb:hover{border-color:var(--ink)}
+.reg{margin:14px 0 28px;padding:0}
+.regb{width:100%;display:flex;align-items:center;gap:16px;text-align:left;font:inherit;color:var(--paper);background:var(--ink);border:0;border-radius:20px;padding:12px 20px;cursor:pointer;transition:background .2s}
+.regb:hover{background:#1f1d1a}
+.regb .rtop-ic{width:40px;height:40px;margin:0;flex:none;background:#f5f1ea;border-radius:11px;padding:7px 8px}
+.regb-t{display:flex;flex-direction:column;flex:1;min-width:0}
+.regb-t small{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--sand)}
+.regb-t b{font-size:15px;font-weight:600}
+.regb-a{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#fff;background:var(--terra);border-radius:999px;padding:6px 6px 6px 16px;flex:none;transition:background .2s}.regb:hover .regb-a{background:var(--terra-d)}
+.regb-a i{font-style:normal;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;transition:transform .3s}
+.reg.open .regb-a i{transform:rotate(180deg)}
+.reg.open .regb{border-radius:20px 20px 0 0}
+.regc{display:none}.reg.open .regc{display:block}
+.regc .rtop{border-radius:0 0 20px 20px;grid-template-columns:1fr;padding-top:6px}
+.reg-h h2{font-family:var(--display);font-size:clamp(26px,3vw,38px);line-height:1.1;margin:10px 0 22px;letter-spacing:-.01em}.reg-h h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra)}
+.rtop{background:var(--ink);color:var(--paper);border-radius:24px;padding:20px 24px 22px;margin-bottom:12px;display:grid;grid-template-columns:210px minmax(0,1fr);gap:24px}
+.rtop-ic{width:34px;height:40px;display:block;margin-bottom:12px}.rtop-h span{display:block;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--sand);margin-bottom:8px}.rtop-h b{display:block;font-family:var(--display);font-weight:400;font-size:21px;line-height:1.15;margin-bottom:8px}.rtop-h small{display:block;font-size:11.5px;line-height:1.45;color:#a89e8f}
+.tdg{transition:opacity .25s}.reg.sel .tdg{opacity:.3}.reg.sel .tdg.on{opacity:1}
+.rtop-g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.rtop-g span{display:block;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#a89e8f;margin-bottom:6px}
+.rtop-g p{font-size:12.5px;line-height:1.45;margin:0 0 6px;color:#e8e1d6}.rtop-g b{color:#e6cd94;font-weight:600}
+.rgr{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.rdc{background:var(--panel);border-radius:18px;border-top:3px solid var(--gc);padding:14px 14px 12px;transition:opacity .25s,box-shadow .25s}
+.rdc h4{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px;line-height:1.3}
+.rdc ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}.rdc li{font-size:12px;line-height:1.45;color:var(--ink2);padding-left:12px;position:relative}
+.rdc li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--gc)}.rdc b{color:var(--ink);font-weight:600}
+.reg.sel .rdc{opacity:.35}.reg.sel .rdc.on{opacity:1;box-shadow:0 0 0 2px var(--gc)}
+@media(max-width:1100px){.rgr{grid-template-columns:repeat(3,minmax(0,1fr))}.rtop-g{grid-template-columns:1fr 1fr}.rtop{grid-template-columns:1fr}}
+@media(max-width:600px){.rgr,.rtop-g{grid-template-columns:1fr}}
+.fx .tr{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}.fx .tr .flw-h{display:block;margin-bottom:10px}
+.fx .tg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.fx .tb{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0;border-radius:16px;overflow:hidden;background:#fffdf9;font-size:12.5px;font-weight:600;line-height:1.3}
+.fx .tb .ta{position:relative;display:block;width:auto;height:auto;border-radius:0;aspect-ratio:16/8}
+.fx .tb .ta svg{position:absolute;inset:6px 8px;width:calc(100% - 16px);height:calc(100% - 12px)}
+.fx .tb .ta em{position:absolute;left:10px;top:7px;font-family:var(--serif);font-style:italic;font-size:13px;font-weight:600;z-index:1}
+.fx .tb b{display:block;padding:9px 12px 11px;font-weight:600}
+.fx .tb:hover{border-color:var(--ink)}
+.fx .tr.sel .tb.cur{background:#fffdf9;color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+@media(max-width:1000px){.fx .tg{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.fx .tg{grid-template-columns:1fr 1fr}}
+.tr.sel .tb{opacity:.35}.tr.sel .tb.on{opacity:1;border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}.tr.sel .tb.cur{opacity:1;background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.clr{font:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 14px;cursor:pointer;color:var(--ink2);margin-top:10px}
+.clr:hover{border-color:var(--ink)}
+@media(max-width:900px){.tg{grid-template-columns:1fr}}
+.mapw{padding-bottom:clamp(56px,7vw,96px)}
+/* przełącznik widoku */
+.vs{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:var(--panel);border:1px solid var(--line);margin-bottom:18px}
+.vs button{font:inherit;font-size:13.5px;font-weight:600;padding:8px 18px;border-radius:999px;border:0;background:transparent;color:var(--ink2);cursor:pointer}
+.vs button.on{background:var(--ink);color:var(--paper)}
+#vS[hidden],#vD[hidden]{display:none}
+/* widok prosty */
+.sb{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:34px;position:relative;padding:4px 0 8px}
+.sc{position:relative;border-radius:24px;padding:22px 20px 18px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.sc+.sc::before{content:"→";position:absolute;left:-28px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--tan)}
+.sc h3{font-family:var(--body);font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin:0 0 4px}
+.sc h3 b{display:block;font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:0;text-transform:none;color:var(--ink);margin-top:4px}
+.si{position:relative;font:inherit;text-align:left;border-radius:16px;border:1px solid var(--line);background:#fffdf9;padding:14px 16px;cursor:pointer;transition:opacity .25s,box-shadow .25s,border-color .25s,background .25s}
+.si b{display:block;font-size:15px;font-weight:600;color:var(--ink)}.si small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.si .rd{display:flex;gap:4px;margin-top:8px}.si .rd i{width:10px;height:10px;border-radius:3px}
+.si .cn{position:absolute;top:-10px;right:12px;min-width:22px;height:22px;padding:0 7px;border-radius:999px;background:var(--hc,var(--terra));color:#fff;font-size:11.5px;font-weight:600;display:none;place-items:center}
+.si:hover{border-color:var(--ink)}
+.sv.sel .si{opacity:.3}.sv.sel .si.hit{opacity:1;border-color:var(--hc,var(--terra));box-shadow:0 0 0 2px var(--hc,var(--terra))}.sv.sel .si.hit .cn{display:grid}
+.sv.sel .si.cur{opacity:1;background:var(--ink);border-color:var(--ink)}.sv.sel .si.cur b{color:var(--paper)}.sv.sel .si.cur small{color:#b9b0a2}
+.sc1{background:#f3e4c4;border-color:transparent}.sc2{background:#e0dccb;border-color:transparent}.sc3{background:#f9d5bd;border-color:transparent}.sc4{background:#e7d4c4;border-color:transparent}
+.sp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;margin-top:26px;padding-top:18px;border-top:1px solid var(--ink)}
+.sg>span{display:block;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tan);margin-bottom:10px}
+.sg>div{display:flex;flex-wrap:wrap;gap:8px}
+.sk{font:inherit;font-size:14px;font-weight:500;padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:opacity .25s,background .25s,border-color .25s,color .25s}
+.sk i{width:11px;height:11px;border-radius:3px;flex:none}
+.sk:hover{border-color:var(--ink)}
+.sv.sel .sk{opacity:.35}.sv.sel .sk.on{opacity:1;border-color:var(--ink)}.sv.sel .sk.cur{opacity:1;background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.sn{margin:18px 0 0;font-size:15px;color:var(--ink2);min-height:24px}.sn b{color:var(--ink)}.sn .clr{margin:0 0 0 10px}
+@media(max-width:1000px){.sb{grid-template-columns:1fr 1fr;gap:16px}.sc+.sc::before{display:none}.sp{grid-template-columns:1fr}}
+@media(max-width:560px){.sb{grid-template-columns:1fr}}
+
+/* ---------- widok próba: bryła ---------- */
+.cbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px}
+.cfaces{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:#fffdf9;border:1px solid var(--line)}
+.cfaces button{font:inherit;font-size:13px;font-weight:600;padding:7px 16px 7px 8px;border-radius:999px;border:0;background:transparent;color:var(--ink2);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.cfaces button i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--panel);display:grid;place-items:center;font-size:11px}
+.cfaces button.on{background:var(--ink);color:var(--paper)}.cfaces button.on i{background:var(--terra-d);color:#fff}
+.crot{margin-left:auto;font:inherit;font-size:13.5px;font-weight:600;padding:9px 18px;border-radius:999px;border:0;background:var(--terra-d);color:#fff;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.crot span{font-size:17px;line-height:1;transition:transform .6s}.crot:hover span{transform:rotate(180deg)}
+.cube{position:relative;perspective:2600px}
+.box{position:relative}
+.box.d3{transform-style:preserve-3d}
+.box.d3 .fc{position:absolute;left:0;right:0;top:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--paper);box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(13,13,13,.4);border-radius:28px}
+.box.d3.go{transition:transform 1.1s cubic-bezier(.65,0,.25,1)}
+.cube.pulse{transition:height 1.1s cubic-bezier(.65,0,.25,1);animation:cp 1.1s cubic-bezier(.65,0,.25,1)}
+@keyframes cp{50%{transform:scale(.86)}}
+body.rotating .fbx,body.rotating .inf,body.rotating #fl{opacity:0!important;pointer-events:none}
+.f2{padding:4px 0 10px}
+.kx-h{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 60px;align-items:end;margin-bottom:18px}
+.kx-h h2{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:clamp(28px,3vw,40px);margin:12px 0 0;letter-spacing:-.02em}
+.kx-h p{margin:0;font-size:15px;font-weight:300;color:var(--ink2)}
+.kx-lane{min-width:0;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));align-content:start}
+.kx-cl{position:relative;padding:var(--pad);display:flex;flex-direction:column}
+.kx-lane{position:relative}.kx-bg{position:absolute;left:0;top:0;z-index:0;pointer-events:none;overflow:visible}
+.kx-cl>*{position:relative;z-index:1}
+.kx-cl .kx-tc{flex:1;background:#fffdf9;border:1px solid rgba(13,13,13,.06)}
+.kx-cl{min-height:92px}.kx-hh{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:6px 6px 4px}.kx-hh b{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:17px;line-height:1.15}.kx-hh small{font-size:12px;color:var(--ink2);font-weight:600}
+.kx-th,.kx-tc,.kx-te{position:relative;border-radius:14px;padding:10px 34px 10px 12px;min-height:74px}
+.kx-tc{background:color-mix(in srgb,var(--dc) 16%,#fffdf9)}
+.kx-tc b{display:block;font-size:13px;font-weight:600;line-height:1.25}.kx-tc small{display:block;font-size:11.5px;color:var(--ink2);margin-top:2px;line-height:1.3}
+.kx-tc.old{filter:grayscale(1);opacity:.6}.kx-tc.old b{text-decoration:line-through}
+.kx-th{background:var(--dc);color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding-right:12px}
+.kx-th b{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:15px;line-height:1.15}.kx-th small{font-size:11px;font-weight:600;opacity:.85;letter-spacing:.04em}
+.kx-te{background:var(--ink);color:var(--paper);text-decoration:none;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:12px 16px}
+.kx-te span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sand)}.kx-te b{font-size:15px}
+.kx-te:hover{background:var(--terra-d)}
+@media(max-width:1100px){.kx-t{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:640px){.kx-t{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kx-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.kx-d{border-radius:24px;padding:14px 12px 12px;background:color-mix(in srgb,var(--dc) 13%,#faf6ef);display:flex;flex-direction:column;gap:8px}.kx-d.w{grid-column:span 8}
+.kx-dh{display:flex;align-items:baseline;gap:8px;padding:0 4px 2px}.kx-dh b{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:17px}.kx-dh small{margin-left:auto;font-size:12px;color:var(--ink2)}
+.kx-l{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.kx-c{position:relative;text-align:left;font:inherit;color:var(--ink);background:#fffdf9;border:1px solid rgba(13,13,13,.07);border-radius:15px;padding:10px 36px 10px 12px;min-height:68px;cursor:default;transition:transform .2s,box-shadow .2s,border-color .2s}
+
+.kx-c b{display:block;font-size:13.5px;font-weight:600;line-height:1.25}.kx-c small{display:block;font-size:11.5px;color:var(--ink2);margin-top:2px}
+.kx-c.old{filter:grayscale(1);opacity:.6}.kx-c.old b{text-decoration:line-through}
+.kx-k{position:absolute;right:9px;top:9px;font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:#e3ddd1}.kx-k.EL{background:#ead9a2;color:#5c4a12}.kx-k.UL{background:var(--ink);color:var(--paper)}.kx-k.S{background:#9a3b25;color:#fff}.kx-k.P{background:#cfe0e6}.kx-k.V{background:#e1e4cf}
+.kx-ot{position:absolute;left:12px;bottom:8px;font-size:9.5px;font-weight:600;color:var(--oc);background:color-mix(in srgb,var(--oc) 12%,#fff);border:1px solid color-mix(in srgb,var(--oc) 35%,#fff);border-radius:999px;padding:1px 8px}
+.kx-rg{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:4px;background:var(--ink);color:var(--paper);font-family:var(--serif);font-style:normal;font-size:12px;margin-right:6px;vertical-align:1px}
+.kx-ub{position:absolute;right:11px;bottom:9px;width:8px;height:38px;display:flex;flex-direction:column-reverse;gap:3px}.kx-ub i{flex:1;border-radius:2px;background:rgba(13,13,13,.09)}.kx-ub i.f{background:var(--dc)}
+.kx-ub.inl{position:static;display:inline-flex;height:22px;vertical-align:middle;margin-right:6px}
+.kxm{position:fixed;inset:0;z-index:90;background:rgba(20,16,12,.45);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}.kxm.open{opacity:1;pointer-events:auto}
+.kxc{position:relative;width:min(780px,100%);max-height:calc(100vh - 40px);overflow:auto;background:#fffdf9;border-radius:26px;box-shadow:0 40px 90px -30px rgba(0,0,0,.55)}
+.kx-mt{height:10px;background:var(--dc)}.kx-mx{position:absolute;right:16px;top:24px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer}
+.kx-mi{padding:24px 34px 32px}.kx-mi .kick{color:var(--dc)}.kx-mi h2{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:clamp(26px,3vw,34px);margin:10px 0 6px;padding-right:40px}
+.kx-mo{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:16px}.kx-mr{display:flex;gap:8px;margin-top:10px;font-size:13px;font-weight:600}.kx-mu{margin-top:12px;font-size:14px;color:var(--ink2)}.kx-mu b{color:var(--ink)}
+.kx-mb p{font-size:15.5px;line-height:1.7;color:var(--ink2);margin:16px 0 0;font-weight:300}
+.kx-ex{margin-top:20px;background:color-mix(in srgb,var(--dc) 12%,#faf6ef);border-radius:18px;padding:18px 22px;border-left:4px solid var(--dc)}.kx-ex>span{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dc)}.kx-ex h3{margin:4px 0 10px;font-size:17px}
+.kx-ex ol{margin:0;padding-left:22px;display:grid;gap:6px}.kx-ex li{font-size:14.5px;line-height:1.5}
+.kx-h4{margin:22px 0 8px;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tan)}.kx-id{font-family:var(--serif);font-style:italic;font-size:16px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+.kx-par{display:grid;gap:8px}.kx-par div{display:grid;grid-template-columns:100px 1fr;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px}.kx-par em{font-family:var(--serif);font-size:19px;color:var(--dc)}.kx-par b{display:block;font-size:14px}.kx-par span{font-size:13.5px;color:var(--ink2)}
+@media(max-width:1100px){.kx-g{grid-template-columns:1fr}.kx-h{grid-template-columns:1fr}}@media(max-width:640px){.kx-l{grid-template-columns:1fr 1fr}}
+
+.tq{padding:4px 0 10px}
+.tq-h{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 60px;align-items:end;margin-bottom:18px}
+.tq-h h2{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:clamp(28px,3vw,40px);margin:12px 0 0;letter-spacing:-.02em}
+.tq-h p{margin:0;font-size:15px;font-weight:300;color:var(--ink2)}
+.tq-g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}.tq-s ol{align-content:start}
+.tq-col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.tq-s{grid-column:span var(--sp);border-radius:22px;background:#fffdf9;border:1px solid var(--line);overflow:hidden;box-shadow:0 14px 30px -26px rgba(13,13,13,.4)}
+.tq-sh{display:flex;align-items:baseline;gap:8px;padding:14px 16px 12px;background:color-mix(in srgb,var(--tc) 22%,#faf6ef)}
+.tq-sh b{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:15px;line-height:1.2}.tq-sh small{margin-left:auto;font-size:12px;color:var(--ink2);font-weight:600}
+.tq-s ol{list-style:none;margin:0;padding:6px 8px 10px;display:grid;grid-template-columns:repeat(var(--ic),minmax(0,1fr));column-gap:10px}
+.tq-s li{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:8px;align-items:start;padding:8px;border-radius:12px;border-bottom:1px dashed var(--line)}
+
+.tq-s li:hover{background:color-mix(in srgb,var(--tc) 8%,#fff)}
+.tq-n{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--tc);padding-top:1px;font-weight:600}
+.tq-t b{display:block;font-size:13px;font-weight:600;line-height:1.3}.tq-t small{display:block;font-size:11.5px;color:var(--ink2);line-height:1.35;margin-top:1px}
+.tq-m{min-width:22px;height:20px;border-radius:999px;background:color-mix(in srgb,var(--tc) 18%,#fff);color:var(--ink);border:1px solid color-mix(in srgb,var(--tc) 40%,#fff);font-size:10.5px;font-weight:600;display:grid;place-items:center;padding:0 6px}
+.tq-e{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:5px;background:#2f6f8f;color:#fff;font-size:10px;font-weight:700;font-style:normal;vertical-align:1px}.tq-r{display:flex;gap:5px;align-items:center}.tq-h p .tq-e{margin:0 2px}
+@media(max-width:1100px){.tq-g{grid-template-columns:1fr 1fr}.tq-s{--sp:2!important;--ic:2!important}.tq-h{grid-template-columns:1fr}}@media(max-width:640px){.tq-g{grid-template-columns:1fr}.tq-s{--sp:1!important;--ic:1!important}}
+
+.kx-tc[data-cid]{cursor:pointer;transition:opacity .2s,box-shadow .2s}
+.kx-tc[data-cid]:hover{box-shadow:0 0 0 1.5px var(--dc)}
+body.tsel .kx-tc[data-cid]{opacity:.35}body.tsel .kx-tc[data-cid].hit{opacity:1;box-shadow:0 0 0 2px var(--dc)}body.tsel .kx-tc[data-cid].cur{opacity:1;background:var(--ink);color:var(--paper);box-shadow:0 0 0 3px var(--dc)}
+body.tsel .kx-tc.cur small{color:#cfc6b8}
+.tq-s li{cursor:pointer;transition:opacity .2s,background .2s}
+body.tsel .tq-s li{opacity:.35}body.tsel .tq-s li.hit{opacity:1;background:color-mix(in srgb,var(--tc) 14%,#fff)}body.tsel .tq-s li.cur{opacity:1;background:var(--ink);color:var(--paper)}
+body.tsel .tq-s li.cur small{color:#cfc6b8}
+.csel{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);border-radius:999px;padding:6px 6px 6px 16px;font-size:13px}
+.csel b{font-weight:600}.csel button{font:inherit;font-size:12.5px;font-weight:600;border:0;border-radius:999px;padding:6px 12px;cursor:pointer;background:var(--terra-d);color:#fff}
+.csel button[data-unsel]{background:#2a2622;padding:6px 10px}
+.csel[hidden]{display:none}
+
+.mm-hd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 60px;align-items:end;margin-bottom:18px}
+.mm-hd h2{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:clamp(28px,3vw,40px);margin:12px 0 0;letter-spacing:-.02em}.mm-hd p{margin:0;font-size:15px;font-weight:300;color:var(--ink2)}
+.mm-g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:8px;column-gap:14px;grid-auto-flow:dense}
+.mm-b{position:relative;border-radius:26px;background:color-mix(in srgb,var(--c) 13%,#fbf8f2);padding:16px;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+.mm-b::after{content:"";position:absolute;right:-40px;top:-40px;width:130px;height:130px;border-radius:50%;background:color-mix(in srgb,var(--c) 14%,transparent);pointer-events:none}
+.mm-bh{display:flex;gap:12px;align-items:flex-start;position:relative;z-index:1}
+.mm-ic{flex:none;width:46px;height:46px;border-radius:14px;background:var(--c);display:grid;place-items:center;box-shadow:0 10px 20px -12px var(--c)}
+.mm-ic svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.mm-no{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--c);font-weight:600}
+.mm-bh h3{margin:0;font-family:"Archivo Black",sans-serif;font-weight:400;font-size:18px;line-height:1.15}
+.mm-bh p{margin:4px 0 0;font-size:12.5px;color:var(--ink2);line-height:1.4}
+.mm-sg{display:grid;grid-template-columns:repeat(var(--ic),minmax(0,1fr));gap:10px;align-items:start;position:relative;z-index:1}
+.mm-s{background:rgba(255,253,249,.7);border:1px solid color-mix(in srgb,var(--c) 22%,transparent);border-radius:16px;padding:10px}
+.mm-s h4{margin:0 0 8px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--c) 75%,#000)}
+.mm-p{display:flex;flex-wrap:wrap;gap:5px}
+.mm-p span{display:inline-flex;flex-direction:column;background:#fff;border:1px solid rgba(13,13,13,.07);border-radius:10px;padding:5px 9px;font-size:12px;line-height:1.25}
+.mm-p b{font-weight:600}.mm-p small{font-size:10.5px;color:var(--ink2);margin-top:1px}
+@media(max-width:1100px){.mm-g{grid-template-columns:repeat(6,minmax(0,1fr))}.mm-b{grid-column:span 6!important;--ic:2!important}.mm-hd{grid-template-columns:1fr}}
+@media(max-width:640px){.mm-b{--ic:1!important}}
+
+.cfaces [data-face="3"]{display:none}
+.mstrip[hidden],.mpan[hidden],.cver [hidden],#crot[hidden]{display:none!important}
+.cver{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-4px 0 14px;padding:8px 10px;border:1.5px dashed var(--terra-d);border-radius:18px;background:#fffdf9}
+.cver>span{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-d);margin:0 8px 0 4px}
+.cver button{font:inherit;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.cver button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cver .cver-go{margin-left:auto;background:var(--terra-d);color:#fff;border-color:var(--terra-d)}
+.mstrip{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px;margin:0 0 12px}
+.mstrip button{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;font:inherit;font-size:12px;font-weight:600;line-height:1.2;padding:9px;border-radius:16px;border:1px solid var(--line);background:color-mix(in srgb,var(--c) 12%,#fffdf9);cursor:pointer;transition:transform .2s,box-shadow .2s}
+.mstrip button:hover{transform:translateY(-2px)}.mstrip button.on{box-shadow:0 0 0 2px var(--c);background:color-mix(in srgb,var(--c) 22%,#fffdf9)}
+.mstrip .mm-ic{width:32px;height:32px;border-radius:10px}.mstrip .mm-ic svg{width:19px;height:19px}.mstrip small{display:block;font-family:var(--serif);font-style:italic;color:var(--c);font-size:12px}
+.mpan{margin:0 0 14px;display:grid;gap:8px}.mpan .mm-b{grid-column:auto!important}
+.mpan-l{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink2)}.mpan-l b{color:var(--ink)}.mpan-l button{margin-left:auto;border:1px solid var(--line);background:#fff;border-radius:50%;width:30px;height:30px;cursor:pointer}
+.mmh{outline:2.5px solid var(--terra-d)!important;outline-offset:2px;box-shadow:0 0 0 6px color-mix(in srgb,var(--terra-d) 18%,transparent)!important;opacity:1!important;border-radius:12px}
+.cube.explode{height:auto!important}
+.cube.explode .box{display:grid;grid-template-columns:1fr 1.6fr 1fr;grid-template-rows:auto auto;gap:22px;align-items:start;perspective:1800px}
+.cube.explode .fc{position:relative!important;cursor:zoom-in;border-radius:22px;background:#fffdf9;box-shadow:0 0 0 1px var(--line),0 24px 50px -30px rgba(13,13,13,.45);overflow:hidden;transition:transform .5s}
+.cube.explode .fc>*{pointer-events:none}
+.cube.explode .f1{grid-column:1;grid-row:1;zoom:.32;transform:rotateY(14deg)}
+.cube.explode .f2{grid-column:3;grid-row:1;zoom:.32;transform:rotateY(-14deg)}
+.cube.explode .f3{grid-column:1/4;grid-row:2;zoom:.34;width:70%;justify-self:center;transform:rotateX(10deg)}
+.cube.explode .f4{grid-column:2;grid-row:1;zoom:.52;cursor:default;box-shadow:0 0 0 2px var(--terra-d),0 30px 60px -30px rgba(13,13,13,.5)}
+.cube.explode .fc:not(.f4):hover{transform:none}
+.cube.explode .fc::before{content:attr(data-lbl);display:block;position:absolute;left:0;right:0;top:0;padding:18px 26px;font-family:"Archivo Black",sans-serif;font-size:46px;color:#fff;background:var(--ink);z-index:5}
+@media(max-width:1100px){.mstrip{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.lid{position:absolute;left:0;right:0;top:0;z-index:3;perspective:2400px;perspective-origin:50% 40%}
+.lid-b{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.lid-b.go{transition:transform 1.1s cubic-bezier(.65,0,.25,1)}
+.lid-f{position:absolute;overflow:hidden;background:var(--paper);border-radius:28px;box-shadow:0 0 0 2px var(--ink2),inset 0 0 0 1px var(--line);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.lid-f>*{pointer-events:none}
+.lid-f::after{content:"";position:absolute;inset:0;pointer-events:none;transition:background .6s}
+.lid-hi .lf-front::after{background:rgba(13,13,13,.10)}.lid-hi .lf-side::after{background:rgba(13,13,13,.22)}
+.lf-top{box-shadow:0 0 0 6px var(--terra-d),inset 0 0 0 1px var(--line)}
+.lid-tag{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:28px 56px;border-radius:999px;background:var(--terra-d);color:#fff;font-family:"Archivo Black",sans-serif;font-size:44px;white-space:nowrap;box-shadow:0 20px 60px -20px rgba(13,13,13,.5);opacity:0;transition:opacity .5s}
+.lid-hi .lid-tag{opacity:1}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="wrap">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav"><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a class="on" href="./">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a href="../o-mnie/">O mnie</a><a href="../#kontakt">Kontakt</a><a class="sci" href="https://maciejbuczak.github.io/">Strona naukowa ↗</a></nav>
+    <a class="brand" href="../"><span><b>Risk Trainings</b><small>Maciej Buczak · Risk Research</small></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a>
+  </div>
+</header>
+
+<main>
+<section class="mh"><div class="wrap">
+  <div><span class="kick">Mapa banku</span><h1>Gdzie modele ryzyka <em>zmieniają liczby</em> banku</h1></div>
+  <p>Bilans, rachunek zysków i strat oraz kapitał – i modele, które je kształtują. Kliknij model, całą grupę ryzyka, pozycję w banku, proces albo szkolenie: mapa pokaże, co się z nim łączy.</p>
+</div></section>
+
+<div class="wrap mapw">
+  <div class="vs" role="tablist" aria-label="Widok mapy"><button type="button" role="tab" data-view="s">Widok prosty</button><button type="button" role="tab" data-view="d">Widok szczegółowy</button><button type="button" role="tab" data-view="p">Widok – próba</button></div>
+  <div id="vS" class="sv">
+    <div class="sb" id="sb"></div>
+    <div class="sp">
+      <div class="sg"><span>Ryzyka</span><div id="sr"></div></div>
+      <div class="sg"><span>Szkolenia</span><div id="st"></div></div>
+    </div>
+    <p class="sn" id="sn"></p>
+  </div>
+  <div id="vD">
+  <div class="fx" id="fx"></div>
+  <div class="lay">
+    <div>
+      <aside class="md" id="md"><div class="md-h"><h3>Modele ryzyka</h3></div><div class="lk" id="lk"><button type="button" class="lc lel" data-s="l:EL"><span class="pl el">EL</span><b>Strata oczekiwana</b><small>odpisy, rezerwy, koszt ryzyka – pokrywa ją marża i bieżący wynik</small></button><button type="button" class="lc lul" data-s="l:UL"><span class="pl ul">UL</span><b>Strata nieoczekiwana</b><small>RWA i Filar 2 – pokrywają ją fundusze własne</small></button><button type="button" class="lc lnn" data-s="l:N"><span class="pl nn">—</span><b>Wycena, marża i płynność</b><small>modele, które nie liczą straty: wycena instrumentów, odsetki, płynność, scenariusze</small></button></div><div id="ml"></div></aside>
+      <section class="reg" id="reg"></section>
+      <div class="bank" id="bank"></div>
+      <div class="fbx" id="fbx"><button type="button" class="fclr" data-clr>Wyczyść <span aria-hidden="true">✕</span></button><button type="button" class="ibb" id="ibb" aria-expanded="false" aria-controls="inf"><span class="ibb-i">i</span><span class="ibb-t"><small id="ibbk">Opis</small><b id="ibbt">Jak czytać mapę</b></span></button></div>
+      <div class="inf" id="inf" role="dialog" aria-label="Opis zaznaczenia"><button type="button" class="inf-x" id="infx" aria-label="Zamknij">✕</button><div class="ib" id="ib"></div></div>
+    </div>
+  </div>
+  </div>
+  <span id="vDhome" hidden></span>
+  <div id="vP" hidden>
+    <div class="cbar"><div class="cfaces" role="tablist" aria-label="Ściana"><button type="button" data-face="0" class="on"><i>1</i>Bilans, wynik i kapitał</button><button type="button" data-face="1"><i>2</i>Koncepcje modeli</button><button type="button" data-face="2"><i>3</i>Techniki ilościowe</button><button type="button" data-face="3"><i>4</i>Mapa modelu</button></div><div class="csel" id="csel" hidden></div><button type="button" class="crot" id="crot"><span aria-hidden="true">↻</span> Obróć bryłę</button></div>
+    <div class="cube" id="cube"><div class="box" id="box"><div class="fc f1" id="f1" data-lbl="1 · Bilans, wynik i kapitał"></div><div class="fc f2" id="f2" data-lbl="2 · Koncepcje modeli"><div class="kx" id="kx"></div></div><div class="fc f3" id="f3" data-lbl="3 · Techniki ilościowe"><div class="tq" id="tqf"></div></div><div class="fc f4" id="f4" data-lbl="Mapa modelu"><div class="mm" id="mmf"></div></div></div></div>
+  </div>
+</div>
+</main>
+
+<div class="kxm" id="kxm" role="dialog" aria-modal="true"><div class="kxc" id="kxc"></div></div>
+<footer class="foot">
+  <div class="wrap">
+    <div><a class="brand" href="../"><span><b>Risk Trainings</b></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a><p style="margin:14px 0 0;max-width:340px">Szkolenia z zarządzania ryzykiem dla banków i instytucji finansowych.</p></div>
+    <div><h4>Strony</h4><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="./">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a href="../o-mnie/">O mnie</a><a href="https://maciejbuczak.github.io/">Strona naukowa</a></div>
+    <div><h4>Kontakt</h4><a href="mailto:maciej.buczak@gmail.com">maciej.buczak@gmail.com</a><a href="https://www.linkedin.com/in/maciej-buczak-561b95120" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div class="bottom"><span>© 2026 Maciej Buczak | Risk Research</span><span>Wersja próbna strony</span></div>
+  </div>
+</footer>
+<script src="../szkolenia.js"></script>
+<script src="../koncepcje/dane.js?v=20261104b"></script>
+<script src="../koncepcje/techniki.js?v=20261104b"></script>
+<script src="../koncepcje/model.js?v=20261104a"></script>
+<script>
+(function(){
+const esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+/* ---------- dane ---------- */
+const RISK={K:{n:"Kredytowe",c:"#bf8165"},R:{n:"Rynkowe",c:"#6f7f58"},O:{n:"Operacyjne",c:"#8a6c90"},A:{n:"Stopa % i płynność",c:"#4f7390"},M:{n:"Ryzyko modeli",c:"#a6824c"},S:{n:"Stres testy",c:"#5c564d"}};
+const COL=[["A","Bilans","Aktywa"],["P","Bilans","Pasywa"],["R","Rachunek zysków i strat","Wynik"],["K","Kapitał i wymogi (CRR)","Kapitał"]];
+const B=[
+ ["a_kasa","A",40,"Kasa i bank centralny","bufor płynności"],
+ ["a_banki","A",40,"Należności od banków",""],
+ ["a_handl","A",48,"Aktywa handlowe","pochodne, papiery – wycena rynkowa"],
+ ["a_papiery","A",48,"Papiery inwestycyjne","obligacje: AC lub OCI"],
+ ["a_kredyty","A",128,"Kredyty dla klientów","hipoteczne, konsumpcyjne, firmowe – wartość brutto"],
+ ["a_ecl","A",52,"Odpisy na oczekiwane straty (−)","ECL, MSSF 9 – koszyki 1, 2, 3"],
+ ["p_banki","P",40,"Zobowiązania wobec banków",""],
+ ["p_depozyty","P",150,"Depozyty klientów","bieżące, oszczędnościowe, terminowe"],
+ ["p_handl","P",40,"Zobowiązania handlowe","pochodne o ujemnej wycenie"],
+ ["p_emisje","P",48,"Emisje i dług podporządkowany","obligacje, listy zastawne"],
+ ["p_rezerwy","P",52,"Rezerwy","ECL od pozabilansu, sprawy sądowe"],
+ ["p_kapital","P",56,"Kapitał własny","zyski zatrzymane, OCI",1],
+ ["r_przych","R",40,"Przychody odsetkowe","od kredytów i papierów"],
+ ["r_koszt","R",40,"Koszty odsetkowe (−)","od depozytów i emisji"],
+ ["r_nii","R",34,"= Wynik odsetkowy","",0,1],
+ ["r_handl","R",48,"Wynik na instrumentach","handlowy, wycena"],
+ ["r_koszty","R",48,"Koszty działania (−)","w tym straty operacyjne"],
+ ["r_ecl","R",56,"Odpisy ECL – koszt ryzyka (−)","zmiana stanu odpisów"],
+ ["r_prawne","R",40,"Koszty ryzyka prawnego (−)","np. kredyty CHF"],
+ ["r_netto","R",34,"= Zysk netto","",0,1],
+ ["r_oci","R",40,"Inne całkowite dochody (OCI)","wycena papierów, zabezpieczenia"],
+ ["k_cet1","K",40,"CET1 – kapitał podstawowy","kapitał własny − odliczenia",1,0,"av:Kapitał dostępny|fundusze własne"],
+ ["k_at1","K",40,"AT1","dodatkowy Tier 1"],
+ ["k_t2","K",40,"Tier 2","dług podporządkowany"],
+ ["k_rwa_k","K",40,"Kredytowe","SA lub IRB",0,0,"rq:Kapitał wymagany|Filar 1: RWA × 8%"],
+ ["k_rwa_cva","K",40,"CVA","kontrahent, wycena"],
+ ["k_rwa_r","K",40,"Rynkowe","SA lub VaR / ES"],
+ ["k_rwa_o","K",40,"Operacyjne","BIC, dawniej AMA"],
+ ["k_p2","K",40,"Filar 2","P2R / ICAAP",0,0,"sub:Ponad Filar 1"],
+ ["k_buf","K",40,"Bufory","CCyB, systemowe, P2G"],
+ ["z_pozab","Z",40,"Pozabilans: limity i gwarancje","ekspozycja przez współczynnik CCF"]];
+const BI=Object.fromEntries(B.map(b=>[b[0],{id:b[0],k:b[1],h:b[2],n:b[3],s:b[4],dark:b[5],sum:b[6],g:b[7]}]));
+const M=[
+ {id:"score",r:"K",lt:"wejście",n:"Scoring i rating",d:"Ocena ryzyka klienta przy decyzji kredytowej i w trakcie życia kredytu.",o:[["a_kredyty","Kto dostaje kredyt i jaki limit – wolumen i jakość portfela.",""],["r_przych","Cena kredytu zależna od ryzyka.","EL"],["a_ecl","Klasa ratingowa jako wejście do PD w ECL.","EL"]],t:["budowa","estymacja"]},
+ {id:"pd",r:"K",lt:"EL",n:"PD 12 m i lifetime",d:"Prawdopodobieństwo defaultu w roku i w całym życiu kredytu – ze scenariuszami.",o:[["a_ecl","ECL = PD × LGD × EAD – stan odpisów w bilansie.","EL"],["r_ecl","Zmiana PD i migracje między koszykami zmieniają koszt ryzyka.","EL"],["p_rezerwy","Ta sama metodyka dla rezerw na limity i gwarancje.","EL"]],t:["budowa","ecl","estymacja","piec"]},
+ {id:"lgd",r:"K",lt:"EL",n:"LGD",d:"Strata w razie defaultu – z odzysków i zabezpieczeń.",o:[["a_ecl","Drugi czynnik ECL – wysokość straty po defaultcie.","EL"],["r_ecl","Spadek cen zabezpieczeń podnosi odpisy.","EL"]],t:["budowa","ecl","estymacja"]},
+ {id:"ccf",r:"K",lt:"EL+UL",n:"EAD i CCF",d:"Ekspozycja w chwili defaultu – ile niewykorzystanego limitu klient wykorzysta.",o:[["z_pozab","Przelicza pozabilans na ekspozycję.",""],["a_ecl","Trzeci czynnik ECL.","EL"],["k_rwa_k","Podstawa RWA kredytowych.","UL"]],t:["ecl","estymacja"]},
+ {id:"makro",r:"K",lt:"EL",n:"Scenariusze makro (FLI)",d:"Prognozy PKB, bezrobocia, stóp i cen nieruchomości przekładane na PD i LGD.",o:[["a_ecl","ECL to średnia ważona strat w scenariuszach.","EL"],["r_ecl","Zmiana prognoz zmienia koszt ryzyka – nawet bez nowych defaultów.","EL"]],t:["ecl"]},
+ {id:"irb",r:"K",lt:"UL",n:"IRB: PD, LGD downturn, EAD",d:"Parametry regulacyjne do wymogów kapitałowych – kwantyl 99,9%.",o:[["k_rwa_k","Wzór IRB → RWA kredytowe, kapitał na stratę nieoczekiwaną.","UL"],["k_cet1","Niedobór rezerw wobec EL regulacyjnej obniża CET1…","EL"],["k_t2","…a nadwyżka rezerw może zwiększyć Tier 2 (z limitem).","EL"],["q_cet1","Niższe RWA – wyższy współczynnik CET1 przy tych samych funduszach.","UL"]],t:["piec","mwn","estymacja"]},
+ {id:"konc",r:"K",lt:"UL",n:"Kapitał ekonomiczny: CreditMetrics, CreditRisk+",d:"Model straty nieoczekiwanej portfela – korelacje i koncentracja.",o:[["k_p2","Narzut kapitału w Filarze 2 na koncentrację.","UL"],["a_kredyty","Limity koncentracji kształtują strukturę portfela.",""]],t:["piec","mwn"]},
+ {id:"wycena",r:"R",lt:"wycena",n:"Modele wyceny instrumentów",d:"Wycena pochodnych i papierów: krzywe stóp, zmienność, modele opcji.",o:[["a_handl","Wartość godziwa aktywów handlowych.",""],["p_handl","Wartość godziwa pochodnych po stronie pasywów.",""],["r_handl","Zmiana wyceny portfela handlowego w wyniku.",""],["r_oci","Wycena papierów przez OCI.",""],["k_cet1","Ostrożna wycena (AVA) odliczana od CET1.",""]],t:[]},
+ {id:"var",r:"R",lt:"UL",n:"VaR i Expected Shortfall",d:"Potencjalna strata portfela handlowego przy danym poziomie ufności.",o:[["k_rwa_r","Podstawa wymogu na ryzyko rynkowe przy modelu wewnętrznym.","UL"],["r_handl","Limity VaR ograniczają zmienność wyniku; backtesting porównuje VaR z wynikiem.",""]],t:["piec","mwn","budowa"]},
+ {id:"cva",r:"R",lt:"EL+UL",n:"CVA / DVA",d:"Korekta wyceny pochodnych o ryzyko kredytowe kontrahenta.",o:[["a_handl","CVA pomniejsza wartość godziwą pochodnych.","EL"],["r_handl","Zmiana CVA trafia do wyniku na instrumentach.","EL"],["k_rwa_cva","Wymóg kapitałowy na ryzyko CVA.","UL"]],t:["piec"]},
+ {id:"oprisk",r:"O",lt:"EL+UL",n:"Model aktuarialny (LDA)",d:"Rozkład częstości i dotkliwości strat operacyjnych, analizy scenariuszowe.",o:[["r_koszty","Zrealizowane straty operacyjne w kosztach działania.","EL"],["k_rwa_o","Dawniej (AMA) wprost wymóg kapitałowy.","UL"],["k_p2","Kapitał wewnętrzny na ryzyko operacyjne.","UL"]],t:["piec","mwn","budowa"]},
+ {id:"prawne",r:"O",lt:"EL",n:"Ryzyko prawne (np. kredyty CHF)",d:"Model liczby pozwów, prawdopodobieństwa przegranej i kosztu ugód.",o:[["p_rezerwy","Rezerwy na sprawy sądowe.","EL"],["a_kredyty","Korekta wartości kredytów objętych sporem.",""],["r_prawne","Koszty ryzyka prawnego w wyniku.","EL"]],t:["budowa"]},
+ {id:"irrbb",r:"A",lt:"UL",n:"IRRBB: ΔNII i ΔEVE",d:"Wrażliwość wyniku odsetkowego i wartości ekonomicznej kapitału na zmiany stóp.",o:[["r_nii","ΔNII – zmiana wyniku odsetkowego w scenariuszach stóp.",""],["k_p2","ΔEVE i ΔNII – kapitał w Filarze 2.","UL"],["r_oci","Zabezpieczenia przepływów pieniężnych w OCI.",""]],t:[]},
+ {id:"depmod",r:"A",lt:"ALM",n:"Modele depozytów (osad, oprocentowanie)",d:"Ile depozytów bieżących zostaje w banku i jak szybko ich oprocentowanie reaguje na stopy.",o:[["p_depozyty","Behawioralny termin zapadalności depozytów na żądanie.",""],["r_koszt","Przenoszenie zmian stóp na oprocentowanie depozytów.",""],["r_nii","Kluczowe założenie w ΔNII i ΔEVE.",""],["q_lcr","Stopy odpływu depozytów w LCR.",""],["q_nsfr","Stabilność depozytów w NSFR.",""]],t:[]},
+ {id:"prepay",r:"A",lt:"ALM",n:"Przedpłaty kredytów",d:"Jak szybko klienci spłacają kredyty przed terminem.",o:[["a_kredyty","Oczekiwane przepływy i efektywna stopa procentowa.",""],["r_przych","Rozliczenie prowizji i przyszłe odsetki.",""],["r_nii","Założenie w ΔNII i ΔEVE.",""]],t:[]},
+ {id:"ftp",r:"A",lt:"ALM",n:"FTP – wycena transferowa funduszy",d:"Wewnętrzna cena pieniądza dla linii kredytowych i depozytowych.",o:[["r_nii","Podział wyniku odsetkowego między linie biznesowe.",""],["r_przych","Minimalna cena kredytu.",""],["r_koszt","Wartość depozytów dla banku.",""]],t:[]},
+ {id:"plyn",r:"A",lt:"płynność",n:"Stres testy płynności, LCR / NSFR",d:"Odpływy i wpływy w scenariuszach stresu, przeżywalność, plan awaryjny.",o:[["a_kasa","Wielkość wymaganego buforu płynności.",""],["a_papiery","Obligacje skarbowe jako bufor HQLA.",""],["p_banki","Stabilność finansowania międzybankowego.",""],["q_lcr","Bufor i odpływy w LCR.",""],["q_nsfr","Stabilne finansowanie w NSFR.",""]],t:[]},
+ {id:"mr",r:"M",lt:"UL",n:"Kwantyfikacja ryzyka modeli",d:"Pomiar niepewności i błędów modeli – zgodnie z Rekomendacją W.",o:[["k_p2","Narzut kapitałowy na ryzyko modeli w ICAAP.","UL"],["a_ecl","Korekty i nakładki (overlaye) na wyniki modeli ECL.","EL"],["k_rwa_k","Marginesy ostrożności w parametrach IRB.","UL"]],t:["ryzmod","estymacja"]},
+ {id:"stres",r:"S",lt:"S",n:"Stres testy i plan kapitałowy",d:"Projekcja bilansu, wyniku i kapitału w scenariuszu niekorzystnym.",o:[["r_ecl","Koszt ryzyka w scenariuszu stresu.","S"],["r_nii","Wynik odsetkowy w stresie.","S"],["q_cet1","Czy bank utrzyma współczynniki kapitałowe w stresie.","S"],["k_buf","Wytyczna P2G i bufory zarządcze.","S"],["k_p2","Kapitał wewnętrzny w scenariuszu stresu.","S"]],t:["mwn","ryzmod"]}];
+const MI=Object.fromEntries(M.map(m=>[m.id,m]));
+const FEED={};M.forEach(m=>m.o.forEach(o=>{(FEED[o[0]]=FEED[o[0]]||new Set()).add(m.r)}));
+const PROB={EL:["Strata oczekiwana (EL)","Odpisy i rezerwy w bilansie, koszt ryzyka w wyniku. Pokrywa ją marża i bieżący wynik."],UL:["Strata nieoczekiwana (UL)","Wymogi kapitałowe – RWA, Filar 2. Pokrywają ją fundusze własne."],S:["Scenariusz skrajny","Stres testy: co stanie się z wynikiem i kapitałem w dekoniunkturze."],N:["Wycena, marża i płynność","Modele, które nie liczą straty: wycena, odsetki, płynność i scenariusze. Wpływają na bilans, wynik i kapitał inną drogą."]};
+const cat=m=>/EL/.test(m.lt)&&/UL/.test(m.lt)?["EL","UL"]:/EL/.test(m.lt)?["EL"]:/UL/.test(m.lt)?["UL"]:["N"];
+const PROC={kon:["Koncepcja modelu",["budowa","ryzmod","piec"],"Cel i zakres: jakie ryzyko, jaka metoda, jakie dane i jakie ograniczenia."],bud:["Budowa modelu",["budowa","ecl","estymacja","mwn"],"Dane, rozkłady, techniki estymacji i kalibracja."],wal:["Walidacja modelu",["estymacja","ryzmod","ecl","budowa"],"Ocena, czy model działa: testy ilościowe, logika biznesowa, okiem walidatora."],wdr:["Wdrożenie modelu",["ryzmod","ecl"],"Implementacja w systemach, zgodność z dokumentacją, zatwierdzenie i włączenie do procesów."],adm:["Administrowanie modelem",["ryzmod","estymacja"],"Monitoring, rekalibracja, inwentarz modeli i zarządzanie zmianą."],dcz:["Wyniki modelu i decyzje",["mwn","piec","ryzmod"],"Jak wyniki modeli przekładają się na kapitał, wynik i decyzje – i jak o nich rozmawiać."]};
+const RT={
+ cet1:{g:"k",n:"Współczynnik CET1",f:["CET1","RWA"],dir:"↑",num:["k_cet1"],den:["k_rwa_k","k_rwa_cva","k_rwa_r","k_rwa_o"],d:"Im niższe RWA z modeli przy tej samej ekspozycji, tym wyższy wskaźnik – dlatego nadzór wymaga konserwatyzmu i stosuje output floor."},
+ tcr:{g:"k",n:"Łączny współczynnik kapitałowy",f:["fundusze własne","RWA"],dir:"↑",num:["k_cet1","k_at1","k_t2"],den:["k_rwa_k","k_rwa_cva","k_rwa_r","k_rwa_o"],d:"Jak CET1, ale w liczniku także AT1 i Tier 2. Przy IRB nadwyżka rezerw nad EL może zwiększyć Tier 2."},
+ lev:{g:"k",n:"Wskaźnik dźwigni",f:["Tier 1","ekspozycja całkowita"],dir:"↑",num:["k_cet1","k_at1"],den:["a_kasa","a_banki","a_handl","a_papiery","a_kredyty","z_pozab"],d:"Mianownik nie jest ważony ryzykiem – modele go nie obniżą. To zabezpieczenie na wypadek zbyt niskich RWA z modeli."},
+ lcr:{g:"l",n:"LCR",f:["bufor HQLA","wypływy netto w 30 dniach"],dir:"↑",num:["a_kasa","a_papiery"],den:["p_depozyty","p_banki","z_pozab"],d:"Mianownik opisują stopy odpływu depozytów, finansowanie międzybankowe i wykorzystanie limitów (CCF)."},
+ nsfr:{g:"l",n:"NSFR",f:["dostępne stabilne finansowanie","wymagane stabilne finansowanie"],dir:"↑",num:["p_kapital","p_depozyty","p_emisje"],den:["a_kredyty","a_papiery","z_pozab"],d:"Stabilne depozyty i kapitał finansują długoterminowe kredyty; modele osadu wpływają na strukturę finansowania."},
+ cor:{g:"w",n:"Koszt ryzyka",f:["odpisy ECL w roku","średnie kredyty"],dir:"↓",num:["r_ecl","a_ecl"],den:["a_kredyty"],d:"W liczniku wprost modele PD, LGD, EAD i scenariusze makro – każda zmiana parametrów od razu zmienia wynik."},
+ npl:{g:"w",n:"Udział kredytów zagrożonych (NPL)",f:["kredyty w koszyku 3","kredyty brutto"],dir:"↓",num:["a_kredyty"],den:["a_kredyty"],d:"Zależy od definicji defaultu i klasyfikacji do koszyka 3; scoring ogranicza napływ złych kredytów."},
+ cov:{g:"w",n:"Pokrycie odpisami (koszyk 3)",f:["odpisy koszyka 3","kredyty w koszyku 3"],dir:"↑",num:["a_ecl"],den:["a_kredyty"],d:"Licznik zależy głównie od LGD dla ekspozycji w defaultcie – odzyski, czas windykacji, zabezpieczenia."},
+ roe:{g:"w",n:"ROE",f:["zysk netto","kapitał własny"],dir:"↑",num:["r_netto","r_ecl"],den:["p_kapital"],d:"Licznik obniża koszt ryzyka, mianownik podnoszą wymogi kapitałowe – modele działają po obu stronach."},
+ raroc:{g:"w",n:"RAROC",f:["dochody − koszty − EL","kapitał na UL"],dir:"↑",num:["r_przych","r_koszty","a_ecl"],den:["k_rwa_k","k_p2"],d:"Łączy obie straty: EL w liczniku, UL w mianowniku. Niedoszacowane PD zawyża RAROC podwójnie."}};
+Object.entries(RT).forEach(([k,r])=>BI["q_"+k]={id:"q_"+k,n:r.n});
+const T=window.RT_SZKOLENIA||[],TC=["#f3e4c4","#f9d5bd","#e0dccb","#efe4bc","#e7d4c4","#f0e2cf"],TL={budowa:"../szkolenia/budowa/"};
+/* ---------- rysowanie ---------- */
+const bank=document.getElementById("bank");
+bank.innerHTML=COL.map((c,ci)=>`<div class="col c${ci+1}"><h3>${c[1]}<b>${c[2]}</b></h3><div class="cb">${c[0]==="K"?kcol():B.filter(b=>b[1]===c[0]).map(b=>(b[7]?`<div class="grh">${b[7]}</div>`:"")+blk(b[0])).join("")}${c[0]==="A"?blk("z_pozab"):""}</div></div>`).join("")+`<div class="rtb"><div class="rtb-h"><span>Wskaźniki</span><b>To, na co patrzą zarząd i nadzór</b><small>liczone z pozycji powyżej – kliknij, aby zobaczyć licznik i mianownik</small></div><div class="rtb-g">${[["k","Kapitał"],["l","Płynność"],["w","Wynik i portfel"]].map(g=>`<div class="rg"><span>${g[1]}</span><div>${Object.entries(RT).filter(([k,r])=>r.g===g[0]).map(([k,r])=>`<button type="button" class="bl rq" data-s="q:${k}" data-b="q_${k}"><b>${esc(r.n)} <em>${r.dir}</em></b><small>${esc(r.f[0])} / ${esc(r.f[1])}</small><span class="bd"></span><span class="rl"></span></button>`).join("")}</div></div>`).join("")}</div></div>`;
+function kcol(){const KP=[["k_at1","k_t2"],["k_rwa_k","k_rwa_cva"],["k_rwa_r","k_rwa_o"],["k_p2","k_buf"]];let h="",open=false;B.filter(b=>b[1]==="K").forEach(b=>{const g=b[7]||"";
+  if(g.startsWith("av:")||g.startsWith("rq:")){if(open)h+="</div>";const [t,sub]=g.slice(3).split("|"),av=g.startsWith("av:");
+    if(!av)h+=`<div class="kvs"><span>musi pokryć</span></div>`;h+=`<div class="kp ${av?"kav":"krq"}"><div class="kph"><b>${t}</b><small>${sub}</small></div>`;open=true}
+  else if(g.startsWith("sub:"))h+=`<div class="grh">${g.slice(4)}</div>`;const pr=KP.find(x=>x.includes(b[0]));h+=(pr&&pr[0]===b[0]?'<div class="kg">':"")+blk(b[0])+(pr&&pr[1]===b[0]?"</div>":"")});return h+(open?"</div>":"")+`<div class="kft">fundusze własne ÷ RWA → współczynniki ↓</div>`}
+function blk(id){const b=BI[id],f=FEED[id]?[...FEED[id]]:[];return`<button type="button" class="bl${b.dark?" dark":""}${b.sum?" sum":""}" data-s="b:${id}" data-b="${id}" style="min-height:${b.h}px;--dw:${f.length&&!b.sum?["K","R","O","A","M","S"].filter(r=>f.includes(r)).length*9+6:0}px"><b>${esc(b.n)}</b>${b.s?`<small>${esc(b.s)}</small>`:""}${f.length&&!b.sum?`<span class="rd">${["K","R","O","A","M","S"].filter(r=>f.includes(r)).map(r=>`<i style="background:${RISK[r].c}" title="${RISK[r].n}"></i>`).join("")}</span>`:""}<span class="bd"></span><span class="rl"></span></button>`}
+const grp=[["K","Ryzyko kredytowe"],["R","Ryzyko rynkowe"],["O","Ryzyko operacyjne"],["A","Stopa % i płynność"],["M","Ryzyko modeli"],["S","Stres testy"]];
+document.getElementById("ml").innerHTML=grp.map(g=>{const ms=M.filter(m=>m.r===g[0]);return ms.length?`<div class="mg" data-s="r:${g[0]}" title="Pokaż całą grupę: ${g[1]}" style="flex:${ms.length} 1 ${Math.max(140,ms.length*85)}px;--gc:${RISK[g[0]].c}"><span>${g[1]}</span>${ms.map(m=>`<button type="button" class="mb" data-s="m:${m.id}"><i style="background:${RISK[m.r].c}"></i><span class="mn">${esc(m.n)}</span><span class="mp">${pl(m.lt)}</span></button>`).join("")}</div>`:""}).join("");
+document.getElementById("fx").innerHTML=
+ `<div class="tr" id="tr"><span class="flw-h">Szkolenia</span><div class="tg" id="tg"></div></div>`+
+ `<div class="flw"><span class="flw-h">Cykl życia modelu</span><div class="flw-r">${Object.entries(PROC).map(([k,v],i)=>`<button type="button" class="ch st" data-s="p:${k}"><em>${String(i+1).padStart(2,"0")}</em>${v[0]}</button>`).join("")}</div></div>`;
+{const INK="#0d0d0d",TER="#bf8165",TERD="#a8694c",TAN="#b29e84";
+const TART={
+/* budowa modeli – bloki układające się w krzywą */
+budowa(){let s="";const n=11,w=19,g=6,x0=200-(n*w+(n-1)*g)/2;
+  for(let i=0;i<n;i++){const v=1/(1+Math.exp(-(i-5)*.9)),k=Math.max(1,Math.round(v*5));for(let j=0;j<k;j++){const top=j===k-1;s+=`<rect class="gr" style="--d:${(i*.07+j*.03).toFixed(2)}s" x="${x0+i*(w+g)}" y="${190-(j+1)*(w+4)}" width="${w}" height="${w}" rx="3" fill="${top&&i>6?TER:INK}" fill-opacity="${top&&i>6?.95:.14+j*.05}"/>`}}
+  let p="";for(let i=0;i<=40;i++){const x=i/40*(n-1),v=1/(1+Math.exp(-(x-5)*.9));p+=(i?" L":"M")+(x0+x*(w+g)+w/2).toFixed(1)+" "+(190-v*5*(w+4)-8).toFixed(1)}
+  return s+`<path class="dr" style="--l:360;--d:.8s" d="${p}" fill="none" stroke="${INK}" stroke-width="2" stroke-linecap="round"/>`},
+/* ECL – trzy ścieżki rozchodzące się z jednego punktu */
+ecl(){let s="";const o=[70,175];[[.25,.6],[.5,.75],[.85,1]].forEach((c,i)=>{const ex=330,ey=175-c[0]*140;s+=`<path class="dr" style="--l:340;--d:${i*.25}s" d="M${o[0]} ${o[1]} C 160 ${o[1]-10}, 240 ${ey+20}, ${ex} ${ey}" fill="none" stroke="${i===2?TER:INK}" stroke-width="${i===2?3:2}" stroke-opacity="${i===2?1:c[1]*.6}" stroke-linecap="round"/><circle class="fd" style="--d:${1+i*.2}s" cx="${ex}" cy="${ey}" r="${7+i*3}" fill="${i===2?TER:INK}" fill-opacity="${i===2?1:.25+i*.15}"/>`});
+  return s+`<circle cx="${o[0]}" cy="${o[1]}" r="6" fill="${INK}"/>`},
+/* ryzyko modeli – tarcza i rozrzut trafień */
+ryzmod(){let s="";const c=[190,112];[78,56,34,12].forEach((r,i)=>s+=`<circle class="fd" style="--d:${i*.1}s" cx="${c[0]}" cy="${c[1]}" r="${r}" fill="none" stroke="${INK}" stroke-opacity="${.18+i*.12}" stroke-width="1.5"/>`);
+  const P=[[-8,6],[12,-10],[4,14],[-16,-6],[18,8],[-4,-18],[10,20],[-20,14],[2,-4]];P.forEach((p,i)=>s+=`<circle class="fd" style="--d:${.5+i*.06}s" cx="${c[0]+p[0]}" cy="${c[1]+p[1]}" r="4" fill="${INK}" fill-opacity=".75"/>`);
+  s+=`<circle class="fd" style="--d:1.2s" cx="${c[0]+92}" cy="${c[1]-46}" r="7" fill="${TER}"/><path class="dr" style="--l:120;--d:1.1s" d="M${c[0]} ${c[1]} L ${c[0]+86} ${c[1]-43}" stroke="${TER}" stroke-width="1.6" stroke-dasharray="4 4"/>`;return s},
+/* estymacja i walidacja – łuk ROC jako znak */
+estymacja(){const X=v=>120+v*160,Y=v=>196-v*160;let p="",a="";for(let v=0;v<=1.0001;v+=.025){const r=1-Math.pow(1-v,4.5);p+=(v?" L":"M")+X(v).toFixed(1)+" "+Y(r).toFixed(1)}
+  return `<rect x="120" y="36" width="160" height="160" rx="10" fill="none" stroke="${INK}" stroke-opacity=".2" stroke-width="1.5"/><path class="fd" style="--d:.9s" d="${p} L ${X(1)} ${Y(0)} Z" fill="${TER}" fill-opacity=".28"/><line x1="${X(0)}" y1="${Y(0)}" x2="${X(1)}" y2="${Y(1)}" stroke="${INK}" stroke-opacity=".35" stroke-dasharray="4 5" stroke-width="1.4"/><path class="dr" style="--l:300" d="${p}" fill="none" stroke="${INK}" stroke-width="2.6" stroke-linecap="round"/><circle class="fd" style="--d:1.2s" cx="${X(.18)}" cy="${Y(1-Math.pow(.82,4.5))}" r="6" fill="${TER}"/>`},
+/* pięć modeli kapitału – pięć kolumn */
+piec(){const D=[.55,.78,.66,.92,.48];let s="";const bw=38,g=16,x0=200-(5*bw+4*g)/2;
+  D.forEach((d,i)=>{const h=d*140,x=x0+i*(bw+g);s+=`<rect class="gr" style="--d:${i*.12}s" x="${x}" y="${195-h}" width="${bw}" height="${h}" rx="${bw/2}" fill="${i===3?TER:INK}" fill-opacity="${i===3?.9:.14+i*.05}"/>`});
+  return s+`<line class="fd" style="--d:1s" x1="${x0-14}" y1="${195-.7*140}" x2="${x0+5*bw+4*g+14}" y2="${195-.7*140}" stroke="${INK}" stroke-opacity=".45" stroke-dasharray="4 5" stroke-width="1.4"/>`},
+/* wartość nieoczekiwana – rozkład z ogonem */
+mwn(){const x0=41,x1=360,yb=190,f=x=>{const z=Math.log(Math.max(1e-6,(x-40)/60));return x<=41?0:Math.exp(-.5*(z/.75)**2)/(x-40)};let mx=0;for(let x=x0;x<=x1;x++)mx=Math.max(mx,f(x));const Y=x=>yb-f(x)/mx*140;
+  let p="M"+x0+" "+yb;for(let x=x0;x<=x1;x+=2)p+=" L"+x+" "+Y(x).toFixed(1);let t="M215 "+yb;for(let x=215;x<=x1;x+=2)t+=" L"+x+" "+Y(x).toFixed(1);t+=" L"+x1+" "+yb+" Z";
+  return `<path class="fd" style="--d:.9s" d="${t}" fill="${TER}" fill-opacity=".85"/><path class="fd" style="--d:.3s" d="${p} L ${x1} ${yb} Z" fill="${INK}" fill-opacity=".08"/><path class="dr" style="--l:460" d="${p}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/><line x1="${x0}" y1="${yb}" x2="${x1}" y2="${yb}" stroke="${INK}" stroke-opacity=".3"/><line class="fd" style="--d:1.1s" x1="215" y1="44" x2="215" y2="${yb}" stroke="${TER}" stroke-width="1.6" stroke-dasharray="4 4"/>`}
+};
+const TPC=["#f3e4c4","#faddc9","#ded9c9","#f2e6c1","#e5d4c6","#eadbc6"],TNC=["#a6824c","#be9170","#8a7f60","#a6824c","#a6824c","#a6824c"];
+document.getElementById("tg").innerHTML=T.map((t,i)=>`<button type="button" class="tb" data-s="t:${t.id}"><span class="ta" style="background:${TPC[i%6]}"><em style="color:${TNC[i%6]}">${String(i+1).padStart(2,"0")}</em><svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${TART[t.id]?TART[t.id]():""}</svg></span><b>${esc(t.title)}</b></button>`).join("")}
+const TOPDOCS=[
+ ['Prawo i regulacje UE',['<b>CRR</b> – rozporządzenie 575/2013 (z CRR3): kapitał, RWA, płynność, dźwignia','<b>CRD</b> (z CRD VI) → <b>Prawo bankowe</b>: system zarządzania ryzykiem','Ustawa o nadzorze makroostrożnościowym – bufory kapitałowe']],
+ ['Ład i kontrola',['Rozporządzenie MRiF z 6.03.2017 – system zarządzania ryzykiem i kontroli wewnętrznej','<b>Rekomendacja Z</b> – ład wewnętrzny','<b>Rekomendacja H</b> – system kontroli wewnętrznej','Wytyczne EBA – zarządzanie wewnętrzne']],
+ ['Modele',['<b>Rekomendacja W</b> (KNF) – zarządzanie ryzykiem modeli: cykl życia, walidacja, rejestr, istotność – dla wszystkich modeli na mapie']],
+ ['Kapitał, nadzór, ujawnienia',['<b>ICAAP</b> (Prawo bankowe) i <b>SREP</b> (wytyczne EBA) – Filar 2','<b>Filar 3</b> – CRR, część ósma (ujawnienia)','<b>MSSF</b> – MSSF 9, MSSF 7 (ujawnienia o ryzyku)']]];
+const RDOCS={
+ K:['<b>MSSF 9</b> – utrata wartości (ECL), koszyki','<b>Rekomendacja R</b> – klasyfikacja ekspozycji i oczekiwane straty','<b>Rekomendacja S</b> – kredyty hipoteczne; <b>T</b> – detaliczne','<b>Rekomendacja C</b> – ryzyko koncentracji','<b>CRR</b> cz. 3 tyt. II – metoda standardowa i IRB','Wytyczne EBA: definicja defaultu, szacowanie PD/LGD, udzielanie i monitorowanie kredytów'],
+ R:['<b>CRR</b> cz. 3 tyt. IV – ryzyko rynkowe (FRTB – w UE odroczone)','<b>MSSF 13</b> – wartość godziwa; <b>MSSF 9</b> – rachunkowość zabezpieczeń','<b>Rekomendacja A</b> – instrumenty pochodne','<b>Rekomendacja I</b> – ryzyko walutowe','RTS – ostrożna wycena (AVA); CRR – ryzyko CVA'],
+ O:['<b>Rekomendacja M</b> – ryzyko operacyjne','<b>Rekomendacja D</b> – IT i bezpieczeństwo środowiska teleinformatycznego','<b>DORA</b> – odporność cyfrowa (od 2025 r.)','<b>CRR</b> cz. 3 tyt. III – metoda standardowa (CRR3)','<b>MSR 37</b> – rezerwy (ryzyko prawne); wytyczne EBA – outsourcing'],
+ A:['<b>Rekomendacja P</b> – ryzyko płynności','<b>CRR</b> cz. 6 i rozporządzenie delegowane 2015/61 – LCR, NSFR','Wytyczne EBA – IRRBB i CSRBB (stopa procentowa w księdze bankowej)','RTS – test wartości odstających (ΔEVE, ΔNII)','<b>ILAAP</b> – wewnętrzna ocena płynności'],
+ M:['<b>Rekomendacja W</b> – cykl życia modelu, walidacja niezależna, rejestr i istotność modeli','<b>Przewodnik EBC</b> po modelach wewnętrznych; RTS EBA – istotność zmian w modelach IRB'],
+ S:['Wytyczne EBA – testy warunków skrajnych w bankach','Testy nadzorcze EBA / KNF','<b>ICAAP</b> – plan kapitałowy w stresie','Plan naprawy (ustawa o BFG)']};
+document.getElementById("reg").innerHTML=`<button type="button" class="regb" id="regb" aria-expanded="false" aria-controls="regc"><svg class="rtop-ic" viewBox="0 0 48 56" aria-hidden="true"><path d="M8 2h22l12 12v36a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="none" stroke="#0d0d0d" stroke-width="2"/><path d="M30 2v12h12" fill="none" stroke="#0d0d0d" stroke-width="2"/><path d="M11 20h16M11 26h22M11 32h18" stroke="#0d0d0d" stroke-width="2" stroke-linecap="round" opacity=".7"/><circle cx="32" cy="43" r="7" fill="#bf8165"/><path d="M29 43l2 2 4-4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="regb-t"><small>Otoczenie regulacyjne</small><b>Modele ryzyka – otoczenie regulacyjne</b></span><span class="regb-a"><span class="regb-l">Pokaż dokumenty</span><i aria-hidden="true">↓</i></span></button><div class="regc" id="regc"><div class="rtop"><div class="rtop-g">${TOPDOCS.map(([n,l],i)=>`<div class="tdg" data-g="${i}"><span>${n}</span>${l.map(x=>`<p>${x}</p>`).join("")}</div>`).join("")}</div></div>
+<div class="rgr">${["K","R","O","A","M","S"].map(r=>`<div class="rdc" data-r="${r}" style="--gc:${RISK[r].c}"><h4>${r==="A"?"Stopa procentowa i płynność":r==="M"||r==="S"?RISK[r].n:"Ryzyko "+RISK[r].n.toLowerCase()}</h4><ul>${RDOCS[r].map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")}</div></div>`;
+document.getElementById("regb").addEventListener("click",e=>{const r=document.getElementById("reg"),o=!r.classList.contains("open");r.classList.toggle("open",o);e.currentTarget.setAttribute("aria-expanded",o);r.querySelector(".regb-l").textContent=o?"Zwiń":"Pokaż dokumenty"});
+/* ---------- logika ---------- */
+function pl(t){return !t?"":t==="EL+UL"?pl("EL")+pl("UL"):t==="EL"?'<span class="pl el">EL</span>':t==="UL"?'<span class="pl ul">UL</span>':t==="S"?'<span class="pl s">stres</span>':""}
+const tName=id=>(T.find(t=>t.id===id)||{}).title||id;
+function resolve(sel){const [k,id]=sel.split(":"),R={m:new Set(),b:new Map(),t:new Set(),ring:null,hc:"#bf8165"};
+  const addM=mid=>{R.m.add(mid);MI[mid].o.forEach((o,i)=>{if(!R.b.has(o[0]))R.b.set(o[0],[]);if(k==="m")R.b.get(o[0]).push(i+1)});MI[mid].t.forEach(t=>R.t.add(t))};
+  if(k==="m"){addM(id);R.hc=RISK[MI[id].r].c}
+  else if(k==="b"){M.forEach(m=>{if(m.o.some(o=>o[0]===id))addM(m.id)});R.b=new Map([[id,[]]])}
+  else if(k==="r"){M.filter(m=>m.r===id).forEach(m=>addM(m.id));R.hc=RISK[id].c}
+  else if(k==="l"&&id==="N"){M.filter(m=>cat(m)[0]==="N").forEach(m=>addM(m.id));R.hc="#8a8270"}
+  else if(k==="l"){M.forEach(m=>{const hit=m.o.filter(o=>o[2]===id);if(hit.length){R.m.add(m.id);m.t.forEach(t=>R.t.add(t));hit.forEach(o=>{if(!R.b.has(o[0]))R.b.set(o[0],[])})}});R.hc=id==="UL"?"#0d0d0d":id==="S"?"#9a3b25":"#a8862c"}
+  else if(k==="p"){PROC[id][1].forEach(t=>R.t.add(t));M.forEach(m=>{if(m.t.some(t=>R.t.has(t)))addM(m.id)});R.t=new Set(PROC[id][1])}
+  else if(k==="q"){const r=RT[id];R.ring=r;[...r.num,...r.den].forEach(b=>R.b.set(b,[]));M.forEach(m=>{if(m.o.some(o=>R.b.has(o[0])||o[0]==="q_"+id)){R.m.add(m.id);m.t.forEach(t=>R.t.add(t))}})}
+  else if(k==="t"){M.forEach(m=>{if(m.t.includes(id))addM(m.id)});R.t=new Set([id])}
+  return R}
+const ib=document.getElementById("ib");
+function info(sel,R){if(!sel){ib.innerHTML=`<span class="kick" style="font-size:11px">Jak czytać mapę</span><h4>Wybierz element</h4><p class="hint">Model ryzyka pokaże, w których miejscach bilansu, wyniku i kapitału lądują jego wyniki. Pozycja w banku – które modele ją kształtują. Szkolenie – jakie modele i obszary obejmuje. Kolorowe znaczniki przy pozycjach oznaczają rodzaje ryzyka, które je zasilają.</p>`;return}
+  const [k,id]=sel.split(":"),cnt0=R.t.size?"":`<p class="hint">Ten temat nie ma jeszcze osobnego szkolenia – może być warsztatem na zamówienie.</p>`,cnt=`<p class="hint">${R.m.size} ${R.m.size===1?"model":R.m.size<5?"modele":"modeli"} · ${R.t.size} ${R.t.size===1?"szkolenie":R.t.size<5?"szkolenia":"szkoleń"}</p>`;
+  const clr='<button type="button" class="clr" data-clr>Wyczyść wybór ✕</button>';
+  if(k==="m"){const m=MI[id];ib.style.setProperty("--hc",RISK[m.r].c);ib.innerHTML=`<span class="kick" style="font-size:11px">Model · ${RISK[m.r].n}</span><h4>${esc(m.n)} ${pl(m.lt)}</h4><p>${esc(m.d)}</p><ol>${m.o.map(o=>`<li><b>${esc(BI[o[0]].n)}</b>${pl(o[2])} – ${esc(o[1])}</li>`).join("")}</ol>${cnt0}${clr}`;return}
+  ib.style.removeProperty("--hc");
+  if(k==="b"){const b=BI[id],ms=M.filter(m=>m.o.some(o=>o[0]===id));ib.innerHTML=`<span class="kick" style="font-size:11px">Pozycja w banku</span><h4>${esc(b.n)}</h4>${ms.length?`<p>Kształtują ją:</p><ol>${ms.map(m=>`<li><b>${esc(m.n)}</b>${pl(m.o.find(o=>o[0]===id)[2])} – ${esc(m.o.find(o=>o[0]===id)[1])}</li>`).join("")}</ol>`:`<p class="hint">Na tej mapie żaden z modeli nie zasila tej pozycji wprost.</p>`}${clr}`;return}
+  if(k==="q"){const r=RT[id];ib.innerHTML=`<span class="kick" style="font-size:11px">Wskaźnik · ${({k:"kapitał",l:"płynność",w:"wynik i portfel"})[r.g]}</span><h4>${esc(r.n)}</h4><p><b>licznik:</b> ${esc(r.f[0])} · <b style="color:var(--terra-d)">mianownik:</b> ${esc(r.f[1])}</p><p>${esc(r.d)}</p>${cnt}${clr}`;return}
+  const tt=k==="r"?["Rodzaj ryzyka",RISK[id].n,"Modele tego ryzyka i miejsca, w których ich wyniki trafiają do bilansu, wyniku i kapitału."]:k==="l"?["Klasa problemu",PROB[id][0],PROB[id][1]]:k==="p"?["Cykl życia modelu",PROC[id][0],PROC[id][2]]:["Szkolenie",tName(id),"Modele omawiane na szkoleniu i miejsca w banku, w których działają."];
+  ib.innerHTML=`<span class="kick" style="font-size:11px">${tt[0]}</span><h4>${esc(tt[1])}</h4><p>${esc(tt[2])}</p>${cnt}${k==="t"&&TL[id]?`<a class="clr" style="display:inline-block;text-decoration:none;margin-right:8px" href="${TL[id]}">Program szkolenia →</a>`:""}${clr}`}
+let lock=null;
+const FL=[["r_netto","p_kapital","zysk zatrzymany"],["r_oci","p_kapital","skumulowane OCI"],["p_kapital","k_cet1","kapitał własny − odliczenia"],["p_emisje","k_t2","dług podporządkowany"],["p_emisje","k_at1","instrumenty AT1"],["a_ecl","r_ecl","zmiana stanu odpisów"],["a_kredyty","r_przych","odsetki od kredytów"],["p_depozyty","r_koszt","odsetki od depozytów"],["a_kredyty","k_rwa_k","ekspozycje × wagi ryzyka"],["z_pozab","k_rwa_k","EAD (CCF)"],["a_handl","k_rwa_r","pozycje handlowe"],["p_rezerwy","r_ecl","rezerwy na pozabilans"]];
+const BASE=[2];
+function flows(list){let sv=document.getElementById("fl");if(!sv){bank.style.position="relative";bank.insertAdjacentHTML("beforeend",'<svg id="fl" class="fl" aria-hidden="true"></svg>');sv=document.getElementById("fl")}
+  if(innerWidth<1000){sv.innerHTML="";return}const br=bank.getBoundingClientRect();sv.setAttribute("viewBox",`0 0 ${br.width} ${br.height}`);sv.style.width=br.width+"px";sv.style.height=br.height+"px";
+  let h=`<defs><marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#0d0d0d"/></marker></defs>`;
+  list.forEach((f,n)=>{const a=bank.querySelector(`[data-b="${f[0]}"]`),b=bank.querySelector(`[data-b="${f[1]}"]`);if(!a||!b)return;const ra=a.getBoundingClientRect(),rb=b.getBoundingClientRect();
+    const right=rb.left>ra.right-4,x1=(right?ra.right:ra.left)-br.left,y1=ra.top+ra.height/2-br.top,x2=(right?rb.left:rb.right)-br.left,y2=rb.top+rb.height/2-br.top,dx=Math.max(40,Math.abs(x2-x1)/2)*(right?1:-1);
+    const d=`M${x1} ${y1} C ${x1+dx} ${y1}, ${x2-dx} ${y2}, ${x2} ${y2}`,tw=f[2].length*6.3+16;
+    const P=t=>{const u=1-t;return[u*u*u*x1+3*u*u*t*(x1+dx)+3*u*t*t*(x2-dx)+t*t*t*x2,u*u*u*y1+3*u*u*t*y1+3*u*t*t*y2+t*t*t*y2]};
+    const C=[...bank.querySelectorAll(".col,.rtb")].map(e=>{const r=e.getBoundingClientRect();return[r.left-br.left,r.top-br.top,r.right-br.left,r.bottom-br.top]});
+    let lx,ly,best=1e9;for(let i=4;i<=96;i++){const t=i/100,[px,py]=P(t),hit=C.some(r=>px+11>r[0]&&px-11<r[2]&&py+11>r[1]&&py-11<r[3]);if(!hit&&Math.abs(t-.5)<best){best=Math.abs(t-.5);lx=px;ly=py}}
+    if(lx===undefined){[lx,ly]=P(.5)}
+    h+=`<path d="${d}" fill="none" stroke="#0d0d0d" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#fa)"/><circle cx="${lx}" cy="${ly}" r="10" fill="#0d0d0d"/><text x="${lx}" y="${ly+4}" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#f5f1ea">${n+1}</text>`});
+  sv.innerHTML=h}
+function flowNote(){if(!curFl.length||innerWidth<1000)return;ib.insertAdjacentHTML("beforeend",`<div class="fln"><span class="kick" style="font-size:11px">Przepływy na mapie</span><ol>${curFl.map((f,n)=>`<li><i>${n+1}</i><span><b>${esc(BI[f[0]].n)} → ${esc(BI[f[1]].n)}</b><br>${esc(f[2])}</span></li>`).join("")}</ol></div>`)}
+let curFl=[];function setFlows(sel){const k=sel&&sel.split(":")[0],id=sel&&sel.split(":")[1];curFl=!sel?[]:k==="b"?FL.filter(f=>f[0]===id||f[1]===id):[];flows(curFl)}
+addEventListener("resize",()=>flows(curFl));if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>flows(curFl));
+function paint(sel){setFlows(sel);const md=document.getElementById("md"),tr=document.getElementById("tr");
+  document.querySelectorAll("[data-s]").forEach(e=>e.classList.remove("on","cur","hit"));
+  bank.querySelectorAll(".bl").forEach(e=>{e.querySelector(".bd").innerHTML="";e.querySelector(".rl").innerHTML="";e.style.removeProperty("--hc")});
+  [bank,md,tr,document.getElementById("reg")].forEach(e=>e.classList.toggle("sel",!!sel));document.getElementById("lk").classList.toggle("sel",!!sel);
+  if(!sel){info(null);flowNote();ibLabel(null);return}
+  const R=resolve(sel),k0=sel.split(":")[0];
+  R.b.forEach((nums,bid)=>{const el=bank.querySelector(`[data-b="${bid}"]`);if(!el)return;el.classList.add("hit");el.style.setProperty("--hc",R.hc);
+    if(nums.length)el.querySelector(".bd").innerHTML=nums.map(n=>`<span>${n}</span>`).join("");
+    if(R.ring){const r=R.ring,x=[];if(r.num.includes(bid))x.push('<span>licznik</span>');if(r.den.includes(bid))x.push('<span class="d">mianownik</span>');el.querySelector(".rl").innerHTML=x.join("")}});
+  R.m.forEach(m=>{const e=document.querySelector(`.mb[data-s="m:${m}"]`);if(e)e.classList.add("on")});
+  {const rs=new Set([...R.m].map(m=>MI[m].r));document.querySelectorAll(".rdc").forEach(e=>e.classList.toggle("on",rs.has(e.dataset.r)));
+    const bs=[...R.b.keys()],kk=sel.split(":")[0],kid=sel.split(":")[1],has=re=>bs.some(b=>re.test(b)),G=[
+      has(/^k_|^p_kapital|^p_emisje|^q_(cet1|tcr|lev|lcr|nsfr)$/)||kk==="r"&&!/[MS]/.test(kid)||kk==="q"&&/^(cet1|tcr|lev|lcr|nsfr)$/.test(kid),
+      kk==="p"||rs.has("M")||kk==="r"&&kid==="M",
+      R.m.size>0||kk==="p",
+      has(/^k_(p2|buf)|^q_(cet1|tcr|lev)$|^a_ecl|^r_ecl|^p_rezerwy|^r_oci|^a_handl|^p_handl/)||rs.has("S")||kk==="q"&&/^(cet1|tcr|lev|cor|npl|cov|roe)$/.test(kid)];
+    document.querySelectorAll(".tdg").forEach((e,i)=>e.classList.toggle("on",!!G[i]))}
+  const lc=new Set();if(k0==="l")lc.add(sel.split(":")[1]);else R.m.forEach(m=>cat(MI[m]).forEach(c=>lc.add(c)));lc.forEach(c=>{const e=document.querySelector(`.lc[data-s="l:${c}"]`);if(e)e.classList.add("on")});
+  R.t.forEach(t=>{const e=document.querySelector(`.tb[data-s="t:${t}"]`);if(e)e.classList.add("on")});
+  const cur=document.querySelector(`[data-s="${sel}"]`);if(cur){cur.classList.add(cur.classList.contains("ch")?"on":"cur")}
+  info(sel,R);flowNote();ibLabel(sel)}
+const ibb=document.getElementById("ibb"),inf=document.getElementById("inf");
+function setClr(){document.querySelector(".fclr").classList.toggle("on",!!lock&&ibb.classList.contains("show"));document.getElementById("fbx").classList.toggle("has",!!lock)}
+function setInf(o){inf.classList.toggle("open",o);ibb.setAttribute("aria-expanded",o)}
+ibb.addEventListener("click",()=>setInf(!inf.classList.contains("open")));document.getElementById("infx").addEventListener("click",()=>setInf(false));
+addEventListener("keydown",e=>{if(e.key==="Escape")setInf(false)});
+{const lay=document.querySelector(".lay");new IntersectionObserver(es=>es.forEach(e=>{ibb.classList.toggle("show",e.isIntersecting);setClr();if(!e.isIntersecting)setInf(false)}),{rootMargin:"-25% 0px -25% 0px"}).observe(lay)}
+function ibLabel(sel){const h=ib.querySelector("h4"),k=ib.querySelector(".kick");document.getElementById("ibbt").textContent=sel&&h?h.textContent:"Jak czytać mapę";document.getElementById("ibbk").textContent=sel&&k?k.textContent:"Opis"}
+document.addEventListener("click",e=>{if(e.target.closest("[data-clr]")){lock=null;paint(null);setClr();return}const el=e.target.closest("[data-s]");if(!el)return;const s=el.dataset.s;lock=lock===s?null:s;paint(lock);ibb.classList.remove("ping");void ibb.offsetWidth;ibb.classList.add("ping");setClr()});
+document.addEventListener("mouseover",e=>{if(lock)return;const el=e.target.closest(".bl,.mb,.tb,.lc");if(el)paint(el.dataset.s)});
+document.addEventListener("mouseout",e=>{if(lock)return;const el=e.target.closest(".bl,.mb,.tb,.lc");if(el&&!el.contains(e.relatedTarget))paint(null)});
+paint(null);
+/* ---------- widok prosty ---------- */
+const SB=[["Bilans","Aktywa",[["kred","Kredyty","portfel i limity",["a_kredyty","z_pozab"]],["odp","Odpisy ECL","oczekiwane straty",["a_ecl","p_rezerwy"]],["rynk","Portfel rynkowy","handel i papiery",["a_handl","p_handl","a_papiery","a_kasa"]]]],
+ ["Bilans","Pasywa",[["dep","Depozyty","finansowanie banku",["p_depozyty","p_banki"]],["kw","Kapitał własny","zyski zatrzymane, OCI",["p_kapital","p_emisje"]]]],
+ ["Rachunek zysków i strat","Wynik",[["nii","Wynik odsetkowy","marża między kredytem a depozytem",["r_przych","r_koszt","r_nii"]],["cor","Koszt ryzyka","odpisy ECL, straty, sprawy sądowe",["r_ecl","r_prawne","r_koszty"]],["zn","Zysk netto","także wynik na instrumentach",["r_netto","r_handl","r_oci"]]]],
+ ["Kapitał i wymogi","Kapitał",[["fw","Fundusze własne","CET1, AT1, Tier 2",["k_cet1","k_at1","k_t2","q_cet1","q_tcr"]],["rwa","RWA – wymogi","kredytowe, rynkowe, operacyjne",["k_rwa_k","k_rwa_r","k_rwa_o","k_rwa_cva"]],["p2","Filar 2, bufory i płynność","ICAAP, P2R, P2G, LCR, NSFR",["k_p2","k_buf","q_lcr","q_nsfr"]]]]];
+const SI={};SB.forEach(c=>c[2].forEach(i=>SI[i[0]]={n:i[1],b:i[3]}));
+const sv=document.getElementById("vS"),sn=document.getElementById("sn");
+const itemRisks=id=>{const r=new Set();M.forEach(m=>{if(m.o.some(o=>SI[id].b.includes(o[0])))r.add(m.r)});return r};
+document.getElementById("sb").innerHTML=SB.map((c,ci)=>`<div class="sc sc${ci+1}"><h3>${c[0]}<b>${c[1]}</b></h3>${c[2].map(i=>`<button type="button" class="si" data-x="i:${i[0]}"><span class="cn"></span><b>${esc(i[1])}</b><small>${esc(i[2])}</small><span class="rd">${["K","R","O","A","M","S"].filter(r=>itemRisks(i[0]).has(r)).map(r=>`<i style="background:${RISK[r].c}" title="${RISK[r].n}"></i>`).join("")}</span></button>`).join("")}</div>`).join("");
+document.getElementById("sr").innerHTML=["K","R","O","A","M","S"].map(r=>`<button type="button" class="sk" data-x="r:${r}"><i style="background:${RISK[r].c}"></i>${RISK[r].n}</button>`).join("");
+document.getElementById("st").innerHTML=T.map((t,i)=>`<button type="button" class="sk" data-x="t:${t.id}"><i style="background:${TC[i%TC.length]};width:22px;height:22px;border-radius:6px;font-family:var(--serif);font-style:italic;font-size:11px;display:grid;place-items:center;color:var(--ink)">${String(i+1).padStart(2,"0")}</i>${esc(t.title)}</button>`).join("");
+let slock=null;const plN=(n,a,b,c)=>n===1?a:(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20))?b:c;
+function spaint(sel){sv.querySelectorAll("[data-x]").forEach(e=>{e.classList.remove("hit","on","cur");e.style.removeProperty("--hc");const c=e.querySelector(".cn");if(c)c.textContent=""});sv.classList.toggle("sel",!!sel);
+  if(!sel){sn.innerHTML='Kliknij ryzyko, szkolenie albo element banku. Strzałki pokazują drogę: od kredytów i depozytów, przez wynik, do kapitału.';return}
+  const [k,id]=sel.split(":");let ms=[];
+  if(k==="r")ms=M.filter(m=>m.r===id);else if(k==="t")ms=M.filter(m=>m.t.includes(id));else ms=M.filter(m=>m.o.some(o=>SI[id].b.includes(o[0])));
+  const hc=k==="r"?RISK[id].c:"#bf8165",items={};ms.forEach(m=>Object.entries(SI).forEach(([iid,v])=>{if(m.o.some(o=>v.b.includes(o[0])))items[iid]=(items[iid]||0)+1}));
+  Object.entries(items).forEach(([iid,n])=>{const e=sv.querySelector(`[data-x="i:${iid}"]`);e.classList.add("hit");e.style.setProperty("--hc",hc);e.querySelector(".cn").textContent=n});
+  const rs=new Set(ms.map(m=>m.r)),ts=new Set();ms.forEach(m=>m.t.forEach(t=>ts.add(t)));if(k==="t"){ts.clear();ts.add(id)}
+  rs.forEach(r=>{const e=sv.querySelector(`[data-x="r:${r}"]`);if(e)e.classList.add("on")});ts.forEach(t=>{const e=sv.querySelector(`[data-x="t:${t}"]`);if(e)e.classList.add("on")});
+  const cur=sv.querySelector(`[data-x="${sel}"]`);cur.classList.add("cur");
+  const name=k==="r"?"Ryzyko "+RISK[id].n.toLowerCase():k==="t"?tName(id):SI[id].n;
+  sn.innerHTML=`<b>${esc(name)}</b> → ${ms.length} ${plN(ms.length,"model","modele","modeli")}, ${Object.keys(items).length} ${plN(Object.keys(items).length,"obszar","obszary","obszarów")} banku, ${ts.size} ${plN(ts.size,"szkolenie","szkolenia","szkoleń")}. <span style="color:var(--muted)">Szczegóły – w widoku szczegółowym.</span>${slock?'<button type="button" class="clr" data-sclr>Wyczyść ✕</button>':""}`}
+sv.addEventListener("click",e=>{if(e.target.closest("[data-sclr]")){slock=null;spaint(null);return}const el=e.target.closest("[data-x]");if(!el)return;e.stopPropagation();slock=slock===el.dataset.x?null:el.dataset.x;spaint(slock)});
+sv.addEventListener("mouseover",e=>{if(slock)return;const el=e.target.closest("[data-x]");if(el)spaint(el.dataset.x)});
+sv.addEventListener("mouseout",e=>{if(slock)return;const el=e.target.closest("[data-x]");if(el&&!el.contains(e.relatedTarget))spaint(null)});
+spaint(null);
+/* ---------- widok próba: bryła ---------- */
+(function(){const D=window.RT_KON;if(!D)return;const kx=document.getElementById("kx");
+  const E=t=>String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;");const DI={};D.dom.forEach(x=>DI[x[0]]=x);const CI={};D.c.forEach(c=>CI[c.id]=c);
+  const UT=["","niszowo","rzadko","w części banków","często","powszechnie"],sg=u=>[1,2,3,4,5].map(k=>`<i${k<=u?' class="f"':""}></i>`).join("");
+  kx.innerHTML=`<div class="kx-h"><div><span class="kick">Druga ściana</span><h2>Koncepcje modeli</h2></div><p>${D.c.length} modeli ryzyka omawianych na szkoleniach, w ${D.dom.length} obszarach. Kliknij koncepcję, żeby zobaczyć jej techniki ilościowe na trzeciej ścianie. Pełne opisy – na stronie <a href="../koncepcje/">Koncepcje modeli</a>.</p></div>
+  <div class="kx-g" id="kxg"></div>`;
+  const lanes=()=>{const L=[[],[]],H=[0,0];D.dom.map(d=>[d,D.c.filter(c=>c.d===d[0]).length]).sort((a,b)=>b[1]-a[1]).forEach(([d,n])=>{const i=H[0]<=H[1]?0:1;L[i].push(d);H[i]+=n+1});return L};
+  const cell=(c,d,head)=>`<div class="kx-tc${c.old?" old":""}" data-cid="${c.id}" role="button" tabindex="0"><b>${c.reg?'<em class="kx-rg">§</em>':""}${E(c.n)}</b><small>${E(c.old||c.o)}</small><span class="kx-k ${c.k}">${c.k}</span></div>`;
+  function laneHTML(doms,cols){const items=[];doms.forEach(d=>{items.push([null,d,true]);D.c.filter(c=>c.d===d[0]).forEach(c=>items.push([c,d,false]))});
+    const g=(r,k)=>{const x=items[r*cols+k];return x?x[1][0]:null};
+    return items.map((x,n)=>{const r=Math.floor(n/cols),k=n%cols,me=x[1][0],T=g(r-1,k)===me&&r>0,B=g(r+1,k)===me,Lf=k>0&&g(r,k-1)===me,Rt=k<cols-1&&g(r,k+1)===me;
+      const R=20,G=7,P=10,rad=`${!T&&!Lf?R:0}px ${!T&&!Rt?R:0}px ${!B&&!Rt?R:0}px ${!B&&!Lf?R:0}px`,ins=`${T?0:G}px ${Rt?0:G}px ${B?0:G}px ${Lf?0:G}px`,pad=`${T?4:G+P}px ${Rt?4:G+P}px ${B?4:G+P}px ${Lf?4:G+P}px`,col=({K2:"#c9a24a"})[me]||x[1][3];
+      return`<div class="kx-cl${x[2]?" hd":""}" data-g="${me}" data-col="${col}" style="--dc:${col};--pad:${pad}">${x[2]?`<div class="kx-hh"><b>${E(x[1][1])}</b><small>${D.c.filter(c=>c.d===me).length} ${D.c.filter(c=>c.d===me).length<5?"koncepcje":"koncepcji"}</small></div>`:cell(x[0])}</div>`}).join("")}
+  let lastCols=0;const fit=()=>{const w=innerWidth,cols=w<640?2:3,one=w<1100;const key=cols+(one?"o":"t");if(key===lastCols)return;lastCols=key;const L=lanes();
+    document.getElementById("kxg").innerHTML=(one?[L[0].concat(L[1])]:L).map(l=>`<div class="kx-lane" style="--cols:${cols}"><svg class="kx-bg" aria-hidden="true"></svg>${laneHTML(l,cols)}</div>`).join("");draw()};
+  function rp(pts,r){let d="";const n=pts.length;for(let i=0;i<n;i++){const P=pts[i],A=pts[(i-1+n)%n],B=pts[(i+1)%n];const la=Math.hypot(A[0]-P[0],A[1]-P[1]),lb=Math.hypot(B[0]-P[0],B[1]-P[1]),rr=Math.min(r,la/2,lb/2);
+    const p1=[P[0]+(A[0]-P[0])/la*rr,P[1]+(A[1]-P[1])/la*rr],p2=[P[0]+(B[0]-P[0])/lb*rr,P[1]+(B[1]-P[1])/lb*rr];d+=(i?"L":"M")+p1[0].toFixed(1)+" "+p1[1].toFixed(1)+"Q"+P[0].toFixed(1)+" "+P[1].toFixed(1)+" "+p2[0].toFixed(1)+" "+p2[1].toFixed(1)}return d+"Z"}
+  function draw(){document.querySelectorAll("#kxg .kx-lane").forEach(lane=>{const lr=lane.getBoundingClientRect();if(!lr.width)return;const sv=lane.querySelector(".kx-bg");sv.setAttribute("width",lr.width);sv.setAttribute("height",lr.height);
+    const G={};lane.querySelectorAll(".kx-cl").forEach(c=>{const r=c.getBoundingClientRect(),k=c.dataset.g;(G[k]=G[k]||{col:c.dataset.col,rows:{}});const y=Math.round(r.top-lr.top);const row=G[k].rows[y]=G[k].rows[y]||[1e9,-1e9,y,0];row[0]=Math.min(row[0],r.left-lr.left);row[1]=Math.max(row[1],r.right-lr.left);row[3]=Math.max(row[3],r.bottom-lr.top)});
+    sv.innerHTML=Object.values(G).map(g=>{const st=Object.values(g.rows).sort((a,b)=>a[2]-b[2]);for(let i=1;i<st.length;i++)st[i][2]=st[i-1][3];
+      let pts=[];st.forEach(q=>{pts.push([q[1],q[2]],[q[1],q[3]])});st.slice().reverse().forEach(q=>{pts.push([q[0],q[3]],[q[0],q[2]])});
+      pts=pts.filter((p,i)=>{const a=pts[(i-1+pts.length)%pts.length],b=pts[(i+1)%pts.length];return !((a[0]===p[0]&&p[0]===b[0])||(a[1]===p[1]&&p[1]===b[1]))});
+      return`<path d="${rp(pts,26)}" fill="color-mix(in srgb, ${g.col} 19%, #faf6ef)" stroke="var(--paper)" stroke-width="14" stroke-linejoin="round"/>`}).join("")})}
+  window.kxDraw=draw;fit();addEventListener("resize",()=>{lastCols=0;fit();setTimeout(()=>paintSel())});if(document.fonts)document.fonts.ready.then(draw);
+  const m=document.getElementById("kxm"),mc=document.getElementById("kxc");
+  function op(id){const c=CI[id],d=DI[c.d],x=c.det;m.style.setProperty("--dc",d[3]);
+    mc.innerHTML=`<div class="kx-mt"></div><button type="button" class="kx-mx" aria-label="Zamknij">✕</button><div class="kx-mi"><span class="kick">${E(d[1])}${c.g?" · "+E(c.g):""}</span><h2>${E(c.n)}</h2><div class="kx-mo">${E(c.o)}</div>${c.reg?`<div class="kx-mr"><em class="kx-rg">§</em><span>${E(c.reg)}</span></div>`:""}<div class="kx-mu"><span class="kx-ub inl">${sg(c.u)}</span>Stosowanie w bankach: <b>${UT[c.u]}</b> (${c.u} / 5)</div>
+    <div class="kx-mb">${x?x.p.map(t=>`<p>${E(t)}</p>`).join(""):`<p>${E(c.s)}</p>`}</div>${x?`<div class="kx-ex"><span>Przykład</span><h3>${E(x.ex[0])}</h3><ol>${x.ex[1].map(t=>`<li>${E(t)}</li>`).join("")}</ol></div>`:""}
+    <div class="kx-h4">Idea w jednym wzorze</div><div class="kx-id">${E(c.idea)}</div>${c.par.length?`<div class="kx-h4">Parametry szacowane</div><div class="kx-par">${c.par.map(p=>`<div><em>${E(p[0])}</em><span><b>${E(p[1])}</b>${E(p[2])}</span></div>`).join("")}</div>`:""}</div>`;
+    m.classList.add("open");document.body.style.overflow="hidden"}
+  const cl=()=>{m.classList.remove("open");document.body.style.overflow=""};
+  kx.addEventListener("click",e=>{const b=e.target.closest("[data-kx]");if(b)op(b.dataset.kx)});
+  m.addEventListener("click",e=>{if(e.target===m||e.target.closest(".kx-mx"))cl()});addEventListener("keydown",e=>{if(e.key==="Escape")cl()});
+  /* trzecia ściana – techniki */
+  {const T=window.RT_TECH,el=document.getElementById("tqf");if(T&&el){const by=c=>T.t.filter(t=>t.c===c);const ORD=[["WN",2],["PR",2],["SO",2],["EK",2],["NU",4]];
+    el.innerHTML=`<div class="tq-h"><div><span class="kick">Trzecia ściana</span><h2>Techniki ilościowe</h2></div><p>${T.t.length} technik statystycznych, ekonometrycznych, probabilistycznych i numerycznych, na których stoją modele ryzyka. <span class="tq-e">E</span> oznacza technikę estymacyjną, a liczba – w ilu koncepcjach z drugiej ściany jest stosowana. Kliknij technikę albo koncepcję, żeby zobaczyć powiązania.</p></div>
+    <div class="tq-g">${ORD.map(([cid,sp])=>{const c=T.cats.find(x=>x[0]===cid);if(!c)return"";const ts=by(cid);return`<div class="tq-s" style="--tc:${c[2]};--sp:${sp};--ic:${sp}"><div class="tq-sh"><b>${E(c[1])}</b><small>${ts.length}</small></div><ol>${ts.map((t,i)=>`<li data-tid="${t.id}" role="button" tabindex="0"><span class="tq-n">${String(i+1).padStart(2,"0")}</span><span class="tq-t"><b>${E(t.n)}</b><small>${E(t.x)}</small></span><span class="tq-r">${t.est?'<span class="tq-e" title="technika estymacyjna">E</span>':""}<span class="tq-m" title="w ilu koncepcjach z drugiej ściany technika jest stosowana">${t.m}</span></span></li>`).join("")}</ol></div>`}).join("")}</div>`}}
+  /* czwarta ściana – mapa modelu */
+  {const R=window.RT_MODEL,el=document.getElementById("mmf");if(R&&el){
+    const IC={id:'<rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16.2c.7-1.6 1.8-2.4 3.2-2.4s2.5.8 3.2 2.4M14 10h4M14 13.5h3"/>',
+      target:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/><path d="M17 7l3-3M18 4h2v2"/>',
+      bulb:'<path d="M9 17.5h6M10 20.5h4M12 3.5a6 6 0 0 0-3.6 10.8c.6.5 1 1.3 1 2.1V17h5.2v-.6c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 3.5z"/>',
+      db:'<ellipse cx="12" cy="6" rx="7.5" ry="2.8"/><path d="M4.5 6v12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V6M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/>',
+      sigma:'<path d="M17 5H7l5.5 7L7 19h10"/><path d="M19.5 15.5c-1 0-1.5.8-1.5 2s.5 2 1.5 2" opacity=".0"/>',
+      check:'<path d="M12 3l7.5 3v5.5c0 4.5-3.2 8-7.5 9.5-4.3-1.5-7.5-5-7.5-9.5V6z"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/>',
+      rocket:'<path d="M14.5 4.5c3-.8 5-.5 5-.5s.3 2-.5 5c-.8 3-3.6 6-6.5 7.5l-4.5-4.5C9.5 9.1 11.5 5.3 14.5 4.5z"/><circle cx="15" cy="9" r="1.6"/><path d="M8 12l-3 .5-1.5 3 4-.5M12 16l-.5 3-3 1.5.5-4M6.5 17.5l-2 2"/>',
+      puzzle:'<path d="M5 8h3.2a1.8 1.8 0 1 1 3.6 0H15v3.2a1.8 1.8 0 1 1 0 3.6V18h-3.2a1.8 1.8 0 1 0-3.6 0H5v-3.2a1.8 1.8 0 1 0 0-3.6z"/>',
+      doc:'<path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15h6M9.5 18h3.5"/>',
+      folder:'<path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2.2h7a2 2 0 0 1 2 2v8.3a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M3.5 10.5h17"/>'};
+    const COLS=["#bf8165","#c9a24a","#a6824c","#4f7390","#8a4f8f","#6f7f58","#c07a1f","#8a7f60","#5f8aa6","#9a9176"];
+    const SPAN={"01":[4,1],"02":[3,1],"03":[5,2],"04":[3,1],"05":[9,3],"06":[6,2],"07":[3,1],"08":[6,2],"09":[3,1],"10":[3,1]};
+    const pills=it=>`<div class="mm-p">${it.map(x=>`<span><b>${E(x[0])}</b>${x[1]?`<small>${E(x[1])}</small>`:""}</span>`).join("")}</div>`;
+    el.innerHTML=`<div class="mm-hd"><div><span class="kick">Czwarta ściana</span><h2>Mapa modelu</h2></div><p>Z czego składa się model – od metryki i celu, przez koncepcję, dane i model statystyczny, po weryfikację, wdrożenie i dokumentację. Dziesięć komponentów, o które pyta się przy budowie i walidacji każdego modelu.</p></div>
+    <div class="mm-g" id="mmg">${R.map((r,i)=>{const sp=SPAN[r[0]]||[4,1];return`<section class="mm-b" style="--c:${COLS[i%COLS.length]};grid-column:span ${sp[0]};--ic:${sp[1]}"><div class="mm-bh"><span class="mm-ic"><svg viewBox="0 0 24 24" aria-hidden="true">${IC[r[2]]||""}</svg></span><div><span class="mm-no">#${r[0]}</span><h3>${E(r[1])}</h3><p>${E(r[3])}</p></div></div><div class="mm-sg">${r[4].map(g=>`<div class="mm-s">${g[0]?`<h4>${E(g[0])}</h4>`:""}${pills(g[1])}</div>`).join("")}</div></section>`}).join("")}</div>`;
+    const mas=()=>{const g=document.getElementById("mmg");if(!g||!g.offsetWidth)return;g.querySelectorAll(".mm-b").forEach(b=>{b.style.gridRowEnd="auto";const h=b.firstElementChild.offsetHeight+b.lastElementChild.offsetHeight+40;b.style.gridRowEnd=`span ${Math.ceil((h+14)/8)}`})};
+    window.mmMas=mas;addEventListener("resize",mas);if(document.fonts)document.fonts.ready.then(mas)}}
+  /* powiązania technika ↔ koncepcja */
+  const C2M={score:["score"],rating:["pd"],merton:["pd"],surv:["pd"],migr:["pd"],lgdw:["lgd"],lgd2:["lgd"],lgdd:["lgd","irb"],lgdid:["lgd","irb"],ccf:["ccf"],ecl:["pd","lgd","ccf","makro"],pdlt:["pd"],lgdlt:["lgd"],eadlt:["ccf","prepay"],sicr:["pd"],fli:["makro"],vasicek:["irb"],irb:["irb"],sa:["irb"],cmetrics:["konc"],crplus:["konc"],copula:["konc"],varp:["var"],varh:["var"],varmc:["var"],garch:["var"],rm:["var"],es:["var"],evt:["var","oprisk"],stv:["var"],mktsa:["var"],frtbsa:["var"],lda:["oprisk"],ama:["oprisk"],sma:["oprisk"],bia:["oprisk"],scen:["oprisk"],bayes:["oprisk"],rep:["oprisk","plyn"],lcr:["plyn"],nsfr:["plyn"],lgap:["plyn","depmod"],lst:["plyn","stres"],agg:["konc"],raroc:["ftp"],p2:["konc","irrbb"],biz:["stres"],sens:["stres"],macro:["stres","makro"],rst:["stres"],eba:["stres"],plan:["stres"],mrq:["mr"],tier:["mr"]};
+  const m2c=m=>Object.keys(C2M).filter(c=>C2M[c].includes(m));
+  const TT=(window.RT_TECH||{t:[]}).t,TI={};TT.forEach(t=>{t.cs=t.cs||[];TI[t.id]=t});let SEL=null;
+  let quiet=false;
+  function face1(sel){quiet=true;const mset=new Set();if(sel){if(sel.k==="m")mset.add(sel.id);else if(sel.k==="c")(C2M[sel.id]||[]).forEach(m=>mset.add(m));else (TI[sel.id].cs||[]).forEach(c=>(C2M[c]||[]).forEach(m=>mset.add(m)))}
+    if(sel&&sel.k!=="m"){if(mset.size===1){lock="m:"+[...mset][0];paint(lock)}else{lock=null;paint(null);if(mset.size){document.getElementById("md").classList.add("sel");mset.forEach(m=>{const e=document.querySelector(`.mb[data-s="m:${m}"]`);e&&e.classList.add("on")})}}}
+    else if(!sel&&lock){lock=null;paint(null)}quiet=false;return mset}
+  function paintSel(){const tset=new Set(),cset=new Set();let mset=new Set();if(SEL){if(SEL.k==="t"){tset.add(SEL.id);TI[SEL.id].cs.forEach(c=>cset.add(c))}else if(SEL.k==="c"){cset.add(SEL.id);TT.forEach(t=>{if(t.cs.includes(SEL.id))tset.add(t.id)})}else{m2c(SEL.id).forEach(c=>cset.add(c));TT.forEach(t=>{if(t.cs.some(c=>cset.has(c)))tset.add(t.id)})}}
+    if(SEL&&SEL.k!=="m")mset=face1(SEL);
+    document.body.classList.toggle("tsel",!!SEL);document.querySelectorAll("[data-cid]").forEach(e=>{e.classList.toggle("hit",cset.has(e.dataset.cid));e.classList.toggle("cur",!!SEL&&SEL.k==="c"&&SEL.id===e.dataset.cid)});
+    document.querySelectorAll("[data-tid]").forEach(e=>{e.classList.toggle("hit",tset.has(e.dataset.tid));e.classList.toggle("cur",!!SEL&&SEL.k==="t"&&SEL.id===e.dataset.tid)});
+    const b=document.getElementById("csel");if(!SEL){b.hidden=true;return}b.hidden=false;
+    const pl=(n,a,b2,c)=>n+" "+(n===1?a:n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?b2:c),g0=face!==0&&(SEL.k==="m"||mset.size)?`<button type="button" data-go="0">Mapa banku${SEL.k!=="m"&&mset.size>1?" ("+mset.size+")":""} →</button>`:"";
+    if(SEL.k==="m"){b.innerHTML=`<span><b>${E(MI[SEL.id].n)}</b> · ${pl(cset.size,"koncepcja","koncepcje","koncepcji")} · ${pl(tset.size,"technika","techniki","technik")}</span>${face!==1?'<button type="button" data-go="1">Koncepcje →</button>':""}${face!==2?'<button type="button" data-go="2">Techniki →</button>':""}<button type="button" data-unsel>✕</button>`;return}
+    if(SEL.k==="t"){const t=TI[SEL.id];b.innerHTML=`<span><b>${E(t.n)}</b> · ${cset.size} ${cset.size===1?"koncepcja":cset.size<5&&cset.size>1?"koncepcje":"koncepcji"}</span>${face!==1?'<button type="button" data-go="1">Koncepcje →</button>':""}${g0}<button type="button" data-unsel>✕</button>`}
+    else{const c=CI[SEL.id];b.innerHTML=`<span><b>${E(c.n)}</b> · ${tset.size} ${tset.size===1?"technika":tset.size<5&&tset.size>1?"techniki":"technik"}</span>${face!==2?'<button type="button" data-go="2">Techniki →</button>':""}${g0}<button type="button" data-unsel>✕</button>`}}
+  document.addEventListener("click",e=>{const t=e.target.closest("[data-tid]"),c=e.target.closest("[data-cid]");
+    if(t){SEL=SEL&&SEL.k==="t"&&SEL.id===t.dataset.tid?null:{k:"t",id:t.dataset.tid};paintSel();return}
+    if(c){SEL=SEL&&SEL.k==="c"&&SEL.id===c.dataset.cid?null:{k:"c",id:c.dataset.cid};paintSel();return}
+    if(e.target.closest("[data-unsel]")){const was=SEL;SEL=null;if(was){quiet=true;lock=null;paint(null);quiet=false}paintSel();return}
+    const g=e.target.closest("#csel [data-go]");if(g){turn(+g.dataset.go);return}});
+  {const _p=paint;paint=function(sel){_p(sel);if(quiet||document.getElementById("vP").hidden)return;
+    if(lock&&lock.startsWith("m:")){SEL={k:"m",id:lock.slice(2)};paintSel()}else if(lock===null&&SEL&&SEL.k==="m"){SEL=null;paintSel()}else if(lock&&SEL){SEL=null;paintSel()}}
+}
+  /* obrót */
+  const cube=document.getElementById("cube"),box=document.getElementById("box"),F=[1,2,3,4].map(i=>document.getElementById("f"+i));let face=0,busy=false;
+  function rest(){setTimeout(()=>paintSel());box.className="box";cube.style.height="";F.forEach((f,i)=>{f.style.transform="";f.hidden=i!==face});document.querySelectorAll("[data-face]").forEach(b=>b.classList.toggle("on",+b.dataset.face===face));document.body.classList.remove("rotating");if(face===0)requestAnimationFrame(()=>flows(curFl));else if(face===1)window.kxDraw&&window.kxDraw();else if(face===3)window.mmMas&&window.mmMas()}
+  function turn(to){if(busy||to===face)return;busy=true;const W=cube.clientWidth;
+    const top=document.querySelector(".cbar").getBoundingClientRect().top+scrollY-100;if(scrollY>top)scrollTo({top,behavior:"instant"});
+    F.forEach((f,i)=>f.hidden=i===3&&face!==3&&to!==3);window.kxDraw&&window.kxDraw();const h0=F[face].offsetHeight,h1=F[to].offsetHeight;document.body.classList.add("rotating");
+    cube.style.height=h0+"px";cube.style.perspectiveOrigin=`50% ${Math.max(200,scrollY+innerHeight/2-(cube.getBoundingClientRect().top+scrollY))}px`;
+    F.forEach((f,i)=>f.style.transform=`rotateY(${90*i}deg) translateZ(${W/2}px)`);
+    box.className="box d3";let st=((to-face)%4+4)%4;if(st===3)st=-1;box.style.transform=`translateZ(${-W/2}px) rotateY(${-90*face}deg)`;void box.offsetWidth;
+    const far=Math.abs(st)>1;box.style.transitionDuration=far?"1.5s":"";cube.style.animationDuration=far?"1.5s":"";cube.style.transitionDuration=far?"1.5s":"";box.classList.add("go");box.style.transform=`translateZ(${-W/2}px) rotateY(${-90*(face+st)}deg)`;cube.style.height=h1+"px";cube.classList.add("pulse");
+    setTimeout(()=>{face=to;box.style.transform="";box.style.transitionDuration="";cube.style.animationDuration="";cube.style.transitionDuration="";cube.classList.remove("pulse");rest();busy=false},far?1550:1150)}
+  document.getElementById("crot").addEventListener("click",()=>{if(face===3){backFromModel();return}turn((face+1)%3)});
+  document.querySelector(".cfaces").addEventListener("click",e=>{const b=e.target.closest("[data-face]");if(b)turn(+b.dataset.face)});
+  /* ---------- trzy wersje ściany modelu ---------- */
+  const vP=document.getElementById("vP"),cbar=document.querySelector(".cbar");let V=1;try{V=+localStorage.getItem("rt_mm_v")||1}catch(_){}
+  cbar.insertAdjacentHTML("afterend",`<div class="cver"><span>Mapa modelu – wersja</span><button type="button" data-mv="1">1 · Dach bryły</button><button type="button" data-mv="2">2 · Pas nad bryłą</button><button type="button" data-mv="3">3 · Rozłożona bryła</button><button type="button" class="cver-go" id="mmgo"></button></div><div class="mstrip" id="mstrip" hidden></div><div class="mpan" id="mpan" hidden></div>`);
+  const mmBlock=document.getElementById("mmg");
+  /* wersja 1 – dach */
+  let prev=0;
+  /* bryła w miniaturze: przód + bok + dach; kamera unosi się nad bryłę */
+  function lid(up,cb){busy=true;const W=cube.clientWidth,fr=up?face:prev,H=Math.min(F[fr].offsetHeight||900,Math.max(560,innerHeight-200));
+    const h4=F[3].hidden;F[3].hidden=false;window.mmMas&&window.mmMas();const top=cube.getBoundingClientRect().top+scrollY-120;scrollTo({top,behavior:"instant"});
+    const cl=(el)=>{const c=el.cloneNode(true);c.hidden=false;c.removeAttribute("id");c.querySelectorAll("[id]").forEach(x=>x.removeAttribute("id"));c.style.cssText="";return c};
+    const sc=document.createElement("div");sc.className="lid";sc.style.height=H+"px";
+    const bx=document.createElement("div");bx.className="lid-b";bx.style.cssText=`width:${W}px;height:${H}px`;
+    const mk=(src,cls,w,h,tr)=>{const f=document.createElement("div");f.className="lid-f "+cls;f.style.cssText=`width:${w}px;height:${h}px;left:${(W-w)/2}px;top:${(H-h)/2}px;transform:${tr}`;f.appendChild(cl(src));bx.appendChild(f);return f};
+    mk(F[fr],"lf-front",W,H,`translateZ(${W/2}px)`);mk(F[(fr+1)%3],"lf-side",W,H,`rotateY(90deg) translateZ(${W/2}px)`);
+    const tp=mk(F[3],"lf-top",W,W,`rotateX(90deg) translateZ(${H/2}px)`);
+    F[3].hidden=h4;sc.appendChild(bx);cube.appendChild(sc);document.body.classList.add("rotating");box.style.visibility="hidden";cube.style.height=H+"px";
+    const S0=`translateZ(${-W/2}px)`,S1=`translateY(${H*.12}px) scale3d(.46,.46,.46) rotateX(-30deg) rotateY(-34deg)`,S2=`translateY(${(W-H)/2}px) translateZ(${-H/2}px) rotateX(-90deg)`;
+    const seq=up?[S0,S1,S2]:[S2,S1,S0];bx.style.transform=seq[0];if(!up)sc.classList.add("lid-hi");void bx.offsetWidth;
+    requestAnimationFrame(()=>{bx.classList.add("go");bx.style.transform=seq[1];sc.classList.toggle("lid-hi",true);
+      setTimeout(()=>{bx.style.transform=seq[2];sc.classList.remove("lid-hi");
+        setTimeout(()=>{sc.remove();box.style.visibility="";cube.style.height="";cb();busy=false;mvUI()},1150)},1100+650)})}
+  function lookUp(){if(busy||face===3)return;prev=face;lid(true,()=>{face=3;rest()})}
+  function backFromModel(){if(busy)return;if(V===1)lid(false,()=>{face=prev;rest()});else{face=prev;rest();mvUI()}}
+  /* wersja 2 – pas */
+  const MMAP={"01":{n:"modele na mapie banku i grupy koncepcji",s:[".mb",".kx-hh"]},"02":{n:"gdzie trafia wynik: kapitał, odpisy i wskaźniki; miary ryzyka",s:['[data-b^="k_"]','[data-b="a_ecl"]','[data-b="r_ecl"]','[data-b^="q_"]','[data-tid="pr_risk"]']},
+    "03":{n:"koncepcje modeli i rodziny rozkładów",s:["[data-cid]",'[data-tid="pr_dist"]','[data-tid="pr_fac"]','[data-tq-x]']},"04":{n:"pozycje bilansu jako dane wejściowe; statystyka opisowa i dane niepełne",s:['[data-b^="a_"]','[data-b^="p_"]','[data-b="z_pozab"]','[data-tid^="so_"]','[data-tid="wn_inc"]','[data-tid="wn_cens"]']},
+    "05":{n:"parametry modeli i techniki estymacji",s:['[data-tid^="wn_"]','[data-tid^="ek_"]','[data-tid^="pr_"]','[data-s="p:bud"]']},"06":{n:"testy i backtesting; krok walidacji w cyklu życia",s:['[data-tid="wn_test"]','[data-tid="wn_gof"]','[data-tid="wn_ci"]','[data-tid="nu_boot"]','[data-tid="nu_hs"]','[data-tid="so_mig"]','[data-s="p:wal"]']},
+    "07":{n:"krok wdrożenia w cyklu życia",s:['[data-s="p:wdr"]']},"08":{n:"administrowanie, ryzyko modeli i regulacje (Rekomendacja W)",s:['[data-s="p:adm"]','[data-s="m:mr"]','#regb']},"09":{n:"wdrożenie i akceptacja modelu",s:['[data-s="p:wdr"]','[data-s="p:dcz"]']},"10":{n:"administrowanie i otoczenie regulacyjne",s:['[data-s="p:adm"]','#regb']}};
+  let MSEL=null;const strip=document.getElementById("mstrip"),pan=document.getElementById("mpan");
+  strip.innerHTML=window.RT_MODEL?window.RT_MODEL.map((r,i)=>{const b=mmBlock.children[i];return`<button type="button" data-mc="${r[0]}" style="--c:${b.style.getPropertyValue("--c")}"><span class="mm-ic">${b.querySelector(".mm-ic").innerHTML}</span><span><small>#${r[0]}</small>${E(r[1])}</span></button>`}).join(""):"";
+  function mHi(){document.querySelectorAll(".mmh").forEach(e=>e.classList.remove("mmh"));strip.querySelectorAll("[data-mc]").forEach(b=>b.classList.toggle("on",b.dataset.mc===MSEL));
+    if(!MSEL){pan.hidden=true;return}const i=window.RT_MODEL.findIndex(r=>r[0]===MSEL),blk=mmBlock.children[i].cloneNode(true);blk.style.gridColumn="";blk.style.gridRowEnd="";blk.style.setProperty("--ic",3);
+    pan.innerHTML=`<div class="mpan-l">Na ścianach: <b>${E(MMAP[MSEL].n)}</b><button type="button" data-mc="${MSEL}">✕</button></div>`;pan.appendChild(blk);pan.hidden=false;
+    MMAP[MSEL].s.forEach(q=>document.querySelectorAll(q).forEach(e=>e.classList.add("mmh")))}
+  strip.addEventListener("click",e=>{const b=e.target.closest("[data-mc]");if(b){MSEL=MSEL===b.dataset.mc?null:b.dataset.mc;mHi()}});pan.addEventListener("click",e=>{if(e.target.closest("[data-mc]")){MSEL=null;mHi()}});
+  /* wersja 3 – rozłożona */
+  let EXP=false;
+  function explode(on){EXP=on;cube.classList.toggle("explode",on);if(on){F.forEach(f=>{f.hidden=false;f.style.transform=""});box.className="box";window.mmMas&&window.mmMas();window.kxDraw&&window.kxDraw()}else rest();mvUI()}
+  cube.addEventListener("click",e=>{if(!EXP)return;const f=e.target.closest(".fc");if(!f||f===F[3])return;e.preventDefault();e.stopPropagation();const i=F.indexOf(f);explode(false);face=i;rest();mvUI()},true);
+  /* przełącznik wersji */
+  function mvUI(){document.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===V));const g=document.getElementById("mmgo");
+    g.hidden=V===2;g.textContent=V===1?(face===3?"↓ Wróć do ścian":"⤒ Spójrz z góry"):(EXP?"Złóż bryłę":"⤢ Rozłóż bryłę");strip.hidden=V!==2;if(V!==2){MSEL=null;mHi()}
+    document.getElementById("crot").hidden=EXP;document.querySelector(".cfaces").style.visibility=EXP?"hidden":""}
+  function setV(v){V=v;try{localStorage.setItem("rt_mm_v",v)}catch(_){}if(EXP)explode(false);if(face===3){face=prev;rest()}mvUI()}
+  document.querySelector(".cver").addEventListener("click",e=>{const b=e.target.closest("[data-mv]");if(b){setV(+b.dataset.mv);return}if(e.target.closest("#mmgo")){if(V===1){face===3?backFromModel():lookUp()}else if(V===3)explode(!EXP)}});
+  rest();mvUI()})();
+function setView(v){const vD=document.getElementById("vD"),f1=document.getElementById("f1"),home=document.getElementById("vDhome"),fx=document.getElementById("fx"),vP=document.getElementById("vP");if(v==="p"){if(vD.parentNode!==f1)f1.appendChild(vD);if(fx.parentNode!==vP)vP.insertBefore(fx,vP.firstChild)}else{if(vD.parentNode===f1)home.parentNode.insertBefore(vD,home);if(fx.parentNode!==vD)vD.insertBefore(fx,vD.firstChild)}document.getElementById("vS").hidden=v!=="s";vD.hidden=!(v==="d"||v==="p");document.getElementById("vP").hidden=v!=="p";document.querySelectorAll(".vs button").forEach(b=>{const on=b.dataset.view===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});try{localStorage.setItem("rt_mapa_view",v)}catch(e){}if(v==="d"||v==="p")requestAnimationFrame(()=>flows(curFl))}
+document.querySelector(".vs").addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(b)setView(b.dataset.view)});
+let v0="s";try{v0=localStorage.getItem("rt_mapa_view")||"s"}catch(e){}setView(v0);
+})();
+</script>
+<script src="../rt.js"></script>
+</body>
+</html>

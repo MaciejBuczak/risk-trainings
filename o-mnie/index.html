@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>O mnie – Risk Trainings | Maciej Buczak</title>
+<meta name="description" content="Maciej Buczak – 17 lat w sektorze finansowym: walidacja i modele ryzyka (IFRS 9, AMA, ICAAP), badania, szkolenia i dydaktyka.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap">
+<link rel="stylesheet" href="../rt.css">
+<style>
+/* nagłówek strony */
+.ah{padding:clamp(48px,7vw,90px) 0 clamp(56px,7vw,96px)}
+.ah .wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:clamp(36px,7vw,100px);align-items:center}
+.ah h1{font-size:clamp(40px,5.6vw,72px);margin:18px 0 8px}
+.ah .role{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.2vw,26px);color:var(--terra-d);margin:0 0 26px}
+.ah p{font-size:17px;color:var(--ink2);font-weight:300;margin:0 0 16px;max-width:620px}
+.ah .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.pic-w{position:relative;width:320px}
+.pic-w::after{content:"";position:absolute;width:42px;height:42px;background:var(--terra);border-radius:6px;right:-15px;top:-15px}
+.pic{border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line);aspect-ratio:1100/1129}
+.pic img{width:100%;height:100%;object-fit:cover;object-position:50% 8%}
+@media(max-width:860px){.ah .wrap{grid-template-columns:1fr}.pic-w{width:240px;order:-1}}
+
+/* liczby */
+.nums{padding:clamp(48px,6vw,72px) 0}
+.nums .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.nums div{padding:4px 26px 4px 0;margin-right:26px;border-right:1px solid #2c2925}
+.nums div:last-child{border-right:0;margin-right:0}
+.nums b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(34px,4vw,50px);line-height:1;color:var(--paper)}
+.nums b{white-space:nowrap}.nums b.w{font-size:clamp(22px,2.3vw,31px);padding-top:clamp(6px,1.2vw,16px)}
+.nums b em{font-style:normal;color:var(--terra)}
+.nums span{display:block;margin-top:12px;font-size:14.5px;color:#cfc6b8;line-height:1.5}
+@media(max-width:860px){.nums .wrap{grid-template-columns:1fr 1fr;gap:28px 0}.nums div:nth-child(2){border-right:0;margin-right:0}}
+@media(max-width:480px){.nums .wrap{grid-template-columns:1fr}.nums div{border-right:0;margin-right:0}}
+
+/* doświadczenie */
+.xp{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,90px);align-items:start}
+.xp-l{position:static}
+.xs{margin-top:34px;display:grid;gap:14px}
+.xs>div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.xs h3{font-family:var(--body);font-weight:600;font-size:16px;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+.xs h3::before{content:"";width:8px;height:8px;border-radius:1px;background:var(--terra)}
+.xs p{margin:0 0 14px;font-size:14.5px;color:var(--muted);line-height:1.55}
+.xs-all{font-size:14px;font-weight:600;color:var(--terra-d);text-decoration:none;padding-left:4px}.xs-all:hover{color:var(--ink)}
+.btn.sm{padding:8px 15px;font-size:13.5px}
+.xs .btn{margin-top:18px}
+.xp-l h2{font-size:clamp(30px,3.6vw,46px);margin:16px 0 18px}
+.xp-l p{margin:0;color:var(--muted);font-size:16px;max-width:420px}
+.tl{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.tl li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:6px 28px;padding:30px 0;border-bottom:1px solid var(--line)}
+.tl .org{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.2;color:var(--terra-d)}
+.tl .org small{display:block;font-family:var(--body);font-style:normal;font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tan);margin-top:8px}
+.tl h3{font-family:var(--body);font-weight:600;font-size:19px;line-height:1.3;margin:0 0 10px}
+.tl ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.tl ul li{display:block;padding:0 0 0 18px;border:0;position:relative;font-size:15px;color:var(--ink2)}
+.tl ul li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:1px;background:var(--sand)}
+@media(max-width:900px){.xp{grid-template-columns:1fr}.xp-l{position:static}}
+@media(max-width:560px){.tl li{grid-template-columns:1fr}}
+
+/* działalność */
+.wk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,3vw,40px) clamp(20px,3vw,40px)}
+.wk a{display:flex;flex-direction:column;border-top:2px solid var(--ink);padding:18px 0 0;text-decoration:none;color:inherit}
+.wk .n{font-family:var(--serif);font-style:italic;font-size:28px;line-height:1;color:var(--terra-d)}
+.wk h3{font-family:var(--body);font-weight:600;font-size:18px;line-height:1.35;margin:14px 0 10px}
+.wk ul{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:7px}
+.wk li{position:relative;padding-left:16px;color:var(--muted);font-size:14.5px;line-height:1.55}
+.wk li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--sand)}
+.wk .go{margin-top:auto;font-size:13.5px;font-weight:600;display:inline-flex;gap:8px;align-items:center}
+.wk a:hover .go{color:var(--terra-d)}.wk a:hover .ar{transform:translateX(3px)}.wk .ar{transition:transform .15s}
+.more-b{margin-top:44px;display:flex;justify-content:center}
+@media(max-width:1000px){.wk{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.wk{grid-template-columns:1fr}}
+
+/* ekspert sektorowy */
+.exp{background:var(--panel)}
+.exp-g{display:grid;grid-template-columns:340px minmax(0,1fr);gap:clamp(30px,5vw,70px);align-items:start}
+.cph{margin:0;position:sticky;top:100px}
+.cph::after{content:"";position:absolute;width:42px;height:42px;background:var(--terra);border-radius:6px;right:-15px;top:-15px}
+.cph-i{aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:var(--greige)}
+.cph-i img{width:100%;height:100%;object-fit:cover;display:block}
+.cph-i[data-empty]{display:grid;place-items:center;border:1.5px dashed var(--tan);background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(178,158,132,.12) 14px 15px)}
+.cph-i[data-empty] span{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tan);text-align:center;padding:0 20px}
+.cph figcaption{margin-top:12px;font-family:var(--serif);font-style:italic;font-size:15px;color:var(--muted)}
+.cl{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.cl li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+.cl .d{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.1;color:var(--terra-d)}
+.cl .d small{display:block;font-family:var(--body);font-style:normal;font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tan);margin-top:8px}
+.cl h3{font-family:var(--body);font-weight:600;font-size:16.5px;line-height:1.4;margin:0 0 4px}
+.cl p{margin:0;font-size:14.5px;color:var(--muted)}
+.cl .og{margin-top:3px;font-size:13px;color:var(--tan)}
+.cl .ds{margin-top:8px;color:var(--ink2)}
+.cl .badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--terra);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.lk{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:8px!important}.lk a{font-size:13px;font-weight:600;text-decoration:none;color:var(--terra-d)}.lk a:hover{text-decoration:underline}
+.exp-m{display:grid;grid-template-columns:1fr;gap:24px;margin-top:30px}
+.exp-m h4,.gl h4{font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin:0 0 8px}
+.exp-m p{margin:0;font-size:14.5px;color:var(--muted)}
+@media(max-width:900px){.exp-g{grid-template-columns:1fr}.cph{position:relative;top:0;max-width:300px}.exp-m{grid-template-columns:1fr}}
+@media(max-width:520px){.cl li{grid-template-columns:1fr;gap:6px}}
+
+/* uczelnie */
+.un-g{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.un-g article{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:clamp(24px,3vw,34px);display:flex;flex-direction:column}
+.un-logo{height:46px;width:auto;max-width:100%;margin-bottom:22px;object-fit:contain;object-position:left center}
+.un-logo.wsb{height:34px;margin:2px 0 32px}
+.un-g h3{font-family:var(--body);font-weight:600;font-size:18px;line-height:1.35;margin:0 0 8px}
+.un-g p{margin:0 0 18px;color:var(--muted);font-size:15px}
+.un-g p.un-f{margin:-4px 0 12px;font-size:13.5px;font-weight:500;color:var(--terra-d)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto}.chips span{font-size:13px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink2)}
+.gl2{margin:26px 0 0;font-size:14.5px;color:var(--muted)}.gl2 a{color:var(--terra-d);font-weight:600;text-decoration:none;white-space:nowrap}
+@media(max-width:860px){.un-g{grid-template-columns:1fr}}
+
+/* badania nad ryzykiem */
+.res{background:#e6d8c3}
+.res .sec-hd p{color:var(--ink2)}
+.rs{margin-top:56px}.rs:first-of-type{margin-top:8px}
+.rs-h{display:flex;align-items:baseline;gap:14px;font-family:var(--body);font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);border-top:1px solid var(--ink);padding-top:18px;margin:0 0 24px}
+.rs-h span{font-family:var(--serif);font-style:italic;font-weight:400;font-size:26px;letter-spacing:0;text-transform:none;color:var(--terra-d)}
+.res .lk{display:flex;flex-wrap:wrap;gap:4px 18px;margin:12px 0 0}.res .lk a{font-size:13.5px;font-weight:600;color:var(--terra-d);text-decoration:none}.res .lk a:hover{color:var(--ink)}
+.pf-g{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pf{background:var(--card);border:1px solid #d6c6ae;border-radius:var(--r);padding:clamp(22px,3vw,32px);position:relative}
+.pf-n{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.pf-n b{font-family:var(--display);font-weight:400;font-size:clamp(34px,3.8vw,48px);line-height:1;color:var(--terra-d)}
+.pf-n span{font-size:13px;color:var(--muted)}
+.pf h4{font-family:var(--body);font-weight:600;font-size:19px;line-height:1.35;color:var(--ink);margin:0 0 6px}
+.pf .m{font-size:13px;color:var(--tan);margin:0 0 12px}
+.pf p{margin:0;font-size:15px;color:var(--ink2)}
+.res .pf .lk a{color:var(--terra-d)}.res .pf .lk a:hover{color:var(--ink)}
+.po{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+.po a{display:grid;gap:3px;padding:16px 0;border-bottom:1px solid #cdbca3;text-decoration:none;color:inherit}
+.po .t{font-weight:600;font-size:15.5px;line-height:1.4;color:var(--ink)}
+.po .m{font-size:12.5px;color:var(--terra-d)}
+.po .d{font-size:14px;color:var(--muted)}
+.po a:hover .t{color:var(--terra-d)}
+.es-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.es{display:flex;flex-direction:column;background:var(--card);color:var(--ink);border-radius:var(--r);overflow:hidden;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.es:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(60,40,20,.5)}
+.es-i{display:block;aspect-ratio:16/9;background:var(--greige);overflow:hidden}.es-i img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.es:hover .es-i img{transform:scale(1.04)}
+.es-b{display:flex;flex-direction:column;flex:1;padding:20px 24px 20px}
+.prof{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;margin:22px 0 4px}
+.prof>span{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-right:6px}
+.pr{display:inline-flex;align-items:center;gap:12px;padding:8px 16px 8px 8px;border:1px solid #cdbca3;border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink);font-size:14px;font-weight:500;transition:border-color .2s,background .2s}
+.pr:hover{border-color:var(--terra-d)}
+.pr .lg{display:inline-grid;place-items:center;height:34px;min-width:34px;padding:0 9px;border-radius:999px;font-weight:700;letter-spacing:.04em;font-size:13px}
+.pr.ssrn .lg{background:#fff;border:1px solid #d6c6ae;color:#1f3864;font-family:Georgia,serif;letter-spacing:.08em}
+.pr.rg .lg{display:inline-flex;align-items:center;justify-content:center;width:34px;background:#00d0af;color:#fff;font-family:var(--body);font-size:15px;padding:0 0 0 2px}
+.pr.rg sup{font-size:9px;line-height:1;margin-left:1px;position:relative;top:-4px;vertical-align:baseline}
+.es .tg{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-d)}
+.es h4{font-family:var(--serif);font-style:italic;font-weight:400;font-size:21px;line-height:1.3;margin:12px 0 10px}
+.es p{margin:0 0 16px;font-size:14px;color:var(--muted)}
+.es .go{margin-top:auto;font-size:13.5px;font-weight:600}
+.rs-cta{margin-top:26px}
+.lc{display:grid;grid-template-columns:300px minmax(0,1fr);gap:clamp(28px,5vw,60px);align-items:start}
+.lc-ph{margin:0;position:relative}
+.lc-ph::after{content:"";position:absolute;width:42px;height:42px;background:var(--terra);border-radius:6px;right:-15px;top:-15px}
+.lc-i{aspect-ratio:3/4}
+.lc-i img{object-position:50% 45%}
+.lc-t{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(24px,2.6vw,32px);line-height:1.3;color:var(--ink);margin:0 0 14px}
+.lc p{margin:0;font-size:15.5px;color:var(--ink2)}
+.lc-l{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.lc-l li{padding:11px 0;border-bottom:1px solid #cdbca3;font-size:14.5px;color:var(--ink)}
+.lc-l b{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d);margin-right:14px}
+@media(max-width:900px){.pf-g,.po,.es-g,.lc{grid-template-columns:1fr}.lc-ph{max-width:340px}}
+
+/* podejście */
+.quote-s{padding-bottom:clamp(48px,6vw,80px)}
+.qb{border-left:3px solid var(--terra);padding:6px 0 6px clamp(20px,3vw,40px);max-width:900px}
+.qb-r{margin:64px 0 8px}
+.qb p{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.6vw,31px);line-height:1.4;margin:0}
+
+/* kontakt */
+.cbox{background:var(--ink);color:var(--paper);border-radius:28px;padding:clamp(32px,5vw,60px);display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+.cbox h2{font-size:clamp(26px,3.2vw,38px);margin:14px 0 0;max-width:620px}
+.cbox .cta{display:flex;flex-wrap:wrap;gap:12px}
+.cbox .btn.ghost{color:var(--paper);border-color:#5b544b}.cbox .btn.ghost:hover{background:#1c1a17}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="wrap">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav"><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../mapa-banku/">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a class="on" href="./">O mnie</a><a href="../#kontakt">Kontakt</a><a class="sci" href="https://maciejbuczak.github.io/">Strona naukowa ↗</a></nav>
+    <a class="brand" href="../"><span><b>Risk Trainings</b><small>Maciej Buczak · Risk Research</small></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a>
+  </div>
+</header>
+
+<main>
+<section class="ah">
+  <div class="wrap">
+    <div class="rv">
+      <span class="kick">O mnie</span>
+      <h1>Maciej Buczak</h1>
+      <p class="role">Modele ryzyka, walidacja, kapitał</p>
+      <p>Buduję, oceniam i bronię modele ryzyka. Moje projekty zawsze dotyczyły realnego problemu biznesowego – z jego wymiarem finansowym i kosztem wdrożenia zmian. Często wymagały wyjścia poza przyjęty sposób myślenia.</p>
+      <p>Na szkoleniach przenoszę to doświadczenie na salę: pracujemy na przypadkach z banków, raportach walidacyjnych i decyzjach komitetów.</p>
+      <div class="cta"><a class="btn" href="../szkolenia/">Programy szkoleń <span class="ar">→</span></a><a class="btn ghost" href="../#kontakt">Kontakt</a></div>
+    </div>
+    <div class="pic-w rv"><div class="pic"><img src="../img/maciej-buczak.jpg" alt="Maciej Buczak" width="1100" height="1129"></div></div>
+  </div>
+</section>
+
+<section class="dark nums">
+  <div class="wrap">
+    <div class="rv"><b>17 <em>lat</em></b><span>w sektorze finansowym – bank, doradztwo, systemy ryzyka</span></div>
+    <div class="rv"><b class="w">kilkadziesiąt</b><span>procesów walidacji modeli: ECL, ryzyko operacyjne, ICAAP</span></div>
+    <div class="rv"><b class="w">kilkanaście</b><span>projektów badawczych w banku, wdrożonych do stosowania</span></div>
+    <div class="rv"><b>6300<em>+</em></b><span>pobrań moich preprintów na SSRN w kilka tygodni</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap xp">
+    <div class="xp-l rv">
+      <span class="kick">Doświadczenie</span>
+      <h2>Ryzyko w&nbsp;banku, systemy IT i&nbsp;doradztwo.</h2>
+      <p>Trzy perspektywy na te same modele: tego, kto je ocenia i broni przed nadzorcą, tego, kto buduje systemy do ich liczenia – i tego, kto doradza.</p>
+      <div class="xs">
+        <div><h3>Projekty badawcze</h3><p>Kilkanaście projektów w banku, które podważały utrwalone podejścia – od lifetime PD i SICR po wartości ekstremalne i zależności w ogonach. Większość obroniłem i wdrożyłem.</p><a class="btn ghost sm" href="szczegoly/#projekty">Zobacz więcej <span class="ar">→</span></a></div>
+        <div><h3>Opracowane metodyki</h3><p>Holistyczna ocena modelu AMA i modeli lifetime PD – obie bardzo dobrze ocenione przez nadzorcę. Współautor metodyk oceny modeli ECL i ICAAP.</p><a class="btn ghost sm" href="szczegoly/#metodyki">Zobacz więcej <span class="ar">→</span></a></div>
+        <a class="xs-all" href="szczegoly/">Pełny profil zawodowy →</a>
+      </div>
+    </div>
+    <ol class="tl">
+      <li class="rv"><div class="org">Alior Bank<small>2016 – 2024</small></div><div><h3>Menedżer Zarządzania Ryzykiem · Departament Walidacji</h3><ul>
+        <li>Walidacja modeli ryzyka kredytowego (impairment, ECL), kapitału wewnętrznego i ryzyka operacyjnego (AMA).</li>
+        <li>Metodyki walidacji i zarządzania ryzykiem modeli; kierownik projektu systemu do obsługi procesu zarządzania ryzykiem modeli.</li>
+        <li>Koordynacja wdrożenia IFRS 9 w obszarze walidacji; zarządzanie ryzykiem modelu AMA.</li>
+        <li>Obrona wniosków przed komitetami, audytem, audytorami zewnętrznymi i KNF.</li></ul></div></li>
+      <li class="rv"><div class="org">Accenture<small>2014 – 2016</small></div><div><h3>Konsultant · Capability Network</h3><ul>
+        <li>Projekty analityczne w Wielkiej Brytanii, Niemczech, Danii i w Polsce: ryzyko nadużyć (conduct risk) w grupie bankowej, analiza sieci dostawców, środowisko analityczne dla administracji podatkowej, model CRM i macierze przejść klientów.</li></ul></div></li>
+      <li class="rv"><div class="org">Bazy i Systemy Bankowe<small>2007 – 2013</small></div><div><h3>Analityk</h3><ul>
+        <li>Metodyki i funkcje statystyczne modelowania ryzyka operacyjnego; moduł analityczny wdrożony w NBP i kilku bankach.</li>
+        <li>Systemy do zarządzania ryzykiem operacyjnym i przeciwdziałania praniu pieniędzy (AML); doradztwo i szkolenia dla banków.</li></ul></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="exp">
+  <div class="wrap">
+    <div class="sec-hd rv"><div><span class="kick">Ekspert sektorowy</span><h2 style="margin-top:16px">Konferencje sektorowe.</h2></div><p>Wystąpienia na konferencjach sektorowych i naukowych w Polsce i za granicą – o modelach kapitałowych, ryzyku operacyjnym i granicach statystyki w finansach.</p></div>
+    <div class="exp-g">
+      <figure class="cph rv"><div class="cph-i"><img src="../img/konferencja-regent-2026.jpg" alt="Maciej Buczak podczas wystąpienia na konferencji CRR III / CRD VI" width="1400" height="934" loading="lazy" style="object-position:50% 40%"></div><figcaption>CRR III / CRD VI – wyzwania dla sektora bankowego · Warszawa, listopad 2025</figcaption></figure>
+      <div>
+        <ol class="cl rv"><li class="up"><span class="d">11.2026<small>Warszawa</small></span><div><span class="badge">Nadchodzące · 24–25 listopada</span><h3>„Pilar 1 vs ICAAP”</h3><p>Zintegrowane zarządzanie kapitałem 2026 – II edycja konferencji z cyklu CRR III / CRD VI</p><p class="og">Organizator: Prestige Conferences</p><p class="ds">Dlaczego standardowe formuły nie zawsze oddają realny profil ryzyka banku: kapitał ekonomiczny, wybór poziomu ufności i horyzontu oraz kapitał na ryzyko operacyjne po likwidacji AMA.</p></div></li><li><span class="d">06.2026<small>Warszawa</small></span><div><h3>„Modelowanie ryzyka operacyjnego”</h3><p>Zarządzanie ryzykiem operacyjnym. Aktualne trendy i wyzwania</p><p class="og">Organizator: Prestige Conferences</p><p class="lk"><a href="https://doi.org/10.13140/RG.2.2.22277.92645" target="_blank" rel="noopener">Prezentacja ↗</a> <a href="https://maciejbuczak.github.io/conferences/Zarz%C4%85dzanie%20Ryzykiem%20Operacyjnym%2023-24.06.2026%20Warsaw%20Regent%20Hotel.pdf" target="_blank" rel="noopener">Program ↗</a></p></div></li><li><span class="d">05.2026<small>Łódź</small></span><div><h3>„Dlaczego kryzysy „stuletnie” zdarzają się co dekadę? Granice statystycznych modeli odporności na rynkach finansowych”</h3><p>Protection and Security in Financial Market</p><p class="og">Organizator: Uniwersytet Łódzki, Uniwersytet Ekonomiczny w Krakowie, Uniwersytet Aleksandra Jana Cuzy w Jassach</p><p class="lk"><a href="https://doi.org/10.13140/RG.2.2.15285.23523" target="_blank" rel="noopener">Prezentacja ↗</a> <a href="https://maciejbuczak.github.io/conferences/10th%20PAS%20CONFERENCE%20Schedule%20v5.pdf" target="_blank" rel="noopener">Program ↗</a></p></div></li><li><span class="d">11.2025<small>Warszawa</small></span><div><h3>„Nieoczywiste drogi rozwoju metod kalkulacji kapitałów. Na przykładzie metod IRB i AMA”</h3><p>CRR III / CRD VI – wyzwania dla sektora bankowego</p><p class="og">Organizator: Prestige Conferences</p><p class="lk"><a href="https://doi.org/10.13140/RG.2.2.20318.40008" target="_blank" rel="noopener">Prezentacja ↗</a> <a href="https://maciejbuczak.github.io/conferences/p646.pdf" target="_blank" rel="noopener">Program ↗</a> <a href="https://www.youtube.com/watch?v=5wuiBqjQXKU" target="_blank" rel="noopener">Film ↗</a></p></div></li><li><span class="d">02.2025<small>Praga</small></span><div><h3>„Built-in mechanisms of the AMA framework that led to its cancellation”</h3><p>4th Annual Banking Operational Risk Summit</p><p class="og">Organizator: Marxo Smith Events</p><p class="lk"><a href="https://doi.org/10.13140/RG.2.2.33084.81289" target="_blank" rel="noopener">Prezentacja ↗</a> <a href="https://maciejbuczak.github.io/conferences/4th_OpRisk_Summit_BROCHURE.pdf" target="_blank" rel="noopener">Program ↗</a></p></div></li></ol>
+        <div class="exp-m rv">
+          <div><h4>Wcześniej</h4><p>Wystąpienia w NBP (2009, także wykład dla przedstawicieli banków centralnych z Europy Wschodniej i Azji) i na konferencji Gazety Bankowej (2008).</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="uni">
+  <div class="wrap">
+    <div class="sec-hd rv"><div><span class="kick">Uczelnie</span><h2 style="margin-top:16px">Dydaktyka akademicka.</h2></div><p>Na uczelniach uczę metod ilościowych i zarządzania ryzykiem. Zależy mi, by studenci rozumieli nie tylko technikę, ale też założenia i ograniczenia opisu zjawisk za pomocą liczb.</p></div>
+    <div class="un-g">
+      <article class="rv"><img class="un-logo" src="../img/logo-sggw.svg" alt="SGGW" height="56"><h3>Szkoła Główna Gospodarstwa Wiejskiego w Warszawie</h3><p class="un-f">Wydział Nauk Ekonomicznych i Społecznych</p><p>Statystyka i analiza danych dla nauk społecznych – od podstaw wnioskowania po analizę wielowymiarową i analizę sieci.</p><div class="chips"><span>Statystyka dla socjologów</span><span>Analiza sieci społecznych</span><span>Analiza danych w Pythonie</span></div></article>
+      <article class="rv"><img class="un-logo wsb" src="../img/logo-wsb-merito.svg" alt="Uniwersytet WSB Merito Warszawa" height="56"><h3>Uniwersytet WSB Merito w Warszawie</h3><p>Zarządzanie ryzykiem i metody ilościowe dla przyszłych menedżerów i finansistów.</p><div class="chips"><span>Zarządzanie ryzykiem finansowym</span><span>Metody ilościowe w zarządzaniu</span><span>Statystyka i ekonometria</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="res">
+  <div class="wrap">
+    <div class="sec-hd rv"><div><span class="kick">Badania nad ryzykiem</span><h2 style="margin-top:16px">Granice modeli ryzyka.</h2></div><p>Badam, czy zjawiska finansowe da się zasadnie opisywać jako losowe – i jak instytucje komunikują niepewność zdarzeń skrajnych.</p></div>
+
+    <div class="rs rv"><h3 class="rs-h"><span>01</span>Publikacje naukowe</h3>
+      <div class="pf-g"><article class="pf"><div class="pf-n"><b>4500+</b><span>pobrań na SSRN</span></div><h4>The AMA Method – Analytical Foundations of Its Failure</h4><p class="m">2026 · preprint</p><p>Matematyczne własności metody AMA, które mogły doprowadzić do jej nieskuteczności – i pytanie, czy zjawiska skrajne da się w ogóle modelować statystycznie.</p><p class="lk"><a href="https://ssrn.com/abstract=6949518" target="_blank" rel="noopener">SSRN ↗</a><a href="https://doi.org/10.13140/RG.2.2.19243.60966" target="_blank" rel="noopener">Wersja polska ↗</a></p></article><article class="pf"><div class="pf-n"><b>2900+</b><span>pobrań na SSRN</span></div><h4>I Can’t Predict 1-in-1000-year Catastrophe</h4><p class="m">2026 · preprint</p><p>Kwantyl 0,999 jako „zdarzenie raz na 1000 lat” – etykieta bez oparcia w modelu ani w rzeczywistości. Analogia z „powodzią stuletnią” w hydrologii.</p><p class="lk"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7259718" target="_blank" rel="noopener">SSRN ↗</a><a href="https://doi.org/10.13140/RG.2.2.17029.92646" target="_blank" rel="noopener">Wersja polska ↗</a></p></article></div>
+      <div class="prof">
+        <span>Moje profile badawcze</span>
+        <a class="pr ssrn" href="https://papers.ssrn.com/Sol3/Cf_Dev/AbsByAuth.cfm?per_id=7368581" target="_blank" rel="noopener"><b class="lg">SSRN</b><span>Social Science Research Network ↗</span></a>
+        <a class="pr rg" href="https://www.researchgate.net/profile/Maciej-Buczak" target="_blank" rel="noopener"><b class="lg">R<sup>G</sup></b><span>ResearchGate ↗</span></a>
+      </div>
+      <ul class="po"><li><a href="https://doi.org/10.13140/RG.2.2.34226.57287" target="_blank" rel="noopener"><span class="t">Are Financial Phenomena Random? On the Limits of the Probabilistic Description of Risk</span><span class="m">2026 · preprint</span><span class="d">Jak aparat stworzony do opisu zjawisk fizycznych stał się jedynym uznanym sposobem „widzenia” ryzyka w finansach.</span></a></li><li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7080238" target="_blank" rel="noopener"><span class="t">Pokryzysowa architektura bezpieczeństwa finansowego wobec epizodu kryzysowego 2023</span><span class="m">2026 · Metody Ilościowe w Badaniach Ekonomicznych (w recenzji)</span><span class="d">Upadki banków mimo spełnienia wymogów kapitałowych i płynnościowych – co to mówi o regulacjach.</span></a></li><li><a href="https://doi.org/10.22630/MIBE.2024.25.4.16" target="_blank" rel="noopener"><span class="t">Bieg wsteczny w rozwoju koncepcji modelowania wartości nieoczekiwanej… na przykładzie wycofania AMA</span><span class="m">2024 · Metody Ilościowe w Badaniach Ekonomicznych</span><span class="d">Dlaczego regulator wycofał najbardziej zaawansowaną metodę kapitałową w ryzyku operacyjnym.</span></a></li><li><a href="https://rcin.org.pl/ibsys/Content/198335/PDF/KS-2009-04-T11P03.pdf" target="_blank" rel="noopener"><span class="t">Badanie autoregresyjnej natury procesu liczby strat operacyjnych</span><span class="m">2009 · IBS PAN</span><span class="d">Czy kolejne straty operacyjne są od siebie niezależne – test na danych.</span></a></li></ul>
+    </div>
+
+    <div class="qb qb-r rv"><p>Interesuje mnie przede wszystkim to, czy model naprawdę opisuje rzeczywistość – i co zrobić, gdy nie opisuje.</p></div>
+
+    <div class="rs rv"><h3 class="rs-h"><span>02</span>Eseje o ryzyku</h3>
+      <div class="es-g"><a class="es" href="https://maciejbuczak.github.io/risk-research/art-1_in_1000years/"><span class="es-i"><img src="https://maciejbuczak.github.io/assets/images/crisis2.jpg" alt="" loading="lazy"></span><span class="es-b"><span class="tg">Ryzyko systemowe · regulacje</span><h4>I Can’t Predict a 1,000-Year Catastrophe</h4><p>Ile lat trzeba czekać na katastrofę, przed którą chroni nas system regulacyjny? Według dokumentów nadzorczych – tysiąc.</p><span class="go">Czytaj →</span></span></a><a class="es" href="https://maciejbuczak.github.io/risk-research/art-hydrology_flood/"><span class="es-i"><img src="https://maciejbuczak.github.io/assets/images/flood_barrier1.jpg" alt="" loading="lazy"></span><span class="es-b"><span class="tg">Powódź stuletnia · ryzyko ekstremalne</span><h4>A Hundred Years of the Return Period and the Hundred-Year Flood</h4><p>Skąd finanse wzięły okres powrotu, stacjonarność i teorię wartości ekstremalnych – i co hydrologia wie o nich dziś.</p><span class="go">Czytaj →</span></span></a><a class="es" href="https://maciejbuczak.github.io/risk-research/art-finance_random/"><span class="es-i"><img src="https://maciejbuczak.github.io/assets/images/finance_random1.jpg" alt="" loading="lazy"></span><span class="es-b"><span class="tg">Błądzenie losowe · ryzyko kredytowe</span><h4>How Finance Borrowed Its Randomness</h4><p>Od Bacheliera i Wienera, przez Blacka-Scholesa, Mertona i Vasicka, do wymogów kapitałowych Bazylei.</p><span class="go">Czytaj →</span></span></a></div>
+      <div class="rs-cta"><a class="btn terra" href="https://maciejbuczak.github.io/articlestart/">Zobacz wszystkie eseje <span class="ar">→</span></a></div>
+    </div>
+
+    <div class="rs rv"><h3 class="rs-h"><span>03</span>Wykład otwarty</h3>
+      <div class="lc">
+        <figure class="lc-ph"><div class="cph-i lc-i"><img src="../img/wyklad-kryzysy-100-letnie.jpg" alt="Maciej Buczak podczas wykładu „Dlaczego kryzysy 100-letnie zdarzają się co 10 lat?”" width="480" height="853" loading="lazy"></div></figure>
+        <div>
+          <h4 class="lc-t">„Dlaczego kryzysy 100-letnie zdarzają się co 10 lat?”</h4>
+          <p>Autorski wykład dla studentów i pracowników naukowych: historia metod modelowania ryzyk finansowych, zestawiona z metodami hydrologii – i problemy u fundamentów przyjętego w nich rozumowania.</p>
+          <ul class="lc-l"><li><b>03.2026</b>Uniwersytet Warszawski · Wydział Nauk Ekonomicznych</li><li><b>04.2026</b>Uniwersytet Mikołaja Kopernika · Wydział Nauk Ekonomicznych i Zarządzania</li><li><b>04.2026</b>Uniwersytet Ekonomiczny w Katowicach · Wydział Ekonomii (online)</li><li><b>05.2026</b>Uniwersytet Ekonomiczny w Katowicach · Wydział Zarządzania</li></ul>
+          <p class="lk"><a href="https://doi.org/10.13140/RG.2.2.31505.39523" target="_blank" rel="noopener">Prezentacja ↗</a><a href="https://maciejbuczak.github.io/conferences/Kryzysy%20100-letnie%20co%2010%20lat%20-%20konspekt.pdf" target="_blank" rel="noopener">Konspekt ↗</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cbox rv">
+      <div><span class="kick">Kontakt</span><h2>Porozmawiajmy o szkoleniu dla Twojego zespołu.</h2></div>
+      <div class="cta"><a class="btn terra" href="mailto:maciej.buczak@gmail.com?subject=Szkolenie%20%E2%80%93%20zapytanie">Napisz <span class="ar">→</span></a><a class="btn ghost" href="https://www.linkedin.com/in/maciej-buczak-561b95120" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><a class="brand" href="../"><span><b>Risk Trainings</b></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a><p style="margin:14px 0 0;max-width:340px">Szkolenia z zarządzania ryzykiem dla banków i instytucji finansowych.</p></div>
+    <div><h4>Strony</h4><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../mapa-banku/">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a href="./">O mnie</a><a href="https://maciejbuczak.github.io/">Strona naukowa</a></div>
+    <div><h4>Kontakt</h4><a href="mailto:maciej.buczak@gmail.com">maciej.buczak@gmail.com</a><a href="https://www.linkedin.com/in/maciej-buczak-561b95120" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div class="bottom"><span>© 2026 Maciej Buczak | Risk Research</span><span>Wersja próbna strony</span></div>
+  </div>
+</footer>
+<script src="../rt.js"></script>
+</body>
+</html>
