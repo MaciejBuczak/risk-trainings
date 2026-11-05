@@ -630,6 +630,20 @@
 .wbl{position:absolute;left:0;top:0;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none}
 .wbl b{font-family:var(--body);font-weight:600;font-size:calc(var(--s)*.034);letter-spacing:.3em;color:#8a6a2c}
 .mw[data-tab="model"] .duo .scene:not(.sc2){margin-bottom:calc(var(--s)*.8)!important}
+/* wyniki – ciemna terakota */
+.wbf{background:rgba(168,105,76,.9)!important;border:1.5px solid #8f5a40!important;border-radius:calc(var(--s)*.03)!important}
+.wbf.sd{border-radius:calc(var(--s)*.028)!important}
+.wbf.cp{background:rgba(168,105,76,.82)!important}
+.wbl b{color:#fff!important}
+.port.pw{border-color:#fff!important;background:rgba(255,253,249,.25)!important}
+/* zasilanie danymi */
+.port.pb{width:calc(var(--s)*.09)!important;height:calc(var(--s)*.09)!important;left:calc(50% - var(--s)*.045)!important;top:calc(50% - var(--s)*.045)!important}
+.sb.dbs .sl{background:rgba(79,115,144,.35)}
+.sb.dbs .sp{background:linear-gradient(transparent,#4f7390,transparent);box-shadow:0 0 6px rgba(79,115,144,.5)}
+/* całość mniejsza */
+.mw[data-tab="model"] .duo .scene:not(.sc2){--s:clamp(190px,21vw,320px)!important;margin:calc(var(--s)*.5) calc(var(--s)*.3) calc(var(--s)*.55)!important}
+.mw[data-tab="model"] .duo .sc2{--s:clamp(150px,16vw,240px)!important}
+.mw[data-tab="model"] .duo{margin-top:10px!important}
 </style>
 </head>
 <body>
@@ -747,8 +761,8 @@ const MODS=[
  {id:"ead",n:"EAD",s:"ekspozycja · CCF",col:"#6f7f58",at:[.27,.17,-.18],k:.12,d:"Ekspozycja w chwili niewykonania zobowiązania, z uwzględnieniem wykorzystania limitów (CCF)."}];
 const LINKS=[["stat","pd"],["stat","lgd"],["stat","ead"],["stat","sicr"],["pd","ttc"],["pd","pit"]];
 MODS.forEach(m=>{m.p="Moduł modelu statystycznego";m.mod=1;m.c=[]});
-const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,1,0],r:.085,h:.11,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
-const FEEDS=[];const DBS=[-.36,0,.36];
+const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,.8,0],r:.08,h:.1,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
+const FEEDS=[];const DBS=[[-.27,.2],[.27,.2],[0,-.27]];
 const WY={id:"wyn",n:"Wyniki",p:"Wyniki modelu",c:["05","02"],sg:{"05":["Wynik modelu"],"02":[""]},col:"#a8823a",at:[0,-.8,0],w:.2,h:.13,d:"Tu trafiają wyniki każdego modułu – PD, TTC i PIT, LGD, EAD, koszyki z SICR i ECL – a dalej do odpisów, raportów i decyzji."};
 const RES=[];
 const INNER=[HUB,...MODS];
@@ -759,7 +773,7 @@ const corners=[];for(const x of[-1,1])for(const y of[-1,1])for(const z of[-1,1])
 cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col};transform:${f.tf} translateZ(${H})"><div class="lb" data-f="${f.id}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small>${E(f.n)}</span></div></div>`).join("")
  +corners.map(([x,y,z])=>`<div class="nd" data-t="translate3d(calc(var(--s)*${x/2}),calc(var(--s)*${y/2}),calc(var(--s)*${z/2}))"><i></i></div>`).join("")+`<div class="inr" id="inr"></div>`;
 /* wyjście wyników – trzy propozycje */
-const EXITS={1:{n:"Przez dach",at:[0,-.82,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
+const EXITS={1:{n:"Przez dach",at:[0,-.8,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
 let EX=1,SV=1;try{SV=+localStorage.getItem("rt_mr_sv")||1}catch(_){}
 const T3=a=>`translate3d(calc(var(--s)*${a[0]}),calc(var(--s)*${a[1]}),calc(var(--s)*${a[2]}))`;
 const rod=(A,B,cl,l,sa=0,sb=0)=>{const E2=.004,d=(u,v)=>Math.hypot(v[0]-u[0],v[1]-u[1],v[2]-u[2]);let pts=[A,[B[0],A[1],A[2]],[B[0],A[1],B[2]],B].filter((p,i,a)=>i===0||d(a[i-1],p)>E2);if(pts.length<2)return"";
@@ -773,7 +787,7 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
   const P=id=>id==="stat"?[0,0,0]:id==="db"?[DB.at[0],DB.at[1]-DB.h/2,DB.at[2]]:id==="wyn"?tgt:MODS.find(m=>m.id===id).at;
   const HS=id=>id==="stat"?.26*(CX?.6:1)/2:id==="db"||id==="wyn"?0:MODS.find(m=>m.id===id).k/2;
   let h=[...LINKS.map(l=>[...l,""]),...FEEDS.map(l=>[...l,"feed"]),...RES.map(l=>[...l,"feed res"])].map(([a,b,cl])=>{const m=[a,b].some(x=>!["stat","db","wyn"].includes(x));return rod(P(a),P(b),cl+(m?" m":""),a+" "+b,HS(a),HS(b))}).join("");
-  {const by=DB.at[1]-DB.h/2;const my=.66;DBS.forEach(x=>{h+=rod([x,by,0],[x,my,0],"feed","db");if(x)h+=rod([x,my,0],[0,my,0],"feed","db")});h+=rod([0,by,0],[0,.5,0],"feed","db");h+=rod([0,.5,0],[0,0,0],"feed","db",0,.078)+`<div class="port pb" style="transform:${T3([0,.5,0])} rotateX(90deg)"></div>`}
+  {const by=DB.at[1]-DB.h/2;const L=(by-.5).toFixed(3);DBS.forEach(([x,z])=>{h+=`<div class="port pb" style="transform:${T3([x,.5,z])} rotateX(90deg)"></div><div class="strm" style="transform:${T3([x,by,z])}"><div class="yb sb sv1 dbs" data-t="" style="--L:calc(var(--s)*${L})"><i class="sl"></i><i class="sp"></i><i class="sp d2"></i></div></div>`})}
   if(X.port){const L=Math.abs(X.at[1]+.06-X.port[1]),rnd=(a,b)=>a+Math.random()*(b-a);let body="";
     if(SV===1)body=`<i class="sl"></i><i class="sp"></i><i class="sp d2"></i>`;
     else{const pool=SV===2?["0,034","12,5%","0,47","1 248","3,1%","0,92","45,6","0,008","7,2%","0,61"]:SV===3?["0","1","0","1","1","0","1","0","0","1","1","0"]:["%","PD","Σ","‰","€","LGD","σ","ECL","μ","EAD"];
@@ -784,7 +798,7 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
    txt=k.mod?`<b>${E(k.n)}</b>`:`<span class="cx"><b class="ecl">ECL</b></span><span class="sp"><span class="ki">${sv("sigma")}</span><b>Model<br>statystyczny</b></span>`,lab=(t,i)=>`<div class="kt i${i}" style="transform:${t} translateZ(calc(var(--k)/2 + 1px))">${txt}</div>`;
    return`<div class="ik${k.mod?" m":" hub"}" data-f="${k.id}" style="--c:${k.col};--k:calc(var(--s)*${k.k||.26});transform:${T3(at)} scale3d(var(--sc,1),var(--sc,1),var(--sc,1))">${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)","rotateX(90deg)","rotateX(-90deg)"].map(f).join("")}${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)"].map(lab).join("")}</div>`}).join("")
    +table()
-   +DBS.map(x=>`<div class="db" data-f="db" style="--c:${DB.col};--r:calc(var(--s)*${DB.r});--h:calc(var(--s)*${DB.h});transform:${T3([x,DB.at[1],DB.at[2]])}">${[-.5,-.17,.17,.5].map((y,i)=>`<div class="ring${i?"":" lid"}" style="transform:translateY(calc(var(--h)*${y})) rotateX(90deg)"></div>`).join("")}${Array.from({length:16},(_,i)=>`<div class="vl" style="transform:rotateY(${i*22.5}deg) translateZ(var(--r))"></div>`).join("")}<div class="yb sil" data-t="">${[-.5,-.17,.17,.5].map((y,i)=>`<span class="el${i?" lo":""}" style="top:calc(var(--h)*${y+.5} - var(--e)/2)"></span>`).join("")}<b>Dane</b></div></div>`).join("");
+   +DBS.map(([x,z])=>`<div class="db" data-f="db" style="--c:${DB.col};--r:calc(var(--s)*${DB.r});--h:calc(var(--s)*${DB.h});transform:${T3([x,DB.at[1],z])}">${[-.5,-.17,.17,.5].map((y,i)=>`<div class="ring${i?"":" lid"}" style="transform:translateY(calc(var(--h)*${y})) rotateX(90deg)"></div>`).join("")}${Array.from({length:16},(_,i)=>`<div class="vl" style="transform:rotateY(${i*22.5}deg) translateZ(var(--r))"></div>`).join("")}<div class="yb sil" data-t="">${[-.5,-.17,.17,.5].map((y,i)=>`<span class="el${i?" lo":""}" style="top:calc(var(--h)*${y+.5} - var(--e)/2)"></span>`).join("")}<b>Dane</b></div></div>`).join("");
   document.getElementById("inr").innerHTML=h;YB=[...cube.querySelectorAll(".yb")];
   const sel=document.querySelector(".fb.on,.ib.on");if(sel)pick(sel.dataset.f,false);if(typeof set==="function")set()}
 const ENVO={id:"env",n:"Środowisko produkcyjne",p:"Wdrożenie techniczne",c:["07","09"],sg:{"07":["Środowisko produkcyjne"],"09":[""]},col:"#c07a1f",d:"System, w którym model działa naprawdę: kod przepisany lub zintegrowany, parametry, zasilanie danymi. Tu model produkuje wyniki."};
