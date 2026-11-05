@@ -811,6 +811,7 @@
 .kmc dd.dbl{flex-direction:column;align-items:flex-start;gap:2px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px!important;font-weight:500}
 .kmc dd.dbl span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#4f7390;margin-right:6px;vertical-align:1px}
 .sil b.dbn{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:600;font-size:calc(var(--s)*.023)!important;letter-spacing:0!important;color:#3f5f78!important;white-space:nowrap;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);margin:0!important}
+.kmline{border-top:0!important;height:2px!important;margin-top:-1px;background:repeating-linear-gradient(90deg,#56514a 0 9px,transparent 9px 17px)}
 </style>
 </head>
 <body>
@@ -1025,24 +1026,24 @@ setEX(EX);setCX(1);
 /* karta silnika – linia w prawo */
 (()=>{const duo=document.getElementById("duo"),ln=document.getElementById("keline"),kc=document.getElementById("kec"),sw=document.querySelector(".sc2w"),KW=240;let st=0,tO=0,tH=0;
   const tag=()=>[...document.querySelectorAll(".etag:not(.tb2)")].find(t=>{const r=t.getBoundingClientRect();return r.width>8}),inR=(r,x,y,m=0)=>x>=r.left-m&&x<=r.right+m&&y>=r.top-m&&y<=r.bottom+m;
-  function open(){st=1;const fl=()=>Math.min(...[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect().left));const sh=Math.max(0,KW+40-fl());duo.style.transform=`translateX(${sh}px)`;
+  function open(){if(window.__kc==="m")return;window.__kc="e";st=1;const fl=()=>Math.min(...[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect().left));const sh=Math.max(0,KW+40-fl());duo.style.transform=`translateX(${sh}px)`;
     setTimeout(()=>{const t=tag();if(!t||!st)return;const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),y=r.top+r.height/2-d.top,cr=fl()-d.left-14;
       ln.style.top=y+"px";ln.style.left=cr+"px";ln.style.width=Math.max(0,r.left-d.left-cr)+"px";kc.style.left=(cr-KW)+"px";kc.style.top=Math.max(-20,y-28)+"px";
       duo.classList.add("keline-on");tO=setTimeout(()=>{if(st)duo.classList.add("keopen")},650)},sh?420:0)}
-  function close(){st=0;clearTimeout(tO);duo.classList.remove("keopen","keline-on");duo.style.transform=""}
-  addEventListener("pointermove",e=>{if(document.getElementById("duo").classList.contains("kmline-on"))return;const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
+  function close(){st=0;if(window.__kc==="e")window.__kc="";clearTimeout(tO);duo.classList.remove("keopen","keline-on");duo.style.transform=""}
+  addEventListener("pointermove",e=>{if(window.__kc==="m")return;const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
     if(over){clearTimeout(tH);tH=0;if(!st)open()}else if(st&&!tH){tH=setTimeout(()=>{tH=0;close()},300)}})})();
 
 /* karta modelu po najechaniu na tabliczkę (wykrywanie w 2D – niezależne od obrotu) */
 (()=>{const duo=document.getElementById("duo"),ln=document.getElementById("kmline"),kc=document.getElementById("kmc"),KW=240;let st=0,tOpen=0,tHide=0,shift=0;
   const tag=()=>document.querySelector(".mtag:not(.mb)"),inR=(r,x,y,m=0)=>x>=r.left-m&&x<=r.right+m&&y>=r.top-m&&y<=r.bottom+m;
-  function open(){st=1;clearTimeout(tHide);const fr=[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect()),vl=Math.min(...fr.map(r=>r.left));
+  function open(){if(window.__kc==="e")return;window.__kc="m";st=1;clearTimeout(tHide);const fr=[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect()),vl=Math.min(...fr.map(r=>r.left));
     shift=Math.max(0,KW+40-vl);duo.style.transform=`translateX(${shift}px)`;
     setTimeout(()=>{const d=duo.getBoundingClientRect(),r=tag().getBoundingClientRect(),vl2=Math.min(...[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect().left)),y=r.top+r.height/2-d.top,cr=vl2-d.left-14,cl=cr-KW;
       ln.style.top=y+"px";ln.style.left=cr+"px";ln.style.width=Math.max(0,r.left-d.left-cr)+"px";kc.style.left=cl+"px";kc.style.top=Math.max(-20,y-28)+"px";
       duo.classList.add("kmline-on");tOpen=setTimeout(()=>{if(st)duo.classList.add("kmopen")},650)},shift?420:0)}
-  function close(){st=0;clearTimeout(tOpen);duo.classList.remove("kmopen","kmline-on");duo.style.transform=""}
-  addEventListener("pointermove",e=>{const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
+  function close(){st=0;if(window.__kc==="m")window.__kc="";clearTimeout(tOpen);duo.classList.remove("kmopen","kmline-on");duo.style.transform=""}
+  addEventListener("pointermove",e=>{if(window.__kc==="e")return;const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
     if(over){clearTimeout(tHide);tHide=0;if(!st)open()}else if(st&&!tHide){tHide=setTimeout(()=>{tHide=0;close()},300)}});
   const oc=close;})();
 pick("stat",false);
