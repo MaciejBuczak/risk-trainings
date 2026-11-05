@@ -765,7 +765,7 @@
 .sb.eng2 .sl{background:rgba(92,86,77,.45)}
 .sb.eng2 .sp{background:linear-gradient(transparent,#5c564d,transparent);box-shadow:0 0 5px rgba(92,86,77,.4)}
 .sb.eng2.down .sp{animation-direction:reverse}
-.mtag{position:absolute;right:5%;top:5%;font-family:var(--body);font-weight:700;font-size:calc(var(--s)*.026);letter-spacing:.22em;color:#fff;background:var(--ink2);padding:3px 8px 3px 10px;border-radius:2px;backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none}
+.mtag{position:absolute;right:5%;top:2.6%;font-family:var(--body);font-weight:700;font-size:calc(var(--s)*.026);letter-spacing:.22em;color:#fff;background:#56514a;padding:3px 8px 3px 10px;border-radius:2px;backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none}
 .mtag.mb{transform:rotateY(180deg);color:transparent;background:#8d877e}
 .mw[data-tab="dep"] .mtag{display:none}
 </style>
@@ -894,7 +894,7 @@ const ALL=[...FACES,...INNER,DB,WY],AI={};ALL.forEach(f=>AI[f.id]=f);
 const cube=document.getElementById("cube"),scene=document.getElementById("scene");
 const H="calc(var(--s)/2)";
 const corners=[];for(const x of[-1,1])for(const y of[-1,1])for(const z of[-1,1])corners.push([x,y,z]);
-cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col};transform:${f.tf} translateZ(${H})"><div class="lb" data-f="${f.id}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small>${E(f.n)}</span></div>${f.id==="front"?`<span class="mtag">MODEL</span><span class="mtag mb"></span>`:""}</div>`).join("")
+cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col};transform:${f.tf} translateZ(${H})"><div class="lb" data-f="${f.id}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small>${E(f.n)}</span></div>${f.id==="front"?`<span class="mtag">MODEL</span><span class="mtag mb">MODEL</span>`:""}</div>`).join("")
  +corners.map(([x,y,z])=>`<div class="nd" data-t="translate3d(calc(var(--s)*${x/2}),calc(var(--s)*${y/2}),calc(var(--s)*${z/2}))"><i></i></div>`).join("")+`<div class="inr" id="inr"></div>`;
 /* wyjście wyników – trzy propozycje */
 const EXITS={1:{n:"Przez dach",at:[0,-.72,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
