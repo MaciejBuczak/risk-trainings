@@ -776,6 +776,23 @@
 .mt-r b{font-weight:600;display:inline-flex;align-items:center;gap:5px}
 .mt-r .ok{width:calc(var(--s)*.013);height:calc(var(--s)*.013);border-radius:50%;background:#4f8a4a;display:inline-block}
 .mtag.mb{background:#c9c3b9!important;border-color:#a39d93}.mtag.mb *{visibility:hidden}
+.mtag{min-width:calc(var(--s)*.185)!important;font-size:calc(var(--s)*.0195)!important;pointer-events:auto!important;cursor:help}
+.mt-h{font-size:calc(var(--s)*.017)!important}
+.mt-r .ok,.kmc .ok{width:calc(var(--s)*.015)!important;height:calc(var(--s)*.015)!important;background:#b6c0a0!important;box-shadow:inset 0 0 0 1px #8f9c78}
+.duo{position:relative}
+.kmline{position:absolute;z-index:20;height:0;border-top:1.5px dashed #56514a;transform-origin:100% 50%;transform:scaleX(0);opacity:0;pointer-events:none}
+.duo.kmline-on .kmline{opacity:1;transform:scaleX(1);transition:transform .6s cubic-bezier(.5,0,.2,1)}
+.kmc{position:absolute;z-index:21;width:290px;background:#fffdf9;border:1px solid #cfc6b8;border-radius:12px;box-shadow:0 24px 50px -24px rgba(13,13,13,.35);overflow:hidden;clip-path:inset(0 0 100% 0 round 12px);opacity:0;pointer-events:none;transition:clip-path .55s cubic-bezier(.5,0,.2,1),opacity .2s}
+.duo.kmopen .kmc{clip-path:inset(0 0 0 0 round 12px);opacity:1;pointer-events:auto}
+.kmc-h{background:#56514a;color:#fff;padding:9px 14px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.kmc-h span{font-style:italic;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.kmc-h b{font-weight:500;font-size:12px;opacity:.85}
+.kmc dl{margin:0;padding:4px 14px 8px}
+.kmc dl div{display:grid;grid-template-columns:112px 1fr;gap:10px;padding:6px 0;border-top:1px solid rgba(86,81,74,.12)}
+.kmc dl div:first-child{border-top:0}
+.kmc dt{font-size:11.5px;color:var(--muted)}
+.kmc dd{margin:0;font-size:12.5px;font-weight:600;line-height:1.3;display:flex;align-items:center;gap:6px}
+.kmc .ok{border-radius:50%;display:inline-block;width:9px!important;height:9px!important}
 </style>
 </head>
 <body>
@@ -799,7 +816,7 @@
   <div class="stage">
     <div class="side l" id="sl"></div>
     <div class="mcol">
-      <div class="duo"><div class="scene v2" id="scene" aria-label="Model ryzyka – sześcian"><div class="cube" id="cube"></div></div><div class="sc2w"><div class="scene v2 sc2" id="scene2" aria-label="Warstwy modelu"><div class="cube" id="cube2"></div></div></div></div>
+      <div class="duo" id="duo"><div class="kmline" id="kmline"></div><div class="kmc" id="kmc"><div class="kmc-h"><span>Karta modelu</span><b>ECL · wersja 3.1</b></div><dl><div><dt>Nazwa modelu</dt><dd>Oczekiwana strata kredytowa – portfel detaliczny</dd></div><div><dt>Obszar ryzyka</dt><dd>Ryzyko kredytowe</dd></div><div><dt>Koncepcja</dt><dd>Strata oczekiwana · MSSF 9</dd></div><div><dt>Istotność</dt><dd>Model istotny</dd></div><div><dt>Właściciel</dt><dd>Departament Ryzyka Kredytowego</dd></div><div><dt>Zakres stosowania</dt><dd>Kredyty hipoteczne i konsumpcyjne</dd></div><div><dt>Pochodzenie</dt><dd>Model wewnętrzny</dd></div><div><dt>Środowisko produkcyjne</dt><dd>System kalkulacji odpisów</dd></div><div><dt>Ostatnia walidacja</dt><dd>02.2026 · bez zastrzeżeń istotnych</dd></div><div><dt>Ocena jakości</dt><dd><em class="ok"></em>4.3 / 5</dd></div></dl></div><div class="scene v2" id="scene" aria-label="Model ryzyka – sześcian"><div class="cube" id="cube"></div></div><div class="sc2w"><div class="scene v2 sc2" id="scene2" aria-label="Warstwy modelu"><div class="cube" id="cube2"></div></div></div></div>
       <div class="ctl" id="ctl">
         <button type="button" class="ar" data-r="0,-30" aria-label="Obróć w lewo" title="Obróć w lewo">⟲</button>
         <button type="button" class="ar" data-r="0,30" aria-label="Obróć w prawo" title="Obróć w prawo">⟳</button>
@@ -985,7 +1002,16 @@ function panel(f){pan.style.setProperty("--c",f.col);
     pan.innerHTML=`<div class="pan-h"><div><span class="kick">${f.p}</span><h2>${E(f.n)} <span class="pmod">${E(f.s)}</span></h2></div><p>${E(f.d)}</p></div><div class="cmp"><div class="cm" style="--k:${f.col}"><div class="sgb"><span>Połączony z</span><div class="it">${nb.map(x=>`<i class="lnk" data-go="${x.id}">${E(x.n)}</i>`).join("")}</div></div></div></div>`;return}
   pan.innerHTML=`<div class="pan-h"><div><span class="kick">${f.p}${f.v?" bryły":""} · ${f.c.map(k=>"#"+k).join(" · ")}</span><h2>${E(f.n)}</h2></div><p>${E(f.d)}</p></div><div class="cmp">${f.c.map(k=>{const r=MI[k],sgs=f.sg&&f.sg[k]?r[4].filter(x=>f.sg[k].includes(x[0])):r[4];return`<div class="cm" style="--k:${COL[k]}"><div class="cm-h"><span class="ic">${sv(r[2])}</span><span><em>#${r[0]}</em><b>${E(r[1])}</b><span>${f.sg&&f.sg[k]?"Wybrane: "+E(f.sg[k].join(", ")):E(r[3])}</span></span></div><div class="sg">${sgs.map(s=>`<div class="sgb">${s[0]?`<span>${E(s[0])}</span>`:""}<div class="it">${s[1].map(i=>`<i>${E(i[0])}${i[1]?`<small>${E(i[1])}</small>`:""}</i>`).join("")}</div></div>`).join("")}</div></div>`}).join("")}</div>`}
 document.getElementById("sl").innerHTML=FACES.slice(0,3).map(fb).join("");document.getElementById("sr").innerHTML=FACES.slice(3).map(fb).join("");
-setEX(EX);setCX(1);pick("stat",false);
+setEX(EX);setCX(1);
+/* karta modelu po najechaniu na tabliczkę */
+(()=>{const duo=document.getElementById("duo"),ln=document.getElementById("kmline"),kc=document.getElementById("kmc"),sc=document.getElementById("scene");let t=0,on=false;
+  function show(tag){clearTimeout(t);const d=duo.getBoundingClientRect(),r=tag.getBoundingClientRect(),S=sc.getBoundingClientRect(),y=r.top+r.height*.5-d.top,x1=r.left-d.left,x0=S.left-d.left-36;
+    ln.style.top=y+"px";ln.style.left=x0+"px";ln.style.width=(x1-x0)+"px";kc.style.top=Math.max(0,y-40)+"px";const kw=290,kx=Math.max(-d.left+12,x0-kw+40);kc.style.left=kx+"px";
+    if(!on){on=true;duo.classList.remove("kmopen");void ln.offsetWidth;duo.classList.add("kmline-on");t=setTimeout(()=>duo.classList.add("kmopen"),650)}}
+  function hide(){t=setTimeout(()=>{on=false;duo.classList.remove("kmopen","kmline-on")},250)}
+  duo.addEventListener("pointerover",e=>{const tag=e.target.closest(".mtag:not(.mb)");if(tag)show(tag);else if(e.target.closest("#kmc"))clearTimeout(t)});
+  duo.addEventListener("pointerout",e=>{if(e.target.closest(".mtag,#kmc")&&!(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest(".mtag:not(.mb),#kmc")))hide()})})();
+pick("stat",false);
 /* rozbieranie kostki – pięć sposobów */
 (()=>{const S="var(--s)",FA=[...cube.querySelectorAll(".fa")],FI={};FACES.forEach((f,i)=>FI[f.id]=i);
   FA.forEach(el=>{const f=FACES[FI[el.dataset.f]],subs=[...new Set(f.c.flatMap(k=>MI[k][4].map(x=>x[0]||MI[k][1])))].slice(0,4);
