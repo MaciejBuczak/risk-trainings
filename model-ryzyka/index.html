@@ -804,7 +804,7 @@
 .et-r{display:flex;justify-content:space-between;gap:8px;padding:1px 6px}.et-r i{font-style:normal;color:var(--muted)}.et-r b{font-weight:600}
 .etag.tb2{background:#c9c3b9!important;border-color:#a39d93;width:auto!important;height:auto!important}.etag.tb2 *{visibility:hidden}
 .mf2.sdx{pointer-events:none}
-.kmline.r{transform-origin:0 50%}
+.kmline.r{transform-origin:100% 50%}
 .duo.keline-on .kmline.r{opacity:1;transform:scaleX(1);transition:transform .6s cubic-bezier(.5,0,.2,1)}
 .duo.keopen .kec{clip-path:inset(0 0 0 0 round 12px);opacity:1;pointer-events:auto}
 .sc2w{transition:opacity .4s}
@@ -1022,10 +1022,11 @@ setEX(EX);setCX(1);
 /* karta silnika – linia w prawo */
 (()=>{const duo=document.getElementById("duo"),ln=document.getElementById("keline"),kc=document.getElementById("kec"),sw=document.querySelector(".sc2w"),KW=240;let st=0,tO=0,tH=0;
   const tag=()=>[...document.querySelectorAll(".etag:not(.tb2)")].find(t=>{const r=t.getBoundingClientRect();return r.width>8}),inR=(r,x,y,m=0)=>x>=r.left-m&&x<=r.right+m&&y>=r.top-m&&y<=r.bottom+m;
-  function open(){st=1;const t=tag();if(!t)return;const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),vr=Math.max(...[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect().right)),y=r.top+r.height/2-d.top,cl=vr-d.left+14;
-    ln.style.top=y+"px";ln.style.left=(r.right-d.left)+"px";ln.style.width=Math.max(0,cl-(r.right-d.left))+"px";kc.style.left=cl+"px";kc.style.top=Math.max(-20,y-28)+"px";
-    duo.classList.add("keline-on");sw.style.opacity=".12";tO=setTimeout(()=>{if(st)duo.classList.add("keopen")},650)}
-  function close(){st=0;clearTimeout(tO);duo.classList.remove("keopen","keline-on");sw.style.opacity=""}
+  function open(){st=1;const fl=()=>Math.min(...[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect().left));const sh=Math.max(0,KW+40-fl());duo.style.transform=`translateX(${sh}px)`;
+    setTimeout(()=>{const t=tag();if(!t||!st)return;const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),y=r.top+r.height/2-d.top,cr=fl()-d.left-14;
+      ln.style.top=y+"px";ln.style.left=cr+"px";ln.style.width=Math.max(0,r.left-d.left-cr)+"px";kc.style.left=(cr-KW)+"px";kc.style.top=Math.max(-20,y-28)+"px";
+      duo.classList.add("keline-on");tO=setTimeout(()=>{if(st)duo.classList.add("keopen")},650)},sh?420:0)}
+  function close(){st=0;clearTimeout(tO);duo.classList.remove("keopen","keline-on");duo.style.transform=""}
   addEventListener("pointermove",e=>{if(document.getElementById("duo").classList.contains("kmline-on"))return;const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
     if(over){clearTimeout(tH);tH=0;if(!st)open()}else if(st&&!tH){tH=setTimeout(()=>{tH=0;close()},300)}})})();
 
