@@ -875,7 +875,7 @@
 .dbf{position:absolute;left:0;top:0;box-sizing:border-box;border:1.6px solid rgba(79,115,144,.8)!important;border-radius:calc(var(--s)*.02)!important;background:rgba(79,115,144,.02)!important;backface-visibility:visible!important}
 .dtag2{border-color:#4f7390!important}.dtag2 .mt-h{background:#4f7390!important}
 .dtag2.wb{background:#c9d3db!important}
-.dtag2:not(.wb){right:auto!important;left:2.6%!important;top:auto!important;bottom:6%!important}.dtag2.wb{right:auto!important;left:2.6%!important;top:auto!important;bottom:6%!important}
+.dtag2:not(.wb){right:2.6%!important;left:auto!important;top:6%!important;bottom:auto!important}.dtag2.wb{right:2.6%!important;left:auto!important;top:6%!important;bottom:auto!important}
 .wbl{backface-visibility:visible!important;-webkit-backface-visibility:visible!important;transform-style:preserve-3d}
 /* zwijany panel górny – tylko ta strona */
 .top.tcol{position:fixed;left:0;right:0;top:0;transform:translateY(-100%);transition:transform .35s cubic-bezier(.5,0,.2,1),box-shadow .35s;z-index:60}
@@ -883,13 +883,13 @@
 .topt{position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:61;font:inherit;font-size:12px;font-weight:600;letter-spacing:.06em;padding:4px 16px 6px;border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;background:#fffdf9;color:var(--ink2);cursor:pointer;transition:opacity .25s}
 .topt span{font-size:10px;margin-left:2px}
 .top.tcol.show~.topt,.topt.hid{opacity:0;pointer-events:none}
-.mw[data-tab="model"] .inn{margin-top:90px!important}
+.mw[data-tab="model"] .inn{margin-top:130px!important}
 .mw[data-tab="model"] .pan{margin-top:60px!important}
+.top.tst{position:relative!important}
 </style>
 </head>
 <body>
-<button type="button" class="topt" id="topt" aria-label="Pokaż menu" aria-controls="top">Menu <span aria-hidden="true">▾</span></button>
-<header class="top tcol" id="top">
+<header class="top tst" id="top">
   <div class="wrap">
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav"><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../mapa-banku/">Mapa banku</a><a class="on" href="./">Model ryzyka</a><a href="../o-mnie/">O mnie</a><a href="../#kontakt">Kontakt</a><a class="sci" href="https://maciejbuczak.github.io/">Strona naukowa ↗</a></nav>
@@ -1003,7 +1003,7 @@ const MODS=[
  {id:"ead",n:"EAD",s:"ekspozycja · CCF",col:"#6f7f58",at:[.27,.12,-.18],k:.12,d:"Ekspozycja w chwili niewykonania zobowiązania, z uwzględnieniem wykorzystania limitów (CCF)."}];
 const LINKS=[["stat","pd"],["stat","lgd"],["stat","ead"],["stat","sicr"],["pd","ttc"],["pd","pit"]];
 MODS.forEach(m=>{m.p="Moduł modelu statystycznego";m.mod=1;m.c=[]});
-const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,.74,0],r:.08,h:.1,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
+const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,.84,0],r:.08,h:.1,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
 const FEEDS=[];const DBS=[[-.27,.2],[.27,.2],[0,-.27]];
 const WY={id:"wyn",n:"Wyniki",p:"Wyniki modelu",c:["05","02"],sg:{"05":["Wynik modelu"],"02":[""]},col:"#a8823a",at:[0,-.575,0],w:.2,h:.13,d:"Tu trafiają wyniki każdego modułu – PD, TTC i PIT, LGD, EAD, koszyki z SICR i ECL – a dalej do odpisów, raportów i decyzji."};
 const RES=[];
@@ -1015,7 +1015,7 @@ const corners=[];for(const x of[-1,1])for(const y of[-1,1])for(const z of[-1,1])
 cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col};transform:${f.tf} translateZ(${H})"><div class="lb" data-f="${f.id}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small>${E(f.n)}</span></div>${f.id==="front"?`<span class="mtag"><span class="mt-h">MODEL</span><span class="mt-r"><i>Kod</i><b>ECL</b></span><span class="mt-r"><i>Wersja</i><b>3.1</b></span><span class="mt-r"><i>Ocena</i><b><em class="ok"></em>4.3</b></span></span><span class="mtag mb"><span class="mt-h">MODEL</span><span class="mt-r"><i>Kod</i><b>ECL</b></span><span class="mt-r"><i>Wersja</i><b>3.1</b></span><span class="mt-r"><i>Ocena</i><b><em class="ok"></em>4.3</b></span></span><span class="dtg"><span class="dt-h"><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15h6"/></svg>Dokumentacja</span><span class="mt-r dt-r"><i>Wersja</i><b>2.6</b></span><span class="mt-r dt-r"><i>Data</i><b>28.02.2026</b></span></span><span class="dtg db2"><span class="dt-h"><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15h6"/></svg>Dokumentacja</span><span class="mt-r dt-r"><i>Wersja</i><b>2.6</b></span><span class="mt-r dt-r"><i>Data</i><b>28.02.2026</b></span></span>`:""}</div>`).join("")
  +corners.map(([x,y,z])=>`<div class="nd" data-t="translate3d(calc(var(--s)*${x/2}),calc(var(--s)*${y/2}),calc(var(--s)*${z/2}))"><i></i></div>`).join("")+`<div class="inr" id="inr"></div>`;
 /* wyjście wyników – trzy propozycje */
-const EXITS={1:{n:"Przez dach",at:[0,-.79,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
+const EXITS={1:{n:"Przez dach",at:[0,-.83,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
 let EX=1,SV=1,MV=2,DV2=1;try{DV2=+localStorage.getItem("rt_mr_dok")||1}catch(_){}
 const GEAR=(n,R,r,h)=>{let d="";for(let i=0;i<n;i++){const a=i/n*2*Math.PI,s1=Math.PI/n*.5,s2=Math.PI/n*.32,P=(rr,aa)=>`${(50+rr*Math.cos(aa)).toFixed(2)} ${(50+rr*Math.sin(aa)).toFixed(2)}`;d+=(i?"L":"M")+P(r,a-s1-.1)+"L"+P(R,a-s2)+"L"+P(R,a+s2)+"L"+P(r,a+s1+.1)}return`<path d="${d}Z"/><circle cx="50" cy="50" r="${h}"/>`};
 
@@ -1025,7 +1025,7 @@ const rod=(A,B,cl,l,sa=0,sb=0)=>{const E2=.004,d=(u,v)=>Math.hypot(v[0]-u[0],v[1
   let h="";for(let i=0;i<n;i++)h+=seg(pts[i],pts[i+1],cl,l);return h};
 const seg=(A,B,cl,l)=>{const dx=B[0]-A[0],dy=B[1]-A[1],dz=B[2]-A[2],h=Math.hypot(dx,dz),L=Math.hypot(dx,dy,dz);
   return`<div class="rod ${cl}" data-l="${l}" style="width:calc(var(--s)*${L.toFixed(4)});transform:${T3(A)} rotateY(${(Math.atan2(-dz,dx)*180/Math.PI).toFixed(2)}deg) rotateZ(${(Math.atan2(dy,h)*180/Math.PI).toFixed(2)}deg)"><i></i><i style="transform:rotateX(90deg)"></i></div>`};
-function dbox(){const W=.84,D=.8,Ht=.3,Y=.75,c=`calc(var(--s)*`,F=(w,h,t,cl,body="")=>{const st=`width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}`;return`<i class="dbf ${cl}" style="${st}"></i>`+(body?`<i class="wbl" style="${st}">${body}</i>`:"")},B=`<span class="mt-h">DANE</span><span class="mt-r"><span class="k">Źródła</span><b>3</b></span><span class="mt-r"><span class="k">Zasilenie</span><b>31.10.2026</b></span><span class="mt-r"><span class="k">Rekordy</span><b>4,2 mln</b></span>`;
+function dbox(){const W=.84,D=.8,Ht=.3,Y=.85,c=`calc(var(--s)*`,F=(w,h,t,cl,body="")=>{const st=`width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}`;return`<i class="dbf ${cl}" style="${st}"></i>`+(body?`<i class="wbl" style="${st}">${body}</i>`:"")},B=`<span class="mt-h">DANE</span><span class="mt-r"><span class="k">Źródła</span><b>3</b></span><span class="mt-r"><span class="k">Zasilenie</span><b>31.10.2026</b></span><span class="mt-r"><span class="k">Rekordy</span><b>4,2 mln</b></span>`;
   return`<div class="tb dbx" data-f="db" style="transform:${T3([0,Y,0])}">${F(W,Ht,`translateZ(${c}${D/2}))`,"sd",`<span class="mtag wtag dtag2">${B}</span><span class="mtag wtag wb dtag2">${B}</span>`)}${F(W,Ht,`rotateY(180deg) translateZ(${c}${D/2}))`,"sd")}${F(D,Ht,`rotateY(90deg) translateZ(${c}${W/2}))`,"sd")}${F(D,Ht,`rotateY(-90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,D,`rotateX(90deg) translateZ(${c}${Ht/2}))`,"cp")}${F(W,D,`rotateX(-90deg) translateZ(${c}${Ht/2}))`,"cp")}</div>`}
 function table(){const W=.72,Ht=.26,c=`calc(var(--s)*`,F=(w,h,t,cl,body="")=>{const st=`width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}`;return`<i class="wbf ${cl}" style="${st}"></i>`+(body?`<i class="wbl" style="${st}">${body}</i>`:"")},WB=`<span class="mt-h">WYNIKI</span><span class="mt-r"><span class="k">Proces</span><b>ECL</b></span><span class="mt-r"><span class="k">Aktywa netto</span><b>48,2 mld zł</b></span><span class="mt-r"><span class="k">Zmiana odpisów</span><b>−126 mln zł</b></span>`,lab=`<span class="mtag wtag">${WB}</span>`,labB=`<span class="mtag wtag wb">${WB}</span>`;
   return`<div class="tb wbox" data-f="wyn" style="--c:${WY.col};transform:${T3(WY.at)}">${F(W,Ht,`translateZ(${c}${W/2}))`,"sd",lab+labB)}${F(W,Ht,`rotateY(180deg) translateZ(${c}${W/2}))`,"sd")}${F(W,Ht,`rotateY(90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,Ht,`rotateY(-90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,W,`rotateX(90deg) translateZ(${c}${Ht/2}))`,"cp")}${F(W,W,`rotateX(-90deg) translateZ(${c}${Ht/2}))`,"cp")}</div>`}
@@ -1236,11 +1236,5 @@ tabs.addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b)se
 })();
 </script>
 <script src="../rt.js"></script>
-<script>
-(()=>{const top=document.getElementById("top"),t=document.getElementById("topt");let h=0;
-  const show=()=>{clearTimeout(h);top.classList.add("show");t.classList.add("hid")},hide=()=>{h=setTimeout(()=>{if(!top.matches(":hover")&&!top.contains(document.activeElement)){top.classList.remove("show");t.classList.remove("hid")}},350)};
-  t.addEventListener("click",show);t.addEventListener("pointerenter",show);top.addEventListener("pointerleave",hide);top.addEventListener("focusin",show);top.addEventListener("focusout",hide);
-  addEventListener("pointermove",e=>{if(e.clientY<6)show()});})();
-</script>
 </body>
 </html>
