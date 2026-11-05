@@ -877,10 +877,17 @@
 .dtag2.wb{background:#c9d3db!important}
 .dtag2:not(.wb){right:auto!important;left:2.6%!important;top:auto!important;bottom:6%!important}.dtag2.wb{right:auto!important;left:2.6%!important;top:auto!important;bottom:6%!important}
 .wbl{backface-visibility:visible!important;-webkit-backface-visibility:visible!important;transform-style:preserve-3d}
+/* zwijany panel górny – tylko ta strona */
+.top.tcol{position:fixed;left:0;right:0;top:0;transform:translateY(-100%);transition:transform .35s cubic-bezier(.5,0,.2,1),box-shadow .35s;z-index:60}
+.top.tcol.show{transform:none;box-shadow:0 12px 30px -20px rgba(13,13,13,.35)}
+.topt{position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:61;font:inherit;font-size:12px;font-weight:600;letter-spacing:.06em;padding:4px 16px 6px;border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;background:#fffdf9;color:var(--ink2);cursor:pointer;transition:opacity .25s}
+.topt span{font-size:10px;margin-left:2px}
+.top.tcol.show~.topt,.topt.hid{opacity:0;pointer-events:none}
 </style>
 </head>
 <body>
-<header class="top" id="top">
+<button type="button" class="topt" id="topt" aria-label="Pokaż menu" aria-controls="top">Menu <span aria-hidden="true">▾</span></button>
+<header class="top tcol" id="top">
   <div class="wrap">
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav"><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../mapa-banku/">Mapa banku</a><a class="on" href="./">Model ryzyka</a><a href="../o-mnie/">O mnie</a><a href="../#kontakt">Kontakt</a><a class="sci" href="https://maciejbuczak.github.io/">Strona naukowa ↗</a></nav>
@@ -1227,5 +1234,11 @@ tabs.addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b)se
 })();
 </script>
 <script src="../rt.js"></script>
+<script>
+(()=>{const top=document.getElementById("top"),t=document.getElementById("topt");let h=0;
+  const show=()=>{clearTimeout(h);top.classList.add("show");t.classList.add("hid")},hide=()=>{h=setTimeout(()=>{if(!top.matches(":hover")&&!top.contains(document.activeElement)){top.classList.remove("show");t.classList.remove("hid")}},350)};
+  t.addEventListener("click",show);t.addEventListener("pointerenter",show);top.addEventListener("pointerleave",hide);top.addEventListener("focusin",show);top.addEventListener("focusout",hide);
+  addEventListener("pointermove",e=>{if(e.clientY<6)show()});})();
+</script>
 </body>
 </html>
