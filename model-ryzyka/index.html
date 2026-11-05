@@ -812,6 +812,21 @@
 .kmc dd.dbl span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#4f7390;margin-right:6px;vertical-align:1px}
 .sil b.dbn{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:600;font-size:calc(var(--s)*.023)!important;letter-spacing:0!important;color:#3f5f78!important;white-space:nowrap;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);margin:0!important}
 .kmline{border-top:0!important;height:2px!important;margin-top:-1px;background:repeating-linear-gradient(90deg,#56514a 0 9px,transparent 9px 17px)}
+.kmline{height:1.4px!important;margin-top:-.7px!important;background:repeating-linear-gradient(90deg,#56514a 0 9px,transparent 9px 17px)!important}
+/* dokumentacja */
+.dok{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;pointer-events:none}
+.dk1{left:calc(var(--s)*-.15);top:calc(var(--s)*-.19);width:calc(var(--s)*.3);height:calc(var(--s)*.375)}
+.dk1 svg{width:100%;height:100%;overflow:visible}
+.dk1 rect{fill:rgba(255,253,249,.55);stroke:#6b6258;stroke-width:1.3}.dk1 rect.lb2{fill:rgba(107,98,88,.06);stroke-width:.8}
+.dk1 text{font-family:var(--body);font-weight:600;font-size:6.3px;fill:#56514a;letter-spacing:.04em}
+.dk1 circle{fill:none;stroke:#6b6258;stroke-width:1}
+.dtag{position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);font-family:var(--body);font-weight:700;font-style:italic;font-size:calc(var(--s)*.017);letter-spacing:.2em;color:#fff;background:#56514a;padding:2px 7px;border-radius:2px;white-space:nowrap}
+.rod.doc i{background:#6b6258!important;opacity:.6}
+.sheet{position:absolute;left:calc(var(--s)*-.62);top:calc(var(--s)*-.62);width:calc(var(--s)*1.24);height:calc(var(--s)*1.24);box-sizing:border-box;border:1.3px solid rgba(107,98,88,.7);border-radius:4px;background:linear-gradient(rgba(107,98,88,.07) 1px,transparent 1px) 0 0/calc(var(--s)*.062) calc(var(--s)*.062),linear-gradient(90deg,rgba(107,98,88,.07) 1px,transparent 1px) 0 0/calc(var(--s)*.062) calc(var(--s)*.062),rgba(255,253,249,.35)}
+.sheet i{position:absolute;left:10%;height:2px;border-radius:1px;background:rgba(107,98,88,.35)}
+.sheet .dtag{left:10%;top:8%;transform:none}
+.sheet.s3{left:calc(var(--s)*-.42);top:calc(var(--s)*-.56);width:calc(var(--s)*.84);height:calc(var(--s)*1.1);background:rgba(255,253,249,.55);clip-path:polygon(0 0,86% 0,100% 11%,100% 100%,0 100%)}
+.sheet.s3::after{content:"";position:absolute;right:0;top:0;width:14%;height:11%;background:linear-gradient(225deg,transparent 50%,rgba(107,98,88,.25) 50%)}
 </style>
 </head>
 <body>
@@ -942,7 +957,7 @@ cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col
  +corners.map(([x,y,z])=>`<div class="nd" data-t="translate3d(calc(var(--s)*${x/2}),calc(var(--s)*${y/2}),calc(var(--s)*${z/2}))"><i></i></div>`).join("")+`<div class="inr" id="inr"></div>`;
 /* wyjście wyników – trzy propozycje */
 const EXITS={1:{n:"Przez dach",at:[0,-.72,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
-let EX=1,SV=1,MV=1;
+let EX=1,SV=1,MV=2,DV2=1;try{DV2=+localStorage.getItem("rt_mr_dok")||1}catch(_){}
 const GEAR=(n,R,r,h)=>{let d="";for(let i=0;i<n;i++){const a=i/n*2*Math.PI,s1=Math.PI/n*.5,s2=Math.PI/n*.32,P=(rr,aa)=>`${(50+rr*Math.cos(aa)).toFixed(2)} ${(50+rr*Math.sin(aa)).toFixed(2)}`;d+=(i?"L":"M")+P(r,a-s1-.1)+"L"+P(R,a-s2)+"L"+P(R,a+s2)+"L"+P(r,a+s1+.1)}return`<path d="${d}Z"/><circle cx="50" cy="50" r="${h}"/>`};
 
 const T3=a=>`translate3d(calc(var(--s)*${a[0]}),calc(var(--s)*${a[1]}),calc(var(--s)*${a[2]}))`;
@@ -970,6 +985,11 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
     const SIDES=["","rotateY(180deg) ","rotateY(90deg) ","rotateY(-90deg) "],EB=`<span class="et-h">SILNIK</span><span class="et-r"><i>Wersja</i><b>1.7</b></span>`,TAG=`<span class="tag etag">${EB}</span>`,TAGB=`<span class="tag tb2 etag">${EB}</span>`;
     mh=`<div class="mbox">${SIDES.map((r,i)=>F(W,Hh,`${r}translateZ(${c}${W/2}))`,"sd")+F(W,Hh,`${r}translateZ(${c}${W/2+.001}))`,"sdx",SC+(i===0?TAG:""))).join("")}${F(W,Hh,`translateZ(${c}${W/2+.002})) rotateY(180deg)`,"sdx",TAGB)}${F(W,W,`rotateX(90deg) translateZ(${c}${Hh/2}))`,"cp")}${inner}${F(W,W,`rotateX(-90deg) translateZ(${c}${Hh/2}))`,"cp")}${pist}</div>`;
     h+=`<div class="mech" data-f="stat" style="transform:${T3(M)}">${mh}</div>`;{const yT=M[1]-Hh/2,yB=.08,L=(yT-yB).toFixed(3);[[-.04,""],[.04," down"]].forEach(([x,cl])=>{h+=`<div class="strm" style="transform:${T3([x,yT,0])}"><div class="yb sb sv1 eng2${cl}" data-t="" style="--L:calc(var(--s)*${L})"><i class="sl"></i><i class="sp"></i><i class="sp d2"></i></div></div>`})}}
+  {const c=`calc(var(--s)*`;let d="";
+    if(DV2===1){d=`<div class="dok d1" style="transform:${T3([-.92,.12,.3])}"><div class="yb dk1" data-t=""><svg viewBox="0 0 120 150" aria-hidden="true">${[["Metodyka",0],["Dokumentacja modelu",38],["Dokumentacja techniczna",76]].map(([n,x])=>`<g transform="translate(${x} 0)"><rect x="2" y="4" width="34" height="142" rx="4"/><rect class="lb2" x="8" y="14" width="22" height="92" rx="2"/><text text-anchor="middle" transform="translate(21.5 60) rotate(-90)">${n}</text><circle cx="19" cy="120" r="5"/></g>`).join("")}</svg><span class="dtag">DOKUMENTACJA</span></div></div>`+rod([-.76,.12,.3],[-.5,.12,.3],"feed doc","doc stat")}
+    else if(DV2===2){d=`<div class="dok d2" style="transform:${T3([0,.56,0])} rotateX(90deg)"><div class="sheet"><span class="dtag">DOKUMENTACJA MODELU</span>${Array.from({length:9},(_,k)=>`<i style="top:${22+k*8}%;width:${[70,55,80,40,65,75,50,60,35][k]}%"></i>`).join("")}</div></div>`}
+    else{d=`<div class="dok d3" style="transform:${T3([.12,-.08,-.82])}"><div class="sheet s3"><span class="dtag">DOKUMENTACJA MODELU</span>${Array.from({length:10},(_,k)=>`<i style="top:${20+k*7.4}%;width:${[70,55,80,40,65,75,50,60,35,58][k]}%"></i>`).join("")}</div></div>`}
+    h+=d}
   if(X.port){const L=Math.abs(X.at[1]+.06-X.port[1]),rnd=(a,b)=>a+Math.random()*(b-a);let body="";
     if(SV===1)body=`<i class="sl"></i><i class="sp"></i><i class="sp d2"></i>`;
     else{const pool=SV===2?["0,034","12,5%","0,47","1 248","3,1%","0,92","45,6","0,008","7,2%","0,61"]:SV===3?["0","1","0","1","1","0","1","0","0","1","1","0"]:["%","PD","Σ","‰","€","LGD","σ","ECL","μ","EAD"];
@@ -989,12 +1009,12 @@ AI.env=ENVO;AI.proc=PROC;
 const fb=f=>`<button type="button" class="fb" data-f="${f.id}" style="--c:${f.col}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small><b>${E(f.n)}</b></span></button>`;
 
 const inn=document.getElementById("inn");
-inn.innerHTML=`<div class="mx2"><span>Model w środku</span><button type="button" data-mx="1">Złożony – kilka modułów</button><button type="button" data-mx="0">Prosty – jeden moduł</button></div><div class="mods"><button type="button" class="ib" data-f="db" style="--c:${DB.col}"><i>${sv("db")}</i>Baza danych</button><button type="button" class="ib" data-f="stat" style="--c:${HUB.col}"><i>${sv("sigma")}</i>ECL</button><button type="button" class="ib" data-f="wyn" style="--c:${WY.col}"><i>${sv("doc")}</i>Wyniki</button>${MODS.map(m=>`<button type="button" class="ib md" data-f="${m.id}" style="--c:${m.col}"><i><b>${m.n[0]}</b></i>${m.n}</button>`).join("")}</div>`;
+inn.innerHTML=`<div class="mx2 ex"><span>Dokumentacja</span>${["Segregator","Plan pod modelem","Teczka w tle"].map((n,k)=>`<button type="button" data-dk="${k+1}">${k+1} · ${n}</button>`).join("")}</div><div class="mx2"><span>Model w środku</span><button type="button" data-mx="1">Złożony – kilka modułów</button><button type="button" data-mx="0">Prosty – jeden moduł</button></div><div class="mods"><button type="button" class="ib" data-f="db" style="--c:${DB.col}"><i>${sv("db")}</i>Baza danych</button><button type="button" class="ib" data-f="stat" style="--c:${HUB.col}"><i>${sv("sigma")}</i>ECL</button><button type="button" class="ib" data-f="wyn" style="--c:${WY.col}"><i>${sv("doc")}</i>Wyniki</button>${MODS.map(m=>`<button type="button" class="ib md" data-f="${m.id}" style="--c:${m.col}"><i><b>${m.n[0]}</b></i>${m.n}</button>`).join("")}</div>`;
 let CX=1;try{CX=localStorage.getItem("rt_mr_cx")==="0"?0:1}catch(_){}
 function setCX(v){CX=v;cube.classList.toggle("simple",!v);HUB.n=v?"ECL":"Model statystyczny";HUB.d=v?"Oczekiwana strata kredytowa – składa wyniki PD, LGD i EAD (z dyskontowaniem i scenariuszami), a SICR decyduje, czy liczymy ją w horyzoncie 12 miesięcy, czy w całym okresie życia.":"Jeden moduł: próba, segmentacja, zmienne, parametry, estymacja i wynik – bez rozbijania na części.";const hb=inn.querySelector('.ib[data-f="stat"]');if(hb)hb.lastChild.textContent=HUB.n;const on=document.querySelector(".ik.hub.on");if(on)panel(HUB);inn.querySelectorAll("[data-mx]").forEach(b=>b.classList.toggle("on",+b.dataset.mx===v));try{localStorage.setItem("rt_mr_cx",v)}catch(_){}
   const cur=document.querySelector(".ik.on");if(!v&&cur&&cur.classList.contains("m"))pick("stat",false)}
-inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setCX(+b.dataset.mx);const mvb=e.target.closest("[data-mv]");if(mvb){MV=+mvb.dataset.mv;try{localStorage.setItem("rt_mr_mv",MV)}catch(_){}setEX(1);return}const x=e.target.closest("[data-sv]");if(x){SV=+x.dataset.sv;try{localStorage.setItem("rt_mr_sv",SV)}catch(_){}setEX(1)}});
-function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));renderInner()}
+inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setCX(+b.dataset.mx);const dkb=e.target.closest("[data-dk]");if(dkb){DV2=+dkb.dataset.dk;try{localStorage.setItem("rt_mr_dok",DV2)}catch(_){}setEX(1);return}const mvb=e.target.closest("[data-mv]");if(mvb){MV=+mvb.dataset.mv;try{localStorage.setItem("rt_mr_mv",MV)}catch(_){}setEX(1);return}const x=e.target.closest("[data-sv]");if(x){SV=+x.dataset.sv;try{localStorage.setItem("rt_mr_sv",SV)}catch(_){}setEX(1)}});
+function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));inn.querySelectorAll("[data-dk]").forEach(b=>b.classList.toggle("on",+b.dataset.dk===DV2));renderInner()}
 /* obrót – tylko na żądanie */
 let rx=-22,ry=-34;
 const NDS=[...cube.querySelectorAll(".nd")];let YB=[];
@@ -1031,7 +1051,7 @@ setEX(EX);setCX(1);
       ln.style.top=y+"px";ln.style.left=cr+"px";ln.style.width=Math.max(0,r.left-d.left-cr)+"px";kc.style.left=(cr-KW)+"px";kc.style.top=Math.max(-20,y-28)+"px";
       duo.classList.add("keline-on");tO=setTimeout(()=>{if(st)duo.classList.add("keopen")},650)},sh?420:0)}
   function close(){st=0;if(window.__kc==="e")window.__kc="";clearTimeout(tO);duo.classList.remove("keopen","keline-on");duo.style.transform=""}
-  addEventListener("pointermove",e=>{if(window.__kc==="m")return;const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
+  addEventListener("pointermove",e=>{if(window.__kc==="m")return;{const mt=document.querySelector(".mtag:not(.mb)");if(mt){const q=mt.getBoundingClientRect();if(e.clientX>=q.left-6&&e.clientX<=q.right+6&&e.clientY>=q.top-6&&e.clientY<=q.bottom+6)return}}const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
     if(over){clearTimeout(tH);tH=0;if(!st)open()}else if(st&&!tH){tH=setTimeout(()=>{tH=0;close()},300)}})})();
 
 /* karta modelu po najechaniu na tabliczkę (wykrywanie w 2D – niezależne od obrotu) */
