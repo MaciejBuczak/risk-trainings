@@ -769,6 +769,13 @@
 .mtag.mb{transform:rotateY(180deg);color:transparent;background:#8d877e}
 .mw[data-tab="dep"] .mtag{display:none}
 .mf2{border:1.6px solid rgba(92,86,77,.85)!important}
+.mtag{display:flex;flex-direction:column;padding:0!important;background:rgba(255,253,249,.92)!important;color:var(--ink2)!important;border:1.2px solid #56514a;border-radius:3px;overflow:hidden;min-width:calc(var(--s)*.16);font-size:calc(var(--s)*.017)!important;letter-spacing:0!important}
+.mt-h{background:#56514a;color:#fff;font-weight:700;font-style:italic;font-size:calc(var(--s)*.015);letter-spacing:.22em;padding:1px 6px}
+.mt-r{display:flex;justify-content:space-between;gap:8px;padding:1px 6px;border-top:1px solid rgba(86,81,74,.18);font-style:normal}
+.mt-r i{font-style:normal;color:var(--muted);font-weight:500}
+.mt-r b{font-weight:600;display:inline-flex;align-items:center;gap:5px}
+.mt-r .ok{width:calc(var(--s)*.013);height:calc(var(--s)*.013);border-radius:50%;background:#4f8a4a;display:inline-block}
+.mtag.mb{background:#c9c3b9!important;border-color:#a39d93}.mtag.mb *{visibility:hidden}
 </style>
 </head>
 <body>
@@ -895,7 +902,7 @@ const ALL=[...FACES,...INNER,DB,WY],AI={};ALL.forEach(f=>AI[f.id]=f);
 const cube=document.getElementById("cube"),scene=document.getElementById("scene");
 const H="calc(var(--s)/2)";
 const corners=[];for(const x of[-1,1])for(const y of[-1,1])for(const z of[-1,1])corners.push([x,y,z]);
-cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col};transform:${f.tf} translateZ(${H})"><div class="lb" data-f="${f.id}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small>${E(f.n)}</span></div>${f.id==="front"?`<span class="mtag">MODEL</span><span class="mtag mb">MODEL</span>`:""}</div>`).join("")
+cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col};transform:${f.tf} translateZ(${H})"><div class="lb" data-f="${f.id}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small>${E(f.n)}</span></div>${f.id==="front"?`<span class="mtag"><span class="mt-h">MODEL</span><span class="mt-r"><i>Kod</i><b>ECL</b></span><span class="mt-r"><i>Wersja</i><b>3.1</b></span><span class="mt-r"><i>Ocena</i><b><em class="ok"></em>4.3</b></span></span><span class="mtag mb"><span class="mt-h">MODEL</span><span class="mt-r"><i>Kod</i><b>ECL</b></span><span class="mt-r"><i>Wersja</i><b>3.1</b></span><span class="mt-r"><i>Ocena</i><b><em class="ok"></em>4.3</b></span></span>`:""}</div>`).join("")
  +corners.map(([x,y,z])=>`<div class="nd" data-t="translate3d(calc(var(--s)*${x/2}),calc(var(--s)*${y/2}),calc(var(--s)*${z/2}))"><i></i></div>`).join("")+`<div class="inr" id="inr"></div>`;
 /* wyjście wyników – trzy propozycje */
 const EXITS={1:{n:"Przez dach",at:[0,-.72,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
