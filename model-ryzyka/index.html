@@ -616,7 +616,7 @@
 .wbf.cp{background:rgba(168,130,58,.05);backface-visibility:visible;-webkit-backface-visibility:visible}
 .wbf b{font-family:var(--body);font-weight:600;font-size:calc(var(--s)*.034);letter-spacing:.3em;color:#8a6a2c}
 .tb.on .wbf{border-width:2.2px}
-.mw[data-tab="model"] .ctl,.mw[data-tab="model"] .hint,.inn .mx2:first-child{display:none!important}
+.mw[data-tab="model"] .ctl,.mw[data-tab="model"] .hint,
 .v2 .fa{border:1.8px solid rgba(13,13,13,.5)!important}
 .port{width:calc(var(--s)*.2)!important;height:calc(var(--s)*.2)!important;left:calc(50% - var(--s)*.1)!important;top:calc(50% - var(--s)*.1)!important;border-width:1.6px!important}
 .port.pw{background:radial-gradient(circle,rgba(168,130,58,.12),rgba(255,253,249,.2) 70%)!important}
@@ -1009,7 +1009,7 @@ AI.env=ENVO;AI.proc=PROC;
 const fb=f=>`<button type="button" class="fb" data-f="${f.id}" style="--c:${f.col}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small><b>${E(f.n)}</b></span></button>`;
 
 const inn=document.getElementById("inn");
-inn.innerHTML=`<div class="mx2 ex"><span>Dokumentacja</span>${["Segregator","Plan pod modelem","Teczka w tle"].map((n,k)=>`<button type="button" data-dk="${k+1}">${k+1} · ${n}</button>`).join("")}</div><div class="mx2"><span>Model w środku</span><button type="button" data-mx="1">Złożony – kilka modułów</button><button type="button" data-mx="0">Prosty – jeden moduł</button></div><div class="mods"><button type="button" class="ib" data-f="db" style="--c:${DB.col}"><i>${sv("db")}</i>Baza danych</button><button type="button" class="ib" data-f="stat" style="--c:${HUB.col}"><i>${sv("sigma")}</i>ECL</button><button type="button" class="ib" data-f="wyn" style="--c:${WY.col}"><i>${sv("doc")}</i>Wyniki</button>${MODS.map(m=>`<button type="button" class="ib md" data-f="${m.id}" style="--c:${m.col}"><i><b>${m.n[0]}</b></i>${m.n}</button>`).join("")}</div>`;
+inn.innerHTML=`<div class="mx2 dks"><span>Dokumentacja</span>${["Segregator","Plan pod modelem","Teczka w tle"].map((n,k)=>`<button type="button" data-dk="${k+1}">${k+1} · ${n}</button>`).join("")}</div><div class="mods"><button type="button" class="ib" data-f="db" style="--c:${DB.col}"><i>${sv("db")}</i>Baza danych</button><button type="button" class="ib" data-f="stat" style="--c:${HUB.col}"><i>${sv("sigma")}</i>ECL</button><button type="button" class="ib" data-f="wyn" style="--c:${WY.col}"><i>${sv("doc")}</i>Wyniki</button>${MODS.map(m=>`<button type="button" class="ib md" data-f="${m.id}" style="--c:${m.col}"><i><b>${m.n[0]}</b></i>${m.n}</button>`).join("")}</div>`;
 let CX=1;try{CX=localStorage.getItem("rt_mr_cx")==="0"?0:1}catch(_){}
 function setCX(v){CX=v;cube.classList.toggle("simple",!v);HUB.n=v?"ECL":"Model statystyczny";HUB.d=v?"Oczekiwana strata kredytowa – składa wyniki PD, LGD i EAD (z dyskontowaniem i scenariuszami), a SICR decyduje, czy liczymy ją w horyzoncie 12 miesięcy, czy w całym okresie życia.":"Jeden moduł: próba, segmentacja, zmienne, parametry, estymacja i wynik – bez rozbijania na części.";const hb=inn.querySelector('.ib[data-f="stat"]');if(hb)hb.lastChild.textContent=HUB.n;const on=document.querySelector(".ik.hub.on");if(on)panel(HUB);inn.querySelectorAll("[data-mx]").forEach(b=>b.classList.toggle("on",+b.dataset.mx===v));try{localStorage.setItem("rt_mr_cx",v)}catch(_){}
   const cur=document.querySelector(".ik.on");if(!v&&cur&&cur.classList.contains("m"))pick("stat",false)}
@@ -1046,24 +1046,24 @@ setEX(EX);setCX(1);
 /* karta silnika – linia w prawo */
 (()=>{const duo=document.getElementById("duo"),ln=document.getElementById("keline"),kc=document.getElementById("kec"),sw=document.querySelector(".sc2w"),KW=240;let st=0,tO=0,tH=0;
   const tag=()=>[...document.querySelectorAll(".etag:not(.tb2)")].find(t=>{const r=t.getBoundingClientRect();return r.width>8}),inR=(r,x,y,m=0)=>x>=r.left-m&&x<=r.right+m&&y>=r.top-m&&y<=r.bottom+m;
-  function open(){if(window.__kc==="m")return;window.__kc="e";st=1;const fl=()=>Math.min(...[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect().left));const sh=Math.max(0,KW+40-fl());duo.style.transform=`translateX(${sh}px)`;
+  function open(){if(window.__kc==="m")return;window.__kc="e";st=1;const fl=()=>Math.min(...[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect().left));const cur=parseFloat((duo.style.transform.match(/-?[\d.]+/)||[0])[0])||0,sh=Math.max(0,KW+40-(fl()-cur)),tg=`translateX(${sh}px)`,same=duo.style.transform===tg;duo.style.transform=tg;
     setTimeout(()=>{const t=tag();if(!t||!st)return;const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),y=r.top+r.height/2-d.top,cr=fl()-d.left-14;
       ln.style.top=y+"px";ln.style.left=cr+"px";ln.style.width=Math.max(0,r.left-d.left-cr)+"px";kc.style.left=(cr-KW)+"px";kc.style.top=Math.max(-20,y-28)+"px";
-      duo.classList.add("keline-on");tO=setTimeout(()=>{if(st)duo.classList.add("keopen")},650)},sh?420:0)}
-  function close(){st=0;if(window.__kc==="e")window.__kc="";clearTimeout(tO);duo.classList.remove("keopen","keline-on");duo.style.transform=""}
-  addEventListener("pointermove",e=>{if(window.__kc==="m")return;{const mt=document.querySelector(".mtag:not(.mb)");if(mt){const q=mt.getBoundingClientRect();if(e.clientX>=q.left-6&&e.clientX<=q.right+6&&e.clientY>=q.top-6&&e.clientY<=q.bottom+6)return}}const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
+      duo.classList.add("keline-on");tO=setTimeout(()=>{if(st)duo.classList.add("keopen")},650)},sh&&!same?420:0)}
+  function close(){st=0;if(window.__kc==="e")window.__kc="";clearTimeout(tO);duo.classList.remove("keopen","keline-on");setTimeout(()=>{if(!window.__kc)duo.style.transform=""},350)}
+  addEventListener("pointermove",e=>{{const mt=document.querySelector(".mtag:not(.mb)");let onM=window.__kc==="m";if(mt){const q=mt.getBoundingClientRect();if(e.clientX>=q.left-6&&e.clientX<=q.right+6&&e.clientY>=q.top-6&&e.clientY<=q.bottom+6)onM=true}if(onM){if(st){clearTimeout(tH);tH=0;close()}return}}const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
     if(over){clearTimeout(tH);tH=0;if(!st)open()}else if(st&&!tH){tH=setTimeout(()=>{tH=0;close()},300)}})})();
 
 /* karta modelu po najechaniu na tabliczkę (wykrywanie w 2D – niezależne od obrotu) */
 (()=>{const duo=document.getElementById("duo"),ln=document.getElementById("kmline"),kc=document.getElementById("kmc"),KW=240;let st=0,tOpen=0,tHide=0,shift=0;
   const tag=()=>document.querySelector(".mtag:not(.mb)"),inR=(r,x,y,m=0)=>x>=r.left-m&&x<=r.right+m&&y>=r.top-m&&y<=r.bottom+m;
-  function open(){if(window.__kc==="e")return;window.__kc="m";st=1;clearTimeout(tHide);const fr=[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect()),vl=Math.min(...fr.map(r=>r.left));
-    shift=Math.max(0,KW+40-vl);duo.style.transform=`translateX(${shift}px)`;
+  function open(){window.__kc="m";st=1;clearTimeout(tHide);const fr=[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect()),vl=Math.min(...fr.map(r=>r.left));
+    const cur0=parseFloat((duo.style.transform.match(/-?[\d.]+/)||[0])[0])||0;shift=Math.max(0,KW+40-(vl-cur0));const tg=`translateX(${shift}px)`,same=duo.style.transform===tg;duo.style.transform=tg;
     setTimeout(()=>{const d=duo.getBoundingClientRect(),r=tag().getBoundingClientRect(),vl2=Math.min(...[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect().left)),y=r.top+r.height/2-d.top,cr=vl2-d.left-14,cl=cr-KW;
       ln.style.top=y+"px";ln.style.left=cr+"px";ln.style.width=Math.max(0,r.left-d.left-cr)+"px";kc.style.left=cl+"px";kc.style.top=Math.max(-20,y-28)+"px";
-      duo.classList.add("kmline-on");tOpen=setTimeout(()=>{if(st)duo.classList.add("kmopen")},650)},shift?420:0)}
-  function close(){st=0;if(window.__kc==="m")window.__kc="";clearTimeout(tOpen);duo.classList.remove("kmopen","kmline-on");duo.style.transform=""}
-  addEventListener("pointermove",e=>{if(window.__kc==="e")return;const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
+      duo.classList.add("kmline-on");tOpen=setTimeout(()=>{if(st)duo.classList.add("kmopen")},650)},shift&&!same?420:0)}
+  function close(){st=0;if(window.__kc==="m")window.__kc="";clearTimeout(tOpen);duo.classList.remove("kmopen","kmline-on");setTimeout(()=>{if(!window.__kc)duo.style.transform=""},350)}
+  addEventListener("pointermove",e=>{const t=tag();if(!t||!t.offsetParent)return;const onT=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4);if(window.__kc==="e"&&!onT)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
     if(over){clearTimeout(tHide);tHide=0;if(!st)open()}else if(st&&!tHide){tHide=setTimeout(()=>{tHide=0;close()},300)}});
   const oc=close;})();
 pick("stat",false);
