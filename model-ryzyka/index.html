@@ -799,6 +799,15 @@
 .kmc dl{padding:3px 11px 6px!important}
 .kmc dl div{grid-template-columns:78px 1fr!important;gap:8px!important;padding:4px 0!important}
 .kmc dt{font-size:10px!important}.kmc dd{font-size:10.5px!important;line-height:1.25!important}
+.etag{display:flex!important;flex-direction:column;padding:0!important;background:rgba(255,253,249,.94)!important;color:var(--ink2)!important;border:1.2px solid #56514a;border-radius:3px;overflow:hidden;min-width:calc(var(--s)*.11);letter-spacing:0!important;box-shadow:none!important;font-size:calc(var(--s)*.0175)!important;font-weight:500!important;pointer-events:auto;cursor:help}
+.et-h{background:#56514a;color:#fff;font-weight:700;font-style:italic;font-size:calc(var(--s)*.015);letter-spacing:.22em;padding:1px 6px}
+.et-r{display:flex;justify-content:space-between;gap:8px;padding:1px 6px}.et-r i{font-style:normal;color:var(--muted)}.et-r b{font-weight:600}
+.etag.tb2{background:#c9c3b9!important;border-color:#a39d93;width:auto!important;height:auto!important}.etag.tb2 *{visibility:hidden}
+.mf2.sdx{pointer-events:none}
+.kmline.r{transform-origin:0 50%}
+.duo.keline-on .kmline.r{opacity:1;transform:scaleX(1);transition:transform .6s cubic-bezier(.5,0,.2,1)}
+.duo.keopen .kec{clip-path:inset(0 0 0 0 round 12px);opacity:1;pointer-events:auto}
+.sc2w{transition:opacity .4s}
 </style>
 </head>
 <body>
@@ -822,7 +831,7 @@
   <div class="stage">
     <div class="side l" id="sl"></div>
     <div class="mcol">
-      <div class="duo" id="duo"><div class="kmline" id="kmline"></div><div class="kmc" id="kmc"><div class="kmc-h"><span>Karta modelu</span><b>ECL · wersja 3.1</b></div><dl><div><dt>Nazwa modelu</dt><dd>Oczekiwana strata kredytowa – portfel detaliczny</dd></div><div><dt>Obszar ryzyka</dt><dd>Ryzyko kredytowe</dd></div><div><dt>Koncepcja</dt><dd>Strata oczekiwana · MSSF 9</dd></div><div><dt>Istotność</dt><dd>Model istotny</dd></div><div><dt>Właściciel</dt><dd>Departament Ryzyka Kredytowego</dd></div><div><dt>Zakres stosowania</dt><dd>Kredyty hipoteczne i konsumpcyjne</dd></div><div><dt>Pochodzenie</dt><dd>Model wewnętrzny</dd></div><div><dt>Środowisko produkcyjne</dt><dd>System kalkulacji odpisów</dd></div><div><dt>Ostatnia walidacja</dt><dd>02.2026 · bez zastrzeżeń istotnych</dd></div><div><dt>Ocena jakości</dt><dd><em class="ok"></em>4.3 / 5</dd></div></dl></div><div class="scene v2" id="scene" aria-label="Model ryzyka – sześcian"><div class="cube" id="cube"></div></div><div class="sc2w"><div class="scene v2 sc2" id="scene2" aria-label="Warstwy modelu"><div class="cube" id="cube2"></div></div></div></div>
+      <div class="duo" id="duo"><div class="kmline" id="kmline"></div><div class="kmline r" id="keline"></div><div class="kmc kec" id="kec"><div class="kmc-h"><span>Karta silnika</span><b>wersja 1.7</b></div><dl><div><dt>Wersja silnika</dt><dd>1.7</dd></div><div><dt>Wersja modelu</dt><dd>3.1</dd></div><div><dt>Data aktualizacji</dt><dd>14.03.2026</dd></div><div><dt>Ostatnia zmiana</dt><dd>Nowa kalibracja PD lifetime i scenariuszy makro</dd></div></dl></div><div class="kmc" id="kmc"><div class="kmc-h"><span>Karta modelu</span><b>ECL · wersja 3.1</b></div><dl><div><dt>Nazwa modelu</dt><dd>Oczekiwana strata kredytowa – portfel detaliczny</dd></div><div><dt>Obszar ryzyka</dt><dd>Ryzyko kredytowe</dd></div><div><dt>Koncepcja</dt><dd>Strata oczekiwana · MSSF 9</dd></div><div><dt>Istotność</dt><dd>Model istotny</dd></div><div><dt>Właściciel</dt><dd>Departament Ryzyka Kredytowego</dd></div><div><dt>Zakres stosowania</dt><dd>Kredyty hipoteczne i konsumpcyjne</dd></div><div><dt>Pochodzenie</dt><dd>Model wewnętrzny</dd></div><div><dt>Środowisko produkcyjne</dt><dd>System kalkulacji odpisów</dd></div><div><dt>Ostatnia walidacja</dt><dd>02.2026 · bez zastrzeżeń istotnych</dd></div><div><dt>Ocena jakości</dt><dd><em class="ok"></em>4.3 / 5</dd></div></dl></div><div class="scene v2" id="scene" aria-label="Model ryzyka – sześcian"><div class="cube" id="cube"></div></div><div class="sc2w"><div class="scene v2 sc2" id="scene2" aria-label="Warstwy modelu"><div class="cube" id="cube2"></div></div></div></div>
       <div class="ctl" id="ctl">
         <button type="button" class="ar" data-r="0,-30" aria-label="Obróć w lewo" title="Obróć w lewo">⟲</button>
         <button type="button" class="ar" data-r="0,30" aria-label="Obróć w prawo" title="Obróć w prawo">⟳</button>
@@ -954,7 +963,7 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
     else if(MV===3){inner=`<div class="swp"><i></i></div>`+[[-.12,-.05,.1],[.1,.04,-.12],[.14,-.02,.08],[-.08,.05,-.1],[0,0,.15],[-.15,.02,-.02],[.05,-.06,0]].map(([x,y,z],k)=>`<div class="dot3" style="transform:translate3d(${c}${x}),${c}${y}),${c}${z}))"><b class="yb" data-t="" style="animation-delay:${(Math.atan2(z,x)/Math.PI/2*3.6).toFixed(2)}s"></b></div>`).join("")}
     let pist="";if(MV===2){[[-.14,-.14],[.14,-.14],[0,0],[-.14,.14],[.14,.14]].forEach(([x,z],a)=>{const b=0;{const d=(-[0,2,4,1,3][a]*.36).toFixed(2);pist+=`<div class="pst" style="transform:translate3d(${c}${x}),0,${c}${z}))"><i class="ring" style="transform:translateY(${c}${-Hh/2})) rotateX(90deg)"></i><i class="ring" style="transform:translateY(${c}${Hh/2})) rotateX(90deg)"></i><div class="yb tube" data-t=""></div><div class="pr" style="animation-delay:${d}s"><div class="yb rod2" data-t=""></div></div></div>`}})}
     const SC=MV===1?`<svg viewBox="0 0 200 54" preserveAspectRatio="none" class="circ sc">${["M0 14H40V40H90V20H140V36H200","M0 40H22V26H60","M110 54V44H170V14H200","M70 0V14H120"].map((d,k)=>`<path class="t" d="${d}"/><path class="f" pathLength="100" d="${d}" style="animation-delay:${(-k*.8).toFixed(1)}s"/>`).join("")}${[[40,14],[40,40],[90,40],[90,20],[140,20],[140,36],[22,40],[22,26],[60,26],[110,44],[170,44],[170,14],[70,14],[120,14]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3.6"/>`).join("")}</svg>`:"";
-    const SIDES=["","rotateY(180deg) ","rotateY(90deg) ","rotateY(-90deg) "],TAG=`<span class="tag">SILNIK</span>`,TAGB=`<span class="tag tb2"></span>`;
+    const SIDES=["","rotateY(180deg) ","rotateY(90deg) ","rotateY(-90deg) "],EB=`<span class="et-h">SILNIK</span><span class="et-r"><i>Wersja</i><b>1.7</b></span>`,TAG=`<span class="tag etag">${EB}</span>`,TAGB=`<span class="tag tb2 etag">${EB}</span>`;
     mh=`<div class="mbox">${SIDES.map((r,i)=>F(W,Hh,`${r}translateZ(${c}${W/2}))`,"sd")+F(W,Hh,`${r}translateZ(${c}${W/2+.001}))`,"sdx",SC+(i===0?TAG:""))).join("")}${F(W,Hh,`translateZ(${c}${W/2+.002})) rotateY(180deg)`,"sdx",TAGB)}${F(W,W,`rotateX(90deg) translateZ(${c}${Hh/2}))`,"cp")}${inner}${F(W,W,`rotateX(-90deg) translateZ(${c}${Hh/2}))`,"cp")}${pist}</div>`;
     h+=`<div class="mech" data-f="stat" style="transform:${T3(M)}">${mh}</div>`;{const yT=M[1]-Hh/2,yB=.08,L=(yT-yB).toFixed(3);[[-.04,""],[.04," down"]].forEach(([x,cl])=>{h+=`<div class="strm" style="transform:${T3([x,yT,0])}"><div class="yb sb sv1 eng2${cl}" data-t="" style="--L:calc(var(--s)*${L})"><i class="sl"></i><i class="sp"></i><i class="sp d2"></i></div></div>`})}}
   if(X.port){const L=Math.abs(X.at[1]+.06-X.port[1]),rnd=(a,b)=>a+Math.random()*(b-a);let body="";
@@ -1009,6 +1018,17 @@ function panel(f){pan.style.setProperty("--c",f.col);
   pan.innerHTML=`<div class="pan-h"><div><span class="kick">${f.p}${f.v?" bryły":""} · ${f.c.map(k=>"#"+k).join(" · ")}</span><h2>${E(f.n)}</h2></div><p>${E(f.d)}</p></div><div class="cmp">${f.c.map(k=>{const r=MI[k],sgs=f.sg&&f.sg[k]?r[4].filter(x=>f.sg[k].includes(x[0])):r[4];return`<div class="cm" style="--k:${COL[k]}"><div class="cm-h"><span class="ic">${sv(r[2])}</span><span><em>#${r[0]}</em><b>${E(r[1])}</b><span>${f.sg&&f.sg[k]?"Wybrane: "+E(f.sg[k].join(", ")):E(r[3])}</span></span></div><div class="sg">${sgs.map(s=>`<div class="sgb">${s[0]?`<span>${E(s[0])}</span>`:""}<div class="it">${s[1].map(i=>`<i>${E(i[0])}${i[1]?`<small>${E(i[1])}</small>`:""}</i>`).join("")}</div></div>`).join("")}</div></div>`}).join("")}</div>`}
 document.getElementById("sl").innerHTML=FACES.slice(0,3).map(fb).join("");document.getElementById("sr").innerHTML=FACES.slice(3).map(fb).join("");
 setEX(EX);setCX(1);
+
+/* karta silnika – linia w prawo */
+(()=>{const duo=document.getElementById("duo"),ln=document.getElementById("keline"),kc=document.getElementById("kec"),sw=document.querySelector(".sc2w"),KW=240;let st=0,tO=0,tH=0;
+  const tag=()=>[...document.querySelectorAll(".etag:not(.tb2)")].find(t=>{const r=t.getBoundingClientRect();return r.width>8}),inR=(r,x,y,m=0)=>x>=r.left-m&&x<=r.right+m&&y>=r.top-m&&y<=r.bottom+m;
+  function open(){st=1;const t=tag();if(!t)return;const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),vr=Math.max(...[...document.querySelectorAll("#cube .fa")].map(f=>f.getBoundingClientRect().right)),y=r.top+r.height/2-d.top,cl=vr-d.left+14;
+    ln.style.top=y+"px";ln.style.left=(r.right-d.left)+"px";ln.style.width=Math.max(0,cl-(r.right-d.left))+"px";kc.style.left=cl+"px";kc.style.top=Math.max(-20,y-28)+"px";
+    duo.classList.add("keline-on");sw.style.opacity=".12";tO=setTimeout(()=>{if(st)duo.classList.add("keopen")},650)}
+  function close(){st=0;clearTimeout(tO);duo.classList.remove("keopen","keline-on");sw.style.opacity=""}
+  addEventListener("pointermove",e=>{if(document.getElementById("duo").classList.contains("kmline-on"))return;const t=tag();if(!t||!t.offsetParent)return;const over=inR(t.getBoundingClientRect(),e.clientX,e.clientY,4)||(st&&inR(kc.getBoundingClientRect(),e.clientX,e.clientY,6))||(st&&inR(ln.getBoundingClientRect(),e.clientX,e.clientY,10));
+    if(over){clearTimeout(tH);tH=0;if(!st)open()}else if(st&&!tH){tH=setTimeout(()=>{tH=0;close()},300)}})})();
+
 /* karta modelu po najechaniu na tabliczkę (wykrywanie w 2D – niezależne od obrotu) */
 (()=>{const duo=document.getElementById("duo"),ln=document.getElementById("kmline"),kc=document.getElementById("kmc"),KW=240;let st=0,tOpen=0,tHide=0,shift=0;
   const tag=()=>document.querySelector(".mtag:not(.mb)"),inR=(r,x,y,m=0)=>x>=r.left-m&&x<=r.right+m&&y>=r.top-m&&y<=r.bottom+m;
