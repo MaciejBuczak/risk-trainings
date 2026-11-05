@@ -757,6 +757,10 @@
 .rod2{top:calc(var(--s)*-.035)!important;height:calc(var(--s)*.07)!important}
 @keyframes pist{0%,100%{transform:translateY(calc(var(--s)*.025))}50%{transform:translateY(calc(var(--s)*-.025))}}
 .pr{animation-duration:4.2s!important}
+.mf2{border:2px solid #8a4f8f!important}
+.circ .f,.circ.sc .f{stroke-dasharray:22 78!important}
+.pr{animation-duration:3s!important}
+.wbf{background:rgba(168,105,76,.012)!important}.wbf.cp{background:rgba(168,105,76,.01)!important}
 </style>
 </head>
 <body>
@@ -871,7 +875,7 @@ const MODS=[
  {id:"pit",n:"PIT",s:"w punkcie cyklu",col:"#9c78a8",at:[-.04,-.34,.14],k:.1,d:"PD w punkcie cyklu (point in time): bieżące ryzyko z korektą o scenariusze makroekonomiczne."},
  {id:"sicr",n:"SICR",s:"koszyk 2",col:"#bf8165",at:[-.3,.14,.22],k:.11,d:"Znaczący wzrost ryzyka kredytowego od początkowego ujęcia – decyduje o przejściu do koszyka 2 i stracie w całym okresie życia."},
  {id:"lgd",n:"LGD",s:"strata",col:"#4f7390",at:[.28,-.17,.13],k:.12,d:"Strata w razie niewykonania zobowiązania – część ekspozycji, której bank nie odzyska."},
- {id:"ead",n:"EAD",s:"ekspozycja · CCF",col:"#6f7f58",at:[.27,.17,-.18],k:.12,d:"Ekspozycja w chwili niewykonania zobowiązania, z uwzględnieniem wykorzystania limitów (CCF)."}];
+ {id:"ead",n:"EAD",s:"ekspozycja · CCF",col:"#6f7f58",at:[.27,.12,-.18],k:.12,d:"Ekspozycja w chwili niewykonania zobowiązania, z uwzględnieniem wykorzystania limitów (CCF)."}];
 const LINKS=[["stat","pd"],["stat","lgd"],["stat","ead"],["stat","sicr"],["pd","ttc"],["pd","pit"]];
 MODS.forEach(m=>{m.p="Moduł modelu statystycznego";m.mod=1;m.c=[]});
 const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,.74,0],r:.08,h:.1,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
@@ -906,8 +910,8 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
   {const M=[0,.33,0];let mh="";
     const W=.44,Hh=.12,c=`calc(var(--s)*`,F=(w,h,t,cl,b="")=>`<i class="mf2 ${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}">${b}</i>`;
     let top="",inner="";const PL=(y,body)=>`<div class="pl3" style="transform:translateY(${c}${y})) rotateX(90deg)">${body}</div>`;
-    if(MV===1){const L=[["M8 20H40V50H70V80H92","M8 50H25V80H55V92","M92 20H60V35H45V50","M40 8V20","M70 50H92","M25 50V35H40"],["M50 8V30H80V60H92","M30 92V65H45V50H70","M8 40H30V20H50","M8 75H18V65H30","M80 30V8","M60 60V80H80"]],N=[[40,50],[70,80],[45,50],[80,60],[30,20],[40,20],[25,50],[70,50],[25,80],[60,35],[50,30],[30,65],[45,65],[18,65],[80,30],[60,80]];
-      inner=L.slice(0,2).map((ps,k)=>PL((k-.5)*Hh/2.4,`<svg viewBox="0 0 100 100" class="circ">${ps.map(d=>`<path class="t" d="${d}"/><path class="f" pathLength="100" d="${d}" style="animation-delay:${(-k*1.1-ps.indexOf(d)*.6).toFixed(1)}s"/>`).join("")}${N.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.6"/>`).join("")}</svg>`)).join("")
+    if(MV===1){const L=[["M8 15H45V40H92","M8 62H30V86H92","M70 8V25H92","M55 92V68H8"],["M15 8V45H40V92","M85 8V55H60V92","M8 72H25V92","M92 30H72V8"]],NL=[[[45,15],[45,40],[30,62],[30,86],[70,25],[55,68]],[[15,45],[40,45],[85,55],[60,55],[25,72],[72,30]]],N=NL[0].concat(NL[1]);
+      inner=L.slice(0,2).map((ps,k)=>PL((k-.5)*Hh/2.4,`<svg viewBox="0 0 100 100" class="circ">${ps.map(d=>`<path class="t" d="${d}"/><path class="f" pathLength="100" d="${d}" style="animation-delay:${(-(k*4+ps.indexOf(d))*.8).toFixed(1)}s"/>`).join("")}${NL[k].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.6"/>`).join("")}</svg>`)).join("")
         +N.slice(0,4).map(([x,y],k)=>`<div class="via" style="transform:translate3d(${c}${((x-50)/100*W).toFixed(3)}),0,${c}${((y-50)/100*W).toFixed(3)}))"><i style="animation-delay:${(-k*.4).toFixed(1)}s"></i><i style="transform:rotateY(90deg);animation-delay:${(-k*.4).toFixed(1)}s"></i></div>`).join("")}
     else if(MV===3){inner=`<div class="swp"><i></i></div>`+[[-.12,-.05,.1],[.1,.04,-.12],[.14,-.02,.08],[-.08,.05,-.1],[0,0,.15],[-.15,.02,-.02],[.05,-.06,0]].map(([x,y,z],k)=>`<div class="dot3" style="transform:translate3d(${c}${x}),${c}${y}),${c}${z}))"><b class="yb" data-t="" style="animation-delay:${(Math.atan2(z,x)/Math.PI/2*3.6).toFixed(2)}s"></b></div>`).join("")}
     let pist="";if(MV===2){[[-.14,-.14],[.14,-.14],[0,0],[-.14,.14],[.14,.14]].forEach(([x,z],a)=>{const b=0;{const d=(-[0,2,4,1,3][a]*.36).toFixed(2);pist+=`<div class="pst" style="transform:translate3d(${c}${x}),0,${c}${z}))"><i class="ring" style="transform:translateY(${c}${-Hh/2})) rotateX(90deg)"></i><i class="ring" style="transform:translateY(${c}${Hh/2})) rotateX(90deg)"></i><div class="yb tube" data-t=""></div><div class="pr" style="animation-delay:${d}s"><div class="yb rod2" data-t=""></div></div></div>`}})}
