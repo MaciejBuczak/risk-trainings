@@ -827,6 +827,14 @@
 .sheet .dtag{left:10%;top:8%;transform:none}
 .sheet.s3{left:calc(var(--s)*-.42);top:calc(var(--s)*-.56);width:calc(var(--s)*.84);height:calc(var(--s)*1.1);background:rgba(255,253,249,.55);clip-path:polygon(0 0,86% 0,100% 11%,100% 100%,0 100%)}
 .sheet.s3::after{content:"";position:absolute;right:0;top:0;width:14%;height:11%;background:linear-gradient(225deg,transparent 50%,rgba(107,98,88,.25) 50%)}
+.dtg{position:absolute;right:2.6%;bottom:2.6%;display:flex;align-items:center;gap:calc(var(--s)*.012);padding:calc(var(--s)*.008) calc(var(--s)*.016) calc(var(--s)*.008) calc(var(--s)*.008);border:1.2px dashed #8d877e;border-radius:calc(var(--s)*.02);background:rgba(255,253,249,.85);backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none}
+.dtg-i{width:calc(var(--s)*.05);height:calc(var(--s)*.05);border-radius:50%;background:#efe5d6;display:grid;place-items:center}
+.dtg-i svg{width:62%;height:62%;fill:none;stroke:#6b6258;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dtg-t{display:flex;flex-direction:column;line-height:1.15}
+.dtg-t b{font-family:var(--serif);font-style:italic;font-weight:600;font-size:calc(var(--s)*.027);color:var(--ink2)}
+.dtg-t small{font-size:calc(var(--s)*.02);color:var(--muted)}
+.dtg.db2{transform:rotateY(180deg);background:#d9d3c9;border-color:#b3ada3}.dtg.db2 *{visibility:hidden}
+.mw[data-tab="dep"] .dtg{display:none}
 </style>
 </head>
 <body>
@@ -953,7 +961,7 @@ const ALL=[...FACES,...INNER,DB,WY],AI={};ALL.forEach(f=>AI[f.id]=f);
 const cube=document.getElementById("cube"),scene=document.getElementById("scene");
 const H="calc(var(--s)/2)";
 const corners=[];for(const x of[-1,1])for(const y of[-1,1])for(const z of[-1,1])corners.push([x,y,z]);
-cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col};transform:${f.tf} translateZ(${H})"><div class="lb" data-f="${f.id}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small>${E(f.n)}</span></div>${f.id==="front"?`<span class="mtag"><span class="mt-h">MODEL</span><span class="mt-r"><i>Kod</i><b>ECL</b></span><span class="mt-r"><i>Wersja</i><b>3.1</b></span><span class="mt-r"><i>Ocena</i><b><em class="ok"></em>4.3</b></span></span><span class="mtag mb"><span class="mt-h">MODEL</span><span class="mt-r"><i>Kod</i><b>ECL</b></span><span class="mt-r"><i>Wersja</i><b>3.1</b></span><span class="mt-r"><i>Ocena</i><b><em class="ok"></em>4.3</b></span></span>`:""}</div>`).join("")
+cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col};transform:${f.tf} translateZ(${H})"><div class="lb" data-f="${f.id}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small>${E(f.n)}</span></div>${f.id==="front"?`<span class="mtag"><span class="mt-h">MODEL</span><span class="mt-r"><i>Kod</i><b>ECL</b></span><span class="mt-r"><i>Wersja</i><b>3.1</b></span><span class="mt-r"><i>Ocena</i><b><em class="ok"></em>4.3</b></span></span><span class="mtag mb"><span class="mt-h">MODEL</span><span class="mt-r"><i>Kod</i><b>ECL</b></span><span class="mt-r"><i>Wersja</i><b>3.1</b></span><span class="mt-r"><i>Ocena</i><b><em class="ok"></em>4.3</b></span></span><span class="dtg"><span class="dtg-i"><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15h6M9.5 18h3.5"/></svg></span><span class="dtg-t"><b>Dokumentacja</b><small>wersja 2.6</small></span></span><span class="dtg db2"><span class="dtg-i"><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15h6M9.5 18h3.5"/></svg></span><span class="dtg-t"><b>Dokumentacja</b><small>wersja 2.6</small></span></span>`:""}</div>`).join("")
  +corners.map(([x,y,z])=>`<div class="nd" data-t="translate3d(calc(var(--s)*${x/2}),calc(var(--s)*${y/2}),calc(var(--s)*${z/2}))"><i></i></div>`).join("")+`<div class="inr" id="inr"></div>`;
 /* wyjście wyników – trzy propozycje */
 const EXITS={1:{n:"Przez dach",at:[0,-.72,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
