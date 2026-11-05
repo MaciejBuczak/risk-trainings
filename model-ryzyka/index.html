@@ -835,6 +835,11 @@
 .dtg-t small{font-size:calc(var(--s)*.02);color:var(--muted)}
 .dtg.db2{transform:rotateY(180deg);background:#d9d3c9;border-color:#b3ada3}.dtg.db2 *{visibility:hidden}
 .mw[data-tab="dep"] .dtg{display:none}
+.dtg{border-style:solid!important}
+.duo.kdline-on #kdline{opacity:1;transform:scaleX(1);transition:transform .6s cubic-bezier(.5,0,.2,1)}
+.duo.kdopen #kdc{clip-path:inset(0 0 0 0 round 12px);opacity:1;pointer-events:auto}
+#kdline{transform-origin:100% 50%}
+.duo{z-index:5}
 </style>
 </head>
 <body>
@@ -858,7 +863,7 @@
   <div class="stage">
     <div class="side l" id="sl"></div>
     <div class="mcol">
-      <div class="duo" id="duo"><div class="kmline" id="kmline"></div><div class="kmline r" id="keline"></div><div class="kmc kec" id="kec"><div class="kmc-h"><span>Karta silnika</span><b>wersja 1.7</b></div><dl><div><dt>Wersja silnika</dt><dd>1.7</dd></div><div><dt>Środowisko</dt><dd>SAS v. 11.4</dd></div><div><dt>Input danych</dt><dd class="dbl"><span>DWH_KREDYTY</span><span>CRM_KLIENCI</span><span>MAKRO_SCENARIUSZE</span></dd></div><div><dt>Data aktualizacji</dt><dd>14.03.2026</dd></div><div><dt>Ostatnia zmiana</dt><dd>Nowa kalibracja PD lifetime i scenariuszy makro</dd></div></dl></div><div class="kmc" id="kmc"><div class="kmc-h"><span>Karta modelu</span><b>ECL · wersja 3.1</b></div><dl><div><dt>Nazwa modelu</dt><dd>Oczekiwana strata kredytowa – portfel detaliczny</dd></div><div><dt>Obszar ryzyka</dt><dd>Ryzyko kredytowe</dd></div><div><dt>Koncepcja</dt><dd>Strata oczekiwana · MSSF 9</dd></div><div><dt>Istotność</dt><dd>Model istotny</dd></div><div><dt>Właściciel</dt><dd>Departament Ryzyka Kredytowego</dd></div><div><dt>Zakres stosowania</dt><dd>Kredyty hipoteczne i konsumpcyjne</dd></div><div><dt>Pochodzenie</dt><dd>Model wewnętrzny</dd></div><div><dt>Środowisko produkcyjne</dt><dd>System kalkulacji odpisów</dd></div><div><dt>Ostatnia walidacja</dt><dd>02.2026 · bez zastrzeżeń istotnych</dd></div><div><dt>Ocena jakości</dt><dd><em class="ok"></em>4.3 / 5</dd></div></dl></div><div class="scene v2" id="scene" aria-label="Model ryzyka – sześcian"><div class="cube" id="cube"></div></div><div class="sc2w"><div class="scene v2 sc2" id="scene2" aria-label="Warstwy modelu"><div class="cube" id="cube2"></div></div></div></div>
+      <div class="duo" id="duo"><div class="kmline" id="kmline"></div><div class="kmline" id="kdline"></div><div class="kmc" id="kdc"><div class="kmc-h"><span>Karta dokumentacji</span><b>wersja 2.6</b></div><dl><div><dt>Wersja</dt><dd>2.6</dd></div><div><dt>Autor</dt><dd>Zespół Modelowania Ryzyka Kredytowego</dd></div><div><dt>Data</dt><dd>28.02.2026</dd></div><div><dt>Status</dt><dd>Zatwierdzona</dd></div><div><dt>Zatwierdził</dt><dd>Komitet Ryzyka</dd></div><div><dt>Zakres</dt><dd>Metodyka, dokumentacja modelu i techniczna</dd></div><div><dt>Zgodność z kodem</dt><dd>Zweryfikowana · silnik 1.7</dd></div></dl></div><div class="kmline r" id="keline"></div><div class="kmc kec" id="kec"><div class="kmc-h"><span>Karta silnika</span><b>wersja 1.7</b></div><dl><div><dt>Wersja silnika</dt><dd>1.7</dd></div><div><dt>Środowisko</dt><dd>SAS v. 11.4</dd></div><div><dt>Input danych</dt><dd class="dbl"><span>DWH_KREDYTY</span><span>CRM_KLIENCI</span><span>MAKRO_SCENARIUSZE</span></dd></div><div><dt>Data aktualizacji</dt><dd>14.03.2026</dd></div><div><dt>Ostatnia zmiana</dt><dd>Nowa kalibracja PD lifetime i scenariuszy makro</dd></div></dl></div><div class="kmc" id="kmc"><div class="kmc-h"><span>Karta modelu</span><b>ECL · wersja 3.1</b></div><dl><div><dt>Nazwa modelu</dt><dd>Oczekiwana strata kredytowa – portfel detaliczny</dd></div><div><dt>Obszar ryzyka</dt><dd>Ryzyko kredytowe</dd></div><div><dt>Koncepcja</dt><dd>Strata oczekiwana · MSSF 9</dd></div><div><dt>Istotność</dt><dd>Model istotny</dd></div><div><dt>Właściciel</dt><dd>Departament Ryzyka Kredytowego</dd></div><div><dt>Zakres stosowania</dt><dd>Kredyty hipoteczne i konsumpcyjne</dd></div><div><dt>Pochodzenie</dt><dd>Model wewnętrzny</dd></div><div><dt>Środowisko produkcyjne</dt><dd>System kalkulacji odpisów</dd></div><div><dt>Ostatnia walidacja</dt><dd>02.2026 · bez zastrzeżeń istotnych</dd></div><div><dt>Ocena jakości</dt><dd><em class="ok"></em>4.3 / 5</dd></div></dl></div><div class="scene v2" id="scene" aria-label="Model ryzyka – sześcian"><div class="cube" id="cube"></div></div><div class="sc2w"><div class="scene v2 sc2" id="scene2" aria-label="Warstwy modelu"><div class="cube" id="cube2"></div></div></div></div>
       <div class="ctl" id="ctl">
         <button type="button" class="ar" data-r="0,-30" aria-label="Obróć w lewo" title="Obróć w lewo">⟲</button>
         <button type="button" class="ar" data-r="0,30" aria-label="Obróć w prawo" title="Obróć w prawo">⟳</button>
@@ -1048,6 +1053,7 @@ setEX(EX);setCX(1);
 /* karty po najechaniu na tabliczki – jeden wspólny sterownik, zawsze tylko jedna karta */
 (()=>{const duo=document.getElementById("duo"),KW=240,
   C={m:{tag:()=>document.querySelector(".mtag:not(.mb)"),card:document.getElementById("kmc"),line:document.getElementById("kmline"),on:"kmline-on",op:"kmopen"},
+     d:{tag:()=>document.querySelector(".dtg:not(.db2)"),card:document.getElementById("kdc"),line:document.getElementById("kdline"),on:"kdline-on",op:"kdopen"},
      e:{tag:()=>[...document.querySelectorAll(".etag:not(.tb2)")].find(t=>t.getBoundingClientRect().width>8),card:document.getElementById("kec"),line:document.getElementById("keline"),on:"keline-on",op:"keopen"}};
   let cur=null,tok=0,tClose=0,shift=0;
   const inR=(el,x,y,m)=>{if(!el)return false;const r=el.getBoundingClientRect();return r.width>0&&x>=r.left-m&&x<=r.right+m&&y>=r.top-m&&y<=r.bottom+m};
@@ -1055,11 +1061,11 @@ setEX(EX);setCX(1);
   function clearAll(){for(const k in C){duo.classList.remove(C[k].on,C[k].op)}}
   function openCard(k){const my=++tok;clearAll();cur=k;const need=Math.max(0,KW+40-faceLeft()),moved=need!==shift;shift=need;duo.style.transform=shift?`translateX(${shift}px)`:"";
     setTimeout(()=>{if(my!==tok)return;const c=C[k],t=c.tag();if(!t)return;const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),y=r.top+r.height/2-d.top,cr=faceLeft()+shift-d.left-14;
-      c.line.style.top=y+"px";c.line.style.left=cr+"px";c.line.style.width=Math.max(0,r.left-d.left-cr)+"px";c.card.style.left=(cr-KW)+"px";c.card.style.top=Math.max(-20,y-28)+"px";
+      c.line.style.top=y+"px";c.line.style.left=cr+"px";c.line.style.width=Math.max(0,r.left-d.left-cr)+"px";c.card.style.left=(cr-KW)+"px";{const ch=c.card.offsetHeight||300,dh=duo.offsetHeight;let tp=y-28;if(tp+ch>dh+10)tp=y+28-ch;c.card.style.top=Math.max(-20,tp)+"px"}
       duo.classList.add(c.on);setTimeout(()=>{if(my===tok)duo.classList.add(c.op)},650)},moved?430:0)}
   function closeCard(){tok++;cur=null;clearAll();shift=0;duo.style.transform=""}
   addEventListener("pointermove",e=>{if(!duo.offsetParent)return;const x=e.clientX,y=e.clientY;
-    let hit=inR(C.m.tag(),x,y,4)?"m":inR(C.e.tag(),x,y,4)?"e":null;
+    let hit=inR(C.m.tag(),x,y,4)?"m":inR(C.d.tag(),x,y,4)?"d":inR(C.e.tag(),x,y,4)?"e":null;
     if(!hit&&cur&&(inR(C[cur].card,x,y,6)||inR(C[cur].line,x,y,10)))hit=cur;
     if(hit){clearTimeout(tClose);tClose=0;if(hit!==cur)openCard(hit)}
     else if(cur&&!tClose)tClose=setTimeout(()=>{tClose=0;closeCard()},300)});
