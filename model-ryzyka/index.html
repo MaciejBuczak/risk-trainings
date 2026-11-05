@@ -700,6 +700,25 @@
 .scan .sw{background:conic-gradient(from 0deg,rgba(138,79,143,.6),transparent 25%)!important}
 .scan{background:repeating-radial-gradient(circle at 50% 50%,transparent 0 13%,rgba(138,79,143,.4) 13% 14%)!important}
 .scan b{width:7%;height:7%;margin:-3.5%}
+/* obliczenia 3D */
+.wbf{background:rgba(168,105,76,.025)!important}.wbf.cp{background:rgba(168,105,76,.02)!important}
+.mf2.cp{background:rgba(255,253,249,.12)!important}
+.pl3{position:absolute;left:calc(var(--s)*-.22);top:calc(var(--s)*-.22);width:calc(var(--s)*.44);height:calc(var(--s)*.44)}
+.pl3 .circ{width:100%;height:100%;overflow:visible}
+.circ .t{fill:none;stroke:rgba(138,79,143,.35);stroke-width:1.6}
+.circ .f{fill:none;stroke:#8a4f8f;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:14 114;animation:circ 3.6s linear infinite}
+.via{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.via i{position:absolute;left:-1px;top:calc(var(--s)*-.06);width:2px;height:calc(var(--s)*.12);background:linear-gradient(rgba(138,79,143,.25),#8a4f8f,rgba(138,79,143,.25));background-size:100% 200%;animation:via 1.6s linear infinite}
+@keyframes via{from{background-position:0 100%}to{background-position:0 -100%}}
+.pr i{top:calc(var(--s)*-.13)!important;height:calc(var(--s)*.13)!important;left:calc(var(--s)*-.02)!important;width:calc(var(--s)*.04)!important}
+.pr i.pt{top:calc(var(--s)*-.02)!important;height:calc(var(--s)*.04)!important}
+@keyframes pist{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(var(--s)*-.09))}}
+.swp{position:absolute;left:0;top:0;transform-style:preserve-3d;animation:spinY 3.6s linear infinite}
+.swp i{position:absolute;left:0;top:calc(var(--s)*-.085);width:calc(var(--s)*.21);height:calc(var(--s)*.17);background:linear-gradient(90deg,rgba(138,79,143,.35),rgba(138,79,143,0));border-left:1.6px solid #8a4f8f}
+@keyframes spinY{to{transform:rotateY(360deg)}}
+.dot3{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.dot3 b{position:absolute;left:calc(var(--s)*-.012);top:calc(var(--s)*-.012);width:calc(var(--s)*.024);height:calc(var(--s)*.024);border-radius:50%;background:#8a4f8f;opacity:.2;animation:blip 3.6s ease-out infinite}
+@media(prefers-reduced-motion:reduce){.via i,.swp{animation:none}}
 </style>
 </head>
 <body>
@@ -819,7 +838,7 @@ const LINKS=[["stat","pd"],["stat","lgd"],["stat","ead"],["stat","sicr"],["pd","
 MODS.forEach(m=>{m.p="Moduł modelu statystycznego";m.mod=1;m.c=[]});
 const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,.8,0],r:.08,h:.1,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
 const FEEDS=[];const DBS=[[-.27,.2],[.27,.2],[0,-.27]];
-const WY={id:"wyn",n:"Wyniki",p:"Wyniki modelu",c:["05","02"],sg:{"05":["Wynik modelu"],"02":[""]},col:"#a8823a",at:[0,-.66,0],w:.2,h:.13,d:"Tu trafiają wyniki każdego modułu – PD, TTC i PIT, LGD, EAD, koszyki z SICR i ECL – a dalej do odpisów, raportów i decyzji."};
+const WY={id:"wyn",n:"Wyniki",p:"Wyniki modelu",c:["05","02"],sg:{"05":["Wynik modelu"],"02":[""]},col:"#a8823a",at:[0,-.575,0],w:.2,h:.13,d:"Tu trafiają wyniki każdego modułu – PD, TTC i PIT, LGD, EAD, koszyki z SICR i ECL – a dalej do odpisów, raportów i decyzji."};
 const RES=[];
 const INNER=[HUB,...MODS];
 const ALL=[...FACES,...INNER,DB,WY],AI={};ALL.forEach(f=>AI[f.id]=f);
@@ -829,7 +848,7 @@ const corners=[];for(const x of[-1,1])for(const y of[-1,1])for(const z of[-1,1])
 cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col};transform:${f.tf} translateZ(${H})"><div class="lb" data-f="${f.id}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small>${E(f.n)}</span></div></div>`).join("")
  +corners.map(([x,y,z])=>`<div class="nd" data-t="translate3d(calc(var(--s)*${x/2}),calc(var(--s)*${y/2}),calc(var(--s)*${z/2}))"><i></i></div>`).join("")+`<div class="inr" id="inr"></div>`;
 /* wyjście wyników – trzy propozycje */
-const EXITS={1:{n:"Przez dach",at:[0,-.8,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
+const EXITS={1:{n:"Przez dach",at:[0,-.585,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
 let EX=1,SV=1,MV=1;try{MV=+localStorage.getItem("rt_mr_mv")||1}catch(_){}
 const GEAR=(n,R,r,h)=>{let d="";for(let i=0;i<n;i++){const a=i/n*2*Math.PI,s1=Math.PI/n*.5,s2=Math.PI/n*.32,P=(rr,aa)=>`${(50+rr*Math.cos(aa)).toFixed(2)} ${(50+rr*Math.sin(aa)).toFixed(2)}`;d+=(i?"L":"M")+P(r,a-s1-.1)+"L"+P(R,a-s2)+"L"+P(R,a+s2)+"L"+P(r,a+s1+.1)}return`<path d="${d}Z"/><circle cx="50" cy="50" r="${h}"/>`};
 try{SV=+localStorage.getItem("rt_mr_sv")||1}catch(_){}
@@ -846,13 +865,15 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
   const HS=id=>id==="stat"?.26*(CX?.6:1)/2:id==="db"||id==="wyn"?0:MODS.find(m=>m.id===id).k/2;
   let h=[...LINKS.map(l=>[...l,""]),...FEEDS.map(l=>[...l,"feed"]),...RES.map(l=>[...l,"feed res"])].map(([a,b,cl])=>{const m=[a,b].some(x=>!["stat","db","wyn"].includes(x));return rod(P(a),P(b),cl+(m?" m":""),a+" "+b,HS(a),HS(b))}).join("");
   {const by=DB.at[1]-DB.h/2;const L=(by-.5).toFixed(3);DBS.forEach(([x,z])=>{h+=`<div class="port pb" style="transform:${T3([x,.5,z])} rotateX(90deg)"></div><div class="strm" style="transform:${T3([x,by,z])}"><div class="yb sb sv1 dbs" data-t="" style="--L:calc(var(--s)*${L})"><i class="sl"></i><i class="sp"></i><i class="sp d2"></i></div></div>`})}
-  {const M=[0,.34,0];let mh="";
-    const W=.44,Hh=.07,c=`calc(var(--s)*`,F=(w,h,t,cl,b="")=>`<i class="mf2 ${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}">${b}</i>`;
-    let top="";
-    if(MV===1)top=`<svg viewBox="0 0 100 100" class="circ" aria-hidden="true"><g class="tr">${["M10 20H40V50H70V80H90","M10 50H25V80H55","M10 80H18","M90 20H60V35H45","M50 10V30H80V60H90","M30 90V65H45V50"].map(d=>`<path d="${d}"/>`).join("")}</g><g class="fl">${["M10 20H40V50H70V80H90","M10 50H25V80H55","M90 20H60V35H45","M50 10V30H80V60H90","M30 90V65H45V50"].map((d,k)=>`<path d="${d}" style="animation-delay:${(-k*.7).toFixed(1)}s"/>`).join("")}</g>${[[40,50],[70,80],[25,80],[60,35],[80,60],[45,50],[40,20],[30,65]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.6"/>`).join("")}</svg>`;
-    else if(MV===3)top=`<div class="scan"><i class="sw"></i>${[[30,35],[62,28],[72,60],[40,70],[55,48],[22,58]].map(([x,y],k)=>`<b style="left:${x}%;top:${y}%;animation-delay:${(k*.55).toFixed(2)}s"></b>`).join("")}</div>`;
-    let pist="";if(MV===2){const P=[-.14,0,.14];P.forEach((x,a)=>P.forEach((z,b)=>{pist+=`<div class="pst" style="transform:translate3d(${c}${x}),${c}${-Hh/2}),${c}${z}))"><div class="pr" style="animation-delay:${(-(a*3+b)*.27).toFixed(2)}s">${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)"].map(t=>`<i style="transform:${t} translateZ(${c}.017))"></i>`).join("")}<i class="pt" style="transform:translateY(${c}-.06)) rotateX(90deg)"></i></div></div>`}))}
-    mh=`<div class="mbox">${F(W,Hh,`translateZ(${c}${W/2}))`,"sd")}${F(W,Hh,`rotateY(180deg) translateZ(${c}${W/2}))`,"sd")}${F(W,Hh,`rotateY(90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,Hh,`rotateY(-90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,W,`rotateX(90deg) translateZ(${c}${Hh/2}))`,"cp",top)}${F(W,W,`rotateX(-90deg) translateZ(${c}${Hh/2}))`,"cp")}${pist}</div>`;
+  {const M=[0,.3,0];let mh="";
+    const W=.44,Hh=.17,c=`calc(var(--s)*`,F=(w,h,t,cl,b="")=>`<i class="mf2 ${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}">${b}</i>`;
+    let top="",inner="";const PL=(y,body)=>`<div class="pl3" style="transform:translateY(${c}${y})) rotateX(90deg)">${body}</div>`;
+    if(MV===1){const L=[["M10 20H40V50H70V80H90","M10 50H25V80H55","M90 20H60V35H45"],["M50 10V30H80V60H90","M30 90V65H45V50","M10 40H30V20"],["M20 90V60H60V40H90","M70 10V25H40"]],N=[[40,50],[70,80],[45,50],[80,60],[30,20],[60,40]];
+      inner=L.map((ps,k)=>PL((k-1)*Hh/3,`<svg viewBox="0 0 100 100" class="circ">${ps.map(d=>`<path class="t" d="${d}"/><path class="f" d="${d}" style="animation-delay:${(-k*1.1-ps.indexOf(d)*.6).toFixed(1)}s"/>`).join("")}${N.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.6"/>`).join("")}</svg>`)).join("")
+        +N.slice(0,4).map(([x,y],k)=>`<div class="via" style="transform:translate3d(${c}${((x-50)/100*W).toFixed(3)}),0,${c}${((y-50)/100*W).toFixed(3)}))"><i style="animation-delay:${(-k*.4).toFixed(1)}s"></i><i style="transform:rotateY(90deg);animation-delay:${(-k*.4).toFixed(1)}s"></i></div>`).join("")}
+    else if(MV===3){inner=`<div class="swp"><i></i></div>`+[[-.12,-.05,.1],[.1,.04,-.12],[.14,-.02,.08],[-.08,.05,-.1],[0,0,.15],[-.15,.02,-.02],[.05,-.06,0]].map(([x,y,z],k)=>`<div class="dot3" style="transform:translate3d(${c}${x}),${c}${y}),${c}${z}))"><b class="yb" data-t="" style="animation-delay:${(Math.atan2(z,x)/Math.PI/2*3.6).toFixed(2)}s"></b></div>`).join("")}
+    let pist="";if(MV===2){const P=[-.14,0,.14];P.forEach((x,a)=>P.forEach((z,b)=>{pist+=`<div class="pst" style="transform:translate3d(${c}${x}),${c}${Hh/2}),${c}${z}))"><div class="pr" style="animation-delay:${(-(a*3+b)*.27).toFixed(2)}s">${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)"].map(t=>`<i style="transform:${t} translateZ(${c}.02))"></i>`).join("")}<i class="pt" style="transform:translateY(${c}-.13)) rotateX(90deg)"></i></div></div>`}))}
+    mh=`<div class="mbox">${F(W,Hh,`translateZ(${c}${W/2}))`,"sd")}${F(W,Hh,`rotateY(180deg) translateZ(${c}${W/2}))`,"sd")}${F(W,Hh,`rotateY(90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,Hh,`rotateY(-90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,W,`rotateX(90deg) translateZ(${c}${Hh/2}))`,"cp")}${inner}${F(W,W,`rotateX(-90deg) translateZ(${c}${Hh/2}))`,"cp")}${pist}</div>`;
     h+=`<div class="mech" data-f="stat" style="transform:${T3(M)}">${mh}</div>`}
   if(X.port){const L=Math.abs(X.at[1]+.06-X.port[1]),rnd=(a,b)=>a+Math.random()*(b-a);let body="";
     if(SV===1)body=`<i class="sl"></i><i class="sp"></i><i class="sp d2"></i>`;
