@@ -644,6 +644,35 @@
 .mw[data-tab="model"] .duo .scene:not(.sc2){--s:clamp(190px,21vw,320px)!important;margin:calc(var(--s)*.5) calc(var(--s)*.3) calc(var(--s)*.55)!important}
 .mw[data-tab="model"] .duo .sc2{--s:clamp(150px,16vw,240px)!important}
 .mw[data-tab="model"] .duo{margin-top:10px!important}
+/* wyniki przezroczyste, lekko przyciemnione */
+.wbf{background:rgba(168,105,76,.1)!important;border:1.6px solid rgba(168,105,76,.85)!important}
+.wbf.cp{background:rgba(168,105,76,.07)!important}
+.wbl b{color:#8f5a40!important}
+.port.pw{border-color:rgba(168,105,76,.85)!important;background:rgba(168,105,76,.08)!important}
+/* mechanizm obliczeń */
+.mech{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;pointer-events:none}
+.mch{left:calc(var(--s)*-.13);top:calc(var(--s)*-.08);width:calc(var(--s)*.26);height:calc(var(--s)*.16)}
+.mch.g svg{width:100%;height:100%;overflow:visible}
+.mch.g path{fill:rgba(138,79,143,.05);stroke:#8a4f8f;stroke-width:1.4;stroke-linejoin:round}.mch.g circle{fill:none;stroke:#8a4f8f;stroke-width:1.2}
+.gr1{animation:spin 12s linear infinite}.gr2{animation:spin 8s linear infinite reverse}.gr3{animation:spin 4.6s linear infinite}
+.gyro{position:absolute;left:0;top:0;transform-style:preserve-3d;animation:gyro 14s linear infinite}
+.gyro .gr{position:absolute;left:calc(var(--s)*-.075);top:calc(var(--s)*-.075);width:calc(var(--s)*.15);height:calc(var(--s)*.15);border-radius:50%;border:1.4px solid rgba(138,79,143,.75);box-sizing:border-box}
+.gyro .r0{border-color:rgba(138,79,143,.45)}
+.gcore{position:absolute;left:calc(var(--s)*-.012);top:calc(var(--s)*-.012);width:calc(var(--s)*.024);height:calc(var(--s)*.024);border-radius:50%;background:#8a4f8f;box-shadow:0 0 10px rgba(138,79,143,.6)}
+@keyframes gyro{from{transform:rotateY(0) rotateX(18deg)}to{transform:rotateY(360deg) rotateX(18deg)}}
+.mch.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:calc(var(--s)*.012);width:calc(var(--s)*.22);left:calc(var(--s)*-.11);height:auto;top:calc(var(--s)*-.06)}
+.mch.grid i{aspect-ratio:1;border-radius:2px;border:1px solid rgba(138,79,143,.5);animation:cell 2.4s ease-in-out infinite}
+@keyframes cell{0%,100%{background:transparent}40%{background:rgba(138,79,143,.55)}}
+@media(prefers-reduced-motion:reduce){.gr1,.gr2,.gr3,.gyro,.mch.grid i{animation:none}}
+.mch.g{left:calc(var(--s)*-.17);top:calc(var(--s)*-.1);width:calc(var(--s)*.34);height:calc(var(--s)*.2)}
+.gw{position:absolute;overflow:visible}
+.gw path{fill:rgba(138,79,143,.06);stroke:#8a4f8f;stroke-width:1.3;stroke-linejoin:round}.gw circle{fill:none;stroke:#8a4f8f;stroke-width:1.2}
+.gw.w1{left:0;top:0;width:58%;aspect-ratio:1;animation:spin 14s linear infinite}
+.gw.w2{left:52.5%;top:-2%;width:40%;aspect-ratio:1;animation:spin 9.3s linear infinite reverse}
+.gw.w3{left:68%;top:62%;width:24%;aspect-ratio:1;animation:spin 5.6s linear infinite}
+.gyro .gr{left:calc(var(--s)*-.11)!important;top:calc(var(--s)*-.11)!important;width:calc(var(--s)*.22)!important;height:calc(var(--s)*.22)!important}
+.mch.grid{width:calc(var(--s)*.32)!important;left:calc(var(--s)*-.16)!important;top:calc(var(--s)*-.1)!important;gap:calc(var(--s)*.014)!important}
+.mch.grid{place-items:stretch!important}.mch.grid i{border-color:rgba(138,79,143,.6)!important;width:100%;height:calc(var(--s)*.03)}
 </style>
 </head>
 <body>
@@ -761,9 +790,9 @@ const MODS=[
  {id:"ead",n:"EAD",s:"ekspozycja · CCF",col:"#6f7f58",at:[.27,.17,-.18],k:.12,d:"Ekspozycja w chwili niewykonania zobowiązania, z uwzględnieniem wykorzystania limitów (CCF)."}];
 const LINKS=[["stat","pd"],["stat","lgd"],["stat","ead"],["stat","sicr"],["pd","ttc"],["pd","pit"]];
 MODS.forEach(m=>{m.p="Moduł modelu statystycznego";m.mod=1;m.c=[]});
-const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,.8,0],r:.08,h:.1,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
+const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,.72,0],r:.08,h:.1,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
 const FEEDS=[];const DBS=[[-.27,.2],[.27,.2],[0,-.27]];
-const WY={id:"wyn",n:"Wyniki",p:"Wyniki modelu",c:["05","02"],sg:{"05":["Wynik modelu"],"02":[""]},col:"#a8823a",at:[0,-.8,0],w:.2,h:.13,d:"Tu trafiają wyniki każdego modułu – PD, TTC i PIT, LGD, EAD, koszyki z SICR i ECL – a dalej do odpisów, raportów i decyzji."};
+const WY={id:"wyn",n:"Wyniki",p:"Wyniki modelu",c:["05","02"],sg:{"05":["Wynik modelu"],"02":[""]},col:"#a8823a",at:[0,-.7,0],w:.2,h:.13,d:"Tu trafiają wyniki każdego modułu – PD, TTC i PIT, LGD, EAD, koszyki z SICR i ECL – a dalej do odpisów, raportów i decyzji."};
 const RES=[];
 const INNER=[HUB,...MODS];
 const ALL=[...FACES,...INNER,DB,WY],AI={};ALL.forEach(f=>AI[f.id]=f);
@@ -774,7 +803,9 @@ cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col
  +corners.map(([x,y,z])=>`<div class="nd" data-t="translate3d(calc(var(--s)*${x/2}),calc(var(--s)*${y/2}),calc(var(--s)*${z/2}))"><i></i></div>`).join("")+`<div class="inr" id="inr"></div>`;
 /* wyjście wyników – trzy propozycje */
 const EXITS={1:{n:"Przez dach",at:[0,-.8,0],port:[0,-.5,0],pt:"rotateX(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
-let EX=1,SV=1;try{SV=+localStorage.getItem("rt_mr_sv")||1}catch(_){}
+let EX=1,SV=1,MV=1;try{MV=+localStorage.getItem("rt_mr_mv")||1}catch(_){}
+const GEAR=(n,R,r,h)=>{let d="";for(let i=0;i<n;i++){const a=i/n*2*Math.PI,s1=Math.PI/n*.5,s2=Math.PI/n*.32,P=(rr,aa)=>`${(50+rr*Math.cos(aa)).toFixed(2)} ${(50+rr*Math.sin(aa)).toFixed(2)}`;d+=(i?"L":"M")+P(r,a-s1-.1)+"L"+P(R,a-s2)+"L"+P(R,a+s2)+"L"+P(r,a+s1+.1)}return`<path d="${d}Z"/><circle cx="50" cy="50" r="${h}"/>`};
+try{SV=+localStorage.getItem("rt_mr_sv")||1}catch(_){}
 const T3=a=>`translate3d(calc(var(--s)*${a[0]}),calc(var(--s)*${a[1]}),calc(var(--s)*${a[2]}))`;
 const rod=(A,B,cl,l,sa=0,sb=0)=>{const E2=.004,d=(u,v)=>Math.hypot(v[0]-u[0],v[1]-u[1],v[2]-u[2]);let pts=[A,[B[0],A[1],A[2]],[B[0],A[1],B[2]],B].filter((p,i,a)=>i===0||d(a[i-1],p)>E2);if(pts.length<2)return"";
   const mv=(p,q,t)=>{const L=d(p,q)||1;return p.map((v,i)=>v+(q[i]-v)*Math.min(t,L*.45)/L)};pts[0]=mv(pts[0],pts[1],sa);const n=pts.length-1;pts[n]=mv(pts[n],pts[n-1],sb);
@@ -788,6 +819,11 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
   const HS=id=>id==="stat"?.26*(CX?.6:1)/2:id==="db"||id==="wyn"?0:MODS.find(m=>m.id===id).k/2;
   let h=[...LINKS.map(l=>[...l,""]),...FEEDS.map(l=>[...l,"feed"]),...RES.map(l=>[...l,"feed res"])].map(([a,b,cl])=>{const m=[a,b].some(x=>!["stat","db","wyn"].includes(x));return rod(P(a),P(b),cl+(m?" m":""),a+" "+b,HS(a),HS(b))}).join("");
   {const by=DB.at[1]-DB.h/2;const L=(by-.5).toFixed(3);DBS.forEach(([x,z])=>{h+=`<div class="port pb" style="transform:${T3([x,.5,z])} rotateX(90deg)"></div><div class="strm" style="transform:${T3([x,by,z])}"><div class="yb sb sv1 dbs" data-t="" style="--L:calc(var(--s)*${L})"><i class="sl"></i><i class="sp"></i><i class="sp d2"></i></div></div>`})}
+  {const M=[0,.34,0];let mh="";
+    if(MV===1)mh=`<div class="yb mch g" data-t=""><svg class="gw w1" viewBox="0 0 100 100">${GEAR(12,46,39,12)}</svg><svg class="gw w2" viewBox="0 0 100 100">${GEAR(8,46,37,14)}</svg><svg class="gw w3" viewBox="0 0 100 100">${GEAR(6,46,35,16)}</svg></div>`;
+    else if(MV===2)mh=`<div class="gyro">${["rotateX(90deg)","rotateY(0deg)","rotateY(60deg)","rotateY(-60deg)"].map((t,k)=>`<i class="gr r${k}" style="transform:${t}"></i>`).join("")}<i class="gcore"></i></div>`;
+    else mh=`<div class="yb mch grid" data-t="">${Array.from({length:35},(_,k)=>`<i style="animation-delay:${(((k%7)+Math.floor(k/7))*.12).toFixed(2)}s"></i>`).join("")}</div>`;
+    h+=`<div class="mech" data-f="stat" style="transform:${T3(M)}">${mh}</div>`}
   if(X.port){const L=Math.abs(X.at[1]+.06-X.port[1]),rnd=(a,b)=>a+Math.random()*(b-a);let body="";
     if(SV===1)body=`<i class="sl"></i><i class="sp"></i><i class="sp d2"></i>`;
     else{const pool=SV===2?["0,034","12,5%","0,47","1 248","3,1%","0,92","45,6","0,008","7,2%","0,61"]:SV===3?["0","1","0","1","1","0","1","0","0","1","1","0"]:["%","PD","Σ","‰","€","LGD","σ","ECL","μ","EAD"];
@@ -807,12 +843,12 @@ AI.env=ENVO;AI.proc=PROC;
 const fb=f=>`<button type="button" class="fb" data-f="${f.id}" style="--c:${f.col}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small><b>${E(f.n)}</b></span></button>`;
 
 const inn=document.getElementById("inn");
-inn.innerHTML=`<div class="mx2"><span>Model w środku</span><button type="button" data-mx="1">Złożony – kilka modułów</button><button type="button" data-mx="0">Prosty – jeden moduł</button></div><div class="mx2 ex"><span>Strumień wyników</span>${["Linia","Liczby","Kod binarny","Symbole"].map((n,k)=>`<button type="button" data-sv="${k+1}">${k+1} · ${n}</button>`).join("")}</div><div class="mods"><button type="button" class="ib" data-f="db" style="--c:${DB.col}"><i>${sv("db")}</i>Baza danych</button><button type="button" class="ib" data-f="stat" style="--c:${HUB.col}"><i>${sv("sigma")}</i>ECL</button><button type="button" class="ib" data-f="wyn" style="--c:${WY.col}"><i>${sv("doc")}</i>Wyniki</button>${MODS.map(m=>`<button type="button" class="ib md" data-f="${m.id}" style="--c:${m.col}"><i><b>${m.n[0]}</b></i>${m.n}</button>`).join("")}</div>`;
+inn.innerHTML=`<div class="mx2"><span>Model w środku</span><button type="button" data-mx="1">Złożony – kilka modułów</button><button type="button" data-mx="0">Prosty – jeden moduł</button></div><div class="mx2 ex mv"><span>Obliczenia</span>${["Tryby","Żyroskop","Siatka obliczeń"].map((n,k)=>`<button type="button" data-mv="${k+1}">${k+1} · ${n}</button>`).join("")}</div><div class="mx2 ex"><span>Strumień wyników</span>${["Linia","Liczby","Kod binarny","Symbole"].map((n,k)=>`<button type="button" data-sv="${k+1}">${k+1} · ${n}</button>`).join("")}</div><div class="mods"><button type="button" class="ib" data-f="db" style="--c:${DB.col}"><i>${sv("db")}</i>Baza danych</button><button type="button" class="ib" data-f="stat" style="--c:${HUB.col}"><i>${sv("sigma")}</i>ECL</button><button type="button" class="ib" data-f="wyn" style="--c:${WY.col}"><i>${sv("doc")}</i>Wyniki</button>${MODS.map(m=>`<button type="button" class="ib md" data-f="${m.id}" style="--c:${m.col}"><i><b>${m.n[0]}</b></i>${m.n}</button>`).join("")}</div>`;
 let CX=1;try{CX=localStorage.getItem("rt_mr_cx")==="0"?0:1}catch(_){}
 function setCX(v){CX=v;cube.classList.toggle("simple",!v);HUB.n=v?"ECL":"Model statystyczny";HUB.d=v?"Oczekiwana strata kredytowa – składa wyniki PD, LGD i EAD (z dyskontowaniem i scenariuszami), a SICR decyduje, czy liczymy ją w horyzoncie 12 miesięcy, czy w całym okresie życia.":"Jeden moduł: próba, segmentacja, zmienne, parametry, estymacja i wynik – bez rozbijania na części.";const hb=inn.querySelector('.ib[data-f="stat"]');if(hb)hb.lastChild.textContent=HUB.n;const on=document.querySelector(".ik.hub.on");if(on)panel(HUB);inn.querySelectorAll("[data-mx]").forEach(b=>b.classList.toggle("on",+b.dataset.mx===v));try{localStorage.setItem("rt_mr_cx",v)}catch(_){}
   const cur=document.querySelector(".ik.on");if(!v&&cur&&cur.classList.contains("m"))pick("stat",false)}
-inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setCX(+b.dataset.mx);const x=e.target.closest("[data-sv]");if(x){SV=+x.dataset.sv;try{localStorage.setItem("rt_mr_sv",SV)}catch(_){}setEX(1)}});
-function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));renderInner()}
+inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setCX(+b.dataset.mx);const mvb=e.target.closest("[data-mv]");if(mvb){MV=+mvb.dataset.mv;try{localStorage.setItem("rt_mr_mv",MV)}catch(_){}setEX(1);return}const x=e.target.closest("[data-sv]");if(x){SV=+x.dataset.sv;try{localStorage.setItem("rt_mr_sv",SV)}catch(_){}setEX(1)}});
+function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));renderInner()}
 /* obrót – tylko na żądanie */
 let rx=-22,ry=-34;
 const NDS=[...cube.querySelectorAll(".nd")];let YB=[];
