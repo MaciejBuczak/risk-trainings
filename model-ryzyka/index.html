@@ -673,6 +673,33 @@
 .gyro .gr{left:calc(var(--s)*-.11)!important;top:calc(var(--s)*-.11)!important;width:calc(var(--s)*.22)!important;height:calc(var(--s)*.22)!important}
 .mch.grid{width:calc(var(--s)*.32)!important;left:calc(var(--s)*-.16)!important;top:calc(var(--s)*-.1)!important;gap:calc(var(--s)*.014)!important}
 .mch.grid{place-items:stretch!important}.mch.grid i{border-color:rgba(138,79,143,.6)!important;width:100%;height:calc(var(--s)*.03)}
+/* płaska kostka obliczeń */
+.wbf{background:rgba(168,105,76,.05)!important}.wbf.cp{background:rgba(168,105,76,.035)!important}
+.mbox{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.mf2{position:absolute;left:0;top:0;box-sizing:border-box;border:1.4px solid rgba(138,79,143,.75);border-radius:calc(var(--s)*.012);background:rgba(138,79,143,.04);overflow:hidden}
+.circ{width:100%;height:100%}
+.circ .tr path{fill:none;stroke:rgba(138,79,143,.3);stroke-width:1.4}
+.circ .fl path{fill:none;stroke:#8a4f8f;stroke-width:1.8;stroke-linecap:round;stroke-dasharray:8 120;animation:circ 3.6s linear infinite}
+.circ circle{fill:#fffdf9;stroke:#8a4f8f;stroke-width:1.2}
+@keyframes circ{from{stroke-dashoffset:128}to{stroke-dashoffset:0}}
+.pst{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.pr{position:absolute;left:0;top:0;transform-style:preserve-3d;animation:pist 1.8s ease-in-out infinite}
+.pr i{position:absolute;left:calc(var(--s)*-.017);top:calc(var(--s)*-.06);width:calc(var(--s)*.034);height:calc(var(--s)*.06);box-sizing:border-box;border:1.2px solid rgba(138,79,143,.8);background:rgba(138,79,143,.06)}
+.pr i.pt{top:calc(var(--s)*-.017);height:calc(var(--s)*.034);background:rgba(138,79,143,.25)}
+@keyframes pist{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(var(--s)*-.05))}}
+.scan{position:absolute;inset:0;background:repeating-radial-gradient(circle at 50% 50%,transparent 0 14%,rgba(138,79,143,.22) 14% 14.6%)}
+.scan .sw{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(138,79,143,.45),transparent 22%);animation:spin 3.2s linear infinite}
+.scan b{position:absolute;width:6%;height:6%;margin:-3%;border-radius:50%;background:#8a4f8f;opacity:.15;animation:blip 3.2s ease-out infinite}
+@keyframes blip{0%{opacity:.9;transform:scale(1.4)}60%,100%{opacity:.15;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.circ .fl path,.pr,.scan .sw,.scan b{animation:none}}
+.mf2.sd{background:none}
+.mf2.cp{background:rgba(255,253,249,.35)}
+.circ .tr path{stroke:rgba(138,79,143,.4);stroke-width:2}
+.circ .fl path{stroke-width:3;stroke-dasharray:14 114}
+.circ circle{r:3.4;stroke-width:1.6}
+.scan .sw{background:conic-gradient(from 0deg,rgba(138,79,143,.6),transparent 25%)!important}
+.scan{background:repeating-radial-gradient(circle at 50% 50%,transparent 0 13%,rgba(138,79,143,.4) 13% 14%)!important}
+.scan b{width:7%;height:7%;margin:-3.5%}
 </style>
 </head>
 <body>
@@ -790,9 +817,9 @@ const MODS=[
  {id:"ead",n:"EAD",s:"ekspozycja · CCF",col:"#6f7f58",at:[.27,.17,-.18],k:.12,d:"Ekspozycja w chwili niewykonania zobowiązania, z uwzględnieniem wykorzystania limitów (CCF)."}];
 const LINKS=[["stat","pd"],["stat","lgd"],["stat","ead"],["stat","sicr"],["pd","ttc"],["pd","pit"]];
 MODS.forEach(m=>{m.p="Moduł modelu statystycznego";m.mod=1;m.c=[]});
-const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,.72,0],r:.08,h:.1,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
+const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,.8,0],r:.08,h:.1,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
 const FEEDS=[];const DBS=[[-.27,.2],[.27,.2],[0,-.27]];
-const WY={id:"wyn",n:"Wyniki",p:"Wyniki modelu",c:["05","02"],sg:{"05":["Wynik modelu"],"02":[""]},col:"#a8823a",at:[0,-.7,0],w:.2,h:.13,d:"Tu trafiają wyniki każdego modułu – PD, TTC i PIT, LGD, EAD, koszyki z SICR i ECL – a dalej do odpisów, raportów i decyzji."};
+const WY={id:"wyn",n:"Wyniki",p:"Wyniki modelu",c:["05","02"],sg:{"05":["Wynik modelu"],"02":[""]},col:"#a8823a",at:[0,-.66,0],w:.2,h:.13,d:"Tu trafiają wyniki każdego modułu – PD, TTC i PIT, LGD, EAD, koszyki z SICR i ECL – a dalej do odpisów, raportów i decyzji."};
 const RES=[];
 const INNER=[HUB,...MODS];
 const ALL=[...FACES,...INNER,DB,WY],AI={};ALL.forEach(f=>AI[f.id]=f);
@@ -820,9 +847,12 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
   let h=[...LINKS.map(l=>[...l,""]),...FEEDS.map(l=>[...l,"feed"]),...RES.map(l=>[...l,"feed res"])].map(([a,b,cl])=>{const m=[a,b].some(x=>!["stat","db","wyn"].includes(x));return rod(P(a),P(b),cl+(m?" m":""),a+" "+b,HS(a),HS(b))}).join("");
   {const by=DB.at[1]-DB.h/2;const L=(by-.5).toFixed(3);DBS.forEach(([x,z])=>{h+=`<div class="port pb" style="transform:${T3([x,.5,z])} rotateX(90deg)"></div><div class="strm" style="transform:${T3([x,by,z])}"><div class="yb sb sv1 dbs" data-t="" style="--L:calc(var(--s)*${L})"><i class="sl"></i><i class="sp"></i><i class="sp d2"></i></div></div>`})}
   {const M=[0,.34,0];let mh="";
-    if(MV===1)mh=`<div class="yb mch g" data-t=""><svg class="gw w1" viewBox="0 0 100 100">${GEAR(12,46,39,12)}</svg><svg class="gw w2" viewBox="0 0 100 100">${GEAR(8,46,37,14)}</svg><svg class="gw w3" viewBox="0 0 100 100">${GEAR(6,46,35,16)}</svg></div>`;
-    else if(MV===2)mh=`<div class="gyro">${["rotateX(90deg)","rotateY(0deg)","rotateY(60deg)","rotateY(-60deg)"].map((t,k)=>`<i class="gr r${k}" style="transform:${t}"></i>`).join("")}<i class="gcore"></i></div>`;
-    else mh=`<div class="yb mch grid" data-t="">${Array.from({length:35},(_,k)=>`<i style="animation-delay:${(((k%7)+Math.floor(k/7))*.12).toFixed(2)}s"></i>`).join("")}</div>`;
+    const W=.44,Hh=.07,c=`calc(var(--s)*`,F=(w,h,t,cl,b="")=>`<i class="mf2 ${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}">${b}</i>`;
+    let top="";
+    if(MV===1)top=`<svg viewBox="0 0 100 100" class="circ" aria-hidden="true"><g class="tr">${["M10 20H40V50H70V80H90","M10 50H25V80H55","M10 80H18","M90 20H60V35H45","M50 10V30H80V60H90","M30 90V65H45V50"].map(d=>`<path d="${d}"/>`).join("")}</g><g class="fl">${["M10 20H40V50H70V80H90","M10 50H25V80H55","M90 20H60V35H45","M50 10V30H80V60H90","M30 90V65H45V50"].map((d,k)=>`<path d="${d}" style="animation-delay:${(-k*.7).toFixed(1)}s"/>`).join("")}</g>${[[40,50],[70,80],[25,80],[60,35],[80,60],[45,50],[40,20],[30,65]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.6"/>`).join("")}</svg>`;
+    else if(MV===3)top=`<div class="scan"><i class="sw"></i>${[[30,35],[62,28],[72,60],[40,70],[55,48],[22,58]].map(([x,y],k)=>`<b style="left:${x}%;top:${y}%;animation-delay:${(k*.55).toFixed(2)}s"></b>`).join("")}</div>`;
+    let pist="";if(MV===2){const P=[-.14,0,.14];P.forEach((x,a)=>P.forEach((z,b)=>{pist+=`<div class="pst" style="transform:translate3d(${c}${x}),${c}${-Hh/2}),${c}${z}))"><div class="pr" style="animation-delay:${(-(a*3+b)*.27).toFixed(2)}s">${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)"].map(t=>`<i style="transform:${t} translateZ(${c}.017))"></i>`).join("")}<i class="pt" style="transform:translateY(${c}-.06)) rotateX(90deg)"></i></div></div>`}))}
+    mh=`<div class="mbox">${F(W,Hh,`translateZ(${c}${W/2}))`,"sd")}${F(W,Hh,`rotateY(180deg) translateZ(${c}${W/2}))`,"sd")}${F(W,Hh,`rotateY(90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,Hh,`rotateY(-90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,W,`rotateX(90deg) translateZ(${c}${Hh/2}))`,"cp",top)}${F(W,W,`rotateX(-90deg) translateZ(${c}${Hh/2}))`,"cp")}${pist}</div>`;
     h+=`<div class="mech" data-f="stat" style="transform:${T3(M)}">${mh}</div>`}
   if(X.port){const L=Math.abs(X.at[1]+.06-X.port[1]),rnd=(a,b)=>a+Math.random()*(b-a);let body="";
     if(SV===1)body=`<i class="sl"></i><i class="sp"></i><i class="sp d2"></i>`;
@@ -843,7 +873,7 @@ AI.env=ENVO;AI.proc=PROC;
 const fb=f=>`<button type="button" class="fb" data-f="${f.id}" style="--c:${f.col}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small><b>${E(f.n)}</b></span></button>`;
 
 const inn=document.getElementById("inn");
-inn.innerHTML=`<div class="mx2"><span>Model w środku</span><button type="button" data-mx="1">Złożony – kilka modułów</button><button type="button" data-mx="0">Prosty – jeden moduł</button></div><div class="mx2 ex mv"><span>Obliczenia</span>${["Tryby","Żyroskop","Siatka obliczeń"].map((n,k)=>`<button type="button" data-mv="${k+1}">${k+1} · ${n}</button>`).join("")}</div><div class="mx2 ex"><span>Strumień wyników</span>${["Linia","Liczby","Kod binarny","Symbole"].map((n,k)=>`<button type="button" data-sv="${k+1}">${k+1} · ${n}</button>`).join("")}</div><div class="mods"><button type="button" class="ib" data-f="db" style="--c:${DB.col}"><i>${sv("db")}</i>Baza danych</button><button type="button" class="ib" data-f="stat" style="--c:${HUB.col}"><i>${sv("sigma")}</i>ECL</button><button type="button" class="ib" data-f="wyn" style="--c:${WY.col}"><i>${sv("doc")}</i>Wyniki</button>${MODS.map(m=>`<button type="button" class="ib md" data-f="${m.id}" style="--c:${m.col}"><i><b>${m.n[0]}</b></i>${m.n}</button>`).join("")}</div>`;
+inn.innerHTML=`<div class="mx2"><span>Model w środku</span><button type="button" data-mx="1">Złożony – kilka modułów</button><button type="button" data-mx="0">Prosty – jeden moduł</button></div><div class="mx2 ex mv"><span>Obliczenia</span>${["Obwód","Tłoki","Skaner"].map((n,k)=>`<button type="button" data-mv="${k+1}">${k+1} · ${n}</button>`).join("")}</div><div class="mx2 ex"><span>Strumień wyników</span>${["Linia","Liczby","Kod binarny","Symbole"].map((n,k)=>`<button type="button" data-sv="${k+1}">${k+1} · ${n}</button>`).join("")}</div><div class="mods"><button type="button" class="ib" data-f="db" style="--c:${DB.col}"><i>${sv("db")}</i>Baza danych</button><button type="button" class="ib" data-f="stat" style="--c:${HUB.col}"><i>${sv("sigma")}</i>ECL</button><button type="button" class="ib" data-f="wyn" style="--c:${WY.col}"><i>${sv("doc")}</i>Wyniki</button>${MODS.map(m=>`<button type="button" class="ib md" data-f="${m.id}" style="--c:${m.col}"><i><b>${m.n[0]}</b></i>${m.n}</button>`).join("")}</div>`;
 let CX=1;try{CX=localStorage.getItem("rt_mr_cx")==="0"?0:1}catch(_){}
 function setCX(v){CX=v;cube.classList.toggle("simple",!v);HUB.n=v?"ECL":"Model statystyczny";HUB.d=v?"Oczekiwana strata kredytowa – składa wyniki PD, LGD i EAD (z dyskontowaniem i scenariuszami), a SICR decyduje, czy liczymy ją w horyzoncie 12 miesięcy, czy w całym okresie życia.":"Jeden moduł: próba, segmentacja, zmienne, parametry, estymacja i wynik – bez rozbijania na części.";const hb=inn.querySelector('.ib[data-f="stat"]');if(hb)hb.lastChild.textContent=HUB.n;const on=document.querySelector(".ik.hub.on");if(on)panel(HUB);inn.querySelectorAll("[data-mx]").forEach(b=>b.classList.toggle("on",+b.dataset.mx===v));try{localStorage.setItem("rt_mr_cx",v)}catch(_){}
   const cur=document.querySelector(".ik.on");if(!v&&cur&&cur.classList.contains("m"))pick("stat",false)}
