@@ -1039,6 +1039,8 @@
 .cube[data-solo="3"] .vl{transform-style:preserve-3d}
 .cube[data-solo="3"] .vl::after{content:"";position:absolute;inset:0;background:inherit;transform:rotateY(90deg)}
 .mw.tabbed:not(.exploring) :is(#kbc,#kec){transition:clip-path 1.6s cubic-bezier(.45,0,.25,1),opacity .4s}
+.cube[data-solo="3"][data-sk="eng"] .etag{font-size:calc(var(--s)*.0126)!important;min-width:calc(var(--s)*.08)}
+.cube[data-solo="3"][data-sk="eng"] .et-h{font-size:calc(var(--s)*.0122)}
 </style>
 </head>
 <body>
@@ -1281,7 +1283,7 @@ setEX(EX);setCX(1);
     eng:{m:1,t:[.294,.33,0],k:2.86,card:"e",face:"#cube .mech .mf2",G:[".wbox,.beam.bw,.port:not(.pb):not(.pe)",".dbx,.db,.beam.bd,.port.pb,.ik,.rod",".fa,.edg.e-md,.beam.be,.port.pe"]}};
   let SK=null;
   function solo(f){if(cube.dataset.solo||SOLO.z>0){if(SK===f)return;unsolo(()=>{});st.push(setTimeout(()=>solo(f),1800));return}
-    clr();const S=SOLOS[f];SK=f;window.__soloFace=S.face;cube.dataset.focus="";SOLO.t=S.t;SOLO.k=S.k;SOLO.m=S.m||0;cube.querySelectorAll("[data-fs]").forEach(e=>delete e.dataset.fs);tagFlat();go(-16,24,1400);
+    clr();const S=SOLOS[f];SK=f;cube.dataset.sk=f;window.__soloFace=S.face;cube.dataset.focus="";SOLO.t=S.t;SOLO.k=S.k;SOLO.m=S.m||0;cube.querySelectorAll("[data-fs]").forEach(e=>delete e.dataset.fs);tagFlat();go(-16,24,1400);
     const T0=800;[1,2,3].forEach((n,i)=>st.push(setTimeout(()=>{tagFlat();cube.dataset.solo=n},T0+i*500)));st.push(setTimeout(()=>zoom(1,1700,()=>{window.__pin=1;window.__openCard&&window.__openCard(S.card)}),T0+2*500+700))}
   function tagFlat(){const G=SOLOS[SK].G;
     const deco=k=>(parseFloat(k.borderTopWidth)>0&&!/, 0\)$|transparent/.test(k.borderTopColor))||!/, 0\)$|transparent/.test(k.backgroundColor)||k.backgroundImage!=="none";const walk=(el,n)=>{if(el.dataset.fs)return;const K=getComputedStyle(el);if(K.transformStyle==="preserve-3d"&&!deco(K)&&[...el.children].some(c=>{const k=getComputedStyle(c);return k.transformStyle==="preserve-3d"||k.transform!=="none"})){[...el.children].forEach(c=>walk(c,n))}else el.dataset.fs=n};
@@ -1332,7 +1334,7 @@ setEX(EX);setCX(1);
   function clearAll(){for(const k in C){duo.classList.remove(C[k].on,C[k].op)}const ev=document.getElementById("elb");if(ev)ev.classList.remove("on")}
   function openCard(k){if(cube.dataset.solo==="3"){const my=++tok;clearAll();cur=k;shift=0;duo.style.transform="";const c=C[k],t=c.tag();if(!t)return;
       const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),y=r.top+r.height/2-d.top,R=Math.max(...[...document.querySelectorAll(window.__soloFace||"#cube .dbf")].map(f=>f.getBoundingClientRect().right))-d.left+90;
-      const hd=t.querySelector(".mt-h,.et-h").getBoundingClientRect(),x0=hd.right-d.left,y0=hd.top+hd.height/2-d.top,x1=x0+22,cy=(()=>{let v=y0-130;const xb=document.querySelector(".xbtn"),ch=c.card.offsetHeight||360;if(xb){const lim=xb.getBoundingClientRect().top-d.top-24-ch+16;if(v>lim)v=lim}return Math.max(10,v)})(),x2=(()=>{let v=Math.max(R,x1+30);const xb=document.querySelector(".xbtn");if(xb){const m=xb.getBoundingClientRect().right-d.left-(c.card.offsetWidth||240);v=Math.max(x1+30,m)}return v})();
+      const hd=t.querySelector(".mt-h,.et-h").getBoundingClientRect(),x0=hd.right-d.left,y0=hd.top+hd.height/2-d.top,x1=x0+22,cy=(()=>{let v=y0-130;if(cube.dataset.sk==="eng"){const ft=Math.min(...[...document.querySelectorAll(window.__soloFace)].map(f=>f.getBoundingClientRect().top))-d.top;v=Math.min(v,ft-90)}const xb=document.querySelector(".xbtn"),ch=c.card.offsetHeight||360;if(xb){const lim=xb.getBoundingClientRect().top-d.top-24-ch+16;if(v>lim)v=lim}return Math.max(10,v)})(),x2=(()=>{let v=Math.max(R,x1+30);const xb=document.querySelector(".xbtn");if(xb){const m=xb.getBoundingClientRect().right-d.left-(c.card.offsetWidth||240);v=Math.max(x1+30,m)}return v})();
       let ev=document.getElementById("elb");if(!ev){duo.insertAdjacentHTML("beforeend",`<svg class="elb" id="elb" aria-hidden="true"><defs><mask id="elbm" maskUnits="userSpaceOnUse"><path class="mk"/></mask></defs><path class="ln" mask="url(#elbm)"/></svg>`);ev=document.getElementById("elb")}
       ev.setAttribute("viewBox",`0 0 ${d.width} ${d.height}`);const P=ev.querySelector(".ln"),M=ev.querySelector(".mk"),D=`M${x0},${y0} H${x1} V${cy} H${x2}`;P.setAttribute("d",D);M.setAttribute("d",D);const L=M.getTotalLength();M.style.strokeDasharray=L+" "+L;ev.querySelector("mask").setAttribute("x",-50);ev.querySelector("mask").setAttribute("y",-50);ev.querySelector("mask").setAttribute("width",d.width+100);ev.querySelector("mask").setAttribute("height",d.height+100);
       ev.style.setProperty("--L",L+"px");ev.classList.remove("on");void ev.offsetWidth;ev.classList.add("on");
