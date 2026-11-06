@@ -1007,6 +1007,22 @@
 .stp p,.stp ul{max-width:480px!important}
 .mw.exploring .mcol{justify-content:center!important;padding-bottom:0}
 .mw.storymode .sdots{top:37vh!important}
+/* wariant 4 – zapisane ujęcia (zakładki) */
+.mw.tabbed .stage{grid-template-columns:minmax(360px,.9fr) minmax(0,1.6fr)!important;align-items:start!important}
+.mw.tabbed .story{padding:1vh 0 0!important;min-height:auto}
+.mw.tabbed .stp{display:none;min-height:0;opacity:1;transform:none;padding:0!important;justify-content:flex-start}
+.mw.tabbed .stp.on{display:flex;animation:stpin .45s ease}
+@keyframes stpin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.mw.tabbed .mcol{position:relative!important;height:min(70vh,620px)!important;padding-bottom:0!important;align-items:flex-start!important;padding-top:0!important}
+.mw.tabbed .duo .scene:not(.sc2){margin-right:calc(var(--s)*1.02)!important;margin-top:calc(var(--s)*.42)!important}
+.mw.tabbed .sdots{display:none!important}
+.vtabs{display:flex;flex-wrap:nowrap;gap:2px;padding:4px;border-radius:14px;background:#fffdf9;border:1px solid var(--line);margin:0 0 30px;width:max-content;max-width:none;position:relative;z-index:3}
+.vtabs button{white-space:nowrap;font:inherit;font-size:12.5px;font-weight:600;padding:7px 11px;border-radius:10px;border:0;background:none;color:var(--ink2);cursor:pointer;transition:background .2s,color .2s}
+.vtabs button:hover{background:rgba(13,13,13,.05)}
+.vtabs button.on{background:var(--ink);color:var(--paper)}
+.mw.tabbed .xbtn{bottom:2vh}
+.mw.exploring .vtabs{display:none}
+@media(max-width:900px){.mw.tabbed .mcol{height:52vh!important}}
 </style>
 </head>
 <body>
@@ -1242,7 +1258,8 @@ setEX(EX);setCX(1);
   function fit(){const w=mcol.clientWidth,hgt=innerHeight;const sz=Math.max(150,Math.min(EXP?420:360,(w-40)/3.25,(hgt-120)/1.75));sc.style.setProperty("--s",sz+"px","important");setTimeout(()=>set(),30)}
   function focus(k){if(k===cur&&!EXP)return;cur=k;const f=steps[k].dataset.focus;steps.forEach((s,i)=>s.classList.toggle("on",i===k));dots.querySelectorAll("button").forEach((b,i)=>b.classList.toggle("on",i===k));
     if(EXP)return;cube.dataset.focus=f==="all"?"":f;const v=VIEW[f]||[SV0.x,SV0.y];go(v[0],v[1])}
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)focus(+e.target.dataset.k)})},{rootMargin:"-36% 0px -62% 0px"});steps.forEach(s=>io.observe(s));
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)focus(+e.target.dataset.k)})},{rootMargin:"-36% 0px -62% 0px"});mw.classList.add("tabbed");story.insertAdjacentHTML("afterbegin",`<div class="vtabs" role="tablist">${["Całość","Dane","Silnik","Model statystyczny","Wyniki","Dokumentacja"].map((n,i)=>`<button type="button" role="tab" data-k="${i}">${n}</button>`).join("")}</div>`);
+  const vt=story.querySelector(".vtabs");vt.addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(!b)return;focus(+b.dataset.k);vt.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b))});vt.firstElementChild.classList.add("on");
   dots.addEventListener("click",e=>{const b=e.target.closest("button");if(b)steps[+b.dataset.k].scrollIntoView({behavior:"smooth",block:"center"})});
   function explore(on){EXP=on;mw.classList.toggle("exploring",on);MODE=on?"dyn":"stab";if(on){cube.dataset.focus="";const top=mcol.parentElement.getBoundingClientRect().top+scrollY;scrollTo({top,behavior:"smooth"})}
     sc.style.opacity=0;setTimeout(()=>{fit();sc.style.opacity=1},620);if(!on){const k=Math.max(0,cur);cur=-1;setTimeout(()=>focus(k),420)}}
