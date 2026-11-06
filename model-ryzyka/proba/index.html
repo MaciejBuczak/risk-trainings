@@ -1014,7 +1014,7 @@
 .mw.tabbed .stp.on{display:flex;animation:stpin .45s ease}
 @keyframes stpin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .mw.tabbed .mcol{position:relative!important;height:min(70vh,620px)!important;padding-bottom:0!important;align-items:flex-start!important;padding-top:0!important}
-.mw.tabbed .duo .scene:not(.sc2){margin-right:calc(var(--s)*1.02)!important;margin-top:calc(var(--s)*.42)!important}
+.mw.tabbed .duo .scene:not(.sc2){margin-right:calc(var(--s)*1.02)!important;margin-top:calc(var(--s)*.58)!important}
 .mw.tabbed .sdots{display:none!important}
 .vtabs{display:flex;flex-wrap:nowrap;gap:2px;padding:4px;border-radius:14px;background:#fffdf9;border:1px solid var(--line);margin:0 0 30px;width:max-content;max-width:none;position:relative;z-index:3}
 .vtabs button{white-space:nowrap;font:inherit;font-size:12.5px;font-weight:600;padding:7px 11px;border-radius:10px;border:0;background:none;color:var(--ink2);cursor:pointer;transition:background .2s,color .2s}
@@ -1024,7 +1024,7 @@
 .mw.exploring .vtabs{display:none}
 @media(max-width:900px){.mw.tabbed .mcol{height:52vh!important}}
 /* tryb solo: po kolei znikają części, zostaje kostka Dane */
-#inr>*,.cube .fa,.cube>.edg{transition:opacity .5s ease}
+#inr>*,.cube .fa,.cube>.edg,.cube .fa .mtag,.cube .fa .dtg{transition:opacity 1.15s cubic-bezier(.4,0,.2,1)!important}
 .cube[data-solo]:not([data-solo=""]) :is(.wbox,.beam.bw,.port:not(.pb):not(.pe)){opacity:0!important}
 .cube[data-solo="2"] :is(.ik,.rod,.mech,.beam.be,.port.pe),.cube[data-solo="3"] :is(.ik,.rod,.mech,.beam.be,.port.pe){opacity:0!important}
 .cube[data-solo="3"] :is(.fa,.edg.e-md,.beam.bd,.port.pb:not(.pbd)){opacity:0!important}
@@ -1266,9 +1266,9 @@ setEX(EX);setCX(1);
     if(EXP)return;if(f==="db"){solo();return}unsolo(()=>{cube.dataset.focus=f==="all"?"":f;const v=VIEW[f]||[SV0.x,SV0.y];go(v[0],v[1])})}
   let st=[],zt=0;const clr=()=>{st.forEach(clearTimeout);st=[];cancelAnimationFrame(zt)};
   function zoom(to,ms,cb){cancelAnimationFrame(zt);const z0=SOLO.z,t0=performance.now();const f=t=>{const k=Math.min(1,(t-t0)/ms),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;SOLO.z=z0+(to-z0)*e;set();if(k<1)zt=requestAnimationFrame(f);else cb&&cb()};zt=requestAnimationFrame(f)}
-  function solo(){clr();cube.dataset.focus="";SOLO.t=[-1.22,.31,0];SOLO.k=2.15;go(-16,24);
-    [1,2,3].forEach((n,i)=>st.push(setTimeout(()=>cube.dataset.solo=n,350+i*550)));st.push(setTimeout(()=>zoom(1,1100),350+3*550))}
-  function unsolo(cb){if(!cube.dataset.solo&&SOLO.z===0){cb();return}clr();zoom(0,800,()=>{cube.dataset.solo="";cb()})}
+  function solo(){clr();cube.dataset.focus="";SOLO.t=[-.62,.31,0];SOLO.k=1.6;go(-16,24);
+    [1,2,3].forEach((n,i)=>st.push(setTimeout(()=>cube.dataset.solo=n,300+i*520)));st.push(setTimeout(()=>zoom(1,1500,()=>{window.__pin=1;window.__openCard&&window.__openCard("b")}),300+2*520+700))}
+  function unsolo(cb){if(window.__pin){window.__pin=0;window.__closeCard&&window.__closeCard()}if(!cube.dataset.solo&&SOLO.z===0){cb();return}clr();zoom(0,800,()=>{cube.dataset.solo="";cb()})}
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)focus(+e.target.dataset.k)})},{rootMargin:"-36% 0px -62% 0px"});mw.classList.add("tabbed");story.insertAdjacentHTML("afterbegin",`<div class="vtabs" role="tablist">${["Całość","Dane","Silnik","Model statystyczny","Wyniki","Dokumentacja"].map((n,i)=>`<button type="button" role="tab" data-k="${i}">${n}</button>`).join("")}</div>`);
   const vt=story.querySelector(".vtabs");vt.addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(!b)return;focus(+b.dataset.k);vt.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b))});vt.firstElementChild.classList.add("on");
   dots.addEventListener("click",e=>{const b=e.target.closest("button");if(b)steps[+b.dataset.k].scrollIntoView({behavior:"smooth",block:"center"})});
@@ -1310,9 +1310,13 @@ setEX(EX);setCX(1);
      e:{tag:()=>[...document.querySelectorAll(".etag:not(.tb2)")].find(t=>t.getBoundingClientRect().width>8),card:document.getElementById("kec"),line:document.getElementById("keline"),on:"keline-on",op:"keopen"}};
   let cur=null,tok=0,tClose=0,shift=0;
   const inR=(el,x,y,m)=>{if(!el)return false;const r=el.getBoundingClientRect();return r.width>0&&x>=r.left-m&&x<=r.right+m&&y>=r.top-m&&y<=r.bottom+m};
-  const faceLeft=()=>Math.min(...[...document.querySelectorAll("#cube .fa, #cube .dbf")].map(f=>f.getBoundingClientRect().left))-shift;
+  const faceLeft=()=>Math.min(...[...document.querySelectorAll(cube.dataset.solo==="3"?"#cube .dbf":"#cube .fa, #cube .dbf")].map(f=>f.getBoundingClientRect().left))-shift;
   function clearAll(){for(const k in C){duo.classList.remove(C[k].on,C[k].op)}}
-  function openCard(k){const my=++tok;clearAll();cur=k;const need=Math.max(0,KW+40-faceLeft()),moved=need!==shift;shift=need;duo.style.transform=shift?`translateX(${shift}px)`:"";
+  function openCard(k){if(cube.dataset.solo==="3"){const my=++tok;clearAll();cur=k;shift=0;duo.style.transform="";const c=C[k],t=c.tag();if(!t)return;
+      const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),y=r.top+r.height/2-d.top,R=Math.max(...[...document.querySelectorAll("#cube .dbf")].map(f=>f.getBoundingClientRect().right))-d.left+36;
+      c.line.style.top=y+"px";c.line.style.left=(r.right-d.left)+"px";c.line.style.width=Math.max(0,R-(r.right-d.left))+"px";c.line.style.transformOrigin="0 50%";c.card.style.left=R+"px";{const ch=c.card.offsetHeight||300;c.card.style.top=Math.max(-20,y-ch/2)+"px"}
+      duo.classList.add(c.on);setTimeout(()=>{if(my===tok)duo.classList.add(c.op)},650);return}
+    C[k].line.style.transformOrigin="";const my=++tok;clearAll();cur=k;const need=Math.max(0,KW+40-faceLeft()),moved=need!==shift;shift=need;duo.style.transform=shift?`translateX(${shift}px)`:"";
     setTimeout(()=>{if(my!==tok)return;const c=C[k],t=c.tag();if(!t)return;const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),y=r.top+r.height/2-d.top,cr=faceLeft()+shift-d.left-14;
       c.line.style.top=y+"px";c.line.style.left=cr+"px";c.line.style.width=Math.max(0,r.left-d.left-cr)+"px";c.card.style.left=(cr-KW)+"px";{const ch=c.card.offsetHeight||300,dh=duo.offsetHeight;let tp=y-28;if(tp+ch>dh+10)tp=y+28-ch;c.card.style.top=Math.max(-20,tp)+"px"}
       duo.classList.add(c.on);setTimeout(()=>{if(my===tok)duo.classList.add(c.op)},650)},moved?430:0)}
@@ -1321,7 +1325,7 @@ setEX(EX);setCX(1);
     let hit=inR(C.m.tag(),x,y,4)?"m":inR(C.w.tag(),x,y,4)?"w":inR(C.d.tag(),x,y,4)?"d":inR(C.b.tag(),x,y,4)?"b":inR(C.e.tag(),x,y,4)?"e":null;
     if(!hit&&cur&&(inR(C[cur].card,x,y,6)||inR(C[cur].line,x,y,10)))hit=cur;
     if(hit){clearTimeout(tClose);tClose=0;if(hit!==cur)openCard(hit)}
-    else if(cur&&!tClose)tClose=setTimeout(()=>{tClose=0;closeCard()},300)});
+    else if(cur&&!tClose&&!window.__pin)tClose=setTimeout(()=>{tClose=0;closeCard()},300)});window.__openCard=k=>{clearTimeout(tClose);tClose=0;openCard(k)};window.__closeCard=closeCard;
   window.__kc=null;})();
 
 
