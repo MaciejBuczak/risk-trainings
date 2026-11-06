@@ -1034,10 +1034,8 @@
 @keyframes elb{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
 /* walce wyraźne w powiększeniu Dane */
 .cube[data-solo="3"] .db{transform-style:preserve-3d}
-.cube[data-solo="3"] .vl{transform-style:preserve-3d;width:1.3px;left:-.65px;background:color-mix(in srgb,var(--c) 50%,transparent)}
+.cube[data-solo="3"] .vl{transform-style:preserve-3d}
 .cube[data-solo="3"] .vl::after{content:"";position:absolute;inset:0;background:inherit;transform:rotateY(90deg)}
-.cube[data-solo="3"] .ring{border-width:1.7px}
-.cube[data-solo="3"] .ring:not(.lid){border-color:color-mix(in srgb,var(--c) 85%,transparent)}
 </style>
 </head>
 <body>
@@ -1323,8 +1321,8 @@ setEX(EX);setCX(1);
   const faceLeft=()=>Math.min(...[...document.querySelectorAll(cube.dataset.solo==="3"?"#cube .dbf":"#cube .fa, #cube .dbf")].map(f=>f.getBoundingClientRect().left))-shift;
   function clearAll(){for(const k in C){duo.classList.remove(C[k].on,C[k].op)}const ev=document.getElementById("elb");if(ev)ev.classList.remove("on")}
   function openCard(k){if(cube.dataset.solo==="3"){const my=++tok;clearAll();cur=k;shift=0;duo.style.transform="";const c=C[k],t=c.tag();if(!t)return;
-      const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),y=r.top+r.height/2-d.top,R=Math.max(...[...document.querySelectorAll("#cube .dbf")].map(f=>f.getBoundingClientRect().right))-d.left+36;
-      const hd=t.querySelector(".mt-h").getBoundingClientRect(),x0=hd.right-d.left,y0=hd.top+hd.height/2-d.top,x1=x0+22,cy=(()=>{let v=y0-130;const xb=document.querySelector(".xbtn"),ch=c.card.offsetHeight||360;if(xb){const lim=xb.getBoundingClientRect().top-d.top-24-ch+16;if(v>lim)v=lim}return Math.max(10,v)})(),x2=Math.max(R,x1+30);
+      const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),y=r.top+r.height/2-d.top,R=Math.max(...[...document.querySelectorAll("#cube .dbf")].map(f=>f.getBoundingClientRect().right))-d.left+90;
+      const hd=t.querySelector(".mt-h").getBoundingClientRect(),x0=hd.right-d.left,y0=hd.top+hd.height/2-d.top,x1=x0+22,cy=(()=>{let v=y0-130;const xb=document.querySelector(".xbtn"),ch=c.card.offsetHeight||360;if(xb){const lim=xb.getBoundingClientRect().top-d.top-24-ch+16;if(v>lim)v=lim}return Math.max(10,v)})(),x2=(()=>{let v=Math.max(R,x1+30);const xb=document.querySelector(".xbtn");if(xb){const m=xb.getBoundingClientRect().right-d.left-(c.card.offsetWidth||240);if(v>m)v=Math.max(x1+30,m)}return v})();
       let ev=document.getElementById("elb");if(!ev){duo.insertAdjacentHTML("beforeend",`<svg class="elb" id="elb" aria-hidden="true"><path/></svg>`);ev=document.getElementById("elb")}
       ev.setAttribute("viewBox",`0 0 ${d.width} ${d.height}`);const P=ev.querySelector("path");P.setAttribute("d",`M${x0},${y0} H${x1} V${cy} H${x2}`);const L=P.getTotalLength();P.style.strokeDasharray=`6 6`;P.style.transition="none";P.style.clipPath="";
       ev.style.setProperty("--L",L);ev.classList.remove("on");void ev.offsetWidth;ev.classList.add("on");
