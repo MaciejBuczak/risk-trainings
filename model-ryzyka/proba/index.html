@@ -937,6 +937,14 @@
 .wtb{position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d}
 .wt{position:absolute;left:0;top:0;box-sizing:border-box;border:1.2px solid rgba(168,105,76,.75);background:rgba(255,253,249,.35)}
 .wt.t{background:linear-gradient(rgba(168,105,76,.22),rgba(168,105,76,.22)) 0 0/100% 22% no-repeat,repeating-linear-gradient(180deg,transparent 0 calc(26% - 1px),rgba(168,105,76,.5) calc(26% - 1px) 26%),repeating-linear-gradient(90deg,transparent 0 calc(33.3% - 1px),rgba(168,105,76,.45) calc(33.3% - 1px) 33.3%),rgba(255,253,249,.6)}
+.vmode{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.vm-t{display:inline-flex;padding:3px;border-radius:999px;border:1px solid var(--line);background:#fffdf9}
+.vm-t button{font:inherit;font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:999px;border:0;background:none;cursor:pointer;color:var(--ink2)}
+.vm-t button.on{background:var(--ink);color:var(--paper)}
+.vm-a{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.vm-s{font:inherit;font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;border:1px dashed var(--ink2);background:#fff;cursor:pointer}
+.vmode[data-m="stab"] .vm-s,.vmode[data-m="stab"] .vm-a{display:none}
+.scene.locked{cursor:default!important}
 </style>
 </head>
 <body>
@@ -971,6 +979,7 @@
         <button type="button" id="biso">Widok bryły</button>
       </div>
       <div class="hint">Strzałki obracają co 30° · możesz też przeciągnąć bryłę</div>
+      <div class="vmode" id="vmode"><div class="vm-t"><button type="button" data-vm="stab">Stabilne</button><button type="button" data-vm="dyn">Dynamiczne</button></div><span class="vm-a" id="vma"></span><button type="button" class="vm-s" id="vms">Zapisz ten widok jako stabilny</button></div>
       <div class="inn" id="inn"></div>
     </div>
     <div class="side r" id="sr"></div>
@@ -1129,7 +1138,9 @@ function setCX(v){CX=v;cube.classList.toggle("simple",!v);HUB.n=v?"ECL":"Model s
 inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setCX(+b.dataset.mx);const mvb=e.target.closest("[data-mv]");if(mvb){MV=+mvb.dataset.mv;try{localStorage.setItem("rt_mr_mv",MV)}catch(_){}setEX(1);return}const x=e.target.closest("[data-sv]");if(x){SV=+x.dataset.sv;try{localStorage.setItem("rt_mr_sv",SV)}catch(_){}setEX(1)}});
 function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));renderInner()}
 /* obrót – tylko na żądanie */
-let rx=-22,ry=-34;
+let SV0={x:-22,y:-34};try{const v=JSON.parse(localStorage.getItem("rt_mrp_view")||"null");if(v&&isFinite(v.x)&&isFinite(v.y))SV0=v}catch(_){}
+let MODE="stab";try{MODE=localStorage.getItem("rt_mrp_mode")||"stab"}catch(_){}
+let rx=SV0.x,ry=SV0.y;
 const NDS=[...cube.querySelectorAll(".nd")];let YB=[];
 function place(){}
 let set=()=>{cube.classList.remove("ease");cube.classList.toggle("fr",Math.abs(rx)<16);YB.forEach(b=>b.style.transform=`rotateY(${-ry}deg)`);cube.dataset.lf=Math.round((((-ry)%360)+360)%360/90)%4;cube.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;NDS.forEach(n=>{n.style.transition="none";n.style.transform=`${n.dataset.t} rotateY(${-ry}deg) rotateX(${-rx}deg)`});place()};set();addEventListener("resize",place);
@@ -1140,7 +1151,7 @@ function go(x,y){anim(x,near(y))}
 document.getElementById("ctl").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(b){const[a,c]=b.dataset.r.split(",").map(Number);anim(Math.max(-90,Math.min(90,rx+a)),ry+c);return}if(e.target.closest("#biso"))go(-22,-34)});
 function pick(id,turn){const f=AI[id];document.querySelectorAll("[data-f]").forEach(e=>e.classList.toggle("on",e.dataset.f===id));document.querySelectorAll(".rod").forEach(r=>r.classList.toggle("on",r.dataset.l.split(" ").includes(id)));if(turn&&f.v)go(f.v[0],f.v[1]);panel(f)}
 let drag=null,moved=0;
-scene.addEventListener("pointerdown",e=>{cancelAnimationFrame(tw);drag={x:e.clientX,y:e.clientY,rx,ry};moved=0;scene.setPointerCapture(e.pointerId);scene.classList.add("drag")});
+scene.addEventListener("pointerdown",e=>{if(MODE==="stab")return;cancelAnimationFrame(tw);drag={x:e.clientX,y:e.clientY,rx,ry};moved=0;scene.setPointerCapture(e.pointerId);scene.classList.add("drag")});
 scene.addEventListener("pointermove",e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;moved=Math.max(moved,Math.abs(dx)+Math.abs(dy));if(moved<4)return;ry=drag.ry+dx*.4;rx=Math.max(-90,Math.min(90,drag.rx-dy*.4));set()});
 scene.addEventListener("pointerup",e=>{scene.classList.remove("drag");const d=drag;drag=null;if(d&&moved<4){scene.releasePointerCapture(e.pointerId);const el=document.elementFromPoint(e.clientX,e.clientY),t=el&&el.closest("[data-f]");if(t)pick(t.dataset.f,false)}});
 scene.addEventListener("pointercancel",()=>{drag=null;scene.classList.remove("drag")});
@@ -1155,6 +1166,13 @@ function panel(f){pan.style.setProperty("--c",f.col);
   pan.innerHTML=`<div class="pan-h"><div><span class="kick">${f.p}${f.v?" bryły":""} · ${f.c.map(k=>"#"+k).join(" · ")}</span><h2>${E(f.n)}</h2></div><p>${E(f.d)}</p></div><div class="cmp">${f.c.map(k=>{const r=MI[k],sgs=f.sg&&f.sg[k]?r[4].filter(x=>f.sg[k].includes(x[0])):r[4];return`<div class="cm" style="--k:${COL[k]}"><div class="cm-h"><span class="ic">${sv(r[2])}</span><span><em>#${r[0]}</em><b>${E(r[1])}</b><span>${f.sg&&f.sg[k]?"Wybrane: "+E(f.sg[k].join(", ")):E(r[3])}</span></span></div><div class="sg">${sgs.map(s=>`<div class="sgb">${s[0]?`<span>${E(s[0])}</span>`:""}<div class="it">${s[1].map(i=>`<i>${E(i[0])}${i[1]?`<small>${E(i[1])}</small>`:""}</i>`).join("")}</div></div>`).join("")}</div></div>`}).join("")}</div>`}
 document.getElementById("sl").innerHTML=FACES.slice(0,3).map(fb).join("");document.getElementById("sr").innerHTML=FACES.slice(3).map(fb).join("");
 setEX(EX);setCX(1);
+/* Stabilne / Dynamiczne */
+(()=>{const box=document.getElementById("vmode"),a=document.getElementById("vma"),sv=document.getElementById("vms"),sc=document.getElementById("scene");
+  const ui=()=>{box.querySelectorAll("[data-vm]").forEach(b=>b.classList.toggle("on",b.dataset.vm===MODE));box.dataset.m=MODE;sc.classList.toggle("locked",MODE==="stab");a.textContent=`widok: X ${Math.round(rx)}° · Y ${Math.round(((ry%360)+540)%360-180)}°`};
+  box.addEventListener("click",e=>{const b=e.target.closest("[data-vm]");if(b){MODE=b.dataset.vm;try{localStorage.setItem("rt_mrp_mode",MODE)}catch(_){}if(MODE==="stab")go(SV0.x,SV0.y);ui()}});
+  sv.addEventListener("click",()=>{SV0={x:Math.round(rx),y:Math.round(((ry%360)+540)%360-180)};try{localStorage.setItem("rt_mrp_view",JSON.stringify(SV0))}catch(_){}MODE="stab";try{localStorage.setItem("rt_mrp_mode",MODE)}catch(_){}ui();sv.textContent="Zapisano ✓";setTimeout(()=>sv.textContent="Zapisz ten widok jako stabilny",1500)});
+  const o=set;set=function(){o();ui()};ui()})();
+
 /* katalog koncepcji – kartoteka z kartami obszarów */
 (()=>{const K=window.RT_KON;if(!K)return;const el=document.getElementById("cat3"),wrap=document.getElementById("cat3s"),duo=document.getElementById("duo"),P=document.getElementById("catp"),LN=document.getElementById("catln");
   const c=v=>`calc(var(--c3)*${v})`,dom=K.dom,cnt=d=>K.c.filter(x=>x.d===d).length,W=1,D=1.25,H=.34;
