@@ -920,6 +920,7 @@
 .ctag .mt-h{background:#5c564d!important;font-size:calc(var(--c3)*.028)!important}.ctag{border-color:#5c564d!important}
 .catln{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2}
 .catln path{fill:none;stroke:#bf8165;stroke-width:1.4;stroke-dasharray:5 6;opacity:.85}
+.tabs .tablink{font-size:14px;font-weight:600;padding:9px 22px;border-radius:999px;color:var(--ink2);text-decoration:none;display:inline-flex;align-items:center}.tabs .tablink:hover,.tabs .tablink.on{background:var(--ink);color:var(--paper)}
 </style>
 </head>
 <body>
@@ -938,7 +939,7 @@
 </div></section>
 
 <div class="mw">
-  <div class="tabs" id="tabs" role="tablist"><button type="button" role="tab" data-tab="model">Model</button><button type="button" role="tab" data-tab="dep">Wdrożenie modelu</button></div>
+  <div class="tabs" id="tabs" role="tablist"><button type="button" role="tab" data-tab="model">Model</button><button type="button" role="tab" data-tab="dep">Wdrożenie modelu</button><a class="tablink" href="proba/">Model-próba</a></div>
   <div class="rozb" id="rozb"><button type="button" class="rz-go" id="rzgo">Rozłóż model na warstwy</button></div>
   <div class="stage">
     <div class="side l" id="sl"></div>
@@ -1280,7 +1281,7 @@ requestAnimationFrame(flow);
 function setDV(v){requestAnimationFrame(()=>requestAnimationFrame(links));DV=v;depv.dataset.dv=v;document.querySelectorAll("[data-dv]").forEach(b=>b.classList.toggle("on",+b.dataset.dv===v));try{localStorage.setItem("rt_mr_dv",v)}catch(_){}requestAnimationFrame(links)}
 document.getElementById("dpv").addEventListener("click",e=>{const b=e.target.closest("[data-dv]");if(b)setDV(+b.dataset.dv)});addEventListener("resize",()=>requestAnimationFrame(links));
 /* zakładki */
-const mw=document.querySelector(".mw"),tabs=document.getElementById("tabs");let TAB="model";try{TAB=localStorage.getItem("rt_mr_tab")||"model"}catch(_){}
+const mw=document.querySelector(".mw"),tabs=document.getElementById("tabs");let TAB="model";try{TAB=localStorage.getItem("rt_mr_tab")||"model"}catch(_){}if(location.hash==="#wdrozenie")TAB="dep";else if(location.hash==="#model")TAB="model";
 function setTab(t){TAB=t;mw.dataset.tab=t;tabs.querySelectorAll("[data-tab]").forEach(b=>{const on=b.dataset.tab===t;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});try{localStorage.setItem("rt_mr_tab",t)}catch(_){}
   if(t==="dep"){cloneModel();setDV(DV);flT0=performance.now();const sel=document.querySelector(".fb.on");if(sel)pick("env",false)}else if(["env","proc"].includes((document.querySelector(".on[data-f]")||{}).dataset?.f))pick("stat",false);
   requestAnimationFrame(()=>window.dispatchEvent(new Event("resize")))}
