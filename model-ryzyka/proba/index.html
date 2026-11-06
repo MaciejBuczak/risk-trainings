@@ -1023,6 +1023,11 @@
 .mw.tabbed .xbtn{bottom:2vh}
 .mw.exploring .vtabs{display:none}
 @media(max-width:900px){.mw.tabbed .mcol{height:52vh!important}}
+/* tryb solo: po kolei znikają części, zostaje kostka Dane */
+#inr>*,.cube .fa,.cube>.edg{transition:opacity .5s ease}
+.cube[data-solo]:not([data-solo=""]) :is(.wbox,.beam.bw,.port:not(.pb):not(.pe)){opacity:0!important}
+.cube[data-solo="2"] :is(.ik,.rod,.mech,.beam.be,.port.pe),.cube[data-solo="3"] :is(.ik,.rod,.mech,.beam.be,.port.pe){opacity:0!important}
+.cube[data-solo="3"] :is(.fa,.edg.e-md,.beam.bd,.port.pb:not(.pbd)){opacity:0!important}
 </style>
 </head>
 <body>
@@ -1184,7 +1189,7 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
   const P=id=>id==="stat"?[0,0,0]:id==="db"?[DB.at[0],DB.at[1]-DB.h/2,DB.at[2]]:id==="wyn"?tgt:MODS.find(m=>m.id===id).at;
   const HS=id=>id==="stat"?.26*(CX?.6:1)/2:id==="db"||id==="wyn"?0:MODS.find(m=>m.id===id).k/2;
   let h=[...LINKS.map(l=>[...l,""]),...FEEDS.map(l=>[...l,"feed"]),...RES.map(l=>[...l,"feed res"])].map(([a,b,cl])=>{const m=[a,b].some(x=>!["stat","db","wyn"].includes(x));return rod(P(a),P(b),cl+(m?" m":""),a+" "+b,HS(a),HS(b))}).join("");
-  {const xr=-1.22+.42;DBS.forEach(([x,z])=>{const y=DB.at[1];h+=`<div class="port pb" style="transform:${T3([-.5,y,z])} rotateY(90deg)"></div><div class="port pb" style="transform:${T3([xr,y,z])} rotateY(90deg)"></div>`+beam([xr,y,z],[-.5,y,z],"bd")})}
+  {const xr=-1.22+.42;DBS.forEach(([x,z])=>{const y=DB.at[1];h+=`<div class="port pb" style="transform:${T3([-.5,y,z])} rotateY(90deg)"></div><div class="port pb pbd" style="transform:${T3([xr,y,z])} rotateY(90deg)"></div>`+beam([xr,y,z],[-.5,y,z],"bd")})}
   {const M=[0,.33,0];let mh="";
     const W=.44,Hh=.12,c=`calc(var(--s)*`,F=(w,h,t,cl,b="")=>`<i class="mf2 ${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}">${b}</i>`;
     let top="",inner="";const PL=(y,body)=>`<div class="pl3" style="transform:translateY(${c}${y})) rotateX(90deg)">${body}</div>`;
@@ -1223,12 +1228,13 @@ function setCX(v){CX=v;cube.classList.toggle("simple",!v);HUB.n=v?"ECL":"Model s
 inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setCX(+b.dataset.mx);const mvb=e.target.closest("[data-mv]");if(mvb){MV=+mvb.dataset.mv;try{localStorage.setItem("rt_mr_mv",MV)}catch(_){}setEX(1);return}const x=e.target.closest("[data-sv]");if(x){SV=+x.dataset.sv;try{localStorage.setItem("rt_mr_sv",SV)}catch(_){}setEX(1)}});
 function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));renderInner()}
 /* obrót – tylko na żądanie */
+let SOLO={z:0,t:[0,0,0],k:1};
 let SV0={x:-22,y:-34};try{const v=JSON.parse(localStorage.getItem("rt_mrp_view")||"null");if(v&&isFinite(v.x)&&isFinite(v.y))SV0=v}catch(_){}
 let MODE="stab";try{MODE=localStorage.getItem("rt_mrp_mode")||"stab"}catch(_){}
 let rx=SV0.x,ry=SV0.y;
 const NDS=[...cube.querySelectorAll(".nd")];let YB=[];
 function place(){}
-let set=()=>{cube.classList.remove("ease");cube.classList.toggle("fr",Math.abs(rx)<16);YB.forEach(b=>b.style.transform=`rotateY(${-ry}deg)`);cube.dataset.lf=Math.round((((-ry)%360)+360)%360/90)%4;cube.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;NDS.forEach(n=>{n.style.transition="none";n.style.transform=`${n.dataset.t} rotateY(${-ry}deg) rotateX(${-rx}deg)`});place()};set();addEventListener("resize",place);
+let set=()=>{cube.classList.remove("ease");cube.classList.toggle("fr",Math.abs(rx)<16);YB.forEach(b=>b.style.transform=`rotateY(${-ry}deg)`);cube.dataset.lf=Math.round((((-ry)%360)+360)%360/90)%4;cube.style.transform=`scale(${1+(SOLO.k-1)*SOLO.z}) rotateX(${rx}deg) rotateY(${ry}deg) translate3d(calc(var(--s)*${(-SOLO.t[0]*SOLO.z).toFixed(4)}),calc(var(--s)*${(-SOLO.t[1]*SOLO.z).toFixed(4)}),calc(var(--s)*${(-SOLO.t[2]*SOLO.z).toFixed(4)}))`;NDS.forEach(n=>{n.style.transition="none";n.style.transform=`${n.dataset.t} rotateY(${-ry}deg) rotateX(${-rx}deg)`});place()};set();addEventListener("resize",place);
 const near=v=>ry+((((v-ry)%360)+540)%360-180);
 let tw=0;function anim(x,y){cancelAnimationFrame(tw);const x0=rx,y0=ry,t0=performance.now(),D=matchMedia("(prefers-reduced-motion: reduce)").matches?1:700;
   const st=t=>{const k=Math.min(1,(t-t0)/D),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;rx=x0+(x-x0)*e;ry=y0+(y-y0)*e;set();if(k<1)tw=requestAnimationFrame(st)};tw=requestAnimationFrame(st)}
@@ -1257,11 +1263,16 @@ setEX(EX);setCX(1);
   let cur=-1,EXP=false;mw.classList.add("storymode");
   function fit(){const w=mcol.clientWidth,hgt=innerHeight;const sz=Math.max(150,Math.min(EXP?420:360,(w-40)/3.25,(hgt-120)/1.75));sc.style.setProperty("--s",sz+"px","important");setTimeout(()=>set(),30)}
   function focus(k){if(k===cur&&!EXP)return;cur=k;const f=steps[k].dataset.focus;steps.forEach((s,i)=>s.classList.toggle("on",i===k));dots.querySelectorAll("button").forEach((b,i)=>b.classList.toggle("on",i===k));
-    if(EXP)return;cube.dataset.focus=f==="all"?"":f;const v=VIEW[f]||[SV0.x,SV0.y];go(v[0],v[1])}
+    if(EXP)return;if(f==="db"){solo();return}unsolo(()=>{cube.dataset.focus=f==="all"?"":f;const v=VIEW[f]||[SV0.x,SV0.y];go(v[0],v[1])})}
+  let st=[],zt=0;const clr=()=>{st.forEach(clearTimeout);st=[];cancelAnimationFrame(zt)};
+  function zoom(to,ms,cb){cancelAnimationFrame(zt);const z0=SOLO.z,t0=performance.now();const f=t=>{const k=Math.min(1,(t-t0)/ms),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;SOLO.z=z0+(to-z0)*e;set();if(k<1)zt=requestAnimationFrame(f);else cb&&cb()};zt=requestAnimationFrame(f)}
+  function solo(){clr();cube.dataset.focus="";SOLO.t=[-1.22,.31,0];SOLO.k=2.15;go(-16,24);
+    [1,2,3].forEach((n,i)=>st.push(setTimeout(()=>cube.dataset.solo=n,350+i*550)));st.push(setTimeout(()=>zoom(1,1100),350+3*550))}
+  function unsolo(cb){if(!cube.dataset.solo&&SOLO.z===0){cb();return}clr();zoom(0,800,()=>{cube.dataset.solo="";cb()})}
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)focus(+e.target.dataset.k)})},{rootMargin:"-36% 0px -62% 0px"});mw.classList.add("tabbed");story.insertAdjacentHTML("afterbegin",`<div class="vtabs" role="tablist">${["Całość","Dane","Silnik","Model statystyczny","Wyniki","Dokumentacja"].map((n,i)=>`<button type="button" role="tab" data-k="${i}">${n}</button>`).join("")}</div>`);
   const vt=story.querySelector(".vtabs");vt.addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(!b)return;focus(+b.dataset.k);vt.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b))});vt.firstElementChild.classList.add("on");
   dots.addEventListener("click",e=>{const b=e.target.closest("button");if(b)steps[+b.dataset.k].scrollIntoView({behavior:"smooth",block:"center"})});
-  function explore(on){EXP=on;mw.classList.toggle("exploring",on);MODE=on?"dyn":"stab";if(on){cube.dataset.focus="";const top=mcol.parentElement.getBoundingClientRect().top+scrollY;scrollTo({top,behavior:"smooth"})}
+  function explore(on){if(on){clr();SOLO.z=0;cube.dataset.solo=""}EXP=on;mw.classList.toggle("exploring",on);MODE=on?"dyn":"stab";if(on){cube.dataset.focus="";const top=mcol.parentElement.getBoundingClientRect().top+scrollY;scrollTo({top,behavior:"smooth"})}
     sc.style.opacity=0;setTimeout(()=>{fit();sc.style.opacity=1},620);if(!on){const k=Math.max(0,cur);cur=-1;setTimeout(()=>focus(k),420)}}
   document.getElementById("xbtn").addEventListener("click",()=>explore(true));document.getElementById("xback").addEventListener("click",()=>explore(false));
   addEventListener("keydown",e=>{if(e.key==="Escape"&&EXP)explore(false)});addEventListener("resize",fit);fit();focus(0)})();
