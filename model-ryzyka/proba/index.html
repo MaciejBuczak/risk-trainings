@@ -1043,6 +1043,7 @@
 .cube[data-solo="3"][data-sk="eng"] .et-h{font-size:calc(var(--s)*.0122)}
 .mw.tabbed:not(.exploring) .duo.kwopen #kwc{clip-path:inset(-60px -60px -60px -60px round 12px)!important}
 .mw.tabbed .story{position:relative;z-index:6;pointer-events:none}.mw.tabbed .story .vtabs,.mw.tabbed .story a,.mw.tabbed .story button{pointer-events:auto}
+#cube .fa{box-shadow:none!important;background:none!important}
 </style>
 </head>
 <body>
@@ -1243,7 +1244,7 @@ function setCX(v){CX=v;cube.classList.toggle("simple",!v);HUB.n=v?"ECL":"Model s
 inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setCX(+b.dataset.mx);const mvb=e.target.closest("[data-mv]");if(mvb){MV=+mvb.dataset.mv;try{localStorage.setItem("rt_mr_mv",MV)}catch(_){}setEX(1);return}const x=e.target.closest("[data-sv]");if(x){SV=+x.dataset.sv;try{localStorage.setItem("rt_mr_sv",SV)}catch(_){}setEX(1)}});
 function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));renderInner()}
 /* obrót – tylko na żądanie */
-let SOLO={z:0,t:[0,0,0],k:1,b:0,ox:0,oy:0};const BASE={k:1.32,o:[-.66,.2]};
+let SOLO={z:0,t:[0,0,0],k:1,b:0,ox:0,oy:0};const BASE={k:1.32,o:[-.76,.32]};
 let SV0={x:-22,y:-34};try{const v=JSON.parse(localStorage.getItem("rt_mrp_view")||"null");if(v&&isFinite(v.x)&&isFinite(v.y))SV0=v}catch(_){}
 let MODE="stab";try{MODE=localStorage.getItem("rt_mrp_mode")||"stab"}catch(_){}
 let rx=SV0.x,ry=SV0.y;
