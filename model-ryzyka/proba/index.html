@@ -1000,6 +1000,13 @@
 .edg i{position:absolute;inset:0;background:var(--ec)}
 .edg.e-md{--ec:rgba(13,13,13,.48);--ew:1.7px}.edg.e-wy{--ec:rgba(168,105,76,.85)}.edg.e-db{--ec:rgba(79,115,144,.82)}.edg.e-en{--ec:rgba(92,86,77,.85);--ew:1.5px}
 .v2 .fa,.wbf,.dbf,.mf2{border-color:transparent!important}
+.mw.storymode .stage{grid-template-columns:minmax(340px,.95fr) minmax(0,1.5fr)!important;gap:0 24px!important}
+.mw.storymode .mcol{justify-content:flex-end!important;padding-bottom:26vh;box-sizing:border-box}
+.mw.storymode .duo .scene:not(.sc2){margin-right:calc(var(--s)*1.02)!important}
+.story{padding:5vh 0 45vh!important}
+.stp p,.stp ul{max-width:480px!important}
+.mw.exploring .mcol{justify-content:center!important;padding-bottom:0}
+.mw.storymode .sdots{top:37vh!important}
 </style>
 </head>
 <body>
@@ -1235,7 +1242,7 @@ setEX(EX);setCX(1);
   function fit(){const w=mcol.clientWidth,hgt=innerHeight;const sz=Math.max(150,Math.min(EXP?420:360,(w-40)/3.25,(hgt-120)/1.75));sc.style.setProperty("--s",sz+"px","important");setTimeout(()=>set(),30)}
   function focus(k){if(k===cur&&!EXP)return;cur=k;const f=steps[k].dataset.focus;steps.forEach((s,i)=>s.classList.toggle("on",i===k));dots.querySelectorAll("button").forEach((b,i)=>b.classList.toggle("on",i===k));
     if(EXP)return;cube.dataset.focus=f==="all"?"":f;const v=VIEW[f]||[SV0.x,SV0.y];go(v[0],v[1])}
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)focus(+e.target.dataset.k)})},{rootMargin:"-45% 0px -45% 0px"});steps.forEach(s=>io.observe(s));
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)focus(+e.target.dataset.k)})},{rootMargin:"-36% 0px -62% 0px"});steps.forEach(s=>io.observe(s));
   dots.addEventListener("click",e=>{const b=e.target.closest("button");if(b)steps[+b.dataset.k].scrollIntoView({behavior:"smooth",block:"center"})});
   function explore(on){EXP=on;mw.classList.toggle("exploring",on);MODE=on?"dyn":"stab";if(on){cube.dataset.focus="";const top=mcol.parentElement.getBoundingClientRect().top+scrollY;scrollTo({top,behavior:"smooth"})}
     sc.style.opacity=0;setTimeout(()=>{fit();sc.style.opacity=1},620);if(!on){const k=Math.max(0,cur);cur=-1;setTimeout(()=>focus(k),420)}}
