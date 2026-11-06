@@ -1082,7 +1082,7 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
   const P=id=>id==="stat"?[0,0,0]:id==="db"?[DB.at[0],DB.at[1]-DB.h/2,DB.at[2]]:id==="wyn"?tgt:MODS.find(m=>m.id===id).at;
   const HS=id=>id==="stat"?.26*(CX?.6:1)/2:id==="db"||id==="wyn"?0:MODS.find(m=>m.id===id).k/2;
   let h=[...LINKS.map(l=>[...l,""]),...FEEDS.map(l=>[...l,"feed"]),...RES.map(l=>[...l,"feed res"])].map(([a,b,cl])=>{const m=[a,b].some(x=>!["stat","db","wyn"].includes(x));return rod(P(a),P(b),cl+(m?" m":""),a+" "+b,HS(a),HS(b))}).join("");
-  {DBS.forEach(([x,z])=>{const y=DB.at[1];h+=`<div class="port pb" style="transform:${T3([-.5,y,z])} rotateY(90deg)"></div>`+beam([x-1.22+DB.r,y,z],[-.5,y,z],"bd")})}
+  {const xr=-1.22+.42;DBS.forEach(([x,z])=>{const y=DB.at[1];h+=`<div class="port pb" style="transform:${T3([-.5,y,z])} rotateY(90deg)"></div><div class="port pb" style="transform:${T3([xr,y,z])} rotateY(90deg)"></div>`+beam([xr,y,z],[-.5,y,z],"bd")})}
   {const M=[0,.33,0];let mh="";
     const W=.44,Hh=.12,c=`calc(var(--s)*`,F=(w,h,t,cl,b="")=>`<i class="mf2 ${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}">${b}</i>`;
     let top="",inner="";const PL=(y,body)=>`<div class="pl3" style="transform:translateY(${c}${y})) rotateX(90deg)">${body}</div>`;
