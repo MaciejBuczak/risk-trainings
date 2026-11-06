@@ -1045,6 +1045,7 @@
 .mw.tabbed .story{position:relative;z-index:6;pointer-events:none}.mw.tabbed .story .vtabs,.mw.tabbed .story a,.mw.tabbed .story button{pointer-events:auto}
 #cube .fa{box-shadow:none!important;background:none!important}
 #cube{inset:auto;left:50%;top:50%;width:var(--s);height:var(--s);margin:calc(var(--s)/-2) 0 0 calc(var(--s)/-2)}
+#cube .kf{border-color:transparent!important}.edg.e-ik{--ec:var(--c);--ew:1.5px}.ik.on .edg.e-ik{--ew:2.5px}
 </style>
 </head>
 <body>
@@ -1173,7 +1174,7 @@ const ALL=[...FACES,...INNER,DB,WY],AI={};ALL.forEach(f=>AI[f.id]=f);
 const cube=document.getElementById("cube"),scene=document.getElementById("scene");
 const H="calc(var(--s)/2)";
 const corners=[];for(const x of[-1,1])for(const y of[-1,1])for(const z of[-1,1])corners.push([x,y,z]);
-const edgeBox=(w,h,d,cl)=>{const c=v=>`calc(var(--s)*${v})`,o=[];
+const edgeBox=(w,h,d,cl,u="--s")=>{const c=v=>`calc(var(${u})*${v})`,o=[];
   for(const y of[-h/2,h/2])for(const z of[-d/2,d/2])o.push(`<div class="edg ${cl}" style="width:${c(w)};transform:translate3d(${c(-w/2)},${c(y)},${c(z)})"><i></i><i style="transform:rotateX(90deg)"></i></div>`);
   for(const x of[-w/2,w/2])for(const z of[-d/2,d/2])o.push(`<div class="edg ${cl}" style="width:${c(h)};transform:translate3d(${c(x)},${c(-h/2)},${c(z)}) rotateZ(90deg)"><i></i><i style="transform:rotateX(90deg)"></i></div>`);
   for(const x of[-w/2,w/2])for(const y of[-h/2,h/2])o.push(`<div class="edg ${cl}" style="width:${c(d)};transform:translate3d(${c(x)},${c(y)},${c(-d/2)}) rotateY(-90deg)"><i></i><i style="transform:rotateX(90deg)"></i></div>`);
@@ -1227,7 +1228,7 @@ function renderInner(){const X=EXITS[EX];WY.at=X.at;const tgt=X.port||X.at;
   if(X.out)h+=rod([X.at[0],X.at[1]-WY.h/2,X.at[2]],X.out,"feed res out","wyn out")+`<div class="port" style="transform:${T3([0,-.5,0])} rotateX(90deg)"></div><div class="arw" style="transform:${T3(X.out)}"><div class="yb ah" data-t="">${sv("up")}<small>do odpisów, raportów i decyzji</small></div></div>`;
   h+=INNER.map(k=>{const at=k.at||[0,0,0],f=t=>`<div class="kf" style="transform:${t} translateZ(calc(var(--k)/2))"></div>`,
    txt=k.mod?`<b>${E(k.n)}</b>`:`<span class="cx"><b class="ecl">ECL</b></span><span class="sp"><span class="ki">${sv("sigma")}</span><b>Model<br>statystyczny</b></span>`,lab=(t,i)=>`<div class="kt i${i}" style="transform:${t} translateZ(calc(var(--k)/2 + 1px))">${txt}</div>`;
-   return`<div class="ik${k.mod?" m":" hub"}" data-f="${k.id}" style="--c:${k.col};--k:calc(var(--s)*${k.k||.26});transform:${T3(at)} scale3d(var(--sc,1),var(--sc,1),var(--sc,1))">${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)","rotateX(90deg)","rotateX(-90deg)"].map(f).join("")}${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)"].map(lab).join("")}</div>`}).join("")
+   return`<div class="ik${k.mod?" m":" hub"}" data-f="${k.id}" style="--c:${k.col};--k:calc(var(--s)*${k.k||.26});transform:${T3(at)} scale3d(var(--sc,1),var(--sc,1),var(--sc,1))">${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)","rotateX(90deg)","rotateX(-90deg)"].map(f).join("")}${edgeBox(1,1,1,"e-ik","--k")}${["rotateY(0deg)","rotateY(90deg)","rotateY(180deg)","rotateY(-90deg)"].map(lab).join("")}</div>`}).join("")
    +table()+dbox()
    +DBS.map(([x,z],di)=>`<div class="db" data-f="db" style="--c:${DB.col};--r:calc(var(--s)*${DB.r});--h:calc(var(--s)*${DB.h});transform:${T3([x-1.22,DB.at[1],z])}">${[-.5,-.17,.17,.5].map((y,i)=>`<div class="ring${i?"":" lid"}" style="transform:translateY(calc(var(--h)*${y})) rotateX(90deg)"></div>`).join("")}${Array.from({length:16},(_,i)=>`<div class="vl" style="transform:rotateY(${i*22.5}deg) translateZ(var(--r))"></div>`).join("")}<div class="yb sil" data-t="">${[-.5,-.17,.17,.5].map((y,i)=>`<span class="el${i?" lo":""}" style="top:calc(var(--h)*${y+.5} - var(--e)/2)"></span>`).join("")}<b class="dbn">${["DWH_KREDYTY","CRM_KLIENCI","MAKRO_SCENARIUSZE"][di]}</b></div></div>`).join("");
   document.getElementById("inr").innerHTML=h;YB=[...cube.querySelectorAll(".yb")];
