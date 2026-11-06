@@ -928,6 +928,7 @@
 .beam i{position:absolute;inset:0;border-radius:3px;background:linear-gradient(90deg,var(--b1) 0 30%,var(--b2) 45%,var(--b1) 60% 100%);background-size:220% 100%;animation:beam 2.4s linear infinite}
 .beam.bd{--b1:rgba(79,115,144,.35);--b2:#4f7390}
 .beam.bw{--b1:rgba(168,105,76,.35);--b2:#a8694c;height:calc(var(--s)*.018);margin-top:calc(var(--s)*-.009)}
+.beam.bw i{animation-delay:-1.6s}
 @keyframes beam{from{background-position:0 0}to{background-position:-183.3333% 0}}
 @media(prefers-reduced-motion:reduce){.beam i{animation:none}}
 .port{width:calc(var(--s)*.1)!important;height:calc(var(--s)*.1)!important;left:calc(50% - var(--s)*.05)!important;top:calc(50% - var(--s)*.05)!important}
@@ -1013,7 +1014,7 @@
 .mw.tabbed .stp{display:none;min-height:0;opacity:1;transform:none;padding:0!important;justify-content:flex-start}
 .mw.tabbed .stp.on{display:flex;animation:stpin .45s ease}
 @keyframes stpin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.mw.tabbed .mcol{position:relative!important;height:min(70vh,620px)!important;padding-bottom:0!important;align-items:flex-start!important;padding-top:0!important}
+.mw.tabbed .mcol{position:relative!important;height:min(88vh,800px)!important;padding-bottom:0!important;align-items:flex-start!important;padding-top:0!important}
 .mw.tabbed .duo .scene:not(.sc2){margin-right:calc(var(--s)*1.02)!important;margin-top:calc(var(--s)*.58)!important}
 .mw.tabbed .sdots{display:none!important}
 .vtabs{display:flex;flex-wrap:nowrap;gap:2px;padding:4px;border-radius:14px;background:#fffdf9;border:1px solid var(--line);margin:0 0 30px;width:max-content;max-width:none;position:relative;z-index:3}
