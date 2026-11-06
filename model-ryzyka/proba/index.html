@@ -989,6 +989,12 @@
 .story{transition:opacity .45s .2s,transform .45s .2s}
 @media(max-width:900px){.mw.storymode .stage{grid-template-columns:1fr!important}.mw.storymode .mcol{height:52vh;top:0;z-index:3;background:var(--paper)}.mw.storymode .story{padding:4vh 0 30vh}.sdots{display:none}.stp{min-height:55vh}}
 @media(prefers-reduced-motion:reduce){.stp,.mw.storymode .stage,.duo .scene{transition:none!important}}
+.cube .fa,.wbf,.dbf,.mf2,.kf,.cf3,.wt{background-clip:padding-box!important}
+/* krawędzie bryły rysowane raz – bez migotania (z-fighting) */
+.v2 .fa[data-f="top"],.v2 .fa[data-f="bottom"]{border-color:transparent!important}
+.v2 .fa[data-f="front"],.v2 .fa[data-f="back"],.v2 .fa[data-f="left"],.v2 .fa[data-f="right"]{border-right-color:transparent!important}
+.wbf.cp,.dbf.cp,.mf2.cp{border-color:transparent!important}
+.wbf.sd,.dbf.sd,.mf2.sd{border-right-color:transparent!important}
 </style>
 </head>
 <body>
