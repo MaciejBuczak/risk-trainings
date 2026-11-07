@@ -1083,8 +1083,9 @@
 .drw,.drl{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
 .edg.e-dr{--ec:rgba(13,13,13,.5);--ew:1.4px}
 .drf{position:absolute;left:0;top:0;background:rgba(255,253,249,.04)}
-.drf .dtg{right:auto!important;bottom:auto!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)}
-.drf .dtg.db2{transform:translate(-50%,-50%) rotateY(180deg)}
+.drf.fr{display:grid;place-items:center}.drf .dtg{position:relative!important;grid-area:1/1;right:auto!important;bottom:auto!important;left:auto!important;top:auto!important;transform:none;font-size:calc(var(--s)*.0215)!important;min-width:calc(var(--s)*.2)!important;-webkit-font-smoothing:antialiased}
+.drf .dtg.db2{transform:rotateY(180deg)}
+.drf .dtg .dt-h{font-style:normal!important;letter-spacing:.04em}
 .cube[data-focus]:not([data-focus=""]):not([data-focus="doc"]) .drw .dtg{opacity:.2}
 .cube[data-focus="doc"] .drw .dtg{box-shadow:0 0 0 3px rgba(191,129,101,.35)}
 /* etykieta Model w lewym dolnym rogu */
@@ -1225,7 +1226,7 @@ const edgeBox=(w,h,d,cl,u="--s")=>{const c=v=>`calc(var(${u})*${v})`,o=[];
 cube.innerHTML=FACES.map(f=>`<div class="fa" data-f="${f.id}" style="--c:${f.col};transform:${f.tf} translateZ(${H})"><div class="lb" data-f="${f.id}"><span class="ic">${sv(f.ic)}</span><span><small>${f.p}</small>${E(f.n)}</span></div>${f.id==="front"?`<span class="mtag"><span class="mt-h">MODEL</span><span class="mt-r"><i>Kod</i><b>ECL</b></span><span class="mt-r"><i>Wersja</i><b>3.1</b></span><span class="mt-r"><i>Ocena</i><b><em class="ok"></em>4.3</b></span></span><span class="mtag mb"><span class="mt-h">MODEL</span><span class="mt-r"><i>Kod</i><b>ECL</b></span><span class="mt-r"><i>Wersja</i><b>3.1</b></span><span class="mt-r"><i>Ocena</i><b><em class="ok"></em>4.3</b></span></span>`:""}</div>`).join("")
  +corners.map(([x,y,z])=>`<div class="nd" data-t="translate3d(calc(var(--s)*${x/2}),calc(var(--s)*${y/2}),calc(var(--s)*${z/2}))"><i></i></div>`).join("")+edgeBox(1,1,1,"e-md")+`<div class="inr" id="inr"></div>`;
 /* wyjście wyników – trzy propozycje */
-const EXITS={1:{n:"Przez dach",at:[1.16,.11,0],port:[.5,-.34,0],pt:"rotateY(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
+const EXITS={1:{n:"Przez dach",at:[1.16,.23,0],port:[.5,-.22,0],pt:"rotateY(90deg)"},2:{n:"Bokiem",at:[.82,-.12,0],port:[.5,-.12,0],pt:"rotateY(90deg)"},3:{n:"Strumień w górę",at:[0,-.3,0],out:[0,-.86,0]}};
 let EX=1,SV=1,MV=2,DV2=1;try{DV2=+localStorage.getItem("rt_mr_dok")||1}catch(_){}
 const GEAR=(n,R,r,h)=>{let d="";for(let i=0;i<n;i++){const a=i/n*2*Math.PI,s1=Math.PI/n*.5,s2=Math.PI/n*.32,P=(rr,aa)=>`${(50+rr*Math.cos(aa)).toFixed(2)} ${(50+rr*Math.sin(aa)).toFixed(2)}`;d+=(i?"L":"M")+P(r,a-s1-.1)+"L"+P(R,a-s2)+"L"+P(R,a+s2)+"L"+P(r,a+s1+.1)}return`<path d="${d}Z"/><circle cx="50" cy="50" r="${h}"/>`};
 
@@ -1242,9 +1243,9 @@ const seg=(A,B,cl,l)=>{const dx=B[0]-A[0],dy=B[1]-A[1],dz=B[2]-A[2],h=Math.hypot
 function dbox(){const W=.84,D=.8,Ht=.3,Y=.31,c=`calc(var(--s)*`,F=(w,h,t,cl,body="")=>{const st=`width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}`;return`<i class="dbf ${cl}" style="${st}"></i>`+(body?`<i class="wbl" style="${st}">${body}</i>`:"")},B=`<span class="mt-h">DANE</span>${["DWH_KREDYTY","CRM_KLIENCI","MAKRO_SCENARIUSZE"].map(n=>`<span class="mt-r"><span class="k">Baza</span><b class="mono">${n}</b></span>`).join("")}`;
   return`<div class="tb dbx" data-f="db" style="transform:${T3([-1.22,Y,0])}">${edgeBox(W,Ht,D,"e-db")}${F(W,Ht,`translateZ(${c}${D/2}))`,"sd",`<span class="mtag wtag dtag2">${B}</span><span class="mtag wtag wb dtag2">${B}</span>`)}${F(W,Ht,`rotateY(180deg) translateZ(${c}${D/2}))`,"sd")}${F(D,Ht,`rotateY(90deg) translateZ(${c}${W/2}))`,"sd")}${F(D,Ht,`rotateY(-90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,D,`rotateX(90deg) translateZ(${c}${Ht/2}))`,"cp")}${F(W,D,`rotateX(-90deg) translateZ(${c}${Ht/2}))`,"cp")}</div>`}
 const PX={at:[-1.22,-.14,0],W:.56,D:.5,Ht:.2,col:"#2f7d74",k:"p",title:"PRZETWARZANIE",items:["Integracja","Filtrowanie","Oczyszczanie"],f:"prc"},PIN=[[-1.42,-.15],[-1.02,0],[-1.42,.15]];
-const KX={at:[1.16,-.34,0],W:.5,D:.46,Ht:.2,col:"#7d4f6b",k:"k",title:"KOREKTY",items:["Bufory parametrów","Korekty wyniku"],tagItems:["Bufory","Korekty"],f:"kor"},KOUT=[[1.0,-.1],[1.32,.1]];
+const KX={at:[1.16,-.22,0],W:.5,D:.46,Ht:.2,col:"#7d4f6b",k:"k",title:"KOREKTY",items:["Bufory parametrów","Korekty wyniku"],tagItems:["Bufory","Korekty"],f:"kor"},KOUT=[[1.0,-.1],[1.32,.1]];
 const DTG=`<span class="dtg"><span class="dt-h"><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15h6"/></svg>Dokumentacja</span><span class="mt-r dt-r"><i>Wersja</i><b>2.6</b></span><span class="mt-r dt-r"><i>Data</i><b>28.02.2026</b></span></span><span class="dtg db2"><span class="dt-h"><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15h6"/></svg>Dokumentacja</span><span class="mt-r dt-r"><i>Wersja</i><b>2.6</b></span><span class="mt-r dt-r"><i>Data</i><b>28.02.2026</b></span></span>`;
-function drawer(){const W=.3,H=.1,D=.9,at=[.32,-.41,0],c=`calc(var(--s)*`,f=(w,h,t,cl,b="")=>`<i class="drf ${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}">${b}</i>`;
+function drawer(){const W=.32,H=.15,D=.76,at=[.31,-.385,-.08],c=`calc(var(--s)*`,f=(w,h,t,cl,b="")=>`<i class="drf ${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}">${b}</i>`;
   return`<div class="drw" data-f="doc" style="transform:${T3(at)}">${edgeBox(W,H,D,"e-dr")}<div class="drl" style="transform:translateZ(${c}${D/2+.007}))">${edgeBox(W+.02,H+.014,.014,"e-dr")}</div>${f(W+.02,H+.014,`translateZ(${c}${D/2+.014}))`,"fr",DTG)}</div>`}
 const PL=(A,B,cl="pln")=>{const dx=B[0]-A[0],dy=B[1]-A[1],dz=B[2]-A[2],h=Math.hypot(dx,dz),L=Math.hypot(dx,dy,dz);return`<div class="${cl}" style="width:calc(var(--s)*${L.toFixed(4)});transform:${T3(A)} rotateY(${(Math.atan2(-dz,dx)*180/Math.PI).toFixed(2)}deg) rotateZ(${(Math.atan2(dy,h)*180/Math.PI).toFixed(2)}deg)"><i></i><i style="transform:rotateX(90deg)"></i></div>`};
 const PR=(r,y,t="rotateX(90deg)",cl="")=>`<i class="prg ${cl}" style="width:calc(var(--s)*${2*r});height:calc(var(--s)*${2*r});margin:calc(var(--s)*${-r}) 0 0 calc(var(--s)*${-r});transform:translateY(calc(var(--s)*${y})) ${t}"></i>`;
@@ -1354,7 +1355,7 @@ setEX(EX);setCX(1);
   function zoom(to,ms,cb){cancelAnimationFrame(zt);const z0=SOLO.z,t0=performance.now();const f=t=>{const k=Math.min(1,(t-t0)/ms),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;SOLO.z=z0+(to-z0)*e;set();if(k<1)zt=requestAnimationFrame(f);else cb&&cb()};zt=requestAnimationFrame(f)}
   const SOLOS={db:{t:[-.66,.11,0],k:1.5,card:"b",face:"#cube .dbf, #cube .pbf.pbf:not(.kbf)",G:[".wbox,.beam.bw,.port:not(.pb):not(.pe):not(.pdt):not(.pp),.kbx,.beam.bk",".ik,.rod,.mech,.beam.be,.port.pe",".fa,.drw,.edg.e-md,.beam.bd,.port.pb:not(.pbd)"]},
     eng:{m:1,t:[.294,.33,0],k:2.86,card:"e",face:"#cube .mech .mf2",G:[".wbox,.beam.bw,.port:not(.pb):not(.pe)",".dbx,.db,.beam.bd,.port.pb,.ik,.rod,.pbx,.beam.bp,.beam.bk",".fa,.drw,.edg.e-md,.beam.be,.port.pe"]},
-    wyn:{m:1,t:[.75,-.10,0],k:1.75,card:"w",dir:-1,face:"#cube .wbox .wbf, #cube .kbf",G:[".dbx,.db,.beam.bd,.port.pb,.pbx:not(.kbx),.beam.bp,.port.pdt,.port.pp",".ik,.rod,.mech,.beam.be,.port.pe",".fa,.drw,.edg.e-md,.beam.bw,.port:not(.pb):not(.pe):not(.pw):not(.pk):not(.pwt)"]}};
+    wyn:{m:1,t:[.75,.01,0],k:1.75,card:"w",dir:-1,face:"#cube .wbox .wbf, #cube .kbf",G:[".dbx,.db,.beam.bd,.port.pb,.pbx:not(.kbx),.beam.bp,.port.pdt,.port.pp",".ik,.rod,.mech,.beam.be,.port.pe",".fa,.drw,.edg.e-md,.beam.bw,.port:not(.pb):not(.pe):not(.pw):not(.pk):not(.pwt)"]}};
   let SK=null;
   function solo(f){if(cube.dataset.solo||SOLO.z>0){if(SK===f)return;unsolo(()=>{});st.push(setTimeout(()=>solo(f),1800));return}
     clr();const S=SOLOS[f];SK=f;cube.dataset.sk=f;window.__soloFace=S.face;window.__soloDir=S.dir||1;cube.dataset.focus="";SOLO.t=S.t;SOLO.k=S.k;SOLO.m=S.m||0;cube.querySelectorAll("[data-fs]").forEach(e=>delete e.dataset.fs);tagFlat();go(-16,24,1400);
