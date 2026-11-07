@@ -1130,6 +1130,10 @@
 @media (max-height:800px){.sc-c{padding:2.5px 0}.scards{row-gap:9px!important}}
 .mw.tabbed #mcol{height:min(118vh,1080px)!important}
 .scards{column-gap:44px!important}
+.slines{position:absolute;left:0;top:0;pointer-events:none;overflow:visible;z-index:7}
+.slines .ln{fill:none;stroke-width:1.5;stroke-dasharray:6 6}
+.slines .mk{fill:none;stroke:#fff;stroke-width:8;stroke-dashoffset:var(--L)}
+.slines.on .mk{animation:elb 1.4s cubic-bezier(.45,0,.25,1) forwards}
 </style>
 </head>
 <body>
@@ -1417,7 +1421,16 @@ setEX(EX);setCX(1);
   let SK=null;
   function solo(f){if(cube.dataset.solo||SOLO.z>0){if(SK===f)return;unsolo(()=>{});st.push(setTimeout(()=>solo(f),1800));return}
     clr();const S=SOLOS[f];SK=f;cube.dataset.sk=f;window.__soloFace=S.face;window.__soloDir=S.dir||1;cube.dataset.focus="";SOLO.t=S.t;SOLO.k=S.k;SOLO.m=S.m||0;SOLO.so=null;if(S.off)calcSo();cube.querySelectorAll("[data-fs]").forEach(e=>delete e.dataset.fs);tagFlat();if(!S.norot)go(...(S.v||[-16,24]),1400);
-    const T0=800;[1,2,3].forEach((n,i)=>st.push(setTimeout(()=>{tagFlat();cube.dataset.solo=n},T0+i*500)));st.push(setTimeout(()=>zoom(1,1700,()=>{if(f==="stat"){placeCards();document.getElementById("scards").classList.add("on");return}window.__pin=1;window.__openCard&&window.__openCard(S.card)}),T0+2*500+700))}
+    const T0=800;[1,2,3].forEach((n,i)=>st.push(setTimeout(()=>{tagFlat();cube.dataset.solo=n},T0+i*500)));st.push(setTimeout(()=>zoom(1,1700,()=>{if(f==="stat"){placeCards();document.getElementById("scards").classList.add("on");st.push(setTimeout(statLines,1000));return}window.__pin=1;window.__openCard&&window.__openCard(S.card)}),T0+2*500+700))}
+  function statLines(){const sc=document.getElementById("scards");if(!sc.classList.contains("on"))return;const par=sc.parentElement,pr=par.getBoundingClientRect(),X=v=>v-pr.left,Y=v=>v-pr.top;
+    const tags=[...cube.querySelectorAll(".fa .mtag:not(.mb):not(.wtag)")].map(t=>[t,t.getBoundingClientRect()]).sort((a,b)=>b[1].width-a[1].width);if(!tags.length)return;const tr=tags[0][1];
+    const F=[...cube.querySelectorAll(".fa")].map(f=>f.getBoundingClientRect()),ctop=Math.min(...F.map(r=>r.top)),stp=document.querySelector('.stp[data-k="3"] p'),tb=stp&&stp.offsetParent?stp.getBoundingClientRect().bottom:ctop-60,ym=(ctop+tb)/2;
+    const cards=[...sc.querySelectorAll(".sc")],er=cards[0].getBoundingClientRect(),eh=cards[0].querySelector("header").getBoundingClientRect();
+    const P=[[`M${X(tr.left+tr.width/2)},${Y(tr.top)} V${Y(ym)} H${X(er.left)}`,"#56514a"]],x0=X(eh.right),y0=Y(eh.top+eh.height/2),xm=x0+(X(cards[1].getBoundingClientRect().left)-x0)/2;
+    cards.slice(1).forEach(c=>{const h=c.querySelector("header").getBoundingClientRect();P.push([`M${x0},${y0} H${xm} V${Y(h.top+h.height/2)} H${X(h.left)}`,"#56514a"])});
+    let sv=document.getElementById("slines");if(sv)sv.remove();par.insertAdjacentHTML("beforeend",`<svg id="slines" class="slines" viewBox="0 0 ${pr.width} ${pr.height}" style="width:${pr.width}px;height:${pr.height}px"><defs>${P.map((p,i)=>`<mask id="slm${i}" maskUnits="userSpaceOnUse" x="-3000" y="-3000" width="8000" height="8000"><path class="mk" d="${p[0]}"/></mask>`).join("")}</defs>${P.map((p,i)=>`<path class="ln" d="${p[0]}" stroke="${p[1]}" mask="url(#slm${i})"/>`).join("")}</svg>`);
+    sv=document.getElementById("slines");sv.querySelectorAll(".mk").forEach((m,i)=>{const L=m.getTotalLength();m.style.strokeDasharray=L+" "+L;m.style.setProperty("--L",L+"px");m.style.animationDelay=(i?1.2+i*.12:0)+"s"});void sv.getBoundingClientRect();sv.classList.add("on")}
+  addEventListener("resize",()=>{if(document.getElementById("slines"))statLines()});
   function placeCards(){const sc=document.getElementById("scards"),mc=sc.offsetParent||sc.parentElement,mr=mc.getBoundingClientRect(),st=document.querySelector('.stp[data-k="3"]'),xb=document.querySelector(".xbtn");let t=86;if(st){const was=st.style.display;st.style.visibility="hidden";st.style.display="flex";const h=st.querySelector("p").getBoundingClientRect();t=h.top-mr.top+3;st.style.display=was;st.style.visibility=""}if(xb){const lim=xb.getBoundingClientRect().top-mr.top-14-sc.offsetHeight;if(t>lim)t=lim}sc.style.setProperty("top",Math.max(0,t)+"px","important")}
   addEventListener("resize",()=>{const sc=document.getElementById("scards");if(sc&&sc.classList.contains("on"))placeCards()});
   function calcSo(){const sr=document.querySelector(".story").getBoundingClientRect(),z=SOLO.z,o=SOLO.so||[0,0];SOLO.k=1+(BASE.k-1)*SOLO.b;const R=[...cube.querySelectorAll(".fa")].map(f=>f.getBoundingClientRect()),L=Math.min(...R.map(r=>r.left)),Rr=Math.max(...R.map(r=>r.right)),T=Math.min(...R.map(r=>r.top)),B=Math.max(...R.map(r=>r.bottom)),cx=(L+Rr)/2-o[0]*z,cy=(T+B)/2-o[1]*z,h=B-T,w=Rr-L;
@@ -1427,7 +1440,7 @@ setEX(EX);setCX(1);
   function tagFlat(){const G=SOLOS[SK].G;
     const deco=k=>(parseFloat(k.borderTopWidth)>0&&!/, 0\)$|transparent/.test(k.borderTopColor))||!/, 0\)$|transparent/.test(k.backgroundColor)||k.backgroundImage!=="none";const walk=(el,n)=>{if(el.dataset.fs)return;const K=getComputedStyle(el);if(K.transformStyle==="preserve-3d"&&!deco(K)&&[...el.children].some(c=>{const k=getComputedStyle(c);return k.transformStyle==="preserve-3d"||k.transform!=="none"})){[...el.children].forEach(c=>walk(c,n))}else el.dataset.fs=n};
     G.forEach((g,i)=>cube.querySelectorAll(g).forEach(el=>walk(el,i+1)))}
-  function unsolo(cb){SK=SK;cube.classList.remove("stv-on");{const sc=document.getElementById("scards");sc&&sc.classList.remove("on")}if(window.__pin){window.__pin=0;window.__closeCard&&window.__closeCard()}if(!cube.dataset.solo&&SOLO.z===0){cb(false);return}clr();zoom(0,1700);[["2",250],["1",650],["",1050]].forEach(([n,t])=>st.push(setTimeout(()=>cube.dataset.solo=n,t)));st.push(setTimeout(()=>cb(true),150))}
+  function unsolo(cb){SK=SK;cube.classList.remove("stv-on");{const sc=document.getElementById("scards");sc&&sc.classList.remove("on");const sl=document.getElementById("slines");sl&&sl.remove()}if(window.__pin){window.__pin=0;window.__closeCard&&window.__closeCard()}if(!cube.dataset.solo&&SOLO.z===0){cb(false);return}clr();zoom(0,1700);[["2",250],["1",650],["",1050]].forEach(([n,t])=>st.push(setTimeout(()=>cube.dataset.solo=n,t)));st.push(setTimeout(()=>cb(true),150))}
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)focus(+e.target.dataset.k)})},{rootMargin:"-36% 0px -62% 0px"});mw.classList.add("tabbed");story.insertAdjacentHTML("afterbegin",`<div class="vtabs" role="tablist">${["Całość","Dane","Silnik","Model statystyczny","Wyniki","Dokumentacja"].map((n,i)=>`<button type="button" role="tab" data-k="${i}">${n}</button>`).join("")}</div>`);
   const vt=story.querySelector(".vtabs");vt.addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(!b)return;focus(+b.dataset.k);vt.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b))});vt.firstElementChild.classList.add("on");
   dots.addEventListener("click",e=>{const b=e.target.closest("button");if(b)steps[+b.dataset.k].scrollIntoView({behavior:"smooth",block:"center"})});
