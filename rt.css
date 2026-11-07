@@ -108,4 +108,4 @@ section{padding:clamp(64px,9vw,120px) 0}
 .sqpanel small{color:var(--muted);font-size:11.5px;line-height:1.4}
 
 .nav a{white-space:nowrap}
-@media(min-width:861px){.nav a{padding:8px 10px}}@media(min-width:861px) and (max-width:1120px){.nav a{padding:7px 7px;font-size:13px}.nav .sci{display:none}}
+@media(min-width:861px){.nav a{padding:8px 9px}.nav{gap:2px}.top .wrap{gap:20px}}@media(min-width:861px) and (max-width:1120px){.nav a{padding:7px 7px;font-size:13px}.nav .sci{display:none}}
