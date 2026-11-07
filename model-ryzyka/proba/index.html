@@ -1205,8 +1205,8 @@ const MODS=[
  {id:"ttc",n:"TTC",s:"przez cykl",col:"#9c78a8",at:[-.4,-.34,.14],k:.1,d:"PD przez cykl (through the cycle): długookresowa średnia, punkt kotwiczenia kalibracji."},
  {id:"pit",n:"PIT",s:"w punkcie cyklu",col:"#9c78a8",at:[-.04,-.34,.14],k:.1,d:"PD w punkcie cyklu (point in time): bieżące ryzyko z korektą o scenariusze makroekonomiczne."},
  {id:"sicr",n:"SICR",s:"koszyk 2",col:"#bf8165",at:[-.3,.14,.22],k:.11,d:"Znaczący wzrost ryzyka kredytowego od początkowego ujęcia – decyduje o przejściu do koszyka 2 i stracie w całym okresie życia."},
- {id:"lgd",n:"LGD",s:"strata",col:"#4f7390",at:[.28,-.17,.13],k:.12,d:"Strata w razie niewykonania zobowiązania – część ekspozycji, której bank nie odzyska."},
- {id:"ead",n:"EAD",s:"ekspozycja · CCF",col:"#6f7f58",at:[.27,.12,-.18],k:.12,d:"Ekspozycja w chwili niewykonania zobowiązania, z uwzględnieniem wykorzystania limitów (CCF)."}];
+ {id:"lgd",n:"LGD",s:"strata",col:"#4f7390",at:[.28,-.11,.13],k:.12,d:"Strata w razie niewykonania zobowiązania – część ekspozycji, której bank nie odzyska."},
+ {id:"ead",n:"EAD",s:"ekspozycja · CCF",col:"#6f7f58",at:[.27,.18,-.18],k:.12,d:"Ekspozycja w chwili niewykonania zobowiązania, z uwzględnieniem wykorzystania limitów (CCF)."}];
 const LINKS=[["stat","pd"],["stat","lgd"],["stat","ead"],["stat","sicr"],["pd","ttc"],["pd","pit"]];
 MODS.forEach(m=>{m.p="Moduł modelu statystycznego";m.mod=1;m.c=[]});
 const DB={id:"db",n:"Baza danych",p:"W środku · zasilanie",c:["04"],col:"#4f7390",at:[0,.31,0],r:.08,h:.1,d:"Dane, którymi model jest zasilany – do estymacji i produkcyjne. Strzałki pokazują, które moduły pobierają dane z bazy."};
