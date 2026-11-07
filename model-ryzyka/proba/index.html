@@ -1012,7 +1012,7 @@
 .mw.tabbed .stage{grid-template-columns:minmax(360px,.9fr) minmax(0,1.6fr)!important;align-items:start!important}
 .mw.tabbed .story{padding:1vh 0 0!important;min-height:auto}
 .mw.tabbed .stp{display:none;min-height:0;opacity:1;transform:none;padding:0!important;justify-content:flex-start}
-.mw.tabbed .stp.on{display:flex;animation:stpin .45s ease}
+.mw.tabbed .stp.on{display:flex;animation:stpin .9s ease}
 @keyframes stpin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .mw.tabbed .mcol{position:relative!important;height:min(88vh,800px)!important;padding-bottom:0!important;align-items:flex-start!important;padding-top:0!important}
 .mw.tabbed .duo .scene:not(.sc2){margin-right:calc(var(--s)*1.02)!important;margin-top:calc(var(--s)*.58)!important}
@@ -1284,7 +1284,7 @@ setEX(EX);setCX(1);
   let cur=-1,EXP=false;mw.classList.add("storymode");
   function fit(){const w=mcol.clientWidth,hgt=innerHeight;const sz=Math.max(150,Math.min(EXP?420:360,(w-40)/3.25,(hgt-120)/1.75));sc.style.setProperty("--s",sz+"px","important");setTimeout(()=>set(),30)}
   let fz=0;function focus(k){if(k===cur&&!EXP)return;const old=steps[cur];clearTimeout(fz);if(old&&!EXP&&document.querySelector(".mw.tabbed")){old.classList.add("out");fz=setTimeout(()=>{old.classList.remove("out");focusNow(k)},450);return}focusNow(k)}
-  function focusNow(k){if(k===cur&&!EXP)return;const first=cur<0;cur=k;const f=steps[k].dataset.focus;steps.forEach((s,i)=>s.classList.toggle("on",i===k));dots.querySelectorAll("button").forEach((b,i)=>b.classList.toggle("on",i===k));
+  let tt=0;function focusNow(k){if(k===cur&&!EXP)return;const first=cur<0;cur=k;const f=steps[k].dataset.focus;clearTimeout(tt);{const show=()=>steps.forEach((s,i)=>s.classList.toggle("on",i===k));if(first||EXP)show();else{steps.forEach(s=>s.classList.remove("on"));const busy=!!cube.dataset.solo||SOLO.z>0,so=f==="db"||f==="eng"||f==="wyn";tt=setTimeout(show,so?(busy?1800:0)+3900:(busy?1800:800))}}dots.querySelectorAll("button").forEach((b,i)=>b.classList.toggle("on",i===k));
     if(EXP)return;{const bt=f==="all"?1:(f==="db"||f==="eng"||f==="wyn")?SOLO.b:0;if(first){SOLO.b=bt;set()}else bto(bt,1500)}if(f==="db"||f==="eng"||f==="wyn"){solo(f);return}unsolo(slow=>{cube.dataset.focus=f==="all"?"":f;const v=VIEW[f]||[SV0.x,SV0.y];go(v[0],v[1],slow?1600:undefined)})}
   let st=[],zt=0;const clr=()=>{st.forEach(clearTimeout);st=[];cancelAnimationFrame(zt)};
   let bt0=0;function bto(v,ms){cancelAnimationFrame(bt0);const b0=SOLO.b,t0=performance.now();if(b0===v)return;const f=t=>{const k=Math.min(1,(t-t0)/ms),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;SOLO.b=b0+(v-b0)*e;set();if(k<1)bt0=requestAnimationFrame(f)};bt0=requestAnimationFrame(f)}
@@ -1346,7 +1346,7 @@ setEX(EX);setCX(1);
   function openCard(k){if(cube.dataset.solo==="3"){const my=++tok;clearAll();cur=k;shift=0;duo.style.transform="";const c=C[k],t=c.tag();if(!t)return;
       const d=duo.getBoundingClientRect(),r=t.getBoundingClientRect(),y=r.top+r.height/2-d.top,R=Math.max(...[...document.querySelectorAll(window.__soloFace||"#cube .dbf")].map(f=>f.getBoundingClientRect().right))-d.left+90;
       const H=t.querySelector(".mt-h,.et-h");if(!H.querySelector(".anc")){H.style.position="relative";H.insertAdjacentHTML("beforeend",'<i class="anc" style="position:absolute;left:0;top:50%;width:0;height:0"></i><i class="anc" style="position:absolute;right:0;top:50%;width:0;height:0"></i>')}
-      const CEN=cube.dataset.sk==="db";if(CEN){let ac=t.querySelector(":scope>.anc.c");if(!ac){t.insertAdjacentHTML("beforeend",'<i class="anc c" style="position:absolute;left:50%;width:0;height:0"></i>');ac=t.querySelector(":scope>.anc.c")}ac.style.top=(H.offsetTop+H.offsetHeight/2)+"px"}
+      const CEN=cube.dataset.sk==="db";if(CEN){let ac=t.querySelector(":scope>.anc.c");if(!ac){t.insertAdjacentHTML("beforeend",'<i class="anc c" style="position:absolute;left:66.667%;width:0;height:0"></i>');ac=t.querySelector(":scope>.anc.c")}ac.style.top=(H.offsetTop+H.offsetHeight/2)+"px"}
       const [aL,aR]=[...H.querySelectorAll(".anc")].map(a=>a.getBoundingClientRect()),dir=window.__soloDir||1,A=CEN?t.querySelector(":scope>.anc.c").getBoundingClientRect():(dir>0?aR:aL),x0=A.left-d.left,y0=A.top-d.top,x1=CEN?x0:x0+22*dir,FS=[...document.querySelectorAll(window.__soloFace||"#cube .dbf")].map(f=>f.getBoundingClientRect()),cw=c.card.offsetWidth||240,xb=document.querySelector(".xbtn");
       const cy=(()=>{let v=y0-130;if(cube.dataset.sk==="eng"||cube.dataset.sk==="wyn"){v=Math.min(v,Math.min(...FS.map(f=>f.top))-d.top-90)}const ch=c.card.offsetHeight||360;if(xb){const lim=xb.getBoundingClientRect().top-d.top-24-ch+16;if(v>lim)v=lim}const vt=document.querySelector(".vtabs");if(vt){const mn=vt.getBoundingClientRect().bottom-d.top+40;if(v<mn)v=mn}return Math.max(10,v)})();
       let x2,CL;if(dir>0){x2=Math.max(R,x1+30);if(xb)x2=Math.max(x1+30,xb.getBoundingClientRect().right-d.left-cw);CL=x2}else{const L0=Math.min(...FS.map(f=>f.left))-d.left;x2=Math.min(x1-30,L0-90);CL=x2-cw}
