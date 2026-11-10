@@ -1297,11 +1297,12 @@
 .bgv i{position:absolute;left:0;top:0;backface-visibility:visible}
 .v1 .bgf{background-image:linear-gradient(rgba(150,130,100,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(150,130,100,.34) 1px,transparent 1px);background-size:calc(var(--s)*.14) calc(var(--s)*.14);background-position:center;-webkit-mask:radial-gradient(closest-side,#000 35%,transparent);mask:radial-gradient(closest-side,#000 35%,transparent)}
 .v1 .bgs{background:radial-gradient(closest-side,rgba(120,95,60,.16),transparent);}
-.v2 .bgf{background:rgba(214,194,164,.55);-webkit-mask:linear-gradient(90deg,#000 45%,transparent),linear-gradient(180deg,#000 45%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,#000 45%,transparent),linear-gradient(180deg,#000 45%,transparent);mask-composite:intersect}
-.v2 .bgw{background:rgba(222,204,178,.85)}
+.v2 .bgf{background:radial-gradient(closest-side,rgba(214,196,170,.55),rgba(214,196,170,0))}
+.v2 .bgf::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(150,130,100,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(150,130,100,.18) 1px,transparent 1px);background-size:calc(var(--s)*.2) calc(var(--s)*.2);-webkit-mask:radial-gradient(closest-side,#000 30%,transparent);mask:radial-gradient(closest-side,#000 30%,transparent)}
+.v2 .bgw{background:rgba(230,216,195,.55)}
 .v2 .bgw.b{-webkit-mask:linear-gradient(90deg,#000 45%,transparent),linear-gradient(0deg,#000 40%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,#000 45%,transparent),linear-gradient(0deg,#000 40%,transparent);mask-composite:intersect}
-.v2 .bgw.s{background:rgba(214,196,168,.75);-webkit-mask:linear-gradient(270deg,#000 45%,transparent),linear-gradient(0deg,#000 40%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(270deg,#000 45%,transparent),linear-gradient(0deg,#000 40%,transparent);mask-composite:intersect}
-.v2 .bgl{background:rgba(140,116,84,.7)}
+.v2 .bgw.s{background:rgba(220,204,180,.4);-webkit-mask:linear-gradient(270deg,#000 45%,transparent),linear-gradient(0deg,#000 40%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(270deg,#000 45%,transparent),linear-gradient(0deg,#000 40%,transparent);mask-composite:intersect}
+.v2 .bgl{background:rgba(150,130,100,.3)}
 .v2 .bgl.b{-webkit-mask:linear-gradient(90deg,#000 15%,transparent 95%);mask:linear-gradient(90deg,#000 15%,transparent 95%)}
 .v2 .bgl.s{-webkit-mask:linear-gradient(270deg,#000 15%,transparent 95%);mask:linear-gradient(270deg,#000 15%,transparent 95%)}
 .v2 .bgl.c{-webkit-mask:linear-gradient(0deg,#000 30%,transparent);mask:linear-gradient(0deg,#000 30%,transparent)}
@@ -1475,8 +1476,8 @@ function bgStage(){const c=v=>`calc(var(--s)*${v})`,Y=.56;
   if(BGV===2){const W=3.4,D=2.4,H=1.1,Yf=Y+.1,f=(w,h,t,cl)=>`<i class="${cl}" style="width:${c(w)};height:${c(h)};margin:${c(-h/2)} 0 0 ${c(-w/2)};transform:${t}"></i>`;
     return`<div id="bgv" class="bgv v2">`+f(W,D,`translateY(${c(Yf)}) rotateX(90deg)`,"bgf")
       +f(W,H,`translate3d(0,${c(Yf-H/2)},${c(-D/2)})`,"bgw b")+f(D,H,`translate3d(${c(-W/2)},${c(Yf-H/2)},0) rotateY(90deg)`,"bgw s")
-      +f(W,.006,`translate3d(0,${c(Yf)},${c(-D/2)})`,"bgl b")+f(D,.006,`translate3d(${c(-W/2)},${c(Yf)},0) rotateY(90deg)`,"bgl s")
-      +f(.006,H,`translate3d(${c(-W/2)},${c(Yf-H/2)},${c(-D/2)})`,"bgl c")+`</div>`}
+      +f(W,.0025,`translate3d(0,${c(Yf)},${c(-D/2)})`,"bgl b")+f(D,.0025,`translate3d(${c(-W/2)},${c(Yf)},0) rotateY(90deg)`,"bgl s")
+      +f(.0025,H,`translate3d(${c(-W/2)},${c(Yf-H/2)},${c(-D/2)})`,"bgl c")+`</div>`}
   return""}
 const PL=(A,B,cl="pln")=>{const dx=B[0]-A[0],dy=B[1]-A[1],dz=B[2]-A[2],h=Math.hypot(dx,dz),L=Math.hypot(dx,dy,dz);return`<div class="${cl}" style="width:calc(var(--s)*${L.toFixed(4)});transform:${T3(A)} rotateY(${(Math.atan2(-dz,dx)*180/Math.PI).toFixed(2)}deg) rotateZ(${(Math.atan2(dy,h)*180/Math.PI).toFixed(2)}deg)"><i></i><i style="transform:rotateX(90deg)"></i></div>`};
 const PR=(r,y,t="rotateX(90deg)",cl="")=>`<i class="prg ${cl}" style="width:calc(var(--s)*${2*r});height:calc(var(--s)*${2*r});margin:calc(var(--s)*${-r}) 0 0 calc(var(--s)*${-r});transform:translateY(calc(var(--s)*${y})) ${t}"></i>`;
