@@ -1641,6 +1641,13 @@
 .dr-tag{min-width:84px!important;font-size:8.5px!important}
 .dr-tag .lt-h{font-size:7.5px!important}
 .dsg .kdc-st{position:relative!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;width:auto!important;max-width:none!important;transform:none!important;clip-path:none!important;opacity:1!important;pointer-events:auto!important;margin:0!important;overflow:auto;z-index:1}
+
+#ds-eng .dcard{display:none}
+.dsl-svg{position:absolute;left:0;top:0;pointer-events:none;overflow:visible;z-index:3}
+#ds-doc .dr-tag{border-color:#c9bba5!important}
+#ds-doc .dr-tag .lt-h{background:#efe5d6!important;color:var(--ink2)!important;border-bottom:1px solid #d9cdb9;font-family:var(--serif);font-style:italic;font-weight:600;font-size:10.5px!important;letter-spacing:.02em!important;text-transform:none!important;padding:3px 7px!important}
+.en-tag{transform:translate(-50%,-50%) skewY(14deg)!important}
+.en-tag .lt-h{background:#56514a!important}
 </style>
 </head>
 <body>
@@ -2045,13 +2052,36 @@ setEX(EX);setCX(1);
     const fc=pt(0,H*.5,z1+.05);const C=[];for(const X of [x0,x1])for(const Y of [y0,y1+.08])for(const Z of [z0,z1+.05])C.push(pt(X,Y,Z));const mx=Math.min(...C.map(c=>c[0]))-14,Mx=Math.max(...C.map(c=>c[0]))+14,my=Math.min(...C.map(c=>c[1]))-14,My=Math.max(...C.map(c=>c[1]))+14,VW=Mx-mx,VH=My-my;
     dp.innerHTML=`<div class="drw-w"><svg class="drwsvg" viewBox="${mx.toFixed(1)} ${my.toFixed(1)} ${VW.toFixed(1)} ${VH.toFixed(1)}" aria-hidden="true">${g}</svg><span class="ltag dr-tag" style="left:${((fc[0]-mx)/VW*100).toFixed(1)}%;top:${((fc[1]-my)/VH*100).toFixed(1)}%"><span class="lt-h">Dokumentacja</span><span class="lt-r"><i>Wersja</i><b>2.6</b></span><span class="lt-r"><i>Data</i><b>28.02.2026</b></span></span></div>`}}
   {const g=DS.doc&&DS.doc.querySelector(".dsg"),src=document.getElementById("kdc");if(g&&src){const c=src.cloneNode(true);c.removeAttribute("id");c.classList.add("kdc-st");g.firstElementChild.replaceWith(c);[...g.querySelectorAll(".dsc .sd-n")].forEach((n,i)=>n.textContent="0"+(i+1))}}
+  {const sec=DS.eng;if(sec){const dc=sec.querySelector(".dcard");dc.insertAdjacentHTML("beforebegin",'<div class="docpg engpg"></div>');const dp=sec.querySelector(".engpg");
+    const ry=-34*Math.PI/180,e=22*Math.PI/180,P=(x,y,z)=>{const x1=x*Math.cos(ry)+z*Math.sin(ry),z1=-x*Math.sin(ry)+z*Math.cos(ry);return[x1*130,(-(y*Math.cos(e))+z1*Math.sin(e))*130]};
+    const S2=p=>p.map(v=>v.toFixed(1)).join(",");const L=(a,b,c="#56514a",w=1.4,o=1)=>{const p=P(...a),q=P(...b);return`<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${q[0].toFixed(1)}" y2="${q[1].toFixed(1)}" stroke="${c}" stroke-width="${w}" opacity="${o}" stroke-linecap="round"/>`};
+    const F=(ps,f)=>`<polygon points="${ps.map(p=>S2(P(...p))).join(" ")}" fill="${f}"/>`;
+    const W=1.7,H=.42,D=1.15,x0=-W/2,x1=W/2,y0=0,y1=H,z0=-D/2,z1=D/2;let g="";
+    g+=F([[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]],"rgba(86,81,74,.06)");
+    const cyl=(cx,cz,r,h,o)=>{const N=28,top=[],bot=[];for(let i=0;i<N;i++){const a=i/N*2*Math.PI;top.push(P(cx+r*Math.cos(a),h,cz+r*Math.sin(a)));bot.push(P(cx+r*Math.cos(a),0,cz+r*Math.sin(a)))}
+      const xs=top.map(p=>p[0]),il=xs.indexOf(Math.min(...xs)),ir=xs.indexOf(Math.max(...xs));let s=`<polygon points="${[...top,...bot.slice().reverse()].map(S2).join(" ")}" fill="rgba(240,234,224,.0)"/>`;
+      s+=`<polygon points="${bot.map(S2).join(" ")}" fill="none" stroke="#9a9184" stroke-width=".9" opacity="${o*.7}"/>`;
+      s+=`<line x1="${top[il][0].toFixed(1)}" y1="${top[il][1].toFixed(1)}" x2="${bot[il][0].toFixed(1)}" y2="${bot[il][1].toFixed(1)}" stroke="#8a8174" stroke-width="1" opacity="${o}"/><line x1="${top[ir][0].toFixed(1)}" y1="${top[ir][1].toFixed(1)}" x2="${bot[ir][0].toFixed(1)}" y2="${bot[ir][1].toFixed(1)}" stroke="#8a8174" stroke-width="1" opacity="${o}"/>`;
+      s+=`<polygon points="${top.map(S2).join(" ")}" fill="rgba(252,249,245,.9)" stroke="#8a8174" stroke-width="1" opacity="${o}"/>`;
+      const r2=r*.55,core=[];for(let i=0;i<N;i++){const a=i/N*2*Math.PI;core.push(P(cx+r2*Math.cos(a),h*.85,cz+r2*Math.sin(a)))}s+=`<polygon points="${core.map(S2).join(" ")}" fill="#d9d2c6" opacity="${o*.8}"/>`;return s};
+    [[-.55,-.25,.13,.34],[.05,-.3,.13,.3],[.55,-.2,.13,.38],[-.3,.22,.13,.3],[.35,.25,.13,.34]].sort((a,b)=>a[1]-b[1]).forEach(c=>g+=cyl(c[0],c[1],c[2],c[3],1));
+    g+=F([[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],"rgba(86,81,74,.05)");
+    [[[x0,y0,z0],[x1,y0,z0],.4],[[x0,y0,z0],[x0,y0,z1],.4],[[x0,y0,z0],[x0,y1,z0],.4],[[x1,y0,z0],[x1,y0,z1]],[[x1,y0,z1],[x0,y0,z1]],[[x0,y1,z0],[x1,y1,z0]],[[x1,y1,z0],[x1,y1,z1]],[[x1,y1,z1],[x0,y1,z1]],[[x0,y1,z1],[x0,y1,z0]],[[x1,y0,z0],[x1,y1,z0]],[[x1,y0,z1],[x1,y1,z1]],[[x0,y0,z1],[x0,y1,z1]]].forEach(([a,b,o])=>g+=L(a,b,"#56514a",1.4,o||1));
+    const C=[];for(const X of [x0,x1])for(const Y of [y0,y1])for(const Z of [z0,z1])C.push(P(X,Y,Z));const mx=Math.min(...C.map(c=>c[0]))-14,Mx=Math.max(...C.map(c=>c[0]))+14,my=Math.min(...C.map(c=>c[1]))-14,My=Math.max(...C.map(c=>c[1]))+14,VW=Mx-mx,VH=My-my,fc=P(x0+W*.32,H*.48,z1);
+    dp.innerHTML=`<div class="drw-w"><svg class="drwsvg" viewBox="${mx.toFixed(1)} ${my.toFixed(1)} ${VW.toFixed(1)} ${VH.toFixed(1)}" aria-hidden="true">${g}</svg><span class="ltag dr-tag en-tag" style="left:${((fc[0]-mx)/VW*100).toFixed(1)}%;top:${((fc[1]-my)/VH*100).toFixed(1)}%"><span class="lt-h">Silnik</span><span class="lt-r"><i>Wersja</i><b>1.7</b></span></span></div>`}
+    const g2=sec&&sec.querySelector(".dsg"),src=document.getElementById("kec");if(g2&&src){const c=src.cloneNode(true);c.removeAttribute("id");c.classList.add("kdc-st");g2.firstElementChild.replaceWith(c);[...g2.querySelectorAll(".dsc .sd-n")].forEach((n,i)=>n.textContent="0"+(i+1))}}
+  function dsLine(sec){const w=sec.querySelector(".sds-w"),t=sec.querySelector(".dr-tag"),c=sec.querySelector(".kdc-st");if(!w||!t||!c)return;let sv=w.querySelector(".dsl-svg");if(!sv){w.style.position="relative";w.insertAdjacentHTML("beforeend",'<svg class="dsl-svg"></svg>');sv=w.querySelector(".dsl-svg")}
+    const wr=w.getBoundingClientRect(),tr=t.querySelector(".lt-h").getBoundingClientRect(),cr=c.querySelector(".kmc-h").getBoundingClientRect(),tag=t.getBoundingClientRect();
+    const x0=tag.right-wr.left,y0=tr.top+tr.height/2-wr.top,x2=cr.left-wr.left,y2=cr.top+cr.height/2-wr.top,lr=sec.querySelector(".sds-l").getBoundingClientRect(),xm=Math.round((lr.right+cr.left)/2-wr.left);
+    sv.setAttribute("viewBox",`0 0 ${wr.width} ${wr.height}`);sv.style.width=wr.width+"px";sv.style.height=wr.height+"px";
+    sv.innerHTML=`<path d="M${x0+2},${y0} H${xm} V${y2} H${x2}" fill="none" stroke="#a09580" stroke-width="1.3" stroke-dasharray="4 4"/><circle cx="${x0+2}" cy="${y0}" r="2.6" fill="#a09580"/><circle cx="${x2}" cy="${y2}" r="2.6" fill="#a09580"/>`}
   function dsFit(sec){const k=sec.querySelector(".stp-n"),K=k.getBoundingClientRect().top+scrollY,tg=K-60+innerHeight-50;[sec.querySelector(".dsg"),sec.querySelector(".docpg")||sec.querySelector(".dcard")].forEach(el=>{el.style.height="";const t=el.getBoundingClientRect().top+scrollY,h=Math.round(tg-t);if(h>el.scrollHeight)el.style.height=h+"px"})}
-  addEventListener("resize",()=>Object.values(DS).forEach(s2=>{if(s2.classList.contains("on"))dsFit(s2)}));
+  addEventListener("resize",()=>Object.values(DS).forEach(s2=>{if(s2.classList.contains("on")){dsFit(s2);dsLine(s2)}}));
   
 {const d=SD.querySelector(".sd-docs");d&&d.remove()}
   function scrollToSec(sec){if(sec===SEC){scrollTo({top:window.__SL||730,behavior:"smooth"});return}const k=sec.querySelector(".stp-n"),off=60;scrollTo({top:k.getBoundingClientRect().top+scrollY-off,behavior:"smooth"})}
   {const cats=SD.querySelector(".sd-cats");if(cats)SEC.querySelector(".sds-l").appendChild(cats)}
-  document.querySelectorAll("[data-ds]").forEach(b=>b.addEventListener("click",()=>{const s2=DS[b.dataset.ds];if(!s2)return;s2.classList.add("on");dsFit(s2);setTimeout(()=>{dsFit(s2);scrollToSec(s2)},40)}));
+  document.querySelectorAll("[data-ds]").forEach(b=>b.addEventListener("click",()=>{const s2=DS[b.dataset.ds];if(!s2)return;s2.classList.add("on");dsFit(s2);setTimeout(()=>{dsFit(s2);dsLine(s2);scrollToSec(s2)},40);setTimeout(()=>dsLine(s2),400)}));
 
     window.__hideDet0=()=>{KT.classList.remove("on");SEC.classList.remove("on","kat");document.querySelectorAll(".dsec").forEach(d=>d.classList.remove("on"));closeBlk();swapTxt(1,0);kfit()};
   window.__SL=730;
