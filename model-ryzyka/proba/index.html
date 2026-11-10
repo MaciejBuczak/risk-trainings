@@ -1462,6 +1462,20 @@
 .mh .wrap>div:first-child,.mh-r p{transition:opacity .45s}
 .mh.hout .wrap>div:first-child,.mh.hout .mh-r p,.mh.hsolo .wrap>div:first-child,.mh.hsolo .mh-r p{opacity:0;pointer-events:none}
 .mh{position:relative;z-index:7}
+
+#scards.scards{row-gap:16px!important}
+#scards .sc-col{gap:10px!important;height:0;overflow:visible}
+#scards .sc-col>*{flex-shrink:0}
+#scards .sc-c{gap:0!important}
+#scards .sc-c b{line-height:1.25!important}
+#scards .sc-c i{line-height:1.3!important}
+#scards .sc-ms{padding:9px 16px!important}
+#scards .sc-ms p{font-size:12px!important;line-height:1.5!important;margin:4px 0 0!important}
+.sc header{padding-top:10px!important;padding-bottom:5px!important}
+.sc-g{padding:3px 18px 9px!important}
+.sc-c{padding:1.5px 0!important}
+.sc-f{margin:9px 18px 0!important;padding:4px 12px!important}
+.sc-ms{padding:11px 18px!important}
 </style>
 </head>
 <body>
@@ -1836,7 +1850,7 @@ BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
     SHP={lay,made};requestAnimationFrame(()=>{lay.classList.add("on");made.forEach(e=>e.classList.add("shp-src"))})}
   function sharpOff(){if(!SHP)return;SHP.made.forEach(e=>e.classList.remove("shp-src"));SHP.lay.remove();SHP=null}
   addEventListener("resize",()=>{if(SHP){sharpOff();setTimeout(sharpOn,300)}});
-  function placeCards(){const sc=document.getElementById("scards"),mc=sc.offsetParent||sc.parentElement,mr=mc.getBoundingClientRect(),st=document.querySelector('.stp[data-k="3"]'),xb=document.querySelector(".xbtn");let t=86;if(st){const was=st.style.display;st.style.visibility="hidden";st.style.display="flex";const h=st.querySelector("p").getBoundingClientRect();t=h.top-mr.top+3;st.style.display=was;st.style.visibility=""}if(xb){const lim=xb.getBoundingClientRect().top-mr.top-14-sc.offsetHeight;if(t>lim)t=lim}sc.style.setProperty("top",Math.max(0,t)+"px","important");SG.style.top=(Math.max(0,t)+sc.offsetHeight+18)+"px"}
+  function placeCards(){const sc=document.getElementById("scards"),mc=sc.offsetParent||sc.parentElement,mr=mc.getBoundingClientRect(),st=document.querySelector('.stp[data-k="3"]'),xb=document.querySelector(".xbtn");let t=86;if(st){const was=st.style.display;st.style.visibility="hidden";st.style.display="flex";const h=st.querySelector("p").getBoundingClientRect();t=h.top-mr.top+3;st.style.display=was;st.style.visibility=""}{const vt=document.querySelector(".vtslot .vtabs");if(vt&&vt.offsetParent)t=Math.min(t,vt.getBoundingClientRect().bottom-mr.top+18)}if(xb){const lim=xb.getBoundingClientRect().top-mr.top-14-sc.offsetHeight;if(t>lim)t=lim}sc.style.setProperty("top",t+"px","important");SG.style.top=(t+sc.offsetHeight+18)+"px"}
   addEventListener("resize",()=>{const sc=document.getElementById("scards");if(sc&&sc.classList.contains("on"))placeCards()});
   function calcSo(){const sr=document.querySelector(".story").getBoundingClientRect(),z=SOLO.z,o=SOLO.so||[0,0];SOLO.k=1+(BASE.k-1)*SOLO.b;const R=[...cube.querySelectorAll(".fa")].map(f=>f.getBoundingClientRect()),L=Math.min(...R.map(r=>r.left)),Rr=Math.max(...R.map(r=>r.right)),T=Math.min(...R.map(r=>r.top)),B=Math.max(...R.map(r=>r.bottom)),cx=(L+Rr)/2-o[0]*z,cy=(T+B)/2-o[1]*z,h=B-T,w=Rr-L;
     let pb=sr.top+300;const st=document.querySelector('.stp[data-k="3"]');if(st){const was=st.style.display;st.style.visibility="hidden";st.style.display="flex";pb=[...st.querySelectorAll("p")].pop().getBoundingClientRect().bottom;st.style.display=was;st.style.visibility=""}
