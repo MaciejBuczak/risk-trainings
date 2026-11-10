@@ -1297,10 +1297,14 @@
 .bgv i{position:absolute;left:0;top:0;backface-visibility:visible}
 .v1 .bgf{background-image:linear-gradient(rgba(150,130,100,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(150,130,100,.34) 1px,transparent 1px);background-size:calc(var(--s)*.14) calc(var(--s)*.14);background-position:center;-webkit-mask:radial-gradient(closest-side,#000 35%,transparent);mask:radial-gradient(closest-side,#000 35%,transparent)}
 .v1 .bgs{background:radial-gradient(closest-side,rgba(120,95,60,.16),transparent);}
-.v2 .bgf{background:radial-gradient(closest-side,rgba(214,196,170,.55),rgba(214,196,170,0));}
-.v2 .bgf::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(150,130,100,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(150,130,100,.18) 1px,transparent 1px);background-size:calc(var(--s)*.2) calc(var(--s)*.2);-webkit-mask:radial-gradient(closest-side,#000 30%,transparent);mask:radial-gradient(closest-side,#000 30%,transparent)}
-.v2 .bgw{background:linear-gradient(0deg,rgba(230,216,195,.55),rgba(230,216,195,0));border-bottom:1px solid rgba(150,130,100,.3)}
-.v2 .bgw.s{background:linear-gradient(0deg,rgba(220,204,180,.4),rgba(220,204,180,0))}
+.v2 .bgf{background:rgba(214,194,164,.55);-webkit-mask:linear-gradient(90deg,#000 45%,transparent),linear-gradient(180deg,#000 45%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,#000 45%,transparent),linear-gradient(180deg,#000 45%,transparent);mask-composite:intersect}
+.v2 .bgw{background:rgba(222,204,178,.85)}
+.v2 .bgw.b{-webkit-mask:linear-gradient(90deg,#000 45%,transparent),linear-gradient(0deg,#000 40%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,#000 45%,transparent),linear-gradient(0deg,#000 40%,transparent);mask-composite:intersect}
+.v2 .bgw.s{background:rgba(214,196,168,.75);-webkit-mask:linear-gradient(270deg,#000 45%,transparent),linear-gradient(0deg,#000 40%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(270deg,#000 45%,transparent),linear-gradient(0deg,#000 40%,transparent);mask-composite:intersect}
+.v2 .bgl{background:rgba(140,116,84,.7)}
+.v2 .bgl.b{-webkit-mask:linear-gradient(90deg,#000 15%,transparent 95%);mask:linear-gradient(90deg,#000 15%,transparent 95%)}
+.v2 .bgl.s{-webkit-mask:linear-gradient(270deg,#000 15%,transparent 95%);mask:linear-gradient(270deg,#000 15%,transparent 95%)}
+.v2 .bgl.c{-webkit-mask:linear-gradient(0deg,#000 30%,transparent);mask:linear-gradient(0deg,#000 30%,transparent)}
 .cube[data-solo]:not([data-solo=""]) .bgv,.cube[data-focus]:not([data-focus=""]) .bgv{opacity:0}
 .scene .bg3{position:absolute;left:50%;top:50%;width:calc(var(--s)*3.4);height:calc(var(--s)*2.2);transform:translate(-62%,-38%);border-radius:calc(var(--s)*.12);background:radial-gradient(ellipse at 45% 55%,#efe5d6 0%,#f1e9dd 45%,rgba(243,237,228,0) 72%);pointer-events:none;transition:opacity .8s;z-index:0}
 .scene .bg3::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(150,130,100,.28) 1px,transparent 1.4px);background-size:22px 22px;-webkit-mask:radial-gradient(ellipse at 45% 55%,#000 20%,transparent 62%);mask:radial-gradient(ellipse at 45% 55%,#000 20%,transparent 62%)}
@@ -1465,10 +1469,14 @@ const KX={at:[1.16,-.22,0],W:.5,D:.46,Ht:.2,col:"#7d4f6b",k:"k",title:"KOREKTY",
 const DTG=`<span class="dtg"><span class="dt-h"><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15h6"/></svg>Dokumentacja</span><span class="mt-r dt-r"><i>Wersja</i><b>2.6</b></span><span class="mt-r dt-r"><i>Data</i><b>28.02.2026</b></span></span><span class="dtg db2"><span class="dt-h"><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15h6"/></svg>Dokumentacja</span><span class="mt-r dt-r"><i>Wersja</i><b>2.6</b></span><span class="mt-r dt-r"><i>Data</i><b>28.02.2026</b></span></span>`;
 function drawer(){const W=.32,H=.15,D=.76,at=[.28,-.3725,-.08],c=`calc(var(--s)*`,f=(w,h,t,cl,b="")=>`<i class="drf ${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}">${b}</i>`;
   return`<div class="drw" data-f="doc" style="transform:${T3(at)}">${edgeBox(W,H,D,"e-dr")}${f(W,H,`rotateY(180deg) translateZ(${c}${D/2}))`,"sd")}${f(D,H,`rotateY(90deg) translateZ(${c}${W/2}))`,"sd")}${f(D,H,`rotateY(-90deg) translateZ(${c}${W/2}))`,"sd")}${f(W,D,`rotateX(90deg) translateZ(${c}${H/2}))`,"sd")}${f(W,D,`rotateX(-90deg) translateZ(${c}${H/2}))`,"sd")}<div class="drl" style="transform:translateZ(${c}${D/2+.007}))">${edgeBox(W+.02,H+.014,.014,"e-dr")}</div>${f(W+.02,H+.014,`translateZ(${c}${D/2+.014}))`,"fr",DTG)}</div>`}
-const BGV=(()=>{try{return +(new URLSearchParams(location.search).get("tlo")||localStorage.getItem("rt_mrp_bg")||1)}catch(e){return 1}})();
+const BGV=(()=>{try{return +(new URLSearchParams(location.search).get("tlo")||2)}catch(e){return 2}})();
 function bgStage(){const c=v=>`calc(var(--s)*${v})`,Y=.56;
   if(BGV===1)return`<div id="bgv" class="bgv v1"><i class="bgf" style="width:${c(4.2)};height:${c(2.6)};margin:${c(-1.3)} 0 0 ${c(-2.1)};transform:translateY(${c(Y)}) rotateX(90deg)"></i><i class="bgs" style="width:${c(3.2)};height:${c(1.5)};margin:${c(-.75)} 0 0 ${c(-1.6)};transform:translateY(${c(Y-.002)}) rotateX(90deg)"></i></div>`;
-  if(BGV===2)return`<div id="bgv" class="bgv v2"><i class="bgf" style="width:${c(4.2)};height:${c(2.4)};margin:${c(-1.2)} 0 0 ${c(-2.1)};transform:translateY(${c(Y)}) rotateX(90deg)"></i><i class="bgw" style="width:${c(3.4)};height:${c(1.1)};margin:${c(-.55)} 0 0 ${c(-1.7)};transform:translate3d(0,${c(Y-.55)},${c(-1.2)})"></i><i class="bgw s" style="width:${c(2.4)};height:${c(1.1)};margin:${c(-.55)} 0 0 ${c(-1.2)};transform:translate3d(${c(-1.7)},${c(Y-.55)},0) rotateY(90deg)"></i></div>`;
+  if(BGV===2){const W=3.4,D=2.4,H=1.1,Yf=Y+.1,f=(w,h,t,cl)=>`<i class="${cl}" style="width:${c(w)};height:${c(h)};margin:${c(-h/2)} 0 0 ${c(-w/2)};transform:${t}"></i>`;
+    return`<div id="bgv" class="bgv v2">`+f(W,D,`translateY(${c(Yf)}) rotateX(90deg)`,"bgf")
+      +f(W,H,`translate3d(0,${c(Yf-H/2)},${c(-D/2)})`,"bgw b")+f(D,H,`translate3d(${c(-W/2)},${c(Yf-H/2)},0) rotateY(90deg)`,"bgw s")
+      +f(W,.006,`translate3d(0,${c(Yf)},${c(-D/2)})`,"bgl b")+f(D,.006,`translate3d(${c(-W/2)},${c(Yf)},0) rotateY(90deg)`,"bgl s")
+      +f(.006,H,`translate3d(${c(-W/2)},${c(Yf-H/2)},${c(-D/2)})`,"bgl c")+`</div>`}
   return""}
 const PL=(A,B,cl="pln")=>{const dx=B[0]-A[0],dy=B[1]-A[1],dz=B[2]-A[2],h=Math.hypot(dx,dz),L=Math.hypot(dx,dy,dz);return`<div class="${cl}" style="width:calc(var(--s)*${L.toFixed(4)});transform:${T3(A)} rotateY(${(Math.atan2(-dz,dx)*180/Math.PI).toFixed(2)}deg) rotateZ(${(Math.atan2(dy,h)*180/Math.PI).toFixed(2)}deg)"><i></i><i style="transform:rotateX(90deg)"></i></div>`};
 const PR=(r,y,t="rotateX(90deg)",cl="")=>`<i class="prg ${cl}" style="width:calc(var(--s)*${2*r});height:calc(var(--s)*${2*r});margin:calc(var(--s)*${-r}) 0 0 calc(var(--s)*${-r});transform:translateY(calc(var(--s)*${y})) ${t}"></i>`;
@@ -1535,7 +1543,7 @@ function setCX(v){CX=v;cube.classList.toggle("simple",!v);HUB.n=v?"ECL":"Model s
 inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setCX(+b.dataset.mx);const mvb=e.target.closest("[data-mv]");if(mvb){MV=+mvb.dataset.mv;try{localStorage.setItem("rt_mr_mv",MV)}catch(_){}setEX(1);return}const x=e.target.closest("[data-sv]");if(x){SV=+x.dataset.sv;try{localStorage.setItem("rt_mr_sv",SV)}catch(_){}setEX(1)}});
 function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));renderInner()}
 /* obrót – tylko na żądanie */
-let SOLO={z:0,t:[0,0,0],k:1,b:0,ox:0,oy:0};const BASE={k:1.32,o:[-.76,.54]};
+let SOLO={z:0,t:[0,0,0],k:1,b:0,ox:0,oy:0};const BASE={k:1.32,o:[-.76,.64]};
 let SV0={x:-22,y:-34};try{const v=JSON.parse(localStorage.getItem("rt_mrp_view")||"null");if(v&&isFinite(v.x)&&isFinite(v.y))SV0=v}catch(_){}
 let MODE="stab";try{MODE=localStorage.getItem("rt_mrp_mode")||"stab"}catch(_){}
 let rx=SV0.x,ry=SV0.y;
@@ -1823,14 +1831,6 @@ tabs.addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b)se
 })();
 </script>
 <script src="../../rt.js"></script>
-<script>
-(function(){const sc=document.getElementById("scene"),cube=document.getElementById("cube");if(!sc||!cube)return;
- let v=1;try{v=+(new URLSearchParams(location.search).get("tlo")||localStorage.getItem("rt_mrp_bg")||1)}catch(e){}
- if(v===3){const b=document.createElement("div");b.className="bg3";b.setAttribute("aria-hidden","true");sc.insertBefore(b,sc.firstChild);
-   const up=()=>sc.classList.toggle("bg-on",!cube.dataset.solo&&!cube.dataset.focus);new MutationObserver(up).observe(cube,{attributes:true,attributeFilter:["data-solo","data-focus"]});up()}
- const col=document.getElementById("mcol")||sc.parentElement;const w=document.createElement("div");w.className="bgsw";w.innerHTML='<span>Tło</span>'+[1,2,3].map(n=>`<button type="button" data-v="${n}" class="${n===v?"on":""}">${["Podłoga","Pokój","Plama"][n-1]}</button>`).join("");col.appendChild(w);
- w.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;try{localStorage.setItem("rt_mrp_bg",b.dataset.v)}catch(e){}const u=new URL(location.href);u.searchParams.delete("tlo");location.href=u.toString()});
-})();
-</script>
+
 </body>
 </html>
