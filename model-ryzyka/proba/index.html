@@ -1478,7 +1478,7 @@
 
 <section class="mh"><div class="wrap">
   <div><span class="kick">Model ryzyka</span><h1>Model ryzyka i jego <em>komponenty</em></h1></div>
-  <div class="mh-r"><div class="vtslot" id="vtslot"></div><p>Szklana bryła to model, a w środku jego model statystyczny – czasem jeden moduł, czasem kilka połączonych (PD, LGD, EAD, SICR, TTC, PIT). Dane wchodzą od dołu, wyniki wychodzą na zewnątrz, a sam model trafia do środowiska produkcyjnego. Obracaj bryłę strzałkami albo przeciągnij ją; kliknij moduł.</p></div>
+  <div class="mh-r"><div class="vtslot" id="vtslot"></div><p>Szklana bryła to model, a w środku jego model statystyczny – PD, LGD, EAD i SICR. Dane wchodzą od dołu, wyniki wychodzą na zewnątrz. Obracaj bryłę albo przeciągnij ją; kliknij moduł.</p></div>
 </div></section>
 
 <div class="mw">
@@ -1840,7 +1840,7 @@ BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
   addEventListener("resize",()=>{const sc=document.getElementById("scards");if(sc&&sc.classList.contains("on"))placeCards()});
   function calcSo(){const sr=document.querySelector(".story").getBoundingClientRect(),z=SOLO.z,o=SOLO.so||[0,0];SOLO.k=1+(BASE.k-1)*SOLO.b;const R=[...cube.querySelectorAll(".fa")].map(f=>f.getBoundingClientRect()),L=Math.min(...R.map(r=>r.left)),Rr=Math.max(...R.map(r=>r.right)),T=Math.min(...R.map(r=>r.top)),B=Math.max(...R.map(r=>r.bottom)),cx=(L+Rr)/2-o[0]*z,cy=(T+B)/2-o[1]*z,h=B-T,w=Rr-L;
     let pb=sr.top+300;const st=document.querySelector('.stp[data-k="3"]');if(st){const was=st.style.display;st.style.visibility="hidden";st.style.display="flex";pb=[...st.querySelectorAll("p")].pop().getBoundingClientRect().bottom;st.style.display=was;st.style.visibility=""}
-    SOLO.so=[Math.max(sr.left+w/2-20,sr.left+sr.width*.5)-cx,pb+80+h/2-cy]}
+    SOLO.so=[sr.left+w/2+1-cx,pb+36+h/2-cy]}
   {const re=()=>{if(SK==="stat"&&SOLO.so&&!window.__tw){calcSo();set()}};new ResizeObserver(re).observe(document.querySelector(".story"));new ResizeObserver(re).observe(cube.parentElement);addEventListener("resize",re)}
   function tagFlat(){const G=SOLOS[SK].G;
     const deco=k=>(parseFloat(k.borderTopWidth)>0&&!/, 0\)$|transparent/.test(k.borderTopColor))||!/, 0\)$|transparent/.test(k.backgroundColor)||k.backgroundImage!=="none";const walk=(el,n)=>{if(el.dataset.fs)return;const K=getComputedStyle(el);if(K.transformStyle==="preserve-3d"&&!deco(K)&&[...el.children].some(c=>{const k=getComputedStyle(c);return k.transformStyle==="preserve-3d"||k.transform!=="none"})){[...el.children].forEach(c=>walk(c,n))}else el.dataset.fs=n};
