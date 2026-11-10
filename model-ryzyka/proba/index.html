@@ -1458,6 +1458,10 @@
 .mh-r p{margin-top:26px!important;align-self:stretch;max-width:620px!important}
 .vtslot .vtabs{margin:0!important;pointer-events:auto;border-radius:999px;padding:5px}
 .vtslot .vtabs button{border-radius:999px;padding:7px 14px}
+
+.mh .wrap>div:first-child,.mh-r p{transition:opacity .45s}
+.mh.hout .wrap>div:first-child,.mh.hout .mh-r p,.mh.hsolo .wrap>div:first-child,.mh.hsolo .mh-r p{opacity:0;pointer-events:none}
+.mh{position:relative;z-index:7}
 </style>
 </head>
 <body>
@@ -1691,7 +1695,7 @@ function setCX(v){CX=v;cube.classList.toggle("simple",!v);HUB.n=v?"ECL":"Model s
 inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setCX(+b.dataset.mx);const mvb=e.target.closest("[data-mv]");if(mvb){MV=+mvb.dataset.mv;try{localStorage.setItem("rt_mr_mv",MV)}catch(_){}setEX(1);return}const x=e.target.closest("[data-sv]");if(x){SV=+x.dataset.sv;try{localStorage.setItem("rt_mr_sv",SV)}catch(_){}setEX(1)}});
 function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));renderInner()}
 /* obrót – tylko na żądanie */
-let SOLO={z:0,t:[0,0,0],k:1,b:0,ox:0,oy:0};const BASE={k:1.32,o:[-1.05,-.15]};
+let SOLO={z:0,t:[0,0,0],k:1,b:0,ox:0,oy:0};const BASE={k:1.32,o:[-1.05,-.19]};
 let SV0={x:-22,y:-34};try{const v=JSON.parse(localStorage.getItem("rt_mrp_view")||"null");if(v&&isFinite(v.x)&&isFinite(v.y))SV0=v}catch(_){}
 let MODE="stab";try{MODE=localStorage.getItem("rt_mrp_mode")||"stab"}catch(_){}
 let rx=SV0.x,ry=SV0.y;
@@ -1726,8 +1730,10 @@ setEX(EX);setCX(1);
   const VIEW={all:null,db:[-16,24],eng:[-48,-24],stat:[-14,-20],wyn:[-20,-58],doc:[-8,-12]};
   let cur=-1,EXP=false;mw.classList.add("storymode");
   function fit(){const w=mcol.clientWidth,hgt=innerHeight;const sz=Math.max(150,Math.min(EXP?420:360,(w-40)/3.25,(hgt-120)/1.75));sc.style.setProperty("--s",sz+"px","important");setTimeout(()=>set(),30)}
-  let fz=0;function focus(k){if(k===cur&&!EXP)return;const old=steps[cur];clearTimeout(fz);if(old&&!EXP&&document.querySelector(".mw.tabbed")){old.classList.add("out");fz=setTimeout(()=>{old.classList.remove("out");focusNow(k)},450);return}focusNow(k)}
-  let tt=0;function focusNow(k){if(k===cur&&!EXP)return;const first=cur<0;cur=k;const f=steps[k].dataset.focus;clearTimeout(tt);{const show=()=>steps.forEach((s,i)=>s.classList.toggle("on",i===k));if(first||EXP)show();else{steps.forEach(s=>s.classList.remove("on"));const busy=!!cube.dataset.solo||SOLO.z>0,so=f==="db"||f==="eng"||f==="wyn"||f==="stat";tt=setTimeout(show,so?(busy?1800:0)+3900:(busy?1800:800))}}dots.querySelectorAll("button").forEach((b,i)=>b.classList.toggle("on",i===k));
+  let fz=0;function focus(k){if(k===cur&&!EXP)return;const old=steps[cur];clearTimeout(fz);if(old&&!EXP&&document.querySelector(".mw.tabbed")){if(old.dataset.focus==="all"){const mh=document.querySelector(".mh");mh&&mh.classList.add("hout")}old.classList.add("out");fz=setTimeout(()=>{old.classList.remove("out");focusNow(k)},450);return}focusNow(k)}
+  let tt=0;function heroMode(all){const st=document.querySelector(".story"),mh=document.querySelector(".mh");if(!st||!mh)return;st.style.translate="";if(all){mh.classList.remove("hout","hsolo");return}const D=st.getBoundingClientRect().top+(parseFloat(getComputedStyle(st).paddingTop)||0)-mh.querySelector(".kick").getBoundingClientRect().top;st.style.translate=`0 ${-Math.round(D)}px`;mh.classList.add("hsolo");mh.classList.remove("hout")}
+  addEventListener("resize",()=>{const mh=document.querySelector(".mh");if(mh&&mh.classList.contains("hsolo"))heroMode(false)});
+  function focusNow(k){if(k===cur&&!EXP)return;const first=cur<0;cur=k;const f=steps[k].dataset.focus;if(!EXP)heroMode(f==="all");clearTimeout(tt);{const show=()=>steps.forEach((s,i)=>s.classList.toggle("on",i===k));if(first||EXP)show();else{steps.forEach(s=>s.classList.remove("on"));const busy=!!cube.dataset.solo||SOLO.z>0,so=f==="db"||f==="eng"||f==="wyn"||f==="stat";tt=setTimeout(show,so?(busy?1800:0)+3900:(busy?1800:800))}}dots.querySelectorAll("button").forEach((b,i)=>b.classList.toggle("on",i===k));
     if(EXP)return;{const bt=f==="all"?1:(f==="db"||f==="eng"||f==="wyn"||f==="stat")?SOLO.b:0;if(first){SOLO.b=bt;set()}else bto(bt,1500)}if(f==="db"||f==="eng"||f==="wyn"||f==="stat"){solo(f);return}unsolo(slow=>{cube.dataset.focus=f==="all"?"":f;const v=VIEW[f]||[SV0.x,SV0.y];go(v[0],v[1],slow?1600:undefined)})}
   let st=[],zt=0;const clr=()=>{st.forEach(clearTimeout);st=[];cancelAnimationFrame(zt)};
   let bt0=0;function bto(v,ms){cancelAnimationFrame(bt0);const b0=SOLO.b,t0=performance.now();if(b0===v)return;const f=t=>{const k=Math.min(1,(t-t0)/ms),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;SOLO.b=b0+(v-b0)*e;set();if(k<1)bt0=requestAnimationFrame(f)};bt0=requestAnimationFrame(f)}
