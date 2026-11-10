@@ -1400,12 +1400,12 @@
 .sd-cats{grid-template-rows:auto auto 1fr auto}
 .sdk{display:grid!important;grid-template-rows:subgrid;grid-row:span 4;gap:12px!important;align-items:start}
 .sdk-h{gap:14px}
-.sdk h3{margin:4px 0 0!important}
+.sdk h3{margin:0!important}
 .sdk-b{align-self:end;justify-self:start}
-.lyr{margin:58px 0 0 48px}
+.lyr{margin:58px 0 0 96px}
 .lyr.sw{opacity:0;transition:opacity .25s}
 .lyr{transition:height .6s cubic-bezier(.5,0,.2,1),opacity .3s}
-.lyr[data-v="c"]{perspective:1600px;transform-style:preserve-3d}
+
 .lyp{display:none}
 .lyr[data-v="b"] .lyp{display:grid;position:absolute;top:0;right:0;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:8px;padding:16px;box-sizing:border-box;border-radius:0 16px 16px 16px;background:color-mix(in srgb,var(--lc) 20%,#faf6f0);z-index:5;transition:background .4s}
 .lyr[data-v="b"] .lyp .ly-i{box-shadow:0 0 0 1px color-mix(in srgb,var(--lc) 18%,#ece3d6)}
@@ -1693,7 +1693,7 @@ setEX(EX);setCX(1);
     wyn:{m:1,t:[.75,.14,0],k:1.75,card:"w",dir:-1,face:"#cube .wbox .wbf, #cube .kbf",G:[".dbx,.db,.beam.bd,.port.pb,.pbx:not(.kbx),.beam.bp,.port.pdt,.port.pp",".ik,.rod,.mech,.beam.be,.port.pe",".fa,.drw,.edg.e-md,.beam.bw,.port:not(.pb):not(.pe):not(.pw):not(.pk):not(.pwt)"]}};
   let SK=null;
   function solo(f,ok){if(cube.dataset.solo||SOLO.z>0){if(SK===f)return;unsolo(()=>{});st.push(setTimeout(()=>solo(f),1800));return}
-    if(f==="stat"&&!ok){const dy=((((ry+34)%360)+540)%360)-180;if(Math.abs(rx+22)>.5||Math.abs(dy)>.5){clr();go(-22,-34,1100);st.push(setTimeout(()=>{const t=document.querySelector(".vtabs button.on");if(!t||t.dataset.k==="3")solo(f,1)},1150));return}}
+    if(f==="stat"&&!ok){const dy=((((ry-SV0.y)%360)+540)%360)-180;if(Math.abs(rx-SV0.x)>.5||Math.abs(dy)>.5){clr();go(SV0.x,SV0.y,1100);st.push(setTimeout(()=>{const t=document.querySelector(".vtabs button.on");if(!t||t.dataset.k==="3")solo(f,1)},1150));return}}
     clr();const S=SOLOS[f];SK=f;cube.dataset.sk=f;window.__soloFace=S.face;window.__soloDir=S.dir||1;cube.dataset.focus="";SOLO.t=S.t;SOLO.k=S.k;SOLO.m=S.m||0;SOLO.so=null;if(S.off)calcSo();cube.querySelectorAll("[data-fs]").forEach(e=>delete e.dataset.fs);tagFlat();if(!S.norot)go(...(S.v||[-16,24]),1400);
     const T0=800;[1,2,3].forEach((n,i)=>st.push(setTimeout(()=>{tagFlat();cube.dataset.solo=n},T0+i*500)));st.push(setTimeout(()=>zoom(1,1700,()=>{if(f==="stat"){placeCards();document.getElementById("scards").classList.add("on");st.push(setTimeout(statLines,1000));st.push(setTimeout(()=>SG.classList.add("on"),1600));st.push(setTimeout(sharpOn,700));return}window.__pin=1;window.__openCard&&window.__openCard(S.card)}),T0+2*500+700))}
   function statLines(){const sc=document.getElementById("scards");if(!sc.classList.contains("on"))return;const par=sc.parentElement,pr=par.getBoundingClientRect(),X=v=>v-pr.left,Y=v=>v-pr.top;
@@ -1736,8 +1736,8 @@ setEX(EX);setCX(1);
   SD.querySelectorAll(".sd-more").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();bkOpen===b.dataset.k?closeBlk():openBlk(b.dataset.k)}));
   {const tb=document.createElement("div");tb.className="sd-tabs";tb.setAttribute("role","tablist");tb.innerHTML=Object.keys(BMAP).map((k,i)=>`<button type="button" data-k="${k}"><i>0${i+1}</i>${k}</button>`).join("");BK.querySelector(".sd-blk-h").prepend(tb);tb.addEventListener("click",e=>{const b=e.target.closest("button");if(b&&b.dataset.k!==bkOpen)openBlk(b.dataset.k)});const x=BK.querySelector(".sd-blk-x");x.setAttribute("aria-label","Wróć do osi modelu");x.title="Wróć do osi modelu"}
   const ICK=`<svg viewBox="0 0 32 32" aria-hidden="true"><circle class="f" cx="16" cy="12.5" r="6"/><path d="M16 4.5a8.5 8.5 0 0 0-5 15.4c.9.7 1.5 1.7 1.5 2.8v.8h7v-.8c0-1.1.6-2.1 1.5-2.8A8.5 8.5 0 0 0 16 4.5z"/><path d="M13 26.5h6M14 29h4"/><path class="t" d="M12.8 14.6l1.9-3.4 1.8 2.6 1.9-3.4 1.2 2"/></svg>`,
-      ICT=`<svg viewBox="0 0 32 32" aria-hidden="true"><path class="t" d="M4 26h24"/><path d="M5 25.5c4 0 6-15 11-15s7 15 11 15"/><path class="t" d="M16 10.5V26"/></svg>`;
-  SD.insertAdjacentHTML("beforeend",`<div class="sd-cats"><article class="sdk"><div class="sdk-h"><span class="sdk-ic">${ICK}</span><span class="sdk-k">54 koncepcje · 8 obszarów</span></div><h3>Koncepcja modelu statystycznego</h3><p>Zanim padnie pierwsza liczba, trzeba wybrać mechanizm: karta scoringowa, model przeżycia, macierze migracji, model Mertona. Koncepcja mówi, jak model rozumie ryzyko i które parametry będzie szacował.</p><button type="button" class="sdk-b" data-kat="kon">Katalog koncepcji <i>→</i></button></article><article class="sdk"><div class="sdk-h"><span class="sdk-ic">${ICT}</span><span class="sdk-k">42 techniki · 5 grup</span></div><h3>Techniki ilościowe</h3><p>Metoda największej wiarygodności, regresja logistyczna, analiza przeżycia, symulacja Monte Carlo – narzędzia, którymi koncepcja zamienia się w liczby. Przy każdej technice widać, w których koncepcjach pracuje.</p><button type="button" class="sdk-b" data-kat="tech">Katalog technik <i>→</i></button></article></div>`);
+      ICT=`<svg viewBox="0 0 32 32" aria-hidden="true"><path class="t" d="M5 5v22h22"/><path d="M8 23.5L26 9"/><circle class="f" cx="11" cy="17" r="1.9"/><circle class="f" cx="15" cy="20" r="1.9"/><circle class="f" cx="19" cy="12.5" r="1.9"/><circle class="f" cx="23" cy="14.5" r="1.9"/></svg>`;
+  SD.insertAdjacentHTML("beforeend",`<div class="sd-cats"><article class="sdk"><span class="sdk-k">54 koncepcje · 8 obszarów</span><div class="sdk-h"><span class="sdk-ic">${ICK}</span><h3>Koncepcja modelu statystycznego</h3></div><p>Zanim padnie pierwsza liczba, trzeba wybrać mechanizm: karta scoringowa, model przeżycia, macierze migracji, model Mertona. Koncepcja mówi, jak model rozumie ryzyko i które parametry będzie szacował.</p><button type="button" class="sdk-b" data-kat="kon">Katalog koncepcji <i>→</i></button></article><article class="sdk"><span class="sdk-k">42 techniki · 5 grup</span><div class="sdk-h"><span class="sdk-ic">${ICT}</span><h3>Techniki ilościowe</h3></div><p>Metoda największej wiarygodności, regresja logistyczna, analiza przeżycia, symulacja Monte Carlo – narzędzia, którymi koncepcja zamienia się w liczby. Przy każdej technice widać, w których koncepcjach pracuje.</p><button type="button" class="sdk-b" data-kat="tech">Katalog technik <i>→</i></button></article></div>`);
   const KT=document.createElement("div");KT.className="skat";KT.id="skat";KT.innerHTML=`<div class="sk-top"><button type="button" class="sd-back sk-back">← Budowa statystyczna</button><span class="sk-k"></span><div class="sd-sw sk-sw"><button type="button" data-kv="a">A · Warstwy</button><button type="button" data-kv="b">B · Segregator</button><button type="button" data-kv="c">C · Kaskada</button></div></div><div class="lyr"></div>`;SD.parentElement.appendChild(KT);
   const LY=KT.querySelector(".lyr");
   function kfit(){const mc=SD.offsetParent;if(!mc)return;mc.style.removeProperty("height");const base=mc.offsetHeight;const el=KT.classList.contains("on")?KT:SD.classList.contains("on")?SD:null;if(!el)return;const mr=mc.getBoundingClientRect(),cb=Math.max(...[...cube.querySelectorAll(".fa")].map(f=>f.getBoundingClientRect().bottom))-mr.top;const need=Math.max(el.offsetTop+el.offsetHeight+90,cb+70);if(need>base)mc.style.setProperty("height",need+"px","important")}
@@ -1752,8 +1752,8 @@ setEX(EX);setCX(1);
     if(KV==="b"){const tw=250,th=54,g=6;P.style.setProperty("--lc",LG[LS].c);P.innerHTML=L[LS].querySelector(".ly-b").innerHTML;
       L.forEach((el,i)=>{el.style.top=i*(th+g)+"px";el.style.left="0px";el.style.right="auto";el.style.width=(i===LS?tw+18:tw)+"px";el.style.height=th+"px";el.style.zIndex=i===LS?N+2:1});
       P.style.left=tw+"px";P.style.minHeight=(N*(th+g)-g)+"px";H=Math.max(N*(th+g)-g,P.offsetHeight)}
-    else{const C=KV==="c",step=C?34:40,inset=C?20:12,hh=48,order=LG.map((g,i)=>i).filter(i=>i!==LS);
-      order.forEach((gi,k)=>{const el=L[gi],d=N-1-k;el.style.top=k*step+"px";if(C){el.style.left=d*inset+"px";el.style.right=((N-1)*inset-d*inset)+"px";el.style.transform=`translateZ(${-d*14}px)`}else el.style.left=el.style.right=(d*inset)+"px";el.style.height=hh+"px";el.style.zIndex=k+1});
+    else{const C=KV==="c",step=C?34:40,inset=C?14:12,hh=48,order=LG.map((g,i)=>i).filter(i=>i!==LS);
+      order.forEach((gi,k)=>{const el=L[gi],d=N-1-k;el.style.top=k*step+"px";if(C){el.style.left=d*inset+"px";el.style.right=((N-1)*inset-d*inset)+"px";el.style.transform=`perspective(1600px) translateZ(${-d*14}px)`}else el.style.left=el.style.right=(d*inset)+"px";el.style.height=hh+"px";el.style.zIndex=k+1});
       const f=L[LS];f.style.top=(N-1)*step+"px";f.style.left="0px";f.style.right=(C?(N-1)*inset:0)+"px";f.style.zIndex=N+1;const fh=f.querySelector(".ly-h").offsetHeight+f.querySelector(".ly-b").offsetHeight;f.style.height=fh+"px";H=(N-1)*step+fh}
     LY.style.height=H+"px";setTimeout(kfit,20);setTimeout(kfit,620)}
   function lyrBuild(k){const D=katData(k);LG=D.G;LS=0;
