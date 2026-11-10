@@ -1602,15 +1602,33 @@
 .dsec .sds-w{align-items:stretch}
 
 #scards .sc header{background:var(--hc)!important;color:#fff!important;margin:0!important;padding:7px 16px!important;border-bottom:0!important}
-#scards .sc header span{color:#fff!important;font-size:14px!important}
+#scards .sc header span{color:#fff!important;font-size:12.5px!important;text-shadow:0 1px 1px rgba(60,45,30,.25)}
 #scards .sc header span::before{background:rgba(255,255,255,.75)!important}
-#scards .sc header em{color:rgba(255,255,255,.82)!important;font-size:11px!important}
-#scards .sc-main{--hc:#665748}
-#scards .sc[style*="#5e3a72"]{--hc:#776858}
-#scards .sc[style*="#4f7390"]{--hc:#837463}
-#scards .sc[style*="#6f7f58"]{--hc:#8e7f6d}
-#scards .sc[style*="#bf8165"]{--hc:#998a77}
+#scards .sc header em{color:#fff!important;font-size:10px!important;text-shadow:0 1px 1px rgba(60,45,30,.25)}
+#scards .sc-main{--hc:#b3a89b}
+#scards .sc[style*="#5e3a72"]{--hc:#bab0a4}
+#scards .sc[style*="#4f7390"]{--hc:#c1b8ad}
+#scards .sc[style*="#6f7f58"]{--hc:#c8bfb4}
+#scards .sc[style*="#bf8165"]{--hc:#cfc7bd}
 #scards .sc-main .sc-f{margin-top:10px!important}
+
+#ds-doc .dcard{display:none}
+.docpg{position:relative;min-height:300px;display:flex;justify-content:center;align-items:stretch;padding:4px 30px 14px}
+.dp-back{position:absolute;left:50%;top:14px;bottom:2px;width:min(300px,78%);transform:translateX(-46%) rotate(3deg);background:#efe6d8;border:1px solid #ddd3c4;border-radius:4px}
+.dp{position:relative;width:min(300px,78%);background:#fffdf9;border:1px solid #ddd3c4;border-radius:4px;box-shadow:0 18px 34px -20px rgba(60,45,30,.45);padding:22px 24px 26px;clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,0 100%);display:flex;flex-direction:column;gap:7px}
+.dp::after{content:"";position:absolute;right:0;top:0;width:28px;height:28px;background:linear-gradient(225deg,transparent 50%,#e6d8c3 50%);}
+.dp-hd{padding-right:18px;display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.08em;color:#a09580;border-bottom:1px solid #ebe3d6;padding-bottom:6px;margin-bottom:6px;text-transform:uppercase}
+.dp-hd span{font-weight:700;color:#a8694c}
+.dp-t{height:9px;width:62%;background:#cdbfa9;border-radius:2px;margin:2px 0 4px}
+.dp-t.s{width:45%;height:7px;margin:0}
+.dp-l{height:5px;background:#ebe3d6;border-radius:2px}
+.w9{width:94%}.w8{width:84%}.w7{width:74%}.w6{width:60%}.w5{width:48%}
+.dp-sec{display:flex;align-items:center;gap:8px;margin-top:8px}.dp-sec i{font-style:normal;font-size:9px;font-weight:700;color:#b29e84}
+.dp-fig{height:54px;margin:6px 0 4px;background:#faf6f0;border-radius:3px;padding:4px}.dp-fig svg{width:100%;height:100%;display:block}
+.dp-tag{position:absolute;right:18px;bottom:30px;min-width:104px;font-size:9.5px;box-shadow:0 10px 22px -12px rgba(40,30,20,.45);transform:rotate(-2deg)}
+.dp-tag .lt-h{font-size:8.5px;padding:2px 6px;background:#b29e84}
+.dp-tag .lt-r{padding:2px 6px}
+.dp-pg{position:absolute;left:24px;bottom:9px;font-size:8.5px;color:#b5aa98}
 </style>
 </head>
 <body>
@@ -1994,10 +2012,10 @@ setEX(EX);setCX(1);
   const EE=t=>String(t).replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
   ["doc","eng"].forEach(k=>{const D=DSD[k],sec=document.createElement("section");sec.className="sdsec dsec";sec.id="ds-"+k;
     sec.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">${EE(D.k)}</span><h2>${EE(D.t)}</h2><p class="dsp">${EE(D.p)}</p>
-      <div class="dcard" style="--dc:${D.card.c}"><div class="dc-h"><span>${EE(D.card.h)}</span><em>${EE(D.card.sub)}</em></div><div class="dc-g">${D.card.rows.map(r=>`<div><i>${EE(r[0])}</i><b>${EE(r[1])}</b></div>`).join("")}</div></div></div>
+      ${k==="doc"?`<div class="docpg"><div class="dp-back"></div><div class="dp"><div class="dp-hd"><span>Model ECL</span><em>v2.6</em></div><div class="dp-t"></div><div class="dp-l w9"></div><div class="dp-l w8"></div><div class="dp-l w6"></div><div class="dp-sec"><i>04</i><div class="dp-t s"></div></div><div class="dp-l w9"></div><div class="dp-l w7"></div><div class="dp-fig"><svg viewBox="0 0 120 50" preserveAspectRatio="none"><path d="M2 46 C20 44 30 30 45 26 S75 8 118 6" fill="none" stroke="#b29e84" stroke-width="1.6"/><path d="M2 46 H118" stroke="#d8ccb9" stroke-width="1"/><g fill="#e6d8c3"><rect x="10" y="34" width="8" height="12"/><rect x="26" y="28" width="8" height="18"/><rect x="42" y="22" width="8" height="24"/><rect x="58" y="18" width="8" height="28"/><rect x="74" y="14" width="8" height="32"/><rect x="90" y="10" width="8" height="36"/></g></svg></div><div class="dp-l w8"></div><div class="dp-l w5"></div><span class="ltag dp-tag"><span class="lt-h">Dokumentacja</span><span class="lt-r"><i>Wersja</i><b>2.6</b></span><span class="lt-r"><i>Data</i><b>28.02.2026</b></span></span><span class="dp-pg">s. 24 / 86</span></div></div>`:""}<div class="dcard" style="--dc:${D.card.c}"><div class="dc-h"><span>${EE(D.card.h)}</span><em>${EE(D.card.sub)}</em></div><div class="dc-g">${D.card.rows.map(r=>`<div><i>${EE(r[0])}</i><b>${EE(r[1])}</b></div>`).join("")}</div></div></div>
       <div class="sds-r"><button type="button" class="sd-back ds-back">↑ Model statystyczny</button><div class="dsg">${D.S.map(x=>`<article class="dsc"><span class="sd-n">${x[0]}</span><h3>${EE(x[1])}</h3><p>${EE(x[2])}</p><ul>${x[3].map(a=>`<li>${EE(a)}</li>`).join("")}</ul></article>`).join("")}</div></div></div>`;
     prevSec.after(sec);prevSec=sec;DS[k]=sec;sec.querySelector(".ds-back").addEventListener("click",()=>scrollToSec(SEC))});
-  function dsFit(sec){const k=sec.querySelector(".stp-n"),K=k.getBoundingClientRect().top+scrollY,tg=K-60+innerHeight-50;[sec.querySelector(".dsg"),sec.querySelector(".dcard")].forEach(el=>{el.style.height="";const t=el.getBoundingClientRect().top+scrollY,h=Math.round(tg-t);if(h>el.scrollHeight)el.style.height=h+"px"})}
+  function dsFit(sec){const k=sec.querySelector(".stp-n"),K=k.getBoundingClientRect().top+scrollY,tg=K-60+innerHeight-50;[sec.querySelector(".dsg"),sec.querySelector(".docpg")||sec.querySelector(".dcard")].forEach(el=>{el.style.height="";const t=el.getBoundingClientRect().top+scrollY,h=Math.round(tg-t);if(h>el.scrollHeight)el.style.height=h+"px"})}
   addEventListener("resize",()=>Object.values(DS).forEach(s2=>{if(s2.classList.contains("on"))dsFit(s2)}));
   
 {const d=SD.querySelector(".sd-docs");d&&d.remove()}
