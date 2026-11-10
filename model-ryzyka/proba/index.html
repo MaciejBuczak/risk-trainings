@@ -1366,9 +1366,36 @@
 .sk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .sk-k{font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c;display:inline-flex;align-items:center;gap:10px}
 .sk-k::before{content:"";width:24px;height:1.5px;background:#bf8165}
-.skat iframe{display:block;width:100%;height:calc(100vh - 150px);min-height:560px;border:0;border-radius:18px;background:#f5f1ea;box-shadow:0 0 0 1px #ddd3c4}
+.skat-unused{display:block;width:100%;height:calc(100vh - 150px);min-height:560px;border:0;border-radius:18px;background:#f5f1ea;box-shadow:0 0 0 1px #ddd3c4}
 .stx{transition:opacity .45s}
-.stx p+p{margin-top:12px}
+.stx .l3s{line-height:1.75}
+
+.sk-h{margin:0 0 22px}
+.sk-h h3{margin:0 0 6px;font-weight:400;font-size:26px;letter-spacing:-.01em;color:#0d0d0d}
+.sk-h p{margin:0;font-size:13.5px;line-height:1.6;color:#5c564d;max-width:640px}
+.lyr{position:relative;transition:height .6s cubic-bezier(.5,0,.2,1)}
+.ly{position:absolute;margin:0;padding:0;border-radius:16px;background:color-mix(in srgb,var(--lc) 34%,#f7f1e8);box-shadow:0 -1px 0 color-mix(in srgb,var(--lc) 30%,#fff) inset,0 -6px 18px -12px rgba(60,40,20,.35);overflow:hidden;cursor:pointer;transition:top .6s cubic-bezier(.5,0,.2,1),left .6s cubic-bezier(.5,0,.2,1),right .6s cubic-bezier(.5,0,.2,1),height .6s cubic-bezier(.5,0,.2,1),background .4s}
+.ly:not(.front):hover{background:color-mix(in srgb,var(--lc) 48%,#f7f1e8)}
+.ly.front{cursor:default;background:color-mix(in srgb,var(--lc) 20%,#faf6f0);box-shadow:0 -1px 0 color-mix(in srgb,var(--lc) 30%,#fff) inset,0 -10px 24px -14px rgba(60,40,20,.4)}
+.ly-h{display:flex;align-items:center;gap:10px;height:48px;padding:0 18px;box-sizing:border-box}
+.ly-h i{flex:none;width:9px;height:9px;border-radius:50%;background:var(--lc)}
+.ly-h b{font-weight:500;font-size:14px;color:#0d0d0d;white-space:nowrap}
+.ly-h em{font-style:normal;font-size:12px;color:#7a7266;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ly-h span{margin-left:auto;font:600 11px var(--body);color:color-mix(in srgb,var(--lc) 75%,#000);background:color-mix(in srgb,var(--lc) 18%,#fff);border-radius:999px;padding:3px 9px}
+.ly-b{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:4px 14px 14px;opacity:0;transition:opacity .35s}
+.ly.front .ly-b{opacity:1;transition:opacity .5s .3s}
+.ly-i{position:relative;background:#fcf9f5;border-radius:10px;padding:9px 12px 10px;box-shadow:0 0 0 1px color-mix(in srgb,var(--lc) 18%,#ece3d6);min-height:46px}
+.ly-i b{display:block;font-weight:600;font-size:12.5px;line-height:1.3;color:#1c1a17;padding-right:34px}
+.ly-i small{display:block;margin-top:2px;font-size:11px;line-height:1.35;color:#7a7266;padding-right:20px}
+.ly-i.old b,.ly-i.old small{color:#a39b8f}.ly-i.old b{text-decoration:line-through}
+.ly-i .rg{text-decoration:none;display:inline-grid;place-items:center;width:15px;height:15px;border-radius:4px;background:#2b2723;color:#fcf9f5;font-size:9.5px;margin-right:5px;vertical-align:1px}
+.bd{position:absolute;top:9px;right:10px;text-decoration:none;font:700 9px var(--body);letter-spacing:.04em;border-radius:999px;padding:2px 6px;background:color-mix(in srgb,var(--lc) 22%,#fff);color:color-mix(in srgb,var(--lc) 70%,#000)}
+.bd-UL{background:#2b2723;color:#fcf9f5}
+.bd.tm{display:flex;gap:3px;padding:0;background:none}
+.bd.tm s{text-decoration:none;display:grid;place-items:center;min-width:17px;height:17px;border-radius:5px;font-size:9.5px}
+.bd.tm .es{background:#8a5238;color:#fff}
+.bd.tm .mc{border-radius:50%;background:color-mix(in srgb,var(--lc) 20%,#fff);color:color-mix(in srgb,var(--lc) 70%,#000)}
+@media (max-width:1100px){.ly-b{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -1450,7 +1477,7 @@
     <div class="bottom"><span>© 2026 Maciej Buczak | Risk Research</span><span>Wersja próbna strony</span></div>
   </div>
 </footer>
-<script src="../../koncepcje/model.js?v=1"></script><script src="../../koncepcje/dane.js?v=20261104b"></script>
+<script src="../../koncepcje/model.js?v=1"></script><script src="../../koncepcje/dane.js?v=20261104b"></script><script src="../../koncepcje/techniki.js?v=20261104b"></script>
 <script>
 (()=>{
 const M=window.RT_MODEL,MI={};M.forEach(r=>MI[r[0]]=r);
@@ -1667,10 +1694,10 @@ setEX(EX);setCX(1);
       P=`<path d="M${W/2},${ph} V${ay}"/><path d="M${w/2},${ay} H${W-w/2}"/>`+S.map((e,i)=>`<path d="M${i*(w+g)+w/2},${ay} V${top}"/><circle cx="${i*(w+g)+w/2}" cy="${ay}" r="4" style="fill:${getComputedStyle(e).getPropertyValue("--sd")}"/>`).join("")}
     else{pd.style.opacity=0;S.forEach(e=>e.style.height="");const w=Math.min(380,W*.55);S.forEach((e,i)=>{const k=((i-sdI)%N+N)%N;e.style.left=(W/2-w/2+k*44)+"px";e.style.top=(40+k*26)+"px";e.style.width=w+"px";e.style.transform=`translateZ(${-k*90}px) rotateY(-16deg)`;e.style.opacity=k===0?1:Math.max(.18,.75-k*.15);e.style.zIndex=10-k})}
     svg.innerHTML=P;SD.classList.toggle("vb",v==="b");if(v!=="a")closeBlk();else if(bkOpen)blkPos();stH()}
-  function stH(){const st=SD.querySelector(".sd-stage");let h=SD.dataset.v==="a"?(+SD.dataset.cb||460)+6:500;if(bkOpen&&SD.dataset.v==="a")h=Math.max(h,BK.offsetTop-st.offsetTop+BK.offsetHeight+4);st.style.height=h+"px";setTimeout(fit,30);setTimeout(fit,560)}
+  function stH(){const st=SD.querySelector(".sd-stage");let h=SD.dataset.v==="a"?(+SD.dataset.cb||460)+6:500;if(bkOpen&&SD.dataset.v==="a")h=Math.max(h,BK.offsetTop-st.offsetTop+BK.offsetHeight+4);st.style.height=h+"px";setTimeout(kfit,30);setTimeout(kfit,560)}
   function sdTop(){const mr=SD.offsetParent.getBoundingClientRect(),h=document.querySelector('.stp[data-k="3"] h2'),tp=SD.querySelector(".sd-top");if(!h||!h.offsetParent)return;SD.style.top=(h.getBoundingClientRect().top-mr.top-tp.offsetHeight-tp.offsetTop-12)+"px"}
-  function showDet(){swapTxt(1,1);const sc=document.getElementById("scards"),sl=document.getElementById("slines");sl&&sl.classList.add("off");sc.classList.remove("on");SG.classList.remove("on");setTimeout(()=>{sl&&sl.remove();SD.classList.add("on");sdLayout();sdTop();fit()},700)}
-  function hideDet(back){SD.classList.remove("on");KT.classList.remove("on");closeBlk();if(back){swapTxt(0,1);setTimeout(fit,500)}else{swapTxt(0,0);fit()}if(back)setTimeout(()=>{placeCards();document.getElementById("scards").classList.add("on");SG.classList.add("on");setTimeout(statLines,900)},500)}
+  function showDet(){swapTxt(1,1);const sc=document.getElementById("scards"),sl=document.getElementById("slines");sl&&sl.classList.add("off");sc.classList.remove("on");SG.classList.remove("on");setTimeout(()=>{sl&&sl.remove();SD.classList.add("on");sdLayout();sdTop();kfit()},700)}
+  function hideDet(back){SD.classList.remove("on");KT.classList.remove("on");closeBlk();if(back){swapTxt(0,1);setTimeout(kfit,500)}else{swapTxt(0,0);kfit()}if(back)setTimeout(()=>{placeCards();document.getElementById("scards").classList.add("on");SG.classList.add("on");setTimeout(statLines,900)},500)}
   SG.addEventListener("click",showDet);document.getElementById("scmsb").addEventListener("click",showDet);SD.querySelector(".sd-back").addEventListener("click",()=>hideDet(true));
   SD.querySelectorAll(".sd-sw button").forEach(b=>b.addEventListener("click",()=>{SD.querySelectorAll(".sd-sw button").forEach(x=>x.classList.toggle("on",x===b));SD.dataset.v=b.dataset.v;sdI=0;SD.classList.remove("on");setTimeout(()=>{SD.classList.add("on");sdLayout()},350)}));
   SD.querySelector(".sd-prev").addEventListener("click",()=>{sdI=(sdI+3)%4;sdLayout()});SD.querySelector(".sd-next").addEventListener("click",()=>{sdI=(sdI+1)%4;sdLayout()});
@@ -1690,17 +1717,29 @@ setEX(EX);setCX(1);
   const ICK=`<svg viewBox="0 0 32 32" aria-hidden="true"><circle class="f" cx="16" cy="12.5" r="6"/><path d="M16 4.5a8.5 8.5 0 0 0-5 15.4c.9.7 1.5 1.7 1.5 2.8v.8h7v-.8c0-1.1.6-2.1 1.5-2.8A8.5 8.5 0 0 0 16 4.5z"/><path d="M13 26.5h6M14 29h4"/><path class="t" d="M12.8 14.6l1.9-3.4 1.8 2.6 1.9-3.4 1.2 2"/></svg>`,
       ICT=`<svg viewBox="0 0 32 32" aria-hidden="true"><path class="t" d="M4 27.5h24"/><rect class="f" x="7" y="18" width="3.2" height="9.5" rx=".6"/><rect class="f" x="12.2" y="12.5" width="3.2" height="15" rx=".6"/><rect class="f" x="17.4" y="14.5" width="3.2" height="13" rx=".6"/><rect class="f" x="22.6" y="21" width="3.2" height="6.5" rx=".6"/><path d="M4.5 25c3.5 0 5-13.5 11.5-13.5S24 25 27.5 25"/><circle cx="16" cy="11.5" r="1.3"/><path class="t" d="M16 4.5v4"/></svg>`;
   SD.insertAdjacentHTML("beforeend",`<div class="sd-cats"><article class="sdk"><div class="sdk-h"><span class="sdk-ic">${ICK}</span><div><span class="sdk-k">54 koncepcje · 8 obszarów</span><h3>Koncepcja modelu statystycznego</h3></div></div><p>Zanim padnie pierwsza liczba, trzeba wybrać mechanizm: karta scoringowa, model przeżycia, macierze migracji, model Mertona. Koncepcja mówi, jak model rozumie ryzyko i które parametry będzie szacował.</p><button type="button" class="sdk-b" data-kat="kon">Katalog koncepcji <i>→</i></button></article><article class="sdk"><div class="sdk-h"><span class="sdk-ic">${ICT}</span><div><span class="sdk-k">42 techniki · 5 grup</span><h3>Techniki ilościowe</h3></div></div><p>Metoda największej wiarygodności, regresja logistyczna, analiza przeżycia, symulacja Monte Carlo – narzędzia, którymi koncepcja zamienia się w liczby. Przy każdej technice widać, w których koncepcjach pracuje.</p><button type="button" class="sdk-b" data-kat="tech">Katalog technik <i>→</i></button></article></div>`);
-  const KT=document.createElement("div");KT.className="skat";KT.id="skat";KT.innerHTML=`<div class="sk-top"><button type="button" class="sd-back sk-back">← Budowa statystyczna</button><span class="sk-k"></span></div><iframe title="Katalog"></iframe>`;SD.parentElement.appendChild(KT);
-  const KF=KT.querySelector("iframe");
-  function fit(){const mc=SD.offsetParent;if(!mc)return;mc.style.removeProperty("height");const base=mc.offsetHeight;const el=KT.classList.contains("on")?KT:SD.classList.contains("on")?SD:null;if(!el)return;const mr=mc.getBoundingClientRect(),cb=Math.max(...[...cube.querySelectorAll(".fa")].map(f=>f.getBoundingClientRect().bottom))-mr.top;const need=Math.max(el.offsetTop+el.offsetHeight+90,cb+70);if(need>base)mc.style.setProperty("height",need+"px","important")}
-  function openKat(k){const u="../../mapa-banku/?embed="+k;KT.querySelector(".sk-k").textContent=k==="kon"?"Katalog koncepcji":"Katalog technik";KT.style.top=SD.style.top;SD.classList.remove("on");
-    let shown=0;const show=()=>{if(shown||SK!=="stat")return;shown=1;KT.classList.add("on");fit();const r=KT.getBoundingClientRect();if(r.top<60||r.top>innerHeight*.5)scrollBy({top:r.top-90,behavior:"smooth"})};
-    if(KF.dataset.u!==u){KF.dataset.u=u;let ok=0,tm=0;KF.onload=()=>{ok=1;if(tm)show()};KF.src=u;setTimeout(()=>{tm=1;if(ok)show()},450);setTimeout(show,2500)}else setTimeout(show,450)}
-  function closeKat(){KT.classList.remove("on");setTimeout(()=>{SD.classList.add("on");sdLayout();fit()},400)}
+  const KT=document.createElement("div");KT.className="skat";KT.id="skat";KT.innerHTML=`<div class="sk-top"><button type="button" class="sd-back sk-back">← Budowa statystyczna</button><span class="sk-k"></span></div><div class="sk-h"><h3></h3><p></p></div><div class="lyr"></div>`;SD.parentElement.appendChild(KT);
+  const LY=KT.querySelector(".lyr");
+  function kfit(){const mc=SD.offsetParent;if(!mc)return;mc.style.removeProperty("height");const base=mc.offsetHeight;const el=KT.classList.contains("on")?KT:SD.classList.contains("on")?SD:null;if(!el)return;const mr=mc.getBoundingClientRect(),cb=Math.max(...[...cube.querySelectorAll(".fa")].map(f=>f.getBoundingClientRect().bottom))-mr.top;const need=Math.max(el.offsetTop+el.offsetHeight+90,cb+70);if(need>base)mc.style.setProperty("height",need+"px","important")}
+  const PAL={K1:"#bf8165",K2:"#a8694c",R:"#b29e84",O:"#8c6e55",L:"#c9a27a",C:"#9a5c41",S:"#6e5f50",M:"#d0a58a",SO:"#b29e84",WN:"#8a5238",EK:"#bf8165",PR:"#7d6a58",NU:"#c99a6e"};
+  const EH=t=>String(t==null?"":t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+  function katData(k){if(k==="kon"){const D=window.RT_KON||{dom:[],c:[]};return{h:"Koncepcje modeli",p:`${D.c.length} koncepcji modeli ryzyka w ${D.dom.length} obszarach. Każda warstwa to jeden obszar – wybierz ją, żeby zobaczyć jej koncepcje.`,G:D.dom.map(d=>({id:d[0],n:d[1],sub:d[2],c:PAL[d[0]]||d[3],it:D.c.filter(c=>c.d===d[0]).map(c=>({n:c.n,o:c.o,b:c.k,r:!!c.reg,x:!!c.old}))}))}}
+    const T=window.RT_TECH||{cats:[],t:[]};return{h:"Techniki ilościowe",p:`${T.t.length} technik statystycznych, ekonometrycznych, probabilistycznych i numerycznych, na których stoją modele ryzyka. E – technika estymacyjna; liczba – w ilu koncepcjach jest stosowana.`,G:T.cats.map(c=>({id:c[0],n:c[1],sub:"",c:PAL[c[0]]||c[2],it:T.t.filter(t=>t.c===c[0]).map(t=>({n:t.n,o:t.x,e:t.est,m:t.m}))}))}}
+  let LS=0,LG=[];
+  function lyrDraw(){const N=LG.length,step=40,hh=48,inset=12,L=[...LY.children];const order=LG.map((g,i)=>i).filter(i=>i!==LS);
+    order.forEach((gi,k)=>{const el=L[gi],d=N-1-k;el.classList.remove("front");el.style.top=k*step+"px";el.style.left=el.style.right=(d*inset)+"px";el.style.height=hh+"px";el.style.zIndex=k+1});
+    const f=L[LS];f.classList.add("front");f.style.top=(N-1)*step+"px";f.style.left=f.style.right="0px";f.style.zIndex=N+1;const fh=f.querySelector(".ly-h").offsetHeight+f.querySelector(".ly-b").offsetHeight;f.style.height=fh+"px";LY.style.height=((N-1)*step+fh)+"px";setTimeout(kfit,20);setTimeout(kfit,620)}
+  function lyrBuild(k){const D=katData(k);LG=D.G;LS=0;KT.querySelector(".sk-h h3").textContent=D.h;KT.querySelector(".sk-h p").textContent=D.p;
+    LY.innerHTML=LG.map((g,i)=>`<div class="ly" style="--lc:${g.c}" data-i="${i}"><div class="ly-h"><i></i><b>${EH(g.n)}</b>${g.sub?`<em>${EH(g.sub)}</em>`:""}<span>${g.it.length}</span></div><div class="ly-b">${g.it.map(t=>`<div class="ly-i${t.x?" old":""}"><b>${t.r?'<s class="rg">§</s>':""}${EH(t.n)}</b><small>${EH(t.o)}</small>${t.b?`<u class="bd bd-${EH(t.b)}">${EH(t.b)}</u>`:""}${t.m!=null?`<u class="bd tm">${t.e?'<s class="es">E</s>':""}<s class="mc">${t.m}</s></u>`:""}</div>`).join("")}</div></div>`).join("");
+    lyrDraw()}
+  LY.addEventListener("click",e=>{const l=e.target.closest(".ly");if(!l||l.classList.contains("front"))return;LS=+l.dataset.i;lyrDraw()});
+  addEventListener("resize",()=>{if(KT.classList.contains("on"))lyrDraw()});
+  function openKat(k){KT.querySelector(".sk-k").textContent=k==="kon"?"Katalog koncepcji":"Katalog technik";KT.style.top=SD.style.top;SD.classList.remove("on");
+    setTimeout(()=>{if(SK!=="stat")return;KT.classList.add("on");lyrBuild(k);const r=KT.getBoundingClientRect();if(r.top<60||r.top>innerHeight*.5)scrollBy({top:r.top-90,behavior:"smooth"})},450)}
+  function closeKat(){KT.classList.remove("on");setTimeout(()=>{SD.classList.add("on");sdLayout();kfit()},400)}
   SD.querySelectorAll("[data-kat]").forEach(b=>b.addEventListener("click",()=>openKat(b.dataset.kat)));KT.querySelector(".sk-back").addEventListener("click",closeKat);
-  const STX=document.querySelector('.stp[data-k="3"] .stx'),STX0=STX?STX.innerHTML:"",STX1=`<h2>Model statystyczny</h2><p>Model statystyczny to rdzeń modelu ECL: reguła ilościowa, która z danych historycznych wyprowadza parametry ryzyka – PD, LGD i EAD – dla każdej ekspozycji i każdego horyzontu.</p><p>Budowa przebiega w czterech krokach: segmentacja portfela, przygotowanie próby, dobór zmiennych i parametrów, wreszcie estymacja. Każdy krok to decyzja, którą trzeba potem obronić przed walidacją i nadzorem.</p><p>Pod spodem leżą dwie warstwy wiedzy: koncepcja modelu – jaki mechanizm ryzyka opisujemy – oraz techniki ilościowe, którymi ten mechanizm szacujemy. Obie znajdziesz w katalogach.</p>`;
+  const STX=document.querySelector('.stp[data-k="3"] .stx'),STX0=STX?STX.innerHTML:"",STX1=`<h2>Model statystyczny</h2><p class="l3s">Segmentacja i próba – na czym model się uczy<br>Parametry i estymacja – jak powstają liczby<br>Koncepcja i technika – co stoi pod spodem</p>`;
   function moveCube(){if(!SOLO.so||SK!=="stat")return;const a=SOLO.so.slice();calcSo();const b=SOLO.so.slice();SOLO.so=a;sharpOff();window.__tw=1;const t0=performance.now(),D=900;
-    const step=t=>{if(SK!=="stat"){window.__tw=0;return}let u=Math.min(1,(t-t0)/D);u=u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;SOLO.so=[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];set();if(u<1)requestAnimationFrame(step);else{window.__tw=0;SOLO.so=b;set();setTimeout(()=>{if(SK==="stat"){sharpOn();fit()}},60)}};requestAnimationFrame(step)}
+    const step=t=>{if(SK!=="stat"){window.__tw=0;return}let u=Math.min(1,(t-t0)/D);u=u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;SOLO.so=[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];set();if(u<1)requestAnimationFrame(step);else{window.__tw=0;SOLO.so=b;set();setTimeout(()=>{if(SK==="stat"){sharpOn();kfit()}},60)}};requestAnimationFrame(step)}
   function swapTxt(det,anim){if(!STX)return;const h=det?STX1:STX0;if(STX.innerHTML===h)return;if(!anim){STX.innerHTML=h;STX.style.opacity="";return}STX.style.opacity=0;setTimeout(()=>{STX.innerHTML=h;moveCube();setTimeout(()=>{STX.style.opacity=1},500)},460)}
   window.__hideDet0=()=>{KT.classList.remove("on");closeBlk();swapTxt(0,0);const mc=SD.offsetParent||SD.parentElement;mc&&mc.style.removeProperty("height")};
 BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
