@@ -9,6 +9,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap">
 <link rel="stylesheet" href="../rt.css">
+<script>(function(){var m=/[?&]embed=(kon|tech)/.exec(location.search);if(m){window.RT_EMB=m[1]==="kon"?1:2;document.documentElement.className+=" emb emb-"+m[1]}})()</script>
+<style>
+.emb body{background:transparent}
+.emb .top,.emb .mh,.emb .foot,.emb .vs,.emb #vS,.emb #vD,.emb #fx,.emb .cbar,.emb .cver,.emb .mstrip,.emb .mpan{display:none!important}
+.emb #vP{display:block!important}
+.emb main{padding:0!important;margin:0!important}
+.emb .mapw{padding:22px 26px 30px!important;margin:0!important;max-width:none!important;width:auto!important}
+.emb .cube{perspective:none}
+.emb .fc{box-shadow:none!important;background:transparent!important}
+.emb .kx-h .kick,.emb .tq-h .kick{display:none}
+</style>
+
 <style>
 .mh{padding:clamp(24px,3vw,44px) 0 18px}
 .mh .wrap,.mapw,.top .wrap,.foot .wrap{max-width:1380px}
@@ -735,7 +747,7 @@ spaint(null);
     if(lock&&lock.startsWith("m:")){SEL={k:"m",id:lock.slice(2)};paintSel()}else if(lock===null&&SEL&&SEL.k==="m"){SEL=null;paintSel()}else if(lock&&SEL){SEL=null;paintSel()}}
 }
   /* obrót */
-  const cube=document.getElementById("cube"),box=document.getElementById("box"),F=[1,2,3,4].map(i=>document.getElementById("f"+i));let face=0,busy=false;
+  const cube=document.getElementById("cube"),box=document.getElementById("box"),F=[1,2,3,4].map(i=>document.getElementById("f"+i));let face=window.RT_EMB||0,busy=false;
   function rest(){setTimeout(()=>paintSel());box.className="box";cube.style.height="";F.forEach((f,i)=>{f.style.transform="";f.hidden=i!==face});document.querySelectorAll("[data-face]").forEach(b=>b.classList.toggle("on",+b.dataset.face===face));document.body.classList.remove("rotating");if(face===0)requestAnimationFrame(()=>flows(curFl));else if(face===1)window.kxDraw&&window.kxDraw();else if(face===3)window.mmMas&&window.mmMas()}
   function turn(to){if(busy||to===face)return;busy=true;const W=cube.clientWidth;
     const top=document.querySelector(".cbar").getBoundingClientRect().top+scrollY-100;if(scrollY>top)scrollTo({top,behavior:"instant"});
@@ -793,11 +805,12 @@ spaint(null);
   function setV(v){V=v;try{localStorage.setItem("rt_mm_v",v)}catch(_){}if(EXP)explode(false);if(face===3){face=prev;rest()}mvUI()}
   document.querySelector(".cver").addEventListener("click",e=>{const b=e.target.closest("[data-mv]");if(b){setV(+b.dataset.mv);return}if(e.target.closest("#mmgo")){if(V===1){face===3?backFromModel():lookUp()}else if(V===3)explode(!EXP)}});
   rest();mvUI()})();
-function setView(v){const vD=document.getElementById("vD"),f1=document.getElementById("f1"),home=document.getElementById("vDhome"),fx=document.getElementById("fx"),vP=document.getElementById("vP");if(v==="p"){if(vD.parentNode!==f1)f1.appendChild(vD);if(fx.parentNode!==vP)vP.insertBefore(fx,vP.firstChild)}else{if(vD.parentNode===f1)home.parentNode.insertBefore(vD,home);if(fx.parentNode!==vD)vD.insertBefore(fx,vD.firstChild)}document.getElementById("vS").hidden=v!=="s";vD.hidden=!(v==="d"||v==="p");document.getElementById("vP").hidden=v!=="p";document.querySelectorAll(".vs button").forEach(b=>{const on=b.dataset.view===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});try{localStorage.setItem("rt_mapa_view",v)}catch(e){}if(v==="d"||v==="p")requestAnimationFrame(()=>flows(curFl))}
+function setView(v){const vD=document.getElementById("vD"),f1=document.getElementById("f1"),home=document.getElementById("vDhome"),fx=document.getElementById("fx"),vP=document.getElementById("vP");if(v==="p"){if(vD.parentNode!==f1)f1.appendChild(vD);if(fx.parentNode!==vP)vP.insertBefore(fx,vP.firstChild)}else{if(vD.parentNode===f1)home.parentNode.insertBefore(vD,home);if(fx.parentNode!==vD)vD.insertBefore(fx,vD.firstChild)}document.getElementById("vS").hidden=v!=="s";vD.hidden=!(v==="d"||v==="p");document.getElementById("vP").hidden=v!=="p";document.querySelectorAll(".vs button").forEach(b=>{const on=b.dataset.view===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});if(!window.RT_EMB)try{localStorage.setItem("rt_mapa_view",v)}catch(e){}if(v==="d"||v==="p")requestAnimationFrame(()=>flows(curFl))}
 document.querySelector(".vs").addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(b)setView(b.dataset.view)});
-let v0="s";try{v0=localStorage.getItem("rt_mapa_view")||"s"}catch(e){}setView(v0);
+let v0="s";try{v0=localStorage.getItem("rt_mapa_view")||"s"}catch(e){}if(window.RT_EMB)v0="p";setView(v0);
 })();
 </script>
+<script>if(window.RT_EMB){const fix=()=>{document.querySelectorAll(".kx-h p,.tq-h p").forEach(p=>{p.innerHTML=p.innerHTML.replace("na trzeciej ścianie","w katalogu technik").replace("z drugiej ściany","z katalogu koncepcji")});document.querySelectorAll("a[href]").forEach(a=>a.target="_top")};fix();setTimeout(fix,400)}</script>
 <script src="../rt.js"></script>
 </body>
 </html>
