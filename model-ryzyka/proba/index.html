@@ -2017,14 +2017,13 @@ tabs.addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b)se
 <script src="../../rt.js"></script>
 
 <script>
-/* ramy ekranu: linie pomocnicze do układania obiektów (?ramy=0 wyłącza) */
-(function(){if(/[?&]ramy=0/.test(location.search))return;const tabs=document.getElementById("tabs");if(!tabs)return;
-  const mk=()=>{const d=document.createElement("div");d.className="ramy";document.body.appendChild(d);return d},L1=mk(),L2=mk();
-  let D=0;try{D=+localStorage.getItem("rt_ramy_d")||0}catch(_){}
-  function base(){const sd=document.getElementById("sdet");if(!sd||!sd.classList.contains("on"))return null;const p=sd.querySelector(".sdx p");if(!p)return null;
-    const w=document.createTreeWalker(p,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){const i=n.data.indexOf("przez");if(i>=0){const pr=document.createElement("span");pr.style.cssText="display:inline-block;width:0;height:0;vertical-align:baseline";const r=document.createRange();r.setStart(n,i+5);r.collapse(true);r.insertNode(pr);const y=pr.getBoundingClientRect().top+scrollY;pr.remove();p.normalize();return y}}return null}
-  function upd(){const t=tabs.getBoundingClientRect().bottom+scrollY;const b=base();if(b){const d=Math.round(b-t);if(d>100&&d!==D){D=d;try{localStorage.setItem("rt_ramy_d",D)}catch(_){}}}
-    L1.style.top=t+"px";L2.style.top=(t+(D||717))+"px"}
+/* ramy ekranu: górna = 40 px nad tytułem „03 · Model statystyczny” (margines od górnej krawędzi ekranu),
+   dolna = górna + 730 px (wysokość okna przeglądarki na typowym laptopie 1536×864). ?ramy=0 wyłącza */
+(function(){if(/[?&]ramy=0/.test(location.search))return;const vt=()=>document.querySelector(".vtabs"),M=40,VH=730;
+  const mk=()=>{const d=document.createElement("div");d.className="ramy";document.body.appendChild(d);return d},L1=mk(),L2=mk();let off=39;
+  function upd(){const v=vt();if(!v)return;const vb=v.getBoundingClientRect().bottom+scrollY,k=document.querySelector('.stp[data-k="3"] .stp-n');
+    if(k&&k.offsetParent){const kt=k.getBoundingClientRect().top+scrollY;if(kt>vb)off=Math.round(kt-vb)}
+    const t=vb+off-M;L1.style.top=t+"px";L2.style.top=(t+VH)+"px"}
   upd();setInterval(upd,400);addEventListener("resize",upd)})();
 </script>
 </body>
