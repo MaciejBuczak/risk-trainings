@@ -1636,6 +1636,11 @@
 .dr-tag{position:absolute;transform:translate(-50%,-50%) skewY(14deg);min-width:92px;font-size:9.5px;box-shadow:0 8px 18px -10px rgba(40,30,20,.4)}
 .dr-tag .lt-h{background:#a09580;font-size:8.5px;padding:2px 6px}.dr-tag .lt-r{padding:2px 6px}
 .dr-cap{margin-top:6px;font-size:11.5px;color:#8a8378;text-align:center}
+
+.docpg{justify-content:flex-start!important;padding-top:18px!important}
+.dr-tag{min-width:84px!important;font-size:8.5px!important}
+.dr-tag .lt-h{font-size:7.5px!important}
+.dsg .kdc-st{position:relative!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;width:auto!important;max-width:none!important;transform:none!important;clip-path:none!important;opacity:1!important;pointer-events:auto!important;margin:0!important;overflow:auto;z-index:1}
 </style>
 </head>
 <body>
@@ -2024,7 +2029,7 @@ setEX(EX);setCX(1);
     prevSec.after(sec);prevSec=sec;DS[k]=sec;sec.querySelector(".ds-back").addEventListener("click",()=>scrollToSec(SEC))});
   {const dp=DS.doc&&DS.doc.querySelector(".docpg");if(dp){
     const ry=-34*Math.PI/180,e=22*Math.PI/180,P=(x,y,z)=>{const x1=x*Math.cos(ry)+z*Math.sin(ry),z1=-x*Math.sin(ry)+z*Math.cos(ry);return[x1,-(y*Math.cos(e))+z1*Math.sin(e)]};
-    const W=1.35,H=.56,D=1.9,sc=118,ox=0,oy=0;const pt=(x,y,z)=>{const[a,b]=P(x,y,z);return[ox+a*sc,oy+b*sc]};
+    const W=.82,H=.4,D=2.05,sc=130,ox=0,oy=0;const pt=(x,y,z)=>{const[a,b]=P(x,y,z);return[ox+a*sc,oy+b*sc]};
     const L=(a,b,c="#a09580",w=1.4,o=1)=>{const p=pt(...a),q=pt(...b);return`<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${q[0].toFixed(1)}" y2="${q[1].toFixed(1)}" stroke="${c}" stroke-width="${w}" opacity="${o}" stroke-linecap="round"/>`};
     const F=(ps,f)=>`<polygon points="${ps.map(p=>pt(...p).map(v=>v.toFixed(1)).join(",")).join(" ")}" fill="${f}"/>`;
     const x0=-W/2,x1=W/2,y0=0,y1=H,z0=-D/2,z1=D/2;let g="";
@@ -2036,9 +2041,10 @@ setEX(EX);setCX(1);
       const tx=x0+.15+((i*0.23)%0.6);g+=F([[tx,h,z],[tx+.22,h,z],[tx+.19,h+.06,z],[tx+.03,h+.06,z]],"#e6d8c3")}
     [[[x0,y0,z0],[x1,y0,z0]],[[x1,y0,z0],[x1,y0,z1]],[[x1,y0,z1],[x0,y0,z1]],[[x0,y0,z1],[x0,y0,z0]],[[x0,y1,z0],[x1,y1,z0]],[[x1,y1,z0],[x1,y1,z1]],[[x1,y1,z1],[x0,y1,z1]],[[x0,y1,z1],[x0,y1,z0]],[[x0,y0,z0],[x0,y1,z0]],[[x1,y0,z0],[x1,y1,z0]],[[x1,y0,z1],[x1,y1,z1]],[[x0,y0,z1],[x0,y1,z1]]].forEach(([a,b])=>{const back=(a[2]===z0&&b[2]===z0&&a[0]===x0)||(a[0]===x0&&b[0]===x0&&a[1]===y0&&b[1]===y0);g+=L(a,b,"#a09580",1.4,back?.45:1)});
     /* uchwyt */
-    g+=L([-.18,H*.62,z1],[.18,H*.62,z1],"#8f8370",2.4,1);
-    const fc=pt(0,H*.42,z1);const C=[];for(const X of [x0,x1])for(const Y of [y0,y1+.08])for(const Z of [z0,z1])C.push(pt(X,Y,Z));const mx=Math.min(...C.map(c=>c[0]))-14,Mx=Math.max(...C.map(c=>c[0]))+14,my=Math.min(...C.map(c=>c[1]))-14,My=Math.max(...C.map(c=>c[1]))+14,VW=Mx-mx,VH=My-my;
-    dp.innerHTML=`<div class="drw-w"><svg class="drwsvg" viewBox="${mx.toFixed(1)} ${my.toFixed(1)} ${VW.toFixed(1)} ${VH.toFixed(1)}" aria-hidden="true">${g}</svg><span class="ltag dr-tag" style="left:${((fc[0]-mx)/VW*100).toFixed(1)}%;top:${((fc[1]-my)/VH*100).toFixed(1)}%"><span class="lt-h">Dokumentacja</span><span class="lt-r"><i>Wersja</i><b>2.6</b></span><span class="lt-r"><i>Data</i><b>28.02.2026</b></span></span></div><span class="dr-cap">Szuflada z bryły modelu – wszystkie dokumenty w jednym miejscu</span>`}}
+    {const fx0=x0-.03,fx1=x1+.03,fy0=y0-.025,fy1=y1+.025,fz0=z1,fz1=z1+.05;g+=F([[fx0,fy0,fz1],[fx1,fy0,fz1],[fx1,fy1,fz1],[fx0,fy1,fz1]],"rgba(236,226,210,.92)");g+=F([[fx0,fy1,fz0],[fx1,fy1,fz0],[fx1,fy1,fz1],[fx0,fy1,fz1]],"rgba(220,205,182,.9)");g+=F([[fx1,fy0,fz0],[fx1,fy0,fz1],[fx1,fy1,fz1],[fx1,fy1,fz0]],"rgba(210,195,170,.9)");[[[fx0,fy0,fz1],[fx1,fy0,fz1]],[[fx1,fy0,fz1],[fx1,fy1,fz1]],[[fx1,fy1,fz1],[fx0,fy1,fz1]],[[fx0,fy1,fz1],[fx0,fy0,fz1]],[[fx0,fy1,fz0],[fx0,fy1,fz1]],[[fx1,fy1,fz0],[fx1,fy1,fz1]],[[fx1,fy0,fz0],[fx1,fy0,fz1]],[[fx0,fy1,fz0],[fx1,fy1,fz0]],[[fx1,fy1,fz0],[fx1,fy0,fz0]]].forEach(([a,b])=>g+=L(a,b,"#a09580",1.3,1))}
+    const fc=pt(0,H*.5,z1+.05);const C=[];for(const X of [x0,x1])for(const Y of [y0,y1+.08])for(const Z of [z0,z1+.05])C.push(pt(X,Y,Z));const mx=Math.min(...C.map(c=>c[0]))-14,Mx=Math.max(...C.map(c=>c[0]))+14,my=Math.min(...C.map(c=>c[1]))-14,My=Math.max(...C.map(c=>c[1]))+14,VW=Mx-mx,VH=My-my;
+    dp.innerHTML=`<div class="drw-w"><svg class="drwsvg" viewBox="${mx.toFixed(1)} ${my.toFixed(1)} ${VW.toFixed(1)} ${VH.toFixed(1)}" aria-hidden="true">${g}</svg><span class="ltag dr-tag" style="left:${((fc[0]-mx)/VW*100).toFixed(1)}%;top:${((fc[1]-my)/VH*100).toFixed(1)}%"><span class="lt-h">Dokumentacja</span><span class="lt-r"><i>Wersja</i><b>2.6</b></span><span class="lt-r"><i>Data</i><b>28.02.2026</b></span></span></div>`}}
+  {const g=DS.doc&&DS.doc.querySelector(".dsg"),src=document.getElementById("kdc");if(g&&src){const c=src.cloneNode(true);c.removeAttribute("id");c.classList.add("kdc-st");g.firstElementChild.replaceWith(c);[...g.querySelectorAll(".dsc .sd-n")].forEach((n,i)=>n.textContent="0"+(i+1))}}
   function dsFit(sec){const k=sec.querySelector(".stp-n"),K=k.getBoundingClientRect().top+scrollY,tg=K-60+innerHeight-50;[sec.querySelector(".dsg"),sec.querySelector(".docpg")||sec.querySelector(".dcard")].forEach(el=>{el.style.height="";const t=el.getBoundingClientRect().top+scrollY,h=Math.round(tg-t);if(h>el.scrollHeight)el.style.height=h+"px"})}
   addEventListener("resize",()=>Object.values(DS).forEach(s2=>{if(s2.classList.contains("on"))dsFit(s2)}));
   
