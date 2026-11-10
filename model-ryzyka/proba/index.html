@@ -1501,6 +1501,20 @@
 .sdet .sd-top{justify-content:flex-start}
 .sdsec{padding-top:86px!important}
 .sds-l{top:40px!important}
+
+.sdtg{display:grid;gap:12px;margin-top:30px}
+.sdtb{display:flex;gap:16px;align-items:flex-start;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:14px;padding:16px 16px 14px}
+.ltag{flex:none;display:flex;flex-direction:column;min-width:118px;border:1.2px solid #56514a;border-radius:3px;overflow:hidden;background:rgba(255,253,249,.95);font-size:10.5px;color:#2b2723}
+.lt-h{background:#56514a;color:#fff;font-style:italic;font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:9.5px;padding:3px 7px}
+.lt-r{display:flex;justify-content:space-between;gap:10px;padding:3px 7px;border-top:1px solid #e6dfd3}
+.lt-r i{font-style:normal;color:#7a7266}.lt-r b{font-weight:700}
+.sdtb-t b{display:block;font-weight:500;font-size:15px;color:#0d0d0d;margin-bottom:4px}
+.sdtb-t p{margin:0 0 10px!important;font-size:12.5px!important;line-height:1.5!important;color:#5c564d!important}
+.sdtb-b{margin:0!important;padding:7px 15px!important;font-size:12px!important}
+.dsec .dsl h3{font-weight:400;font-size:clamp(28px,2.7vw,40px);line-height:1.1;letter-spacing:-.015em;margin:12px 0 16px;color:#0d0d0d}
+.dsec .dsl p{margin:0 0 10px;font-size:15.5px;line-height:1.65;font-weight:300;color:var(--ink2)}
+.dsec .ds-back{margin-top:14px}
+.dsec .sdx-c{padding:22px 24px}
 </style>
 </head>
 <body>
@@ -1862,7 +1876,20 @@ setEX(EX);setCX(1);
     const step=t=>{if(SK!=="stat"){window.__tw=0;return}let u=Math.min(1,(t-t0)/D);u=u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;SOLO.so=[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];set();if(u<1)requestAnimationFrame(step);else{window.__tw=0;SOLO.so=b;set();setTimeout(()=>{if(SK==="stat"){sharpOn();kfit()}},60)}};requestAnimationFrame(step)}
   function swapTxt(det,anim){if(!STX)return;const h=typeof det==="string"?det:STX1;if(STX.innerHTML===h)return;if(!anim){STX.innerHTML=h;STX.style.opacity="";return}STX.style.opacity=0;setTimeout(()=>{STX.innerHTML=h;setTimeout(()=>{STX.style.opacity=1},60)},380)}
   STX.innerHTML=STX1;
-    window.__hideDet0=()=>{KT.classList.remove("on");SEC.classList.remove("on","kat");closeBlk();swapTxt(1,0);kfit()};
+  /* Dokumentacja i Silnik: ramki pod opisem + osobne sekcje szczegółowe */
+  const TAGS={doc:{h:"Dokumentacja",r:[["Wersja","2.6"],["Data","28.02.2026"]],t:"Dokumentacja modelu",d:"Założenia, etapy budowy i wyniki modelu – opisane tak, by każdą decyzję dało się odtworzyć."},
+              eng:{h:"Silnik",r:[["Wersja","1.7"],["Środowisko","SAS 11.4"]],t:"Silnik modelu",d:"Kod liczący model co miesiąc – zgodny z dokumentacją w każdej formule, segmencie i parametrze."}};
+  SEC.querySelector(".sds-l").insertAdjacentHTML("beforeend",`<div class="sdtg">${Object.entries(TAGS).map(([k,v])=>`<div class="sdtb"><span class="ltag"><span class="lt-h">${v.h}</span>${v.r.map(r=>`<span class="lt-r"><i>${r[0]}</i><b>${r[1]}</b></span>`).join("")}</span><div class="sdtb-t"><b>${v.t}</b><p>${v.d}</p><button type="button" class="sdk-b sdtb-b" data-ds="${k}">Szczegóły <i>→</i></button></div></div>`).join("")}</div>`);
+  const DS={};let prevSec=SEC;
+  [...SD.querySelectorAll(".sd-docs .sdx")].forEach((x,i)=>{const k=i?"eng":"doc",sec=document.createElement("section");sec.className="sdsec dsec";sec.id="ds-"+k;
+    sec.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">${k==="doc"?"Dokumentacja modelu":"Silnik modelu"}</span><div class="dsl"></div><button type="button" class="sd-back ds-back">↑ Model statystyczny</button></div><div class="sds-r"></div></div>`;
+    const t=x.querySelector(".sdx-t"),c=x.querySelector(".sdx-c");t.querySelector(".sdx-k")&&t.querySelector(".sdx-k").remove();sec.querySelector(".dsl").append(...t.childNodes);sec.querySelector(".sds-r").append(c);
+    prevSec.after(sec);prevSec=sec;DS[k]=sec;sec.querySelector(".ds-back").addEventListener("click",()=>scrollToSec(SEC))});
+  {const d=SD.querySelector(".sd-docs");d&&d.remove()}
+  function scrollToSec(sec){const k=sec.querySelector(".stp-n"),hk=document.querySelector(".mh .kick"),off=hk?hk.getBoundingClientRect().top+scrollY:126;scrollTo({top:k.getBoundingClientRect().top+scrollY-off,behavior:"smooth"})}
+  SEC.querySelectorAll("[data-ds]").forEach(b=>b.addEventListener("click",()=>{const s2=DS[b.dataset.ds];if(!s2)return;s2.classList.add("on");setTimeout(()=>scrollToSec(s2),40)}));
+
+    window.__hideDet0=()=>{KT.classList.remove("on");SEC.classList.remove("on","kat");document.querySelectorAll(".dsec").forEach(d=>d.classList.remove("on"));closeBlk();swapTxt(1,0);kfit()};
   window.__sdsOn=()=>{if(SEC.classList.contains("on"))return;SEC.classList.add("on");SD.classList.add("on");requestAnimationFrame(()=>{sdLayout();kfit()});setTimeout(kfit,1200);setTimeout(kfit,2600)};
 BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
   addEventListener("resize",()=>{if(SD.classList.contains("on"))sdLayout()});
