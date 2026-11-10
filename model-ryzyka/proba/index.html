@@ -1599,6 +1599,17 @@
 .dsc li{position:relative;padding:4px 0 4px 12px;font-size:12px;color:#2b2723;border-top:1px dashed #e0d6c6}
 .dsc li::before{content:"";position:absolute;left:0;top:.95em;width:4px;height:4px;border-radius:50%;background:#bf8165}
 .dsec .sds-w{align-items:stretch}
+
+#scards .sc header{background:var(--hc)!important;color:#fff!important;margin:0!important;padding:7px 16px!important;border-bottom:0!important}
+#scards .sc header span{color:#fff!important}
+#scards .sc header span::before{background:rgba(255,255,255,.75)!important}
+#scards .sc header em{color:rgba(255,255,255,.82)!important}
+#scards .sc-main{--hc:#6e3f2b}
+#scards .sc[style*="#5e3a72"]{--hc:#8a5238}
+#scards .sc[style*="#4f7390"]{--hc:#9a5c41}
+#scards .sc[style*="#6f7f58"]{--hc:#a8694c}
+#scards .sc[style*="#bf8165"]{--hc:#b47657}
+#scards .sc-main .sc-f{margin-top:10px!important}
 </style>
 </head>
 <body>
@@ -2012,7 +2023,7 @@ BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
     SHP={lay,made};requestAnimationFrame(()=>{lay.classList.add("on");made.forEach(e=>e.classList.add("shp-src"))})}
   function sharpOff(){if(!SHP)return;SHP.made.forEach(e=>e.classList.remove("shp-src"));SHP.lay.remove();SHP=null}
   addEventListener("resize",()=>{if(SHP){sharpOff();setTimeout(sharpOn,300)}});
-  function placeCards(){const sc=document.getElementById("scards"),mc=sc.offsetParent||sc.parentElement,mr=mc.getBoundingClientRect(),st=document.querySelector('.stp[data-k="3"]'),xb=document.querySelector(".xref");let t=86;if(st){const was=st.style.display;st.style.visibility="hidden";st.style.display="flex";const h=st.querySelector("p").getBoundingClientRect();t=h.top-mr.top+3;st.style.display=was;st.style.visibility=""}{const vt=document.querySelector(".vtslot .vtabs");if(vt&&vt.offsetParent){const vb=vt.getBoundingClientRect().bottom,top=mr.top+t,gap=top-vb,avail=innerHeight-gap-(top+scrollY),R=[...sc.children].filter(e=>e.classList.contains("sc")&&!e.closest(".sc-col")),sum=R.reduce((a,e)=>a+e.offsetHeight,0),rg=Math.max(4,Math.min(16,(avail-sum)/Math.max(1,R.length-1)));sc.style.setProperty("row-gap",rg+"px","important")}}if(xb){const lim=xb.getBoundingClientRect().top-mr.top-14-sc.offsetHeight;if(t>lim)t=lim}sc.style.setProperty("top",t+"px","important");SG.style.top=(t+sc.offsetHeight+18)+"px";setTimeout(()=>{const tr=sc.querySelector(".sc-tri"),R=[...sc.children].filter(e=>e.classList.contains("sc")&&!e.closest(".sc-col")).pop();if(tr&&R){tr.style.height="";const h=R.getBoundingClientRect().bottom-tr.getBoundingClientRect().top;if(h>tr.offsetHeight){tr.style.height=h+"px";const d=tr.getBoundingClientRect().bottom-R.getBoundingClientRect().bottom;if(Math.abs(d)>.5)tr.style.height=(h-d)+"px"}}},1700)}
+  function placeCards(){const sc=document.getElementById("scards"),mc=sc.offsetParent||sc.parentElement,mr=mc.getBoundingClientRect(),st=document.querySelector('.stp[data-k="3"]'),xb=document.querySelector(".xref");let t=86;if(st){const was=st.style.display;st.style.visibility="hidden";st.style.display="flex";const h=st.querySelector("p").getBoundingClientRect();t=h.top-mr.top+3;st.style.display=was;st.style.visibility=""}{const vt=document.querySelector(".vtslot .vtabs");if(vt&&vt.offsetParent){const vb=vt.getBoundingClientRect().bottom,top=mr.top+t,gap=top-vb,avail=innerHeight-gap-(top+scrollY),R=[...sc.children].filter(e=>e.classList.contains("sc")&&!e.closest(".sc-col")),sum=R.reduce((a,e)=>a+e.offsetHeight,0),rg=Math.max(4,Math.min(16,(avail-sum)/Math.max(1,R.length-1)));sc.style.setProperty("row-gap",rg+"px","important")}}if(xb){const lim=xb.getBoundingClientRect().top-mr.top-14-sc.offsetHeight;if(t>lim)t=lim}sc.style.setProperty("top",t+"px","important");SG.style.top=(t+sc.offsetHeight+18)+"px";setTimeout(()=>{const tr=sc.querySelector(".sc-tri"),R=[...sc.children].filter(e=>e.classList.contains("sc")&&!e.closest(".sc-col")).pop();if(tr&&R){tr.style.height="";tr.style.marginTop="";const H=R.offsetHeight;tr.style.height=H+"px";const d=R.getBoundingClientRect().bottom-tr.getBoundingClientRect().bottom;if(Math.abs(d)>.5)tr.style.marginTop=d+"px"}},1700)}
   addEventListener("resize",()=>{const sc=document.getElementById("scards");if(sc&&sc.classList.contains("on"))placeCards()});
   function calcSo(){const sr=document.querySelector(".story").getBoundingClientRect(),z=SOLO.z,o=SOLO.so||[0,0];SOLO.k=1+(BASE.k-1)*SOLO.b;const R=[...cube.querySelectorAll(".fa")].map(f=>f.getBoundingClientRect()),L=Math.min(...R.map(r=>r.left)),Rr=Math.max(...R.map(r=>r.right)),T=Math.min(...R.map(r=>r.top)),B=Math.max(...R.map(r=>r.bottom)),cx=(L+Rr)/2-o[0]*z,cy=(T+B)/2-o[1]*z,h=B-T,w=Rr-L;
     let pb=sr.top+300;const st=document.querySelector('.stp[data-k="3"]');if(st){const was=st.style.display;st.style.visibility="hidden";st.style.display="flex";pb=[...st.querySelectorAll("p")].pop().getBoundingClientRect().bottom;st.style.display=was;st.style.visibility=""}
