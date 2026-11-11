@@ -2482,11 +2482,12 @@ setEX(EX);setCX(1);
       const tg=ts.querySelector(".tgrid"),EH3=t=>String(t==null?"":t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
       const fitT=()=>{const k=ts.querySelector(".stp-n"),tgt=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,t=tg.getBoundingClientRect().top+scrollY;tg.style.height=Math.max(420,Math.round(tgt-t))+"px";const l=ts.querySelector(".tgl");l.style.height="";l.style.height=Math.max(l.scrollHeight,Math.round(tg.getBoundingClientRect().bottom-l.getBoundingClientRect().top))+"px"};
       const closeT=()=>{tg.classList.remove("sel");tg.querySelectorAll(".tcol").forEach(x=>x.remove());tg.querySelectorAll(".tgb").forEach(b=>{b.classList.remove("on","hid");b.style.margin=""})};
-      const mg=(c,r,h)=>`${r===1?10:0}px ${c===4?16:5}px ${r+h-1===4?10:0}px ${c===1?16:5}px`;
+      let C0=1;const mg=(c,r,h)=>`${r===1?10:0}px ${c===4?16:5}px ${r+h-1===4?10:0}px ${c===C0?16:5}px`;const TREG={NU:[3,4]};
       tg.querySelectorAll(".tgb").forEach(b=>b.addEventListener("click",()=>{if(b.classList.contains("on"))return closeT();closeT();
         const id=b.dataset.c,it=cnt(id).slice().sort((a,b)=>b.m-a.m),col=+b.dataset.col,r0=+b.dataset.r,h0=+b.dataset.h;
-        b.classList.add("on");tg.querySelectorAll(".tgb").forEach(o=>o.classList.toggle("hid",o!==b));tg.style.setProperty("--dc",b.style.getPropertyValue("--dc"));b.style.margin=mg(col,r0,h0);
-        const seg=[];[1,2,3,4].forEach(c=>{if(c!==col)seg.push({c,r:1,h:4});else{if(r0>1)seg.push({c,r:1,h:r0-1});if(r0+h0<=4)seg.push({c,r:r0+h0,h:4-(r0+h0)+1})}});
+        const cl=TREG[id]||[1,2,3,4];C0=cl[0];const bgE=tg.querySelector(".tgbg");bgE.style.setProperty("grid-column",`${cl[0]} / span ${cl.length}`,"important");
+        b.classList.add("on");tg.querySelectorAll(".tgb").forEach(o=>o.classList.toggle("hid",o!==b&&cl.includes(+o.dataset.col)));tg.style.setProperty("--dc",b.style.getPropertyValue("--dc"));b.style.margin=mg(col,r0,h0);
+        const seg=[];cl.forEach(c=>{if(c!==col)seg.push({c,r:1,h:4});else{if(r0>1)seg.push({c,r:1,h:r0-1});if(r0+h0<=4)seg.push({c,r:r0+h0,h:4-(r0+h0)+1})}});
         const tot=seg.reduce((a,x)=>a+x.h,0);let q=seg.map(x=>Math.max(1,Math.floor(it.length*x.h/tot)));
         while(q.reduce((a,b)=>a+b,0)>it.length){const i=q.indexOf(Math.max(...q));q[i]--}
         while(q.reduce((a,b)=>a+b,0)<it.length){let bi=0,bv=-1;seg.forEach((x,i)=>{const v=it.length*x.h/tot-q[i];if(v>bv){bv=v;bi=i}});q[bi]++}
