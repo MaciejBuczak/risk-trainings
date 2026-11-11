@@ -1681,6 +1681,14 @@
 .wq-res i{display:block;font-style:normal;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#8a7a62}
 .wq-res b{font-family:var(--serif);font-size:18px;font-weight:600;color:#0d0d0d}
 .wq-res span{font-size:10.5px;color:#5c564d;text-align:right}
+
+/* Próba: siatka grup koncepcji */
+#ds-prb .dcard{display:none}
+.kgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:10px;min-height:420px}
+.kgb{border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--dc) 13%,#faf6ef);border:1px solid color-mix(in srgb,var(--dc) 22%,#faf6ef);display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-width:0}
+.kgb-n{margin-bottom:auto;font:600 9.5px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--dc)}
+.kgb b{font-weight:500;font-size:14px;line-height:1.2;color:#0d0d0d}
+.kgb small{font-size:11px;color:#5c564d;line-height:1.3}
 /* Silnik: replikacja kodu */
 .dsc.wqc{padding-bottom:0}
 .wqc h3{margin:4px 0 4px!important}
@@ -2277,6 +2285,15 @@ setEX(EX);setCX(1);
       setTimeout(()=>{window.__bkNow=1;openBlk(k)},720)};
     if(BK.classList.contains("on")){BK.classList.remove("on");window.__bkLineOff();setTimeout(run,300)}else run()};
   window.__bkLineOff=()=>{const sv=SEC.querySelector(".bkl-svg");if(sv)sv.innerHTML=""};
+  /* Próba: strona jak Silnik, z prawej siatka 4×4 – bloczki grup koncepcji */
+  {const e=DS.eng;if(e){const p=e.cloneNode(true);p.id="ds-prb";p.classList.remove("on");p.querySelector(".stp-n").textContent="Silnik obliczeniowy · próba";
+    p.querySelectorAll(".rep-p,.dsl-svg,.rep-svg").forEach(x=>x.remove());
+    const G=[["Ryzyko kredytowe – parametry","PD, LGD, EAD, ECL","#bf8165",16,3],["Ryzyko kredytowe – portfel","rozkład strat, kapitał","#a8694c",6,1],["Ryzyko rynkowe","VaR, ES, zmienność","#6f7f58",10,2],["Ryzyko operacyjne","straty operacyjne, prawne","#8a6c90",7,2],["Płynność","finansowanie, odpływy","#5f8aa6",4,1],["Kapitał ekonomiczny","agregacja, alokacja","#a6824c",4,3],["Stres testy","scenariusze skrajne","#5c564d",5,3],["Ryzyko modeli","inwentarz, istotność, pomiar","#9a9176",2,1]];
+    const pl=n=>n+" "+(n===1?"koncepcja":(n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?"koncepcje":"koncepcji");
+    const g=p.querySelector(".dsg");g.className="kgrid";g.removeAttribute("style");
+    g.innerHTML=G.map(x=>`<div class="kgb" style="--dc:${x[2]};grid-column:span ${x[4]}"><span class="kgb-n">${pl(x[3])}</span><b>${x[0]}</b><small>${x[1]}</small></div>`).join("");
+    e.after(p);p.querySelector(".ds-back").addEventListener("click",()=>scrollToSec(SEC));
+    new MutationObserver(()=>{const on=e.classList.contains("on");p.classList.toggle("on",on);if(on)setTimeout(()=>{const k=p.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,t=g.getBoundingClientRect().top+scrollY;g.style.height=Math.max(420,Math.round(tg-t))+"px"},60)}).observe(e,{attributes:true,attributeFilter:["class"]})}}
   document.querySelectorAll("[data-ds]").forEach(b=>b.addEventListener("click",()=>{const s2=DS[b.dataset.ds];if(!s2)return;s2.classList.add("on");dsFit(s2);setTimeout(()=>{dsFit(s2);dsLine(s2);scrollToSec(s2)},40);setTimeout(()=>dsLine(s2),400)}));
 
     window.__hideDet0=()=>{KT.classList.remove("on");SEC.classList.remove("on","kat");document.querySelectorAll(".dsec").forEach(d=>d.classList.remove("on"));closeBlk();swapTxt(1,0);kfit()};
