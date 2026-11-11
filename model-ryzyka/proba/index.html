@@ -1787,9 +1787,19 @@
 .tgb{font:inherit;text-align:left;cursor:pointer;position:relative;border:0;border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--dc) 46%,#f7f1e8);box-shadow:0 -1px 0 color-mix(in srgb,var(--dc) 30%,#fff) inset;display:flex;flex-direction:column;gap:8px;min-height:0;z-index:2;transition:transform .2s,box-shadow .2s}
 .tgb:hover{transform:translateY(-1px);box-shadow:0 10px 22px -16px rgba(40,30,20,.45)}
 .tgb .kgb-n{font:600 9.5px var(--body);letter-spacing:.14em;text-transform:uppercase;color:color-mix(in srgb,var(--dc) 75%,#000)}
-.tgb-ic{flex:1;display:grid;place-items:center;min-height:0}
-.tgb-ic svg{width:56px;height:56px;fill:none;stroke:color-mix(in srgb,var(--dc) 70%,#000);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.tgb-ic svg circle{fill:color-mix(in srgb,var(--dc) 70%,#000);stroke:none}
+.tgb-ic{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;position:relative}
+.tgb-ic i{display:block;position:absolute}
+.tgb-ic{--dk:color-mix(in srgb,var(--dc) 78%,#2b2723);--lt:color-mix(in srgb,var(--dc) 30%,#fffdf9)}
+.tgf-SO i:first-child{width:46%;height:8px;border-radius:4px;background:var(--dk);opacity:.32}
+.tgf-SO i:last-child{display:none}
+.tgf-WN i:first-child{width:52%;height:7px;border-radius:4px;background:var(--dk);opacity:.32;transform:translateY(-9px)}
+.tgf-WN i:last-child{width:34%;height:7px;border-radius:4px;background:var(--lt);opacity:.9;transform:translate(-9%,9px)}
+.tgf-PR i:first-child{width:46px;height:46px;border-radius:9px;background:var(--lt);opacity:.75}
+.tgf-PR i:last-child{display:none}
+.tgf-EK i:first-child{width:40px;height:40px;border-radius:50%;border:2px solid var(--dk);opacity:.3}
+.tgf-EK i:last-child{display:none}
+.tgf-NU i:first-child{width:30px;height:30px;border-radius:7px;background:var(--dk);opacity:.25;transform:translate(-8px,-8px)}
+.tgf-NU i:last-child{width:30px;height:30px;border-radius:7px;background:var(--lt);opacity:.85;transform:translate(8px,8px)}
 .tgb-bars{flex:1;display:flex;align-items:flex-end;gap:3px;min-height:20px;padding:4px 0}
 .tgb-bars i{flex:1;max-width:9px;border-radius:2px 2px 0 0;background:color-mix(in srgb,var(--dc) 70%,#fff);opacity:.85}
 .tgb .kgb-in{align-self:stretch;display:flex;flex-direction:column;background:#fffdf9;border-radius:10px;padding:8px 12px 9px;box-shadow:0 4px 12px -8px rgba(40,30,20,.35)}
@@ -2477,7 +2487,7 @@ setEX(EX);setCX(1);
       const cnt=id=>TT().t.filter(t=>t.c===id);
       ts.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Techniki ilościowe</span><h2>Techniki ilościowe</h2><p class="dsp">Techniki to narzędzia, którymi koncepcja zamienia się w liczby – od statystyki opisowej po symulację Monte Carlo. Kliknij grupę, by zobaczyć jej techniki.</p>
         <div class="tgl"><div class="kls-h"><b>Grupy technik</b><p>Pięć rodzin narzędzi – każda rozwiązuje inny rodzaj zadania:</p></div>${TC.map(c=>`<div class="tgl-r" style="--dc:${c[3]}"><i></i><div><b>${c[1]}<em>${cnt(c[0]).length}</em></b><small>${c[2]}</small></div></div>`).join("")}<div class="kls-f tgl-f"><span><span class="tes">E</span>technika estymacyjna</span><span><span class="tmc"><i></i><i></i><i></i></span>wysokość karty – w ilu koncepcjach jest stosowana</span></div></div></div>
-        <div class="sds-r"><button type="button" class="sd-back ds-back">↑ Model statystyczny</button><div class="tgrid">${TC.map(c=>{const it=cnt(c[0]);return`<button type="button" class="tgb" data-c="${c[0]}" data-col="${c[4]}" data-r="${c[5]}" data-h="${c[6]}" style="--dc:${c[3]};grid-column:${c[4]};grid-row:${c[5]} / span ${c[6]}"><span class="kgb-n">${tl(it.length)}</span><span class="tgb-ic"><svg viewBox="0 0 44 44" aria-hidden="true">${TI[c[0]]}</svg></span><span class="kgb-in"><b>${c[1]}</b></span><i class="kg-x" aria-hidden="true">×</i></button>`}).join("")}<div class="kgbg tgbg"></div></div></div></div>`;
+        <div class="sds-r"><button type="button" class="sd-back ds-back">↑ Model statystyczny</button><div class="tgrid">${TC.map(c=>{const it=cnt(c[0]);return`<button type="button" class="tgb" data-c="${c[0]}" data-col="${c[4]}" data-r="${c[5]}" data-h="${c[6]}" style="--dc:${c[3]};grid-column:${c[4]};grid-row:${c[5]} / span ${c[6]}"><span class="kgb-n">${tl(it.length)}</span><span class="tgb-ic tgf-${c[0]}" aria-hidden="true"><i></i><i></i></span><span class="kgb-in"><b>${c[1]}</b></span><i class="kg-x" aria-hidden="true">×</i></button>`}).join("")}<div class="kgbg tgbg"></div></div></div></div>`;
       p.after(ts);
       const tg=ts.querySelector(".tgrid"),EH3=t=>String(t==null?"":t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
       const fitT=()=>{const k=ts.querySelector(".stp-n"),tgt=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,t=tg.getBoundingClientRect().top+scrollY;tg.style.height=Math.max(420,Math.round(tgt-t))+"px";const l=ts.querySelector(".tgl");l.style.height="";l.style.height=Math.max(l.scrollHeight,Math.round(tg.getBoundingClientRect().bottom-l.getBoundingClientRect().top))+"px"};
