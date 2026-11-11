@@ -1681,6 +1681,32 @@
 .wq-res i{display:block;font-style:normal;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#8a7a62}
 .wq-res b{font-family:var(--serif);font-size:18px;font-weight:600;color:#0d0d0d}
 .wq-res span{font-size:10.5px;color:#5c564d;text-align:right}
+/* Silnik: replikacja kodu */
+.dsc.wqc{padding-bottom:0}
+.wqc h3{margin:4px 0 4px!important}
+.wqc .wq-r{padding:2px 0}
+.wqc .wq-res{margin-top:4px;padding:3px 10px}
+.wqc .wq-res b{font-size:15px}
+.rep-f{margin:6px -16px 0;border-radius:0 0 14px 14px}
+.rep-f span b{font-size:11px;font-weight:600;color:#1c1a17}
+.engpg .engstage{height:236px;margin-top:-26px;transform:scale(.88);transform-origin:50% 40%}
+.engpg{position:relative}
+.rep-p{display:none;margin-top:auto;position:relative;width:100%;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:14px;padding:13px 16px 12px;box-shadow:0 14px 30px -22px rgba(60,45,30,.5);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.rep-p.on{display:block;opacity:1;transform:none;animation:repin .35s ease}
+@keyframes repin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.rep-x{position:absolute;right:10px;top:8px;border:0;background:none;font-size:16px;color:#8a8378;cursor:pointer}
+.rep-k{font:600 9.5px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a8694c}
+.rep-p h3{margin:3px 0 5px;font-weight:400;font-size:17px;color:#0d0d0d}
+.rep-p p{margin:0 0 6px;font-size:11.5px;line-height:1.45;color:#5c564d}
+.rep-p ul{list-style:none;margin:0 0 7px;padding:0}
+.rep-p li{position:relative;padding:3px 0 3px 12px;font-size:11px;line-height:1.35;color:#2b2723;border-top:1px dashed #e0d6c6}
+.rep-p li::before{content:"";position:absolute;left:0;top:.85em;width:4px;height:4px;border-radius:50%;background:#bf8165}
+.rep-p li b{font-weight:600}
+.rep-r{display:flex;justify-content:space-between;gap:8px;padding:6px 10px;border-radius:8px;background:#f1e8d4;border:1px solid #e0d2b8}
+.rep-r span{display:flex;flex-direction:column}
+.rep-r i{font-style:normal;font-size:9px;color:#8a7a62}
+.rep-r b{font-size:11.5px;font-weight:600;color:#0d0d0d}
+
 /* Silnik: blok kodu */
 .dsc.code{padding:0;overflow:hidden;background:#fffdf9;border-color:#ddd3c4}
 .code-h{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid #ddd3c4;background:#f0e8dd}
@@ -2174,8 +2200,24 @@ setEX(EX);setCX(1);
       const MO=[["Kontrole danych wejściowych","3 źródła"],["Przypisanie segmentów","6 segmentów"],["Moduł PD · 12 m i lifetime","1,15 mln"],["Moduł LGD","krzywe odzysków"],["Moduł EAD i CCF","limity"],["Scenariusze makro i wagi","50 / 20 / 30%"],["Koszyki i SICR","1 · 2 · 3"],["Agregacja ECL","3,55 mld zł"]];
       cs[2].className="dsc det";cs[2].innerHTML=`<span class="sd-n">02</span><h3>Moduły obliczeniowe</h3><ol class="det-l">${MO.map((e,i)=>`<li><i>${i+1}</i><b>${e[0]}</b><em>${e[1]}</em></li>`).join("")}</ol><p class="det-n"><b>Przeliczenie:</b> co miesiąc, około 42 min dla całego portfela.</p>`;
       const ZQ=[["Dokumentacja","Zgodność z v2.6",[["Formuły","rozdz. 04"],["Segmentacja","rozdz. 03"],["Parametry","v2.6"]]],["Testy","Przed wdrożeniem",[["Regresyjne","128 / 128"],["Model ref.","Δ 0,02%"]]],["Kontrola zmian","Kod i wdrożenie",[["Code review","15.03.2026"],["Wdrożenie","14.03.2026"]]]];
-      cs[3].className="dsc wq";cs[3].innerHTML=`<span class="sd-n">03</span><h3>Zgodność i kontrola zmian</h3><div class="wq-l">${ZQ.map(w=>`<div class="wq-r"><div class="wq-h"><b>${w[0]}</b><small>${w[1]}</small></div><div class="wq-v">${w[2].map(v=>`<span><i>${v[0]}</i><b>${v[1]}</b></span>`).join("")}</div></div>`).join("")}</div><div class="wq-res"><div><i>Rozbieżności z dokumentacją</i><b>brak</b></div><span>silnik v1.7 = dokumentacja v2.6</span></div>`;
+      cs[3].className="dsc wq";cs[3].innerHTML=`<span class="sd-n">03</span><h3>Zgodność i kontrola zmian</h3><div class="wq-l">${ZQ.map(w=>`<div class="wq-r"><div class="wq-h"><b>${w[0]}</b><small>${w[1]}</small></div><div class="wq-v">${w[2].map(v=>`<span><i>${v[0]}</i><b>${v[1]}</b></span>`).join("")}</div></div>`).join("")}</div><div class="wq-res"><div><i>Rozbieżności z dokumentacją</i><b>brak</b></div><span>silnik v1.7 = dokumentacja v2.6</span></div><div class="kmet-f rep-f"><span><b>Replikacja kodu modelu</b></span><button type="button" class="kmet-btn rep-btn">Szczegóły <i>→</i></button></div>`;
+      cs[3].classList.add("wqc");
+      cs[3].querySelector(".rep-btn").addEventListener("click",()=>window.__repT&&window.__repT(sec));
     }}
+  window.__repT=function(sec){const w=sec.querySelector(".sds-w"),dp=sec.querySelector(".engpg"),g=sec.querySelector(".dsg"),bt=sec.querySelector(".rep-btn");if(!w||!dp||!g||!bt)return;
+    let pn=dp.querySelector(".rep-p");const old=w.querySelector(".rep-svg");
+    if(pn&&pn.classList.contains("on")){pn.classList.remove("on");old&&old.remove();bt.innerHTML="Szczegóły <i>→</i>";return}
+    if(!pn){dp.insertAdjacentHTML("beforeend",`<div class="rep-p"><button type="button" class="rep-x" aria-label="Zamknij">×</button><span class="rep-k">Silnik obliczeniowy</span><h3>Replikacja kodu modelu</h3><p>Niezależny zespół odtwarza obliczenia od zera w innym środowisku (np. Python zamiast SAS), na tych samych danych i parametrach. Zgodne wyniki potwierdzają, że silnik liczy to, co opisano w dokumentacji.</p><ul><li><b>Ryzyko środowiska</b> – eliminuje błędy wersji oprogramowania, bibliotek i ustawień</li><li><b>Ryzyko implementacji</b> – wychwytuje błędy w formułach i segmentacji</li></ul><div class="rep-r"><span><i>Ostatnia replikacja</i><b>03.2026</b></span><span><i>Środowisko</i><b>Python 3.11</b></span><span><i>Różnica ECL</i><b>0,02%</b></span><span><i>Tolerancja</i><b>±0,1%</b></span></div></div>`);
+      pn=dp.querySelector(".rep-p");pn.querySelector(".rep-x").addEventListener("click",()=>window.__repT(sec))}
+    const gr=g.getBoundingClientRect(),dr=dp.getBoundingClientRect();dp.style.height=Math.round(gr.bottom-dr.top)+"px";
+    const wr=w.getBoundingClientRect(),br=bt.getBoundingClientRect(),pr=dp.getBoundingClientRect();
+    const x0=br.left+br.width/2-wr.left,y0=br.bottom-wr.top,yl=gr.bottom-wr.top+20,xp=pr.left+pr.width/2-wr.left,yp=gr.bottom-wr.top;
+    old&&old.remove();w.style.position="relative";
+    const d=`M${x0},${y0} V${yl} H${xp} V${yp}`;
+    w.insertAdjacentHTML("beforeend",`<svg class="dsl-svg rep-svg" viewBox="0 0 ${wr.width} ${wr.height+40}" style="width:${wr.width}px;height:${wr.height+40}px"><defs><mask id="repm"><path d="${d}" fill="none" stroke="#fff" stroke-width="4" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" class="rep-mk"/></mask></defs><path d="${d}" fill="none" stroke="#a8694c" stroke-width="1.3" stroke-dasharray="4 4" mask="url(#repm)"/><circle cx="${x0}" cy="${y0}" r="2.6" fill="#a8694c"/></svg>`);
+    bt.innerHTML="Zamknij <i>×</i>";
+    requestAnimationFrame(()=>{const mk=w.querySelector(".rep-mk");if(mk){mk.style.transition="stroke-dashoffset .9s ease";mk.getBoundingClientRect();mk.style.strokeDashoffset="0"}});
+    setTimeout(()=>pn.classList.add("on"),900)};
   function dsLine(sec){const w=sec.querySelector(".sds-w"),t=sec.querySelector(".dr-tag")||[...sec.querySelectorAll(".engstage .etag")].find(e=>e.getBoundingClientRect().width>4),c=sec.querySelector(".kdc-st");if(!w||!t||!c)return;let sv=w.querySelector(".dsl-svg");if(!sv){w.style.position="relative";w.insertAdjacentHTML("beforeend",'<svg class="dsl-svg"></svg>');sv=w.querySelector(".dsl-svg")}
     const wr=w.getBoundingClientRect(),tr=(t.querySelector(".lt-h")||t.querySelector(".et-h")||t).getBoundingClientRect(),cr=c.querySelector(".kmc-h").getBoundingClientRect(),tag=t.getBoundingClientRect();
     const x0=tag.right-wr.left,y0=tr.top+tr.height/2-wr.top,x2=cr.left-wr.left,y2=cr.top+cr.height/2-wr.top,lr=sec.querySelector(".sds-l").getBoundingClientRect(),xm=Math.round((lr.right+cr.left)/2-wr.left);
