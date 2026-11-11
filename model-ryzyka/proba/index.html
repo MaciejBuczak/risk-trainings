@@ -1880,6 +1880,28 @@
 .rgc li{font-size:10.5px;line-height:1.33;color:#3e3730;padding-left:11px;position:relative}
 .rgc li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--gc)}
 .rgc b{color:#0d0d0d;font-weight:600}
+
+/* Klasy – nowy układ */
+.klx .kx-k,.klg2 .kx-k{font-style:normal;font-weight:700;border-radius:999px;background:#e3ddd1;color:#0d0d0d;line-height:1.5;font-size:11px;padding:2px 9px}
+.klx .kx-k.EL,.klg2 .kx-k.EL{background:#ead9a2;color:#5c4a12}.klx .kx-k.UL,.klg2 .kx-k.UL{background:#0d0d0d;color:#fcf9f5}.klx .kx-k.S,.klg2 .kx-k.S{background:#9a3b25;color:#fff}.klx .kx-k.P,.klg2 .kx-k.P{background:#cfe0e6}.klx .kx-k.V,.klg2 .kx-k.V{background:#e1e4cf}
+.klx{margin-top:18px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;gap:10px}
+.klx .klc-s:nth-child(3){grid-column:1 / -1}
+.klc-s{padding:12px 14px;gap:4px}
+.klc-s h3{font-size:15px!important;margin-top:2px!important}
+.klc-s .klc-q{font-size:12px!important}
+.klc-s p{font-size:11px!important;line-height:1.4!important}
+.klg2{display:grid;grid-template-rows:auto 1fr 1fr;gap:10px}
+.klwn{padding:12px 16px!important;gap:3px!important}
+.klwn h3{font-size:16px!important;margin:2px 0!important}
+.klw{padding:12px 16px 14px!important;gap:10px!important}
+.klw-h{display:flex;align-items:baseline;gap:12px}
+.klw-h .kx-k{align-self:center}
+.klw-h h3{margin:0!important;font-size:17px!important}
+.klw-h em{margin-left:auto;font-style:normal;font-size:10.5px;color:#8a8378}
+.klw-g{flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.klw-c{background:#fffdf9;border:1px solid rgba(13,13,13,.07);border-radius:12px;padding:10px 12px}
+.klw-c b{display:block;font:600 9.5px var(--body);letter-spacing:.12em;text-transform:uppercase;color:#a8694c;margin-bottom:5px}
+.klw-c p{margin:0;font-size:12.5px;line-height:1.5;color:#3e3730}
 /* Silnik: replikacja kodu */
 .dsc.wqc{padding-bottom:0}
 .wqc h3{margin:4px 0 4px!important}
@@ -2538,15 +2560,20 @@ setEX(EX);setCX(1);
     const fitP=()=>{const k=p.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,t=g.getBoundingClientRect().top+scrollY;g.style.height=Math.max(420,Math.round(tg-t))+"px";const kw=p.querySelector(".kls");if(kw){kw.style.height="";const gb=g.getBoundingClientRect().bottom,kt=kw.getBoundingClientRect().top;kw.style.height=Math.max(kw.scrollHeight,Math.round(gb-kt))+"px"}lineP()};
     {const KD=[["EL","Strata oczekiwana","Ile średnio stracimy?","Spodziewany, przeciętny koszt ryzyka w danym horyzoncie – w uproszczeniu PD × LGD × EAD. To nie zaskoczenie, lecz koszt prowadzenia działalności: bank wlicza go w cenę kredytu i pokrywa odpisami (MSSF 9).","Scoring, PD lifetime, oczekiwana strata (ECL)",14],
         ["UL","Strata nieoczekiwana","Ile możemy stracić w bardzo złym roku?","Odchylenie strat ponad średnią – ogon rozkładu, mierzony kwantylem (VaR, ES) na wysokim poziomie ufności. Tej części nie da się wliczyć w cenę; pokrywa ją kapitał.","Wzór IRB, VaR, Expected Shortfall, kapitał ekonomiczny",25],
-        ["S","Scenariusze i stres","Co, jeśli stanie się coś skrajnego?","Zamiast rozkładu – konkretna, mało prawdopodobna, ale możliwa historia: recesja, szok stóp, odpływ depozytów. Wynik mówi o odporności banku, nie o prawdopodobieństwie straty.","Analiza wrażliwości, reverse stress testing, stres testy nadzorcze",10],
+        ["S","Scenariusze i stres","Co, jeśli stanie się coś skrajnego?","Zamiast rozkładu – konkretna, skrajna, ale możliwa historia: recesja, szok stóp, odpływ depozytów. Wynik mówi o odporności banku.","Analiza wrażliwości, reverse stress testing, stres testy nadzorcze",10],
         ["P","Płynność","Czy wystarczy gotówki na czas?","Tu problemem nie jest strata, lecz czas. Bank może być wypłacalny, a mimo to nie mieć środków na bieżące zobowiązania. Modele mierzą luki przepływów i bufory płynnych aktywów.","LCR, NSFR, luka płynności",3],
         ["V","Ryzyko modeli","Czy modelom można ufać?","Każdy model upraszcza rzeczywistość i może się mylić. Ta klasa traktuje błąd samego modelu jako osobne ryzyko: inwentarz, istotność, walidacja i bufory na niepewność.","Inwentarz i istotność modeli, kwantyfikacja ryzyka modeli",2]];
       const k2=document.createElement("section");k2.className="sdsec dsec";k2.id="ds-kls";
+      const KX={EL:[["Co mierzy","Średni, spodziewany koszt ryzyka w danym horyzoncie – koszt prowadzenia działalności, a nie zaskoczenie."],["Jak liczymy","EL = PD × LGD × EAD, w horyzoncie 12 miesięcy lub całego życia (MSSF 9), z wagami scenariuszy."],["Czym pokrywa bank","Ceną kredytu i odpisami. Przykłady: scoring, PD lifetime, oczekiwana strata (ECL)."]],
+        UL:[["Co mierzy","Odchylenie strat ponad średnią – ogon rozkładu, czyli to, czego nie da się przewidzieć w cenie."],["Jak liczymy","Kwantyl rozkładu strat: VaR lub ES na wysokim poziomie ufności, np. 99,9% we wzorze IRB."],["Czym pokrywa bank","Kapitałem. Przykłady: wzór IRB, VaR, Expected Shortfall, kapitał ekonomiczny."]]};
+      const KDm=Object.fromEntries(KD.map(k=>[k[0],k]));
+      const small=k=>`<article class="klc klc-s"><div class="klc-t"><span class="kx-k ${k[0]}">${k[0]}</span><em>${pl(k[5])}</em></div><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><p>${k[3]}</p><p class="klc-x"><b>Przykłady:</b> ${k[4]}</p></article>`;
+      const wide=k=>`<article class="klc klw"><div class="klw-h"><span class="kx-k ${k[0]}">${k[0]}</span><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><em>${pl(k[5])}</em></div><div class="klw-g">${KX[k[0]].map(x=>`<div class="klw-c"><b>${x[0]}</b><p>${x[1]}</p></div>`).join("")}</div></article>`;
       k2.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Klasy modeli</span><h2>Klasy modeli ryzyka</h2><p class="dsp">Każdy model odpowiada na jedno z kilku podstawowych pytań o ryzyko. Klasa mówi, jakie to pytanie i czym bank pokrywa wynik.</p>
-        <div class="klv">${KD.map(k=>`<div class="klv-r"><span class="kx-k ${k[0]}">${k[0]}</span><b>${k[1]}</b></div>`).join("")}<div class="klv-r klv-x"><em class="kx-rg">§</em><b>Metoda regulacyjna</b></div></div></div>
-        <div class="sds-r"><button type="button" class="sd-back ds-back">↓ Koncepcje modeli ryzyka</button><div class="klg">${KD.map(k=>`<article class="klc"><div class="klc-t"><span class="kx-k ${k[0]}">${k[0]}</span><em>${pl(k[5])}</em></div><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><p>${k[3]}</p><p class="klc-x"><b>Przykłady:</b> ${k[4]}</p></article>`).join("")}<article class="klc klc-n"><div class="klc-t"><span class="klc-k">Jedna liczba, różne pytania</span></div><h3>Dlaczego klasa ma znaczenie</h3><p>PD czy LGD pojawiają się w kilku klasach: w EL jako średnia, w UL jako punkt wyjścia do kwantyla, w stres testach jako wynik scenariusza.</p><p>Klasa mówi, na jakie pytanie odpowiada liczba – i czym bank ją pokrywa: ceną, odpisem, kapitałem czy buforem płynności.</p></article></div></div></div>`;
+        <div class="klx">${small(KDm.S)}${small(KDm.P)}${small(KDm.V)}</div></div>
+        <div class="sds-r"><button type="button" class="sd-back ds-back">↓ Koncepcje modeli ryzyka</button><div class="klg2"><article class="klc klc-n klwn"><span class="klc-k">Jedna liczba, różne pytania</span><h3>Dlaczego klasa ma znaczenie</h3><p>PD czy LGD pojawiają się w kilku klasach: w EL jako średnia, w UL jako punkt wyjścia do kwantyla, w stres testach jako wynik scenariusza. Klasa mówi, na jakie pytanie odpowiada liczba – i czym bank ją pokrywa: ceną, odpisem, kapitałem czy buforem płynności.</p></article>${wide(KDm.EL)}${wide(KDm.UL)}</div></div></div>`;
       p.before(k2);
-      const fitK=()=>{const k=k2.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,gg=k2.querySelector(".klg"),t=gg.getBoundingClientRect().top+scrollY;gg.style.height=Math.max(gg.scrollHeight>0?0:0,Math.round(tg-t))+"px";const v=k2.querySelector(".klv");v.style.height="";v.style.height=Math.max(v.scrollHeight,Math.round(gg.getBoundingClientRect().bottom-v.getBoundingClientRect().top))+"px"};
+      const fitK=()=>{const k=k2.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,gg=k2.querySelector(".klg2"),t=gg.getBoundingClientRect().top+scrollY;gg.style.height="";gg.style.height=Math.max(gg.scrollHeight,Math.round(tg-t))+"px";const v=k2.querySelector(".klx");v.style.height="";v.style.height=Math.max(v.scrollHeight,Math.round(gg.getBoundingClientRect().bottom-v.getBoundingClientRect().top))+"px"};
       window.__openKls=()=>{k2.classList.add("on");setTimeout(()=>{fitK();scrollToSec(k2)},60)};addEventListener("resize",()=>{if(k2.classList.contains("on"))fitK()});
       k2.querySelector(".ds-back").addEventListener("click",()=>window.__openPrb());
       p.querySelector(".kls-go").addEventListener("click",()=>window.__openKls());{const kb2=SD.querySelector(".sdk-kls");kb2&&kb2.addEventListener("click",()=>window.__openKls())}}
