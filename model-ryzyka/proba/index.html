@@ -1830,6 +1830,14 @@
 .bk-nav button:active{background:#8a5238;border-color:#8a5238;color:#fff}
 .bk-nav i{font-style:normal}
 /* Otoczenie regulacyjne */
+.rg-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.rg-hd{display:flex;align-items:baseline;gap:10px}
+.rg-hd b{font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c}
+.rg-hd i{font-style:normal;font-size:11px;color:#8a8378}
+.recl{margin-top:18px;box-sizing:border-box;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:14px;padding:13px 18px 10px;display:flex;flex-direction:column}
+.recl-r{flex:1;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:6px 0;border-top:1px dashed #e0d6c6}
+.recl-r b{font-weight:600;font-size:12.5px;color:#0d0d0d}
+.recl-r small{font-size:11px;line-height:1.4;color:#5c564d}
 .rgw{display:flex;flex-direction:column;gap:10px}
 .rgt{background:#0d0d0d;color:#fcf9f5;border-radius:18px;padding:13px 18px 9px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .rgt span{display:block;font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#a89e8f;margin-bottom:6px}
@@ -2559,10 +2567,11 @@ const RDOC={
  S:['Wytyczne EBA – testy warunków skrajnych w bankach','Testy nadzorcze EBA / KNF','<b>ICAAP</b> – plan kapitałowy w stresie','Plan naprawy (ustawa o BFG)']};
       const RC={K:["Ryzyko kredytowe","#bf8165"],R:["Ryzyko rynkowe","#6f7f58"],O:["Ryzyko operacyjne","#8a6c90"],A:["Stopa procentowa i płynność","#4f7390"],M:["Ryzyko modeli","#a6824c"],S:["Stres testy","#5c564d"]};
       const rs=document.createElement("section");rs.className="sdsec dsec";rs.id="ds-reg";
-      rs.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Otoczenie regulacyjne</span><h2>Otoczenie regulacyjne</h2><p class="dsp">Przepisy i wytyczne, które wyznaczają, co model musi liczyć, jak go budować, walidować i nadzorować – od prawa UE i rekomendacji KNF po standardy rachunkowości.</p></div>
-        <div class="sds-r"><button type="button" class="sd-back ds-back">↑ Model statystyczny</button><div class="rgw"><div class="rgt">${RTOP.map(([n,l])=>`<div><span>${n}</span>${l.map(x=>`<p>${x}</p>`).join("")}</div>`).join("")}</div><div class="rgg">${["K","R","O","A","M","S"].map(r=>`<div class="rgc" style="--gc:${RC[r][1]}"><h4>${RC[r][0]}</h4><ul>${RDOC[r].map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")}</div></div></div></div>`;
+      rs.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Otoczenie regulacyjne</span><h2>Otoczenie regulacyjne</h2><p class="dsp">Przepisy i wytyczne, które wyznaczają, jak model budować, walidować i nadzorować – od prawa UE po rekomendacje KNF.</p><div class="recl"><div class="kls-h"><b>Regulacje dla ECL</b><p>Nasz przykład to model ECL – kształtują go bezpośrednio:</p></div>${[["MSSF 9","utrata wartości: 3 koszyki, ECL 12-miesięczna i dożywotnia, informacje prognostyczne"],["MSSF 7","ujawnienia: zmiany odpisów, ekspozycja na ryzyko kredytowe, założenia"],["Rekomendacja R","KNF – klasyfikacja ekspozycji i szacowanie strat oczekiwanych"],["EBA/GL/2017/06","praktyki zarządzania ryzykiem kredytowym a rachunkowość ECL"],["Definicja defaultu","CRR art. 178, wytyczne EBA/GL/2016/07"],["Rekomendacja W","KNF – cykl życia, walidacja i rejestr modelu ECL"]].map(r=>`<div class="recl-r"><b>${r[0]}</b><small>${r[1]}</small></div>`).join("")}</div></div>
+        <div class="sds-r"><div class="rg-top"><button type="button" class="sd-back ds-back">↑ Model statystyczny</button><span class="rg-hd"><b>Mapa regulacji bankowych</b><i>przegląd ogólny – wszystkie obszary ryzyka</i></span></div><div class="rgw"><div class="rgt">${RTOP.map(([n,l])=>`<div><span>${n}</span>${l.map(x=>`<p>${x}</p>`).join("")}</div>`).join("")}</div><div class="rgg">${["K","R","O","A","M","S"].map(r=>`<div class="rgc" style="--gc:${RC[r][1]}"><h4>${RC[r][0]}</h4><ul>${RDOC[r].map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")}</div></div></div></div>`;
       document.getElementById("ds-kls").before(rs);
-      window.__openReg=()=>{rs.classList.add("on");setTimeout(()=>scrollToSec(rs),60)};
+      const fitR=()=>{const l=rs.querySelector(".recl"),g=rs.querySelector(".rgw");if(!l||!g)return;l.style.height="";l.style.height=Math.max(l.scrollHeight,Math.round(g.getBoundingClientRect().bottom-l.getBoundingClientRect().top))+"px"};
+      window.__openReg=()=>{rs.classList.add("on");setTimeout(()=>{fitR();scrollToSec(rs)},60)};addEventListener("resize",()=>{if(rs.classList.contains("on"))fitR()});
       rs.querySelector(".ds-back").addEventListener("click",()=>scrollToSec(SEC));
       {const rb=SD.querySelector(".sdk-reg");rb&&rb.addEventListener("click",()=>window.__openReg())}}
     window.__openPrb=()=>{p.classList.add("on");setTimeout(()=>{fitP();scrollToSec(p)},60)};addEventListener("resize",()=>{if(p.classList.contains("on"))fitP()});
