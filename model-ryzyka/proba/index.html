@@ -1907,6 +1907,31 @@
 .klw-c{background:#fffdf9;border:1px solid rgba(13,13,13,.07);border-radius:12px;padding:9px 11px}
 .klw-c b{display:block;font:600 9.5px var(--body);letter-spacing:.12em;text-transform:uppercase;color:#a8694c;margin-bottom:5px}
 .klw-c p{margin:0;font-size:12px;line-height:1.48;color:#3e3730}
+
+/* UL: ramka Okiem praktyka */
+.klw-g:has(.klw-p){grid-template-rows:1fr auto}
+.klw-g:has(.klw-p) .klw-m{grid-row:1 / span 2;grid-column:4}
+.klw-p{grid-column:1 / span 3;grid-row:2;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f0e8dd;border:1px solid #e4d9c8;border-radius:12px;padding:8px 12px}
+.klw-p b{display:block;font:600 10px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a8694c}
+.klw-p p{margin:2px 0 0;font-size:11.5px;color:#5c564d}
+.klw-p .kmet-btn{padding:5px 13px}
+/* Okiem praktyka – strona */
+.pol-t{line-height:1.08!important}
+.pol-t em{font-style:italic;font-family:var(--serif);color:#a8694c}
+.pol-a{display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:16px;border-top:1px solid #ddd3c4}
+.pol-av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#0d0d0d;color:#fcf9f5;font:600 13px var(--body);letter-spacing:.06em}
+.pol-a b{display:block;font-weight:600;font-size:13.5px;color:#0d0d0d}
+.pol-a small{font-size:11.5px;color:#8a8378}
+.polg{display:grid;grid-template-columns:34px minmax(0,1fr) 26px minmax(0,1.25fr);grid-template-rows:auto;grid-auto-rows:1fr;column-gap:10px;row-gap:10px}
+.pol-hd,.pol-r{display:contents}
+.pol-hd span{font:600 10px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#8a8378;padding:0 4px}
+.pol-hd span:last-child{color:#a8694c}
+.pol-n{align-self:center;font:italic 22px var(--serif);color:#c9b9a3}
+.pol-th{align-self:stretch;display:flex;align-items:center;background:#f0e8dd;border-radius:14px;padding:12px 16px;font-size:12.5px;line-height:1.45;color:#5c564d}
+.pol-ar{align-self:center;justify-self:center;color:#a8694c;font-size:16px}
+.pol-me{align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:4px;background:#fcf9f5;border:1px solid #ddd3c4;border-left:3px solid #a8694c;border-radius:14px;padding:12px 18px}
+.pol-me b{font:italic 17px var(--serif);font-weight:500;color:#0d0d0d}
+.pol-me p{margin:0;font-size:12px;line-height:1.45;color:#3e3730}
 /* Silnik: replikacja kodu */
 .dsc.wqc{padding-bottom:0}
 .wqc h3{margin:4px 0 4px!important}
@@ -2574,11 +2599,24 @@ setEX(EX);setCX(1);
       const KM={EL:[["ECL","odpisy 12 m i lifetime"],["Scoring, rating","PD klienta"],["LGD, EAD","strata i ekspozycja"],["Pricing","koszt ryzyka w cenie"]],UL:[["IRB","kapitał dla kredytów"],["VaR / ES","ryzyko rynkowe"],["AMA","operacyjne, do CRR III"],["Kapitał wewnętrzny","ICAAP"]]};
       const KDm=Object.fromEntries(KD.map(k=>[k[0],k]));
       const small=k=>`<article class="klc klc-s"><div class="klc-t"><span class="kx-k ${k[0]}">${k[0]}</span><em>${pl(k[5])}</em></div><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><p>${k[3]}</p><p class="klc-x"><b>Przykłady:</b> ${k[4]}</p></article>`;
-      const wide=k=>`<article class="klc klw"><div class="klw-h"><span class="kx-k ${k[0]}">${k[0]}</span><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><em>${pl(k[5])}</em></div><div class="klw-g">${KX[k[0]].map(x=>`<div class="klw-c"><b>${x[0]}</b><p>${x[1]}</p></div>`).join("")}<div class="klw-c klw-m"><b>Kluczowe modele</b>${KM[k[0]].map(m=>`<div><strong>${m[0]}</strong><span>${m[1]}</span></div>`).join("")}</div></div></article>`;
+      const wide=k=>`<article class="klc klw"><div class="klw-h"><span class="kx-k ${k[0]}">${k[0]}</span><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><em>${pl(k[5])}</em></div><div class="klw-g">${KX[k[0]].map(x=>`<div class="klw-c"><b>${x[0]}</b><p>${x[1]}</p></div>`).join("")}<div class="klw-c klw-m"><b>Kluczowe modele</b>${KM[k[0]].map(m=>`<div><strong>${m[0]}</strong><span>${m[1]}</span></div>`).join("")}</div>${k[0]==="UL"?`<div class="klw-p"><div><b>Okiem praktyka: UL pod lupą</b><p>Moje uwagi i wątpliwości wobec koncepcji straty nieoczekiwanej.</p></div><button type="button" class="kmet-btn pol-go">Czytaj <i>→</i></button></div>`:""}</div></article>`;
       k2.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Klasy modeli</span><h2>Klasy modeli ryzyka</h2><p class="dsp">Każdy model odpowiada na jedno z kilku podstawowych pytań o ryzyko. Klasa mówi, jakie to pytanie i czym bank pokrywa wynik.</p>
         <div class="klx">${small(KDm.S)}${small(KDm.P)}${small(KDm.V)}</div></div>
         <div class="sds-r"><button type="button" class="sd-back ds-back">↓ Koncepcje modeli ryzyka</button><div class="klg2"><article class="klc klc-n klwn"><span class="klc-k">Jedna liczba, różne pytania</span><h3>Dlaczego klasa ma znaczenie</h3><p>To samo PD jest w EL średnią, w UL punktem wyjścia do kwantyla, a w stres testach wynikiem scenariusza. Klasa mówi, na jakie pytanie odpowiada liczba i czym bank ją pokrywa.</p></article>${wide(KDm.EL)}${wide(KDm.UL)}</div></div></div>`;
       p.before(k2);
+      /* Okiem praktyka: UL pod lupą */
+      {const PT=[["Strata nieoczekiwana to kwantyl 99,9% rozkładu strat.","Raz na tysiąc lat – i kto to sprawdzi?","Nikt nie ma danych z tysiąca lat. Kwantyl tak daleko w ogonie jest bardziej wynikiem założeń o rozkładzie niż obserwacji."],
+          ["Zależności między kredytobiorcami opisuje jeden stały czynnik.","Korelacje nie są stałe","W kryzysie korelacje rosną skokowo. Model jest najsłabszy wtedy, gdy jest najbardziej potrzebny."],
+          ["Kapitał pokrywa to, czego nie da się przewidzieć w cenie.","Granica EL / UL jest umowna","Zmiana horyzontu albo definicji defaultu przesuwa część straty z odpisu do kapitału – i odwrotnie."],
+          ["Model daje jedną liczbę kapitału.","Jedna liczba usypia czujność","Ważniejsze od precyzji kwantyla są scenariusze: co konkretnie musiałoby się stać, żeby kapitał nie wystarczył."]];
+        const ps=document.createElement("section");ps.className="sdsec dsec";ps.id="ds-pol";
+        ps.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Uwagi autora</span><h2 class="pol-t">Okiem praktyka:<br><em>UL pod lupą</em></h2><p class="dsp">Koncepcja straty nieoczekiwanej to fundament kapitału. Poniżej moje osobiste uwagi z praktyki – nie stanowisko nauki ani nadzoru.</p><div class="pol-a"><span class="pol-av">MB</span><div><b>Maciej Buczak</b><small>praktyk zarządzania ryzykiem</small></div></div></div>
+          <div class="sds-r"><button type="button" class="sd-back ds-back">↑ Klasy modeli ryzyka</button><div class="polg"><div class="pol-hd"><span></span><span>Teoria zakłada</span><span></span><span>Moim zdaniem</span></div>${PT.map((x,i)=>`<div class="pol-r"><span class="pol-n">${String(i+1).padStart(2,"0")}</span><div class="pol-th">${x[0]}</div><span class="pol-ar">→</span><div class="pol-me"><b>${x[1]}</b><p>${x[2]}</p></div></div>`).join("")}</div></div></div>`;
+        k2.after(ps);
+        const fitP2=()=>{const k=ps.querySelector(".stp-n"),tgt=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,g=ps.querySelector(".polg"),t=g.getBoundingClientRect().top+scrollY;g.style.height="";g.style.height=Math.max(g.scrollHeight,Math.round(tgt-t))+"px"};
+        window.__openPol=()=>{ps.classList.add("on");setTimeout(()=>{fitP2();scrollToSec(ps)},60)};addEventListener("resize",()=>{if(ps.classList.contains("on"))fitP2()});
+        ps.querySelector(".ds-back").addEventListener("click",()=>window.__openKls());
+        k2.querySelector(".pol-go").addEventListener("click",()=>window.__openPol())}
       const fitK=()=>{const k=k2.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,gg=k2.querySelector(".klg2"),t=gg.getBoundingClientRect().top+scrollY;gg.style.height="";gg.style.height=Math.max(gg.scrollHeight,Math.round(tg-t))+"px";const v=k2.querySelector(".klx");v.style.height="";v.style.height=Math.max(v.scrollHeight,Math.round(gg.getBoundingClientRect().bottom-v.getBoundingClientRect().top))+"px"};
       window.__openKls=()=>{k2.classList.add("on");setTimeout(()=>{fitK();scrollToSec(k2)},60)};addEventListener("resize",()=>{if(k2.classList.contains("on"))fitK()});
       k2.querySelector(".ds-back").addEventListener("click",()=>window.__openPrb());
