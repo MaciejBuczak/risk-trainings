@@ -1699,7 +1699,11 @@
 .kgk>*{flex-shrink:0}
 @keyframes kgin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 .kgk-g{display:flex;justify-content:space-between;gap:6px;font:600 9px var(--body);letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--dc) 75%,#000)}
-.kgk-k{font-style:normal;color:#8a8378}
+.kgk{padding-right:44px!important}
+.kgk .kx-k{position:absolute;right:9px;top:9px;font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:#e3ddd1;color:#0d0d0d;line-height:1.5}
+.kgk .kx-k.EL{background:#ead9a2;color:#5c4a12}.kgk .kx-k.UL{background:#0d0d0d;color:#fcf9f5}.kgk .kx-k.S{background:#9a3b25;color:#fff}.kgk .kx-k.P{background:#cfe0e6}.kgk .kx-k.V{background:#e1e4cf}
+.kgk .kx-rg{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:4px;background:#0d0d0d;color:#fcf9f5;font-family:var(--serif);font-style:normal;font-size:12px;margin-right:6px;vertical-align:1px}
+.kgk.old{filter:grayscale(1);opacity:.6}.kgk.old b{text-decoration:line-through}
 .kgk b{font-weight:500;font-size:12.5px;line-height:1.25;color:#0d0d0d}
 .kgk-s{margin:3px 0 0;font-size:11px;line-height:1.4;color:#5c564d;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 
@@ -2307,7 +2311,7 @@ setEX(EX);setCX(1);
   /* Próba: strona jak Silnik, z prawej siatka 4×4 – bloczki grup koncepcji */
   {const e=DS.eng;if(e){const p=e.cloneNode(true);p.id="ds-prb";p.classList.remove("on");p.querySelector(".stp-n").textContent="Silnik obliczeniowy · próba";
     p.querySelectorAll(".rep-p,.dsl-svg,.rep-svg").forEach(x=>x.remove());
-    const G=[["Ryzyko kredytowe – parametry","PD, LGD, EAD, ECL","#bf8165",16,3],["Ryzyko kredytowe – portfel","rozkład strat, kapitał","#a8694c",6,1],["Ryzyko rynkowe","VaR, ES, zmienność","#b29e84",10,2],["Ryzyko operacyjne","straty operacyjne, prawne","#8c6e55",7,2],["Płynność","finansowanie, odpływy","#c9a27a",4,1],["Kapitał ekonomiczny","agregacja, alokacja","#9a5c41",4,3],["Stres testy","scenariusze skrajne","#6e5f50",5,3],["Ryzyko modeli","inwentarz, istotność, pomiar","#d0a58a",2,1]];
+    const G=[["Ryzyko kredytowe – parametry","PD, LGD, EAD, ECL","#bf8165",16,3],["Ryzyko kredytowe – portfel","rozkład strat, kapitał","#9a5c41",6,1],["Ryzyko rynkowe","VaR, ES, zmienność","#8f9a6e",10,2],["Ryzyko operacyjne","straty operacyjne, prawne","#8a7a9a",7,2],["Płynność","finansowanie, odpływy","#6f93a8",4,1],["Kapitał ekonomiczny","agregacja, alokacja","#c9a24f",4,3],["Stres testy","scenariusze skrajne","#6e5f50",5,3],["Ryzyko modeli","inwentarz, istotność, pomiar","#c4b49a",2,1]];
     const pl=n=>n+" "+(n===1?"koncepcja":(n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?"koncepcje":"koncepcji");
     const g=p.querySelector(".dsg");g.className="kgrid";g.removeAttribute("style");
     const DK=["K1","K2","R","O","L","C","S","M"];let col=1;
@@ -2330,7 +2334,7 @@ setEX(EX);setCX(1);
       g.querySelectorAll(".kgb").forEach(o=>o.classList.toggle("hid",o!==b&&rows.includes(+o.dataset.r)));
       bg.style.gridRow=`${rows[0]} / span ${rows.length}`;
       const T=lay(cs.length,rows,+b.dataset.r,+b.dataset.c,+b.dataset.w);
-      g.insertAdjacentHTML("beforeend",cs.map((c,i)=>{const t=T[i];return`<div class="kgk" style="grid-column:${t.c} / span ${t.s};grid-row:${t.r};animation-delay:${i*25}ms"><span class="kgk-g">${EH2(c.g)}<em class="kgk-k">${EH2(c.k)}</em></span><b>${EH2(c.n)}</b><p class="kgk-s">${EH2(c.s)}</p></div>`}).join(""));
+      g.insertAdjacentHTML("beforeend",cs.map((c,i)=>{const t=T[i];return`<div class="kgk${c.old?" old":""}" style="grid-column:${t.c} / span ${t.s};grid-row:${t.r};animation-delay:${i*25}ms"><span class="kgk-g">${EH2(c.g)}</span><span class="kx-k ${EH2(c.k)}">${EH2(c.k)}</span><b>${c.reg?'<em class="kx-rg">§</em>':""}${EH2(c.n)}</b><p class="kgk-s">${EH2(c.old||c.s)}</p></div>`}).join(""));
       g.classList.add("sel")})}));
     e.after(p);p.querySelector(".ds-back").addEventListener("click",()=>scrollToSec(SEC));
     new MutationObserver(()=>{const on=e.classList.contains("on");p.classList.toggle("on",on);if(on)setTimeout(()=>{const k=p.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,t=g.getBoundingClientRect().top+scrollY;g.style.height=Math.max(420,Math.round(tg-t))+"px"},60)}).observe(e,{attributes:true,attributeFilter:["class"]})}}
