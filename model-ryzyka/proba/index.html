@@ -1893,15 +1893,20 @@
 .klg2{display:grid;grid-template-rows:auto 1fr 1fr;gap:10px}
 .klwn{padding:12px 16px!important;gap:3px!important}
 .klwn h3{font-size:16px!important;margin:2px 0!important}
-.klw{padding:12px 16px 14px!important;gap:10px!important}
+.klw{padding:11px 16px 12px!important;gap:8px!important}
 .klw-h{display:flex;align-items:baseline;gap:12px}
 .klw-h .kx-k{align-self:center}
 .klw-h h3{margin:0!important;font-size:17px!important}
 .klw-h em{margin-left:auto;font-style:normal;font-size:10.5px;color:#8a8378}
-.klw-g{flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.klw-c{background:#fffdf9;border:1px solid rgba(13,13,13,.07);border-radius:12px;padding:10px 12px}
+.klw-g{flex:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.klw-m{background:#f6efe4!important}
+.klw-m div{display:flex;flex-direction:column;padding:2px 0;border-top:1px dashed #e0d6c6}
+.klw-m b+div{border-top:0;padding-top:0}
+.klw-m strong{font-size:12px;font-weight:600;color:#0d0d0d;line-height:1.3}
+.klw-m span{font-size:10.5px;line-height:1.3;color:#5c564d}
+.klw-c{background:#fffdf9;border:1px solid rgba(13,13,13,.07);border-radius:12px;padding:9px 11px}
 .klw-c b{display:block;font:600 9.5px var(--body);letter-spacing:.12em;text-transform:uppercase;color:#a8694c;margin-bottom:5px}
-.klw-c p{margin:0;font-size:12.5px;line-height:1.5;color:#3e3730}
+.klw-c p{margin:0;font-size:12px;line-height:1.48;color:#3e3730}
 /* Silnik: replikacja kodu */
 .dsc.wqc{padding-bottom:0}
 .wqc h3{margin:4px 0 4px!important}
@@ -2564,14 +2569,15 @@ setEX(EX);setCX(1);
         ["P","Płynność","Czy wystarczy gotówki na czas?","Tu problemem nie jest strata, lecz czas. Bank może być wypłacalny, a mimo to nie mieć środków na bieżące zobowiązania. Modele mierzą luki przepływów i bufory płynnych aktywów.","LCR, NSFR, luka płynności",3],
         ["V","Ryzyko modeli","Czy modelom można ufać?","Każdy model upraszcza rzeczywistość i może się mylić. Ta klasa traktuje błąd samego modelu jako osobne ryzyko: inwentarz, istotność, walidacja i bufory na niepewność.","Inwentarz i istotność modeli, kwantyfikacja ryzyka modeli",2]];
       const k2=document.createElement("section");k2.className="sdsec dsec";k2.id="ds-kls";
-      const KX={EL:[["Co mierzy","Średni, spodziewany koszt ryzyka w danym horyzoncie – koszt prowadzenia działalności, a nie zaskoczenie."],["Jak liczymy","EL = PD × LGD × EAD, w horyzoncie 12 miesięcy lub całego życia (MSSF 9), z wagami scenariuszy."],["Czym pokrywa bank","Ceną kredytu i odpisami. Przykłady: scoring, PD lifetime, oczekiwana strata (ECL)."]],
-        UL:[["Co mierzy","Odchylenie strat ponad średnią – ogon rozkładu, czyli to, czego nie da się przewidzieć w cenie."],["Jak liczymy","Kwantyl rozkładu strat: VaR lub ES na wysokim poziomie ufności, np. 99,9% we wzorze IRB."],["Czym pokrywa bank","Kapitałem. Przykłady: wzór IRB, VaR, Expected Shortfall, kapitał ekonomiczny."]]};
+      const KX={EL:[["Co mierzy","Średni, spodziewany koszt ryzyka w danym horyzoncie – koszt prowadzenia działalności, a nie zaskoczenie."],["Jak liczymy","EL = PD × LGD × EAD, w horyzoncie 12 miesięcy lub całego życia (MSSF 9), z wagami scenariuszy."],["Czym pokrywa bank","Ceną kredytu – marżą za ryzyko – i odpisami w wyniku finansowym."]],
+        UL:[["Co mierzy","Odchylenie strat ponad średnią – ogon rozkładu, czyli to, czego nie da się przewidzieć w cenie."],["Jak liczymy","Kwantyl rozkładu strat: VaR lub ES na wysokim poziomie ufności, np. 99,9% we wzorze IRB."],["Czym pokrywa bank","Kapitałem – regulacyjnym (Filar 1) i wewnętrznym (Filar 2, ICAAP)."]]};
+      const KM={EL:[["ECL","odpisy 12 m i lifetime"],["Scoring, rating","PD klienta"],["LGD, EAD","strata i ekspozycja"],["Pricing","koszt ryzyka w cenie"]],UL:[["IRB","kapitał dla kredytów"],["VaR / ES","ryzyko rynkowe"],["AMA","operacyjne, do CRR III"],["Kapitał wewnętrzny","ICAAP"]]};
       const KDm=Object.fromEntries(KD.map(k=>[k[0],k]));
       const small=k=>`<article class="klc klc-s"><div class="klc-t"><span class="kx-k ${k[0]}">${k[0]}</span><em>${pl(k[5])}</em></div><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><p>${k[3]}</p><p class="klc-x"><b>Przykłady:</b> ${k[4]}</p></article>`;
-      const wide=k=>`<article class="klc klw"><div class="klw-h"><span class="kx-k ${k[0]}">${k[0]}</span><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><em>${pl(k[5])}</em></div><div class="klw-g">${KX[k[0]].map(x=>`<div class="klw-c"><b>${x[0]}</b><p>${x[1]}</p></div>`).join("")}</div></article>`;
+      const wide=k=>`<article class="klc klw"><div class="klw-h"><span class="kx-k ${k[0]}">${k[0]}</span><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><em>${pl(k[5])}</em></div><div class="klw-g">${KX[k[0]].map(x=>`<div class="klw-c"><b>${x[0]}</b><p>${x[1]}</p></div>`).join("")}<div class="klw-c klw-m"><b>Kluczowe modele</b>${KM[k[0]].map(m=>`<div><strong>${m[0]}</strong><span>${m[1]}</span></div>`).join("")}</div></div></article>`;
       k2.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Klasy modeli</span><h2>Klasy modeli ryzyka</h2><p class="dsp">Każdy model odpowiada na jedno z kilku podstawowych pytań o ryzyko. Klasa mówi, jakie to pytanie i czym bank pokrywa wynik.</p>
         <div class="klx">${small(KDm.S)}${small(KDm.P)}${small(KDm.V)}</div></div>
-        <div class="sds-r"><button type="button" class="sd-back ds-back">↓ Koncepcje modeli ryzyka</button><div class="klg2"><article class="klc klc-n klwn"><span class="klc-k">Jedna liczba, różne pytania</span><h3>Dlaczego klasa ma znaczenie</h3><p>PD czy LGD pojawiają się w kilku klasach: w EL jako średnia, w UL jako punkt wyjścia do kwantyla, w stres testach jako wynik scenariusza. Klasa mówi, na jakie pytanie odpowiada liczba – i czym bank ją pokrywa: ceną, odpisem, kapitałem czy buforem płynności.</p></article>${wide(KDm.EL)}${wide(KDm.UL)}</div></div></div>`;
+        <div class="sds-r"><button type="button" class="sd-back ds-back">↓ Koncepcje modeli ryzyka</button><div class="klg2"><article class="klc klc-n klwn"><span class="klc-k">Jedna liczba, różne pytania</span><h3>Dlaczego klasa ma znaczenie</h3><p>To samo PD jest w EL średnią, w UL punktem wyjścia do kwantyla, a w stres testach wynikiem scenariusza. Klasa mówi, na jakie pytanie odpowiada liczba i czym bank ją pokrywa.</p></article>${wide(KDm.EL)}${wide(KDm.UL)}</div></div></div>`;
       p.before(k2);
       const fitK=()=>{const k=k2.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,gg=k2.querySelector(".klg2"),t=gg.getBoundingClientRect().top+scrollY;gg.style.height="";gg.style.height=Math.max(gg.scrollHeight,Math.round(tg-t))+"px";const v=k2.querySelector(".klx");v.style.height="";v.style.height=Math.max(v.scrollHeight,Math.round(gg.getBoundingClientRect().bottom-v.getBoundingClientRect().top))+"px"};
       window.__openKls=()=>{k2.classList.add("on");setTimeout(()=>{fitK();scrollToSec(k2)},60)};addEventListener("resize",()=>{if(k2.classList.contains("on"))fitK()});
