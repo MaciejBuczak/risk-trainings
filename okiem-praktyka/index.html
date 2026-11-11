@@ -47,6 +47,7 @@ a.oki:hover{background:var(--panel)}
 .os-h b.k{font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px}
 .os-h h2{font-size:clamp(26px,2.6vw,34px);margin:0}
 .os-h h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d)}
+.os-ess{margin-left:auto;font-size:13px;font-weight:600;color:var(--terra-d);text-decoration:none}.os-ess+span{margin-left:16px!important}
 .os-h span{margin-left:auto;font-size:13px;color:var(--muted)}
 .og{display:grid;grid-template-columns:44px minmax(0,1fr) 30px minmax(0,1.3fr);column-gap:12px;row-gap:12px}
 .og-hd,.og-r{display:contents}
@@ -99,7 +100,7 @@ const PTS={UL:[["Strata nieoczekiwana to kwantyl 99,9% rozkładu strat.","Raz na
           ["Scenariusze makro czynią ECL prognostyczną.","Prognoza to też założenie","Ścieżki makro i wagi scenariuszy ustalają ludzie. Zmienność odpisu bywa efektem decyzji, nie ryzyka."],
           ["Wyższy odpis oznacza większe ryzyko portfela.","Odpis mówi też o modelu","Skok ECL może wynikać z rekalibracji albo nowych kryteriów SICR, a nie z pogorszenia portfela."]]};
 const NM={EL:["Strata oczekiwana","EL pod lupą","#ead9a2","#5c4a12"],UL:["Strata nieoczekiwana","UL pod lupą","#0d0d0d","#fcf9f5"]};
-document.getElementById("osx").innerHTML=["EL","UL"].map(K=>`<section class="os" id="${K.toLowerCase()}"><div class="wrap"><div class="os-h"><b class="k" style="background:${NM[K][2]};color:${NM[K][3]}">${K}</b><h2>${NM[K][0]} – <em>${NM[K][1]}</em></h2><span>${PTS[K].length} uwagi</span></div><div class="og"><div class="og-hd"><span></span><span>Teoria zakłada</span><span></span><span>Moim zdaniem</span></div>${PTS[K].map((x,i)=>`<div class="og-r"><span class="og-n">${String(i+1).padStart(2,"0")}</span><div class="og-th">${x[0]}</div><span class="og-ar">→</span><div class="og-me"><b>${x[1]}</b><p>${x[2]}</p></div></div>`).join("")}</div></div></section>`).join("");
+document.getElementById("osx").innerHTML=["EL","UL"].map(K=>`<section class="os" id="${K.toLowerCase()}"><div class="wrap"><div class="os-h"><b class="k" style="background:${NM[K][2]};color:${NM[K][3]}">${K}</b><h2>${NM[K][0]} – <em>${NM[K][1]}</em></h2>${K==="UL"?`<a class="os-ess" href="raz-na-tysiac-lat/">Esej: Raz na tysiąc lat →</a>`:""}<span>${PTS[K].length} uwagi</span></div><div class="og"><div class="og-hd"><span></span><span>Teoria zakłada</span><span></span><span>Moim zdaniem</span></div>${PTS[K].map((x,i)=>`<div class="og-r"><span class="og-n">${String(i+1).padStart(2,"0")}</span><div class="og-th">${x[0]}</div><span class="og-ar">→</span><div class="og-me"><b>${x[1]}</b><p>${x[2]}</p></div></div>`).join("")}</div></div></section>`).join("");
 </script>
 </main>
 
