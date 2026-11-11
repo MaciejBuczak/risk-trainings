@@ -2320,7 +2320,7 @@ setEX(EX);setCX(1);
     g.innerHTML=G.map((x,i)=>{const c0=col;col+=x[4];if(col>4)col=1;const r=Math.floor(i/2)+1;return`<button type="button" class="kgb" data-d="${DK[i]}" data-c="${c0}" data-w="${x[4]}" data-r="${r}" style="--dc:${x[2]};grid-column:${(c0-1)*15+1} / span ${x[4]*15};grid-row:${r}"><span class="kgb-n">${pl(x[3])}</span><span class="kgb-in"><b>${x[0]}</b><small>${x[1]}</small></span><i class="kg-x" aria-hidden="true">×</i></button>`}).join("");
     const EH2=t=>String(t==null?"":t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
     const need=cb=>{if(window.RT_KON)return cb();const sc=document.createElement("script");sc.src="../../koncepcje/dane.js";sc.onload=cb;document.head.appendChild(sc)};
-    const close=()=>{g.classList.remove("sel");g.querySelectorAll(".kgk").forEach(x=>x.remove());g.querySelectorAll(".kgb").forEach(b=>b.classList.remove("on","hid"))};
+    const close=()=>{g.querySelectorAll(".kgb").forEach(b=>b.style.margin="");g.classList.remove("sel");g.querySelectorAll(".kgk").forEach(x=>x.remove());g.querySelectorAll(".kgb").forEach(b=>b.classList.remove("on","hid"))};
     const split=(L,k)=>{const a=[],b=Math.floor(L/k);let r=L-b*k;for(let i=0;i<k;i++){a.push(b+(r>0?1:0));r--}return a};
     /* układ: wolne pola w obszarze (wiersze) wokół bloczka; kafelki o wyrównanej szerokości */
     const REG={L:[3,4],C:[3,4],S:[3,4],M:[4]};
@@ -2336,7 +2336,9 @@ setEX(EX);setCX(1);
       g.querySelectorAll(".kgb").forEach(o=>o.classList.toggle("hid",o!==b&&rows.includes(+o.dataset.r)));
       bg.style.gridRow=`${rows[0]} / span ${rows.length}`;
       const T=lay(cs.length,rows,+b.dataset.r,+b.dataset.c,+b.dataset.w);
-      g.insertAdjacentHTML("beforeend",cs.map((c,i)=>{const t=T[i];return`<div class="kgk${c.old?" old":""}" style="grid-column:${t.c} / span ${t.s};grid-row:${t.r};animation-delay:${i*25}ms"><span class="kgk-g">${EH2(c.g)}</span><span class="kx-k ${EH2(c.k)}">${EH2(c.k)}</span><b>${c.reg?'<em class="kx-rg">§</em>':""}${EH2(c.n)}</b><p class="kgk-s">${EH2(c.old||c.s)}</p></div>`}).join(""));
+      const ins=(c,sp,r)=>`margin:${r===rows[0]?10:0}px ${c+sp-1===60?16:5}px ${r===rows[rows.length-1]?10:0}px ${c===1?16:5}px;`;
+      b.style.margin=ins((+b.dataset.c-1)*15+1,+b.dataset.w*15,+b.dataset.r).slice(7,-1);
+      g.insertAdjacentHTML("beforeend",cs.map((c,i)=>{const t=T[i];return`<div class="kgk${c.old?" old":""}" style="${ins(t.c,t.s,t.r)}grid-column:${t.c} / span ${t.s};grid-row:${t.r};animation-delay:${i*25}ms"><span class="kgk-g">${EH2(c.g)}</span><span class="kx-k ${EH2(c.k)}">${EH2(c.k)}</span><b>${c.reg?'<em class="kx-rg">§</em>':""}${EH2(c.n)}</b><p class="kgk-s">${EH2(c.old||c.s)}</p></div>`}).join(""));
       g.classList.add("sel")})}));
     e.after(p);p.querySelector(".ds-back").addEventListener("click",()=>scrollToSec(SEC));
     new MutationObserver(()=>{const on=e.classList.contains("on");p.classList.toggle("on",on);if(on)setTimeout(()=>{const k=p.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,t=g.getBoundingClientRect().top+scrollY;g.style.height=Math.max(420,Math.round(tg-t))+"px"},60)}).observe(e,{attributes:true,attributeFilter:["class"]})}}
