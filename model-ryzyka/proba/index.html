@@ -1706,6 +1706,31 @@
 .rep-r span{display:flex;flex-direction:column}
 .rep-r i{font-style:normal;font-size:9px;color:#8a7a62}
 .rep-r b{font-size:11.5px;font-weight:600;color:#0d0d0d}
+/* Dokumentacja: układ 2 kolumny – Dokumentacja + Metodyka | Etapy + Weryfikacja */
+#ds-doc .dsg .kdc-st:not(.kmet){grid-column:1;grid-row:1}
+#ds-doc .dsg .kmet{grid-column:1;grid-row:2}
+#ds-doc .dsg .dcomb{grid-column:2;grid-row:1/span 2;padding:0;overflow:hidden;line-height:1.25}
+.dcomb .dcs{flex:1;display:flex;flex-direction:column;padding:14px 18px 14px}
+.dcomb .dcs+.dcs{border-top:1px solid #ddd3c4}
+.dcomb h3{margin:6px 0 8px!important;font-size:18px!important}
+.dcomb .det-l li{padding:4px 0;font-size:12px}
+.dcomb .wq-r{padding:6px 0}
+#ds-doc .drw-w{margin-top:-52px;max-width:350px}
+#ds-doc .dsg{grid-auto-rows:auto}
+.dcomb .dcs{padding:12px 18px}
+.dcomb .det-l li{padding:3px 0!important}
+.dcomb .wq-r{padding:4px 0!important}
+.kon-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-right:22px;margin-bottom:4px}
+.kon-p .kmet-k li{padding:4px 0}
+.kon-p .kmet-k li::before{display:none}
+.kon-p .kmet-k small{font-size:9.5px}
+.kon-p h3{margin:0 0 4px!important}
+.kon-p .kmet-k{display:block;padding:0 0 4px}
+.kon-f{display:flex;justify-content:flex-end;padding-top:6px;border-top:1px solid #ddd3c4}
+.rep-p{padding:11px 16px 10px!important}
+.rep-r{padding:4px 10px!important}
+.rep-p ul{margin-bottom:6px!important}
+
 
 /* Silnik: blok kodu */
 .dsc.code{padding:0;overflow:hidden;background:#fffdf9;border-color:#ddd3c4}
@@ -2158,16 +2183,17 @@ setEX(EX);setCX(1);
   {const g=DS.doc&&DS.doc.querySelector(".dsg"),src=document.getElementById("kdc");if(g&&src){const c=src.cloneNode(true);c.removeAttribute("id");c.classList.add("kdc-st");g.firstElementChild.replaceWith(c);
     {const ks=[...c.querySelectorAll(".ksec")].find(x=>/Metodyka/.test(x.textContent));if(ks){const w=document.createElement("div");w.className="kmet-src";ks.before(w);w.append(ks,ks.nextElementSibling)}}
     const cs=[...g.children];
-    const MR=[["Nazwa","Metodyka modeli impairmentowych"],["Wersja","3.9"],["Data","15.01.2026"],["Status","Zatwierdzona"],["Zatwierdził","Komitet Ryzyka"],["Koncepcja","Strata oczekiwana · MSSF 9"],["Wybrane podejście","PD lifetime – model przeżycia"],["Parametry","PD, LGD, EAD, SICR"]];
+    const MR=[["Nazwa","Metodyka modeli impairmentowych"],["Wersja","3.9"],["Data","15.01.2026"],["Koncepcja","Strata oczekiwana · MSSF 9"],["Wybrane podejście","PD lifetime – model przeżycia"],["Parametry","PD, LGD, EAD, SICR"]];
     const KC=[["Model przeżycia (PD lifetime)","wybrana","Krzywe PD w czasie z danych o czasie do defaultu",1],["Macierze migracji","rozważana","Przejścia między klasami ratingowymi – za mało klas",0],["Scoring + skalowanie w czasie","rozważana","Prosty, ale słabo oddaje profil PD w czasie",0],["Krzywe vintage","benchmark","Punkt odniesienia przy kalibracji krzywych",0]];
     const m=document.createElement("div");m.className="kmc kdoc kdc-st kmet";
-    m.innerHTML=`<div class="kmc-h"><span>Metodyka modelu</span><b>wersja 3.9</b></div><div class="kmet-b"><dl>${MR.map(r=>`<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl><ul class="kmet-k">${KC.map(k=>`<li class="${k[3]?"sel":""}"><b>${k[0]}</b><em>${k[1]}</em><small>${k[2]}</small></li>`).join("")}</ul></div><div class="kmet-f"><span><b>4</b> koncepcje rozważane · <b>1</b> wybrana</span><button type="button" class="kmet-btn">Rozważane koncepcje <i>→</i></button></div>`;
-    m.querySelector(".kmet-btn").addEventListener("click",e=>{const on=m.classList.toggle("alt");e.currentTarget.innerHTML=on?"<i>←</i> Karta metodyki":"Rozważane koncepcje <i>→</i>"});
+    m.innerHTML=`<div class="kmc-h"><span>Metodyka modelu</span><b>wersja 3.9</b></div><div class="kmet-b"><dl>${MR.map(r=>`<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl><ul class="kmet-k">${KC.map(k=>`<li class="${k[3]?"sel":""}"><b>${k[0]}</b><em>${k[1]}</em><small>${k[2]}</small></li>`).join("")}</ul></div><div class="kmet-f"><span><b>4</b> koncepcje rozważane · <b>1</b> wybrana</span><button type="button" class="kmet-btn rep-btn">Rozważane koncepcje <i>→</i></button></div>`;
+    m.querySelector(".kmet-btn").addEventListener("click",()=>window.__repT&&window.__repT(DS.doc));
     cs[1].replaceWith(m);
     const ET=[["Cel i zakres modelu","portfel detaliczny"],["Dane i próba","2015–2025"],["Segmentacja portfela","6 segmentów"],["Selekcja zmiennych","38 → 9"],["Estymacja PD, LGD, EAD","MNW"],["Kalibracja i scenariusze makro","3 scenariusze"],["Korekty i bufory (MoC)","+0,15 mld zł"],["Rejestr zmian wersji","v2.5 → v2.6"]];
     cs[2].className="dsc det";cs[2].innerHTML=`<span class="sd-n">02</span><h3>Etapy budowy modelu</h3><ol class="det-l">${ET.map((e,i)=>`<li><i>${i+1}</i><b>${e[0]}</b><em>${e[1]}</em></li>`).join("")}</ol><p class="det-n"><b>Znane ograniczenia:</b> krótka historia defaultów hipotecznych – rozdz. 06 w aktualizacji.</p>`;
     const WQ=[["DQM","Jakość danych",[["Kompletność","99,2%"],["Reguły jakości","412 / 415"]]],["Jakościowa","Koncepcja i założenia",[["Dokumentacja","kompletna"],["Uwagi istotne","brak"]]],["Ilościowa","Testy",[["Gini PD","0,62"],["Kalibracja","test zaliczony"],["PSI","0,06"]]]];
     cs[3].className="dsc wq";cs[3].innerHTML=`<span class="sd-n">03</span><h3>Weryfikacja jakości modelu</h3><div class="wq-l">${WQ.map(w=>`<div class="wq-r"><div class="wq-h"><b>${w[0]}</b><small>${w[1]}</small></div><div class="wq-v">${w[2].map(v=>`<span><i>${v[0]}</i><b>${v[1]}</b></span>`).join("")}</div></div>`).join("")}</div><div class="wq-res"><div><i>Wynik weryfikacji</i><b>4,3 / 5</b></div><span>bez zastrzeżeń istotnych · 2 rekomendacje</span></div>`;
+    {const cb=document.createElement("article");cb.className="dsc dcomb";cb.innerHTML=`<div class="dcs dcs-e">${cs[2].innerHTML.replace('sd-n">02','sd-n">01')}</div><div class="dcs dcs-w">${cs[3].innerHTML.replace('sd-n">03','sd-n">02')}</div>`;cs[2].replaceWith(cb);cs[3].remove()}
   }}
   {const sec=DS.eng;if(sec){const dc=sec.querySelector(".dcard");dc.insertAdjacentHTML("beforebegin",'<div class="docpg engpg"></div>');const dp=sec.querySelector(".engpg");
     const ry=-34*Math.PI/180,e=22*Math.PI/180,P=(x,y,z)=>{const x1=x*Math.cos(ry)+z*Math.sin(ry),z1=-x*Math.sin(ry)+z*Math.cos(ry);return[x1*130,(-(y*Math.cos(e))+z1*Math.sin(e))*130]};
@@ -2204,9 +2230,12 @@ setEX(EX);setCX(1);
       cs[3].classList.add("wqc");
       cs[3].querySelector(".rep-btn").addEventListener("click",()=>window.__repT&&window.__repT(sec));
     }}
-  window.__repT=function(sec){const w=sec.querySelector(".sds-w"),dp=sec.querySelector(".engpg"),g=sec.querySelector(".dsg"),bt=sec.querySelector(".rep-btn");if(!w||!dp||!g||!bt)return;
+  window.__repT=function(sec){const w=sec.querySelector(".sds-w"),dp=sec.querySelector(".engpg")||sec.querySelector(".docpg"),g=sec.querySelector(".dsg"),bt=sec.querySelector(".rep-btn");if(!w||!dp||!g||!bt)return;if(!bt.dataset.lbl)bt.dataset.lbl=bt.innerHTML;const isDoc=sec.id==="ds-doc";
     let pn=dp.querySelector(".rep-p");const old=w.querySelector(".rep-svg");
-    if(pn&&pn.classList.contains("on")){pn.classList.remove("on");old&&old.remove();bt.innerHTML="Szczegóły <i>→</i>";return}
+    if(pn&&pn.classList.contains("on")){pn.classList.remove("on");old&&old.remove();bt.innerHTML=bt.dataset.lbl;return}
+    if(!pn&&isDoc){const KC=[["Model przeżycia (PD lifetime)","wybrana","Krzywe PD w czasie z danych o czasie do defaultu",1],["Macierze migracji","rozważana","Przejścia między klasami ratingowymi – za mało klas",0],["Scoring + skalowanie w czasie","rozważana","Prosty, ale słabo oddaje profil PD w czasie",0],["Krzywe vintage","benchmark","Punkt odniesienia przy kalibracji krzywych",0]];
+      dp.insertAdjacentHTML("beforeend",`<div class="rep-p kon-p"><button type="button" class="rep-x" aria-label="Zamknij">×</button><div class="kon-h"><h3>Rozważane koncepcje</h3><button type="button" class="kmet-btn kon-go">Przegląd koncepcji <i>→</i></button></div><ul class="kmet-k">${KC.map(k=>`<li class="${k[3]?"sel":""}"><b>${k[0]}</b><em>${k[1]}</em><small>${k[2]}</small></li>`).join("")}</ul></div>`);
+      pn=dp.querySelector(".rep-p");pn.querySelector(".rep-x").addEventListener("click",()=>window.__repT(sec));pn.querySelector(".kon-go").addEventListener("click",()=>{scrollToSec(SEC);setTimeout(()=>openKat("kon"),500)})}
     if(!pn){dp.insertAdjacentHTML("beforeend",`<div class="rep-p"><button type="button" class="rep-x" aria-label="Zamknij">×</button><h3>Replikacja kodu modelu</h3><p>Niezależny zespół odtwarza obliczenia w innym środowisku (np. Python), by potwierdzić poprawność kodu.</p><ul><li><b>Ryzyko środowiska</b> – eliminuje błędy wersji, bibliotek i ustawień</li><li><b>Ryzyko implementacji</b> – wychwytuje błędy w formułach</li></ul><div class="rep-r"><span><i>Ostatnia replikacja</i><b>03.2026</b></span><span><i>Środowisko</i><b>Python 3.11</b></span><span><i>Różnica ECL</i><b>0,02%</b></span><span><i>Tolerancja</i><b>±0,1%</b></span></div></div>`);
       pn=dp.querySelector(".rep-p");pn.querySelector(".rep-x").addEventListener("click",()=>window.__repT(sec))}
     const gr=g.getBoundingClientRect(),dr=dp.getBoundingClientRect();dp.style.height=Math.round(gr.bottom-dr.top)+"px";
@@ -2223,8 +2252,8 @@ setEX(EX);setCX(1);
     const x0=tag.right-wr.left,y0=tr.top+tr.height/2-wr.top,x2=cr.left-wr.left,y2=cr.top+cr.height/2-wr.top,lr=sec.querySelector(".sds-l").getBoundingClientRect(),xm=Math.round((lr.right+cr.left)/2-wr.left);
     sv.setAttribute("viewBox",`0 0 ${wr.width} ${wr.height}`);sv.style.width=wr.width+"px";sv.style.height=wr.height+"px";
     sv.innerHTML=`<path d="M${x0+2},${y0} H${xm} V${y2} H${x2}" fill="none" stroke="#a09580" stroke-width="1.3" stroke-dasharray="4 4"/><circle cx="${x0+2}" cy="${y0}" r="2.6" fill="#a09580"/><circle cx="${x2}" cy="${y2}" r="2.6" fill="#a09580"/>`;
-    const ms=sec.querySelector(".kmet-src"),mt=sec.querySelector(".kmet");if(ms&&mt){const a=ms.getBoundingClientRect(),b=mt.querySelector(".kmc-h").getBoundingClientRect(),xa=a.right-wr.left,ya=a.top+a.height/2-wr.top,xb=b.left-wr.left,yb=b.top+b.height/2-wr.top,xg=Math.round((xa+xb)/2);
-      sv.insertAdjacentHTML("beforeend",`<path d="M${xa},${ya} H${xg} V${yb} H${xb}" fill="none" stroke="#a8694c" stroke-width="1.3" stroke-dasharray="4 4"/><circle cx="${xa}" cy="${ya}" r="2.6" fill="#a8694c"/><circle cx="${xb}" cy="${yb}" r="2.6" fill="#a8694c"/>`)}}
+    const ms=sec.querySelector(".kmet-src"),mt=sec.querySelector(".kmet");if(ms&&mt){const a=ms.getBoundingClientRect(),b=mt.querySelector(".kmc-h").getBoundingClientRect(),xa=Math.round(a.left+a.width/2-wr.left),ya=a.bottom-wr.top,xb=xa,yb=b.top-wr.top;
+      sv.insertAdjacentHTML("beforeend",`<path d="M${xa},${ya} V${yb}" fill="none" stroke="#a8694c" stroke-width="1.3" stroke-dasharray="4 4"/><circle cx="${xa}" cy="${ya}" r="2.6" fill="#a8694c"/><circle cx="${xb}" cy="${yb}" r="2.6" fill="#a8694c"/>`)}}
   function dsFit(sec){const k=sec.querySelector(".stp-n"),K=k.getBoundingClientRect().top+scrollY,tg=K-60+innerHeight-50;[sec.querySelector(".dsg"),sec.querySelector(".docpg")||sec.querySelector(".dcard")].forEach(el=>{el.style.height="";const t=el.getBoundingClientRect().top+scrollY,h=Math.round(tg-t);if(h>el.scrollHeight)el.style.height=h+"px"})}
   addEventListener("resize",()=>Object.values(DS).forEach(s2=>{if(s2.classList.contains("on")){dsFit(s2);dsLine(s2)}}));
   
