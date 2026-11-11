@@ -1684,27 +1684,32 @@
 
 /* Próba: siatka grup koncepcji */
 #ds-prb .dcard{display:none}
-.kgrid{position:relative}
-.kgb{font:inherit;text-align:left;cursor:pointer;transition:opacity .3s,transform .2s,box-shadow .2s}
+.kgrid{position:relative;grid-template-columns:repeat(12,1fr)!important;transition:background .3s,box-shadow .3s;border-radius:20px}
+.kgb{font:inherit;text-align:left;cursor:pointer;position:relative;transition:opacity .3s,transform .2s,box-shadow .2s}
 .kgb:hover{transform:translateY(-1px);box-shadow:0 10px 22px -16px rgba(40,30,20,.45)}
-.kgh,.kgc{display:none}
+.kgb .kg-x{display:none;position:absolute;right:12px;top:8px;font-style:normal;font-size:16px;color:#8a8378}
+.kgrid.sel{background:color-mix(in srgb,var(--dc) 6%,#fffdf9);box-shadow:0 0 0 8px color-mix(in srgb,var(--dc) 6%,#fffdf9),0 0 0 9px color-mix(in srgb,var(--dc) 20%,#fffdf9)}
 .kgrid.sel .kgb:not(.on){display:none}
 .kgrid.sel .kgb.on{box-shadow:0 10px 22px -16px rgba(40,30,20,.45)}
-.kgrid.sel .kgh{display:flex;grid-row:1;align-items:flex-start;justify-content:space-between;gap:10px;padding:12px 14px 6px;background:color-mix(in srgb,var(--dc) 7%,#fffdf9);border:1px solid color-mix(in srgb,var(--dc) 24%,#fffdf9);border-bottom:0;border-radius:16px 16px 0 0;margin-bottom:-11px;position:relative;z-index:1;animation:kgin .35s ease}
-.kgrid.sel .kgc{display:grid;grid-row:2 / span 3;grid-column:1 / -1;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));grid-auto-rows:min-content;align-content:start;gap:8px;padding:12px 14px 14px;overflow:auto;background:color-mix(in srgb,var(--dc) 7%,#fffdf9);border:1px solid color-mix(in srgb,var(--dc) 24%,#fffdf9);border-radius:16px;animation:kgin .35s ease}
-.kgrid.sel .kgh[data-side="l"]+.kgc{border-top-left-radius:0}
-.kgrid.sel .kgh[data-side="r"]+.kgc{border-top-right-radius:0}
-.kgrid.sel .kgh[data-side="l"]{border-top-left-radius:16px}
-@keyframes kgin{from{opacity:0}to{opacity:1}}
-.kgh-t{display:flex;flex-direction:column;gap:2px}
-.kgh-t b{font-weight:500;font-size:17px;color:#0d0d0d}
-.kgh-t small{font-size:11px;color:#5c564d}
-.kg-x{border:0;background:none;font-size:18px;line-height:1;color:#8a8378;cursor:pointer}
-.kgk{background:#fffdf9;border:1px solid rgba(13,13,13,.07);border-left:3px solid var(--dc);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:2px;min-width:0}
-.kgk-g{display:flex;justify-content:space-between;font:600 9px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--dc)}
+.kgrid.sel .kgb.on .kg-x{display:block}
+.kgk{background:#fffdf9;border:1px solid rgba(13,13,13,.07);border-left:3px solid var(--dc);border-radius:12px;padding:9px 11px;display:flex;flex-direction:column;gap:2px;min-width:0;min-height:0;overflow:hidden;animation:kgin .35s ease both}
+@keyframes kgin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.kgk-g{display:flex;justify-content:space-between;gap:6px;font:600 9px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--dc)}
 .kgk-k{font-style:normal;color:#8a8378}
 .kgk b{font-weight:500;font-size:12.5px;line-height:1.25;color:#0d0d0d}
 .kgk small{font-size:10.5px;line-height:1.3;color:#7a7266}
+.kgk-s{margin:4px 0 0;font-size:11px;line-height:1.4;color:#5c564d;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.kgk.kg-md{padding:11px 13px}
+.kgk.kg-lg,.kgk.kg-xl{padding:14px 18px;gap:3px}
+.kgk.kg-lg b,.kgk.kg-xl b{font-size:16px}
+.kgk.kg-lg small,.kgk.kg-xl small{font-size:11.5px}
+.kgk.kg-lg .kgk-s,.kgk.kg-xl .kgk-s{-webkit-line-clamp:4;font-size:12px}
+.kgk-i{display:block;margin:8px 0 2px;font:italic 13px var(--serif);color:#2b2723}
+.kgk-u{margin:auto 0 0;padding-top:6px;border-top:1px dashed #e0d6c6;font-size:11px;line-height:1.35;color:#5c564d;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.kgk-u b{font-size:11px!important;font-weight:600}
+.kgk{text-align:left}.kgk>*{flex-shrink:0}
+.kgk.kg-xl .kgk-d{-webkit-line-clamp:9;color:#5c564d}
+.kgk.kg-xl{padding:18px 22px}
 
 .kgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:10px;min-height:420px}
 .kgb{border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--dc) 13%,#faf6ef);border:1px solid color-mix(in srgb,var(--dc) 22%,#faf6ef);display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-width:0}
@@ -2314,18 +2319,28 @@ setEX(EX);setCX(1);
     const pl=n=>n+" "+(n===1?"koncepcja":(n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?"koncepcje":"koncepcji");
     const g=p.querySelector(".dsg");g.className="kgrid";g.removeAttribute("style");
     const DK=["K1","K2","R","O","L","C","S","M"];let col=1;
-    g.innerHTML=G.map((x,i)=>{const c0=col;col+=x[4];if(col>4)col=1;return`<button type="button" class="kgb" data-d="${DK[i]}" data-c="${c0}" data-r="${Math.floor(i/2)+1}" style="--dc:${x[2]};grid-column:${c0} / span ${x[4]};grid-row:${Math.floor(i/2)+1}"><span class="kgb-n">${pl(x[3])}</span><b>${x[0]}</b><small>${x[1]}</small></button>`}).join("")+`<div class="kgh"></div><div class="kgc"></div>`;
-    const kh=g.querySelector(".kgh"),kc=g.querySelector(".kgc"),EH2=t=>String(t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+    g.innerHTML=G.map((x,i)=>{const c0=col;col+=x[4];if(col>4)col=1;const r=Math.floor(i/2)+1;return`<button type="button" class="kgb" data-d="${DK[i]}" data-c="${c0}" data-w="${x[4]}" data-r="${r}" style="--dc:${x[2]};grid-column:${(c0-1)*3+1} / span ${x[4]*3};grid-row:${r}"><span class="kgb-n">${pl(x[3])}</span><b>${x[0]}</b><small>${x[1]}</small><i class="kg-x" aria-hidden="true">×</i></button>`}).join("");
+    const EH2=t=>String(t==null?"":t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
     const need=cb=>{if(window.RT_KON)return cb();const sc=document.createElement("script");sc.src="../../koncepcje/dane.js";sc.onload=cb;document.head.appendChild(sc)};
-    const close=()=>{g.classList.remove("sel");g.querySelectorAll(".kgb").forEach(b=>{b.classList.remove("on");b.style.gridRow=b.dataset.r})};
+    const close=()=>{g.classList.remove("sel");g.querySelectorAll(".kgk").forEach(x=>x.remove());g.querySelectorAll(".kgb").forEach(b=>b.classList.remove("on"))};
+    const split=(L,k)=>{const a=[],b=Math.floor(L/k);let r=L-b*k;for(let i=0;i<k;i++){a.push(b+(r>0?1:0));r--}return a};
+    /* układ: wolne pola 4×4 (siatka 12 kolumn) wokół bloczka, kafelki dzielą je równo */
+    function lay(n,r0,c0,w){const seg=c0>1?[1,(c0-1)*3]:[(c0+w-1)*3+1,(4-c0-w+1)*3];const T=[];
+      if(n>=4){const len=[1,2,3,4].map(r=>r===r0?seg[1]:12),tot=len.reduce((a,b)=>a+b,0);let q=len.map(l=>Math.max(1,Math.floor(n*l/tot)));
+        while(q.reduce((a,b)=>a+b,0)<n){let bi=0,bv=-1;len.forEach((l,i)=>{const v=n*l/tot-q[i];if(v>bv&&q[i]<l/2){bv=v;bi=i}});q[bi]++}
+        while(q.reduce((a,b)=>a+b,0)>n){const i=q.indexOf(Math.max(...q));q[i]--}
+        q.forEach((k,i)=>{const r=i+1,[a,L]=r===r0?seg:[1,12];let x=a;split(L,k).forEach(sp=>{T.push({c:x,s:sp,r,h:1});x+=sp})})}
+      else{T.push({c:seg[0],s:seg[1],r:r0,h:1});const others=[1,2,3,4].filter(r=>r!==r0),runs=[];others.forEach(r=>{const l=runs[runs.length-1];if(l&&l[l.length-1]===r-1)l.push(r);else runs.push([r])});
+        let bands=runs.map(x=>x.slice());while(bands.length<n-1){bands.sort((a,b)=>b.length-a.length);const b=bands.shift(),h=Math.ceil(b.length/2);bands.push(b.slice(0,h),b.slice(h))}
+        while(bands.length>n-1){bands.sort((a,b)=>a[0]-b[0]);let bi=0;for(let i=0;i<bands.length-1;i++)if(bands[i][bands[i].length-1]+1===bands[i+1][0]){bi=i;break}const m=bands.splice(bi,2);bands.splice(bi,0,m[0].concat(m[1]))}
+        bands.sort((a,b)=>a[0]-b[0]).forEach(b=>T.push({c:1,s:12,r:b[0],h:b.length}))}
+      return T}
     g.querySelectorAll(".kgb").forEach(b=>b.addEventListener("click",()=>{if(b.classList.contains("on"))return close();need(()=>{
-      const K=window.RT_KON,d=b.dataset.d,dom=K.dom.find(x=>x[0]===d),cs=K.c.filter(x=>x.d===d),gi=DK.indexOf(d),w=G[gi][4],c0=+b.dataset.c;
-      g.querySelectorAll(".kgb").forEach(o=>{o.classList.remove("on");o.style.gridRow=o.dataset.r});b.classList.add("on");b.style.gridRow="1";
-      g.style.setProperty("--dc",dom[3]);
-      const left=c0>1;kh.style.gridColumn=left?`1 / span ${4-w}`:`${c0+w} / span ${4-w}`;kh.dataset.side=left?"l":"r";
-      kh.innerHTML=`<div class="kgh-t"><span class="kgb-n">Koncepcje modeli</span><b>${EH2(dom[1])}</b><small>${pl(cs.length)} · ${EH2(dom[2])}</small></div><button type="button" class="kg-x" aria-label="Zamknij">×</button>`;
-      kh.querySelector(".kg-x").addEventListener("click",close);
-      kc.innerHTML=cs.map(c=>`<div class="kgk"><span class="kgk-g">${EH2(c.g||"")}<em class="kgk-k">${EH2(c.k||"")}</em></span><b>${EH2(c.n)}</b><small>${EH2(c.o||"")}</small></div>`).join("");
+      const K=window.RT_KON,d=b.dataset.d,dom=K.dom.find(x=>x[0]===d),cs=K.c.filter(x=>x.d===d);
+      close();b.classList.add("on");g.style.setProperty("--dc",dom[3]);
+      const T=lay(cs.length,+b.dataset.r,+b.dataset.c,+b.dataset.w);
+      g.insertAdjacentHTML("beforeend",cs.map((c,i)=>{const t=T[i],a=t.s/3*t.h,m=a>=6?"xl":a>=2.4?"lg":a>=1.3?"md":"sm",big=m==="lg"||m==="xl",dp=(c.det&&c.det.p||[]).slice(0,2).join(" ");
+        return`<div class="kgk kg-${m}" style="grid-column:${t.c} / span ${t.s};grid-row:${t.r} / span ${t.h};animation-delay:${i*25}ms"><span class="kgk-g">${EH2(c.g)}<em class="kgk-k">${EH2(c.k)}</em></span><b>${EH2(c.n)}</b><small>${EH2(c.o)}</small>${m!=="sm"?`<p class="kgk-s">${EH2(c.s)}</p>`:""}${m==="xl"&&dp?`<p class="kgk-s kgk-d">${EH2(dp)}</p>`:""}${big&&c.idea?`<code class="kgk-i">${EH2(c.idea)}</code>`:""}${big&&t.h>1&&c.use?`<p class="kgk-u"><b>Zastosowanie:</b> ${EH2(c.use)}</p>`:""}</div>`}).join(""));
       g.classList.add("sel")})}));
     e.after(p);p.querySelector(".ds-back").addEventListener("click",()=>scrollToSec(SEC));
     new MutationObserver(()=>{const on=e.classList.contains("on");p.classList.toggle("on",on);if(on)setTimeout(()=>{const k=p.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,t=g.getBoundingClientRect().top+scrollY;g.style.height=Math.max(420,Math.round(tg-t))+"px"},60)}).observe(e,{attributes:true,attributeFilter:["class"]})}}
