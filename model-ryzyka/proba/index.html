@@ -1979,7 +1979,8 @@
 .sds-r .sd-cats .sdk:first-child h3{color:#fcf9f5!important}
 .sds-r .sd-cats .sdk:first-child .sdk-ic{background:#f5f1ea!important;width:32px!important;height:32px!important}
 .sds-r .sd-cats .sdk:first-child p{order:1;color:#c9bfb0!important;margin:0!important;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sds-r .sd-cats .sdk:first-child .sdk-b{order:3;margin:0!important}
+.sds-r .sd-cats .sdk:first-child .sdk-b{order:3;margin:0!important;align-self:center!important}
+.sds-r .sd-cats .sdk:first-child{min-height:0!important;height:auto!important;align-self:start!important}
 .sds-r .sd-cats .sdk{padding:13px 14px!important;gap:7px!important}
 .sds-r .sd-cats .sdk-h{gap:10px!important;align-items:center}
 .sds-r .sd-cats .sdk-ic{width:34px!important;height:34px!important;border-radius:10px!important}.sds-r .sd-cats .sdk-ic svg{width:22px!important;height:22px!important}
@@ -2614,7 +2615,7 @@ const RDOC={
 
     window.__hideDet0=()=>{KT.classList.remove("on");SEC.classList.remove("on","kat");document.querySelectorAll(".dsec").forEach(d=>d.classList.remove("on"));closeBlk();swapTxt(1,0);kfit()};
   window.__SL=730;
-  window.__secPad=()=>{const off=60;SEC.style.setProperty("padding-top","0px","important");const top=SEC.getBoundingClientRect().top+scrollY;let pt=Math.max(0,Math.round(window.__SL+off-top));SEC.style.setProperty("padding-top",pt+"px","important");{const k=SEC.querySelector(".stp-n"),d=k.getBoundingClientRect().top+scrollY-(window.__SL+off);if(Math.abs(d)>1){pt=Math.max(0,Math.round(pt-d));SEC.style.setProperty("padding-top",pt+"px","important")}}const c=SEC.querySelector(".sd-cats");if(c){c.style.height="";const tg=window.__SL+innerHeight-50,ct=c.getBoundingClientRect().top+scrollY;c.style.height="";const fr=[...c.children];fr.forEach(f=>f.style.minHeight="");const extra=Math.round(tg-(c.getBoundingClientRect().bottom+scrollY));const h0=Math.max(...fr.map(f=>f.offsetHeight));if(extra>0)fr.forEach(f=>f.style.minHeight=(h0+extra)+"px")}if(bkOpen)bkH()};
+  window.__secPad=()=>{const off=60;SEC.style.setProperty("padding-top","0px","important");const top=SEC.getBoundingClientRect().top+scrollY;let pt=Math.max(0,Math.round(window.__SL+off-top));SEC.style.setProperty("padding-top",pt+"px","important");{const k=SEC.querySelector(".stp-n"),d=k.getBoundingClientRect().top+scrollY-(window.__SL+off);if(Math.abs(d)>1){pt=Math.max(0,Math.round(pt-d));SEC.style.setProperty("padding-top",pt+"px","important")}}const c=SEC.querySelector(".sd-cats");if(c){c.style.height="";const tg=window.__SL+innerHeight-50,ct=c.getBoundingClientRect().top+scrollY;c.style.height="";[...c.children].forEach(f=>f.style.minHeight="");const fr=[...c.children].slice(1);const extra=Math.round(tg-(c.getBoundingClientRect().bottom+scrollY));const h0=Math.max(...fr.map(f=>f.offsetHeight));if(extra>0)fr.forEach(f=>f.style.minHeight=(h0+extra)+"px")}if(bkOpen)bkH()};
   addEventListener("resize",()=>{if(SEC.classList.contains("on"))window.__secPad()});
   window.__sdsOn=()=>{if(SEC.classList.contains("on"))return;SEC.classList.add("on");SD.classList.add("on");requestAnimationFrame(()=>{sdLayout();kfit();window.__secPad()});setTimeout(()=>{kfit();window.__secPad()},1200);setTimeout(()=>{kfit();window.__secPad()},2600)};
 BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
