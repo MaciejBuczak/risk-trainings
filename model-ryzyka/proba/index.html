@@ -1689,9 +1689,9 @@
 .wqc .wq-res b{font-size:15px}
 .rep-f{margin:6px -16px 0;border-radius:0 0 14px 14px}
 .rep-f span b{font-size:11px;font-weight:600;color:#1c1a17}
-.engpg .engstage{height:236px;margin-top:-26px;transform:scale(.88);transform-origin:50% 40%}
+.engpg .engstage{flex-shrink:0;height:236px;margin-top:-26px;transform:scale(.88);transform-origin:50% 40%}
 .engpg{position:relative}
-.rep-p{display:none;margin-top:auto;position:relative;width:100%;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:14px;padding:13px 16px 12px;box-shadow:0 14px 30px -22px rgba(60,45,30,.5);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.rep-p{display:none;position:absolute;left:0;right:0;bottom:0;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:14px;padding:13px 16px 12px;box-shadow:0 14px 30px -22px rgba(60,45,30,.5);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
 .rep-p.on{display:block;opacity:1;transform:none;animation:repin .35s ease}
 @keyframes repin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .rep-x{position:absolute;right:10px;top:8px;border:0;background:none;font-size:16px;color:#8a8378;cursor:pointer}
@@ -2207,7 +2207,7 @@ setEX(EX);setCX(1);
   window.__repT=function(sec){const w=sec.querySelector(".sds-w"),dp=sec.querySelector(".engpg"),g=sec.querySelector(".dsg"),bt=sec.querySelector(".rep-btn");if(!w||!dp||!g||!bt)return;
     let pn=dp.querySelector(".rep-p");const old=w.querySelector(".rep-svg");
     if(pn&&pn.classList.contains("on")){pn.classList.remove("on");old&&old.remove();bt.innerHTML="Szczegóły <i>→</i>";return}
-    if(!pn){dp.insertAdjacentHTML("beforeend",`<div class="rep-p"><button type="button" class="rep-x" aria-label="Zamknij">×</button><span class="rep-k">Silnik obliczeniowy</span><h3>Replikacja kodu modelu</h3><p>Niezależny zespół odtwarza obliczenia od zera w innym środowisku (np. Python zamiast SAS), na tych samych danych i parametrach. Zgodne wyniki potwierdzają, że silnik liczy to, co opisano w dokumentacji.</p><ul><li><b>Ryzyko środowiska</b> – eliminuje błędy wersji oprogramowania, bibliotek i ustawień</li><li><b>Ryzyko implementacji</b> – wychwytuje błędy w formułach i segmentacji</li></ul><div class="rep-r"><span><i>Ostatnia replikacja</i><b>03.2026</b></span><span><i>Środowisko</i><b>Python 3.11</b></span><span><i>Różnica ECL</i><b>0,02%</b></span><span><i>Tolerancja</i><b>±0,1%</b></span></div></div>`);
+    if(!pn){dp.insertAdjacentHTML("beforeend",`<div class="rep-p"><button type="button" class="rep-x" aria-label="Zamknij">×</button><h3>Replikacja kodu modelu</h3><p>Niezależny zespół odtwarza obliczenia w innym środowisku (np. Python zamiast SAS) na tych samych danych. Zgodne wyniki potwierdzają poprawność silnika.</p><ul><li><b>Ryzyko środowiska</b> – eliminuje błędy wersji, bibliotek i ustawień</li><li><b>Ryzyko implementacji</b> – wychwytuje błędy w formułach</li></ul><div class="rep-r"><span><i>Ostatnia replikacja</i><b>03.2026</b></span><span><i>Środowisko</i><b>Python 3.11</b></span><span><i>Różnica ECL</i><b>0,02%</b></span><span><i>Tolerancja</i><b>±0,1%</b></span></div></div>`);
       pn=dp.querySelector(".rep-p");pn.querySelector(".rep-x").addEventListener("click",()=>window.__repT(sec))}
     const gr=g.getBoundingClientRect(),dr=dp.getBoundingClientRect();dp.style.height=Math.round(gr.bottom-dr.top)+"px";
     const wr=w.getBoundingClientRect(),br=bt.getBoundingClientRect(),pr=dp.getBoundingClientRect();
