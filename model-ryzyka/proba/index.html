@@ -1822,6 +1822,7 @@
 .tct-m .tmc i.f{background:color-mix(in srgb,var(--dc) 80%,#000)}
 
 /* Przyciski pod panelem szczegółów */
+#sdsec,#sdsec *{overflow-anchor:none}
 .bk-nav{display:flex;gap:10px;margin-top:22px}
 .bk-nav+#sdblk{margin-top:16px!important}
 .bk-nav button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;border-radius:999px;border:1px solid #ad6b4e;background:transparent;color:#ad6b4e;font:600 12px var(--body);cursor:pointer;transition:background .2s,color .2s}
@@ -2285,7 +2286,7 @@ setEX(EX);setCX(1);
     blkPos();BK.classList.remove("on");void BK.offsetWidth;BK.classList.add("on");bkOpen=k;BK.style.height="";requestAnimationFrame(()=>{bkH();stH()});setTimeout(()=>{bkH();stH()},560);stH();
     }
   function closeBlk(){BK.classList.remove("on");window.__bkLineOff&&window.__bkLineOff();BK.style.height="";SD.classList.remove("blk");const was=bkOpen;bkOpen=null;if(was)stH();SD.querySelectorAll(".sd-more").forEach(b=>b.classList.remove("on"));SD.querySelectorAll(".sdc").forEach(c=>c.classList.remove("act"))}
-  SD.querySelectorAll(".sd-more").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();bkOpen===b.dataset.k?closeBlk():openBlk(b.dataset.k)}));
+  SD.querySelectorAll(".sd-more").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();const h=SEC.querySelector(".sds-t h2")||SEC.querySelector("h2"),t0=h.getBoundingClientRect().top,y0=scrollY;bkOpen===b.dataset.k?closeBlk():openBlk(b.dataset.k);const fix=()=>{const d=h.getBoundingClientRect().top-t0;if(Math.abs(d)>.5)window.scrollTo({top:scrollY+d,behavior:"instant"})};[0,60,200,450,800,1200,1600].forEach(t=>setTimeout(fix,t))}));
   {const tb=document.createElement("div");tb.className="sd-tabs";tb.setAttribute("role","tablist");tb.innerHTML=Object.keys(BMAP).map((k,i)=>`<button type="button" data-k="${k}"><i>0${i+1}</i>${k}</button>`).join("");BK.querySelector(".sd-blk-h").prepend(tb);tb.addEventListener("click",e=>{const b=e.target.closest("button");if(b&&b.dataset.k!==bkOpen)openBlk(b.dataset.k)});const x=BK.querySelector(".sd-blk-x");x.setAttribute("aria-label","Wróć do osi modelu");x.title="Wróć do osi modelu"}
   const ICK=`<svg viewBox="0 0 32 32" aria-hidden="true"><circle class="f" cx="16" cy="12.5" r="6"/><path d="M16 4.5a8.5 8.5 0 0 0-5 15.4c.9.7 1.5 1.7 1.5 2.8v.8h7v-.8c0-1.1.6-2.1 1.5-2.8A8.5 8.5 0 0 0 16 4.5z"/><path d="M13 26.5h6M14 29h4"/><path class="t" d="M12.8 14.6l1.9-3.4 1.8 2.6 1.9-3.4 1.2 2"/></svg>`,
       ICT=`<svg viewBox="0 0 32 32" aria-hidden="true"><path class="t" d="M5 5v22h22"/><path d="M8 23.5L26 9"/><circle class="f" cx="11" cy="17" r="1.9"/><circle class="f" cx="15" cy="20" r="1.9"/><circle class="f" cx="19" cy="12.5" r="1.9"/><circle class="f" cx="23" cy="14.5" r="1.9"/></svg>`;
