@@ -1686,13 +1686,13 @@
 #ds-prb .dcard{display:none}
 .kgrid{position:relative;grid-template-columns:repeat(60,1fr)!important;column-gap:0!important}
 .kgrid>*{margin:0 5px}
-.kgb{font:inherit;text-align:left;cursor:pointer;position:relative;background:color-mix(in srgb,var(--dc) 34%,#f7f1e8)!important;border:0!important;box-shadow:0 -1px 0 color-mix(in srgb,var(--dc) 30%,#fff) inset;transition:opacity .3s,transform .2s,box-shadow .2s;z-index:2}
+.kgb{font:inherit;text-align:left;cursor:pointer;position:relative;background:color-mix(in srgb,var(--dc) 46%,#f7f1e8)!important;border:0!important;box-shadow:0 -1px 0 color-mix(in srgb,var(--dc) 30%,#fff) inset;transition:opacity .3s,transform .2s,box-shadow .2s;z-index:2}
 .kgb .kgb-n{color:color-mix(in srgb,var(--dc) 75%,#000)!important}
 .kgb{padding:12px 14px!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important}
 .kgb-in{align-self:flex-start;max-width:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;background:#fffdf9;border-radius:10px;padding:8px 14px 9px;box-shadow:0 4px 12px -8px rgba(40,30,20,.35)}
 .kgb:hover{transform:translateY(-1px);box-shadow:0 10px 22px -16px rgba(40,30,20,.45)}
 .kgb .kg-x{display:none;position:absolute;right:12px;top:8px;font-style:normal;font-size:16px;color:#6e5f50}
-.kgbg{display:none;grid-column:1 / -1;margin:-6px 0!important;border-radius:20px;background:color-mix(in srgb,var(--dc) 22%,#f7f1e8);border:1px solid color-mix(in srgb,var(--dc) 36%,#f7f1e8);z-index:0}
+.kgbg{display:none;grid-column:1 / -1;margin:-6px 0!important;border-radius:20px;background:color-mix(in srgb,var(--dc) 14%,#f9f4ec);border:1px solid color-mix(in srgb,var(--dc) 28%,#f9f4ec);z-index:0}
 .kgrid.sel .kgbg{display:block}
 .kgrid.sel .kgb.hid{display:none!important}
 .kgrid.sel .kgb.on{box-shadow:0 10px 22px -16px rgba(40,30,20,.45)}
@@ -2313,7 +2313,7 @@ setEX(EX);setCX(1);
   /* Próba: strona jak Silnik, z prawej siatka 4×4 – bloczki grup koncepcji */
   {const e=DS.eng;if(e){const p=e.cloneNode(true);p.id="ds-prb";p.classList.remove("on");p.querySelector(".stp-n").textContent="Silnik obliczeniowy · próba";
     p.querySelectorAll(".rep-p,.dsl-svg,.rep-svg").forEach(x=>x.remove());
-    const G=[["Ryzyko kredytowe – parametry","PD, LGD, EAD, ECL","#bf8165",16,3],["Ryzyko kredytowe – portfel","rozkład strat, kapitał","#9a5c41",6,1],["Ryzyko rynkowe","VaR, ES, zmienność","#8f9a6e",10,2],["Ryzyko operacyjne","straty operacyjne, prawne","#8a7a9a",7,2],["Płynność","finansowanie, odpływy","#6f93a8",4,1],["Kapitał ekonomiczny","agregacja, alokacja","#c9a24f",4,3],["Stres testy","scenariusze skrajne","#6e5f50",5,3],["Ryzyko modeli","inwentarz, istotność, pomiar","#c4b49a",2,1]];
+    const G=[["Ryzyko kredytowe – parametry","PD, LGD, EAD, ECL","#bf8165",16,3],["Ryzyko kredytowe – portfel","rozkład strat, kapitał","#8f5a40",6,1],["Ryzyko rynkowe","VaR, ES, zmienność","#b29e84",10,2],["Ryzyko operacyjne","straty operacyjne, prawne","#a07e70",7,2],["Płynność","finansowanie, odpływy","#a39f88",4,1],["Kapitał ekonomiczny","agregacja, alokacja","#c9a26a",4,3],["Stres testy","scenariusze skrajne","#6e5f50",5,3],["Ryzyko modeli","inwentarz, istotność, pomiar","#d8b3a0",2,1]];
     const pl=n=>n+" "+(n===1?"koncepcja":(n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?"koncepcje":"koncepcji");
     const g=p.querySelector(".dsg");g.className="kgrid";g.removeAttribute("style");
     const DK=["K1","K2","R","O","L","C","S","M"];let col=1;
