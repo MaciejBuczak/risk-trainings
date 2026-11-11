@@ -1725,6 +1725,9 @@
 .kon-p .kmet-k li::before{display:none}
 .kon-p .kmet-k small{font-size:9.5px}
 .kon-t{white-space:nowrap;padding-right:22px}
+.kon-p .kmet-k{padding-bottom:0!important;margin-bottom:0!important}
+.kon-p .kmet-k li:last-child{padding-bottom:3px}
+.kon-p .kon-f{padding-top:6px;margin-top:2px}
 .kon-f{display:flex;justify-content:flex-end;padding-top:6px;border-top:1px solid #ddd3c4}
 .kon-p h3{margin:0 0 4px!important}
 .kon-p .kmet-k{display:block;padding:0 0 4px}
@@ -2147,7 +2150,7 @@ setEX(EX);setCX(1);
               eng:{h:"Silnik",r:[["Wersja","1.7"],["Środowisko","SAS 11.4"]],t:"Silnik modelu",d:"Kod liczący model co miesiąc – zgodny z dokumentacją w każdej formule, segmencie i parametrze."}};
   SEC.querySelector(".sds-l").insertAdjacentHTML("beforeend",`<div class="sdtg" style="display:none">${Object.entries(TAGS).map(([k,v])=>`<div class="sdtb"><span class="ltag"><span class="lt-h">${v.h}</span>${v.r.map(r=>`<span class="lt-r"><i>${r[0]}</i><b>${r[1]}</b></span>`).join("")}</span><div class="sdtb-t"><b>${v.t}</b><p>${v.d}</p><button type="button" class="sdk-b sdtb-b" data-ds="${k}">Szczegóły <i>→</i></button></div></div>`).join("")}</div>`);
   const DS={};let prevSec=SEC;
-  const DSD={doc:{k:"Dokumentacja modelu",t:"Dokumentacja modelu",p:"Wszystkie założenia modelu, etapy jego budowy i wyniki – opisane tak, by każdą decyzję dało się odtworzyć.",
+  const DSD={doc:{k:"Dokumentacja modelu",t:"Dokumentacja modelu",p:"Założenia, etapy budowy i wyniki modelu – opisane tak, by każdą decyzję dało się odtworzyć.",
       card:{h:"Dokumentacja",sub:"Model ECL",c:"#b29e84",rows:[["Wersja","2.6"],["Data","28.02.2026"],["Status","zatwierdzona"],["Właściciel","Departament Ryzyka"],["Autorzy","Zespół Modeli Ryzyka"],["Zatwierdził","Komitet Modeli"],["Stron","86"],["Rozdziałów","6"],["Załączniki","kod, dane, testy"],["Następny przegląd","02.2027"]]},
       S:[["01","Założenia i zakres","Co model liczy, dla jakiego portfela i przy jakich założeniach.",["Cel i zastosowanie modelu","Zakres portfela i produktów","Definicja defaultu","Kluczowe założenia i uproszczenia"]],
          ["02","Budowa modelu","Kolejne etapy – od danych do parametrów – z uzasadnieniem każdej decyzji.",["Dane i próba","Segmentacja portfela","Zmienne i parametry","Metoda i proces estymacji"]],
