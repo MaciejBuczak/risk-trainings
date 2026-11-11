@@ -1724,6 +1724,8 @@
 .kon-p .kmet-k li{padding:4px 0}
 .kon-p .kmet-k li::before{display:none}
 .kon-p .kmet-k small{font-size:9.5px}
+.kon-t{white-space:nowrap;padding-right:22px}
+.kon-f{display:flex;justify-content:flex-end;padding-top:6px;border-top:1px solid #ddd3c4}
 .kon-p h3{margin:0 0 4px!important}
 .kon-p .kmet-k{display:block;padding:0 0 4px}
 .kon-f{display:flex;justify-content:flex-end;padding-top:6px;border-top:1px solid #ddd3c4}
@@ -2184,9 +2186,9 @@ setEX(EX);setCX(1);
     {const ks=[...c.querySelectorAll(".ksec")].find(x=>/Metodyka/.test(x.textContent));if(ks){const w=document.createElement("div");w.className="kmet-src";ks.before(w);w.append(ks,ks.nextElementSibling)}}
     const cs=[...g.children];
     const MR=[["Nazwa","Metodyka modeli impairmentowych"],["Wersja","3.9"],["Data","15.01.2026"],["Koncepcja","Strata oczekiwana · MSSF 9"],["Wybrane podejście","PD lifetime – model przeżycia"],["Parametry","PD, LGD, EAD, SICR"]];
-    const KC=[["Model przeżycia (PD lifetime)","wybrana","Krzywe PD w czasie z danych o czasie do defaultu",1],["Macierze migracji","rozważana","Przejścia między klasami ratingowymi – za mało klas",0],["Scoring + skalowanie w czasie","rozważana","Prosty, ale słabo oddaje profil PD w czasie",0],["Krzywe vintage","benchmark","Punkt odniesienia przy kalibracji krzywych",0]];
+    const KC=[["Model przeżycia (PD lifetime)","wybrana","Krzywe PD w czasie z danych o czasie do defaultu",1],["Macierze migracji","rozważana","Przejścia między klasami ratingowymi – za mało klas",0],["Scoring + skalowanie w czasie","rozważana","Prosty, ale słabo oddaje profil PD w czasie",0]];
     const m=document.createElement("div");m.className="kmc kdoc kdc-st kmet";
-    m.innerHTML=`<div class="kmc-h"><span>Metodyka modelu</span><b>wersja 3.9</b></div><div class="kmet-b"><dl>${MR.map(r=>`<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl><ul class="kmet-k">${KC.map(k=>`<li class="${k[3]?"sel":""}"><b>${k[0]}</b><em>${k[1]}</em><small>${k[2]}</small></li>`).join("")}</ul></div><div class="kmet-f"><span><b>4</b> koncepcje rozważane · <b>1</b> wybrana</span><button type="button" class="kmet-btn rep-btn">Rozważane koncepcje <i>→</i></button></div>`;
+    m.innerHTML=`<div class="kmc-h"><span>Metodyka modelu</span><b>wersja 3.9</b></div><div class="kmet-b"><dl>${MR.map(r=>`<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl><ul class="kmet-k">${KC.map(k=>`<li class="${k[3]?"sel":""}"><b>${k[0]}</b><em>${k[1]}</em><small>${k[2]}</small></li>`).join("")}</ul></div><div class="kmet-f"><span><b>3</b> koncepcje rozważane · <b>1</b> wybrana</span><button type="button" class="kmet-btn rep-btn">Rozważane koncepcje <i>→</i></button></div>`;
     m.querySelector(".kmet-btn").addEventListener("click",()=>window.__repT&&window.__repT(DS.doc));
     cs[1].replaceWith(m);
     const ET=[["Cel i zakres modelu","portfel detaliczny"],["Dane i próba","2015–2025"],["Segmentacja portfela","6 segmentów"],["Selekcja zmiennych","38 → 9"],["Estymacja PD, LGD, EAD","MNW"],["Kalibracja i scenariusze makro","3 scenariusze"],["Korekty i bufory (MoC)","+0,15 mld zł"],["Rejestr zmian wersji","v2.5 → v2.6"]];
@@ -2233,8 +2235,8 @@ setEX(EX);setCX(1);
   window.__repT=function(sec){const w=sec.querySelector(".sds-w"),dp=sec.querySelector(".engpg")||sec.querySelector(".docpg"),g=sec.querySelector(".dsg"),bt=sec.querySelector(".rep-btn");if(!w||!dp||!g||!bt)return;if(!bt.dataset.lbl)bt.dataset.lbl=bt.innerHTML;const isDoc=sec.id==="ds-doc";
     let pn=dp.querySelector(".rep-p");const old=w.querySelector(".rep-svg");
     if(pn&&pn.classList.contains("on")){pn.classList.remove("on");old&&old.remove();bt.innerHTML=bt.dataset.lbl;return}
-    if(!pn&&isDoc){const KC=[["Model przeżycia (PD lifetime)","wybrana","Krzywe PD w czasie z danych o czasie do defaultu",1],["Macierze migracji","rozważana","Przejścia między klasami ratingowymi – za mało klas",0],["Scoring + skalowanie w czasie","rozważana","Prosty, ale słabo oddaje profil PD w czasie",0],["Krzywe vintage","benchmark","Punkt odniesienia przy kalibracji krzywych",0]];
-      dp.insertAdjacentHTML("beforeend",`<div class="rep-p kon-p"><button type="button" class="rep-x" aria-label="Zamknij">×</button><div class="kon-h"><h3>Rozważane koncepcje</h3><button type="button" class="kmet-btn kon-go">Przegląd koncepcji <i>→</i></button></div><ul class="kmet-k">${KC.map(k=>`<li class="${k[3]?"sel":""}"><b>${k[0]}</b><em>${k[1]}</em><small>${k[2]}</small></li>`).join("")}</ul></div>`);
+    if(!pn&&isDoc){const KC=[["Model przeżycia (PD lifetime)","wybrana","Krzywe PD w czasie z danych o czasie do defaultu",1],["Macierze migracji","rozważana","Przejścia między klasami ratingowymi – za mało klas",0],["Scoring + skalowanie w czasie","rozważana","Prosty, ale słabo oddaje profil PD w czasie",0]];
+      dp.insertAdjacentHTML("beforeend",`<div class="rep-p kon-p"><button type="button" class="rep-x" aria-label="Zamknij">×</button><h3 class="kon-t">Rozważane koncepcje</h3><ul class="kmet-k">${KC.map(k=>`<li class="${k[3]?"sel":""}"><b>${k[0]}</b><em>${k[1]}</em><small>${k[2]}</small></li>`).join("")}</ul><div class="kon-f"><button type="button" class="kmet-btn kon-go">Przegląd koncepcji <i>→</i></button></div></div>`);
       pn=dp.querySelector(".rep-p");pn.querySelector(".rep-x").addEventListener("click",()=>window.__repT(sec));pn.querySelector(".kon-go").addEventListener("click",()=>{scrollToSec(SEC);setTimeout(()=>openKat("kon"),500)})}
     if(!pn){dp.insertAdjacentHTML("beforeend",`<div class="rep-p"><button type="button" class="rep-x" aria-label="Zamknij">×</button><h3>Replikacja kodu modelu</h3><p>Niezależny zespół odtwarza obliczenia w innym środowisku (np. Python), by potwierdzić poprawność kodu.</p><ul><li><b>Ryzyko środowiska</b> – eliminuje błędy wersji, bibliotek i ustawień</li><li><b>Ryzyko implementacji</b> – wychwytuje błędy w formułach</li></ul><div class="rep-r"><span><i>Ostatnia replikacja</i><b>03.2026</b></span><span><i>Środowisko</i><b>Python 3.11</b></span><span><i>Różnica ECL</i><b>0,02%</b></span><span><i>Tolerancja</i><b>±0,1%</b></span></div></div>`);
       pn=dp.querySelector(".rep-p");pn.querySelector(".rep-x").addEventListener("click",()=>window.__repT(sec))}
@@ -2252,8 +2254,8 @@ setEX(EX);setCX(1);
     const x0=tag.right-wr.left,y0=tr.top+tr.height/2-wr.top,x2=cr.left-wr.left,y2=cr.top+cr.height/2-wr.top,lr=sec.querySelector(".sds-l").getBoundingClientRect(),xm=Math.round((lr.right+cr.left)/2-wr.left);
     sv.setAttribute("viewBox",`0 0 ${wr.width} ${wr.height}`);sv.style.width=wr.width+"px";sv.style.height=wr.height+"px";
     sv.innerHTML=`<path d="M${x0+2},${y0} H${xm} V${y2} H${x2}" fill="none" stroke="#a09580" stroke-width="1.3" stroke-dasharray="4 4"/><circle cx="${x0+2}" cy="${y0}" r="2.6" fill="#a09580"/><circle cx="${x2}" cy="${y2}" r="2.6" fill="#a09580"/>`;
-    const ms=sec.querySelector(".kmet-src"),mt=sec.querySelector(".kmet");if(ms&&mt){const a=ms.getBoundingClientRect(),b=mt.querySelector(".kmc-h").getBoundingClientRect(),xa=Math.round(a.left+a.width/2-wr.left),ya=a.bottom-wr.top,xb=xa,yb=b.top-wr.top;
-      sv.insertAdjacentHTML("beforeend",`<path d="M${xa},${ya} V${yb}" fill="none" stroke="#a8694c" stroke-width="1.3" stroke-dasharray="4 4"/><circle cx="${xa}" cy="${ya}" r="2.6" fill="#a8694c"/><circle cx="${xb}" cy="${yb}" r="2.6" fill="#a8694c"/>`)}}
+    const ms=sec.querySelector(".kmet-src"),mt=sec.querySelector(".kmet");if(ms&&mt){const ks=ms.querySelector(".ksec").getBoundingClientRect(),a=ms.getBoundingClientRect(),b=mt.querySelector(".kmc-h").getBoundingClientRect(),cl=mt.getBoundingClientRect().left,xa=Math.round(a.left-wr.left),ya=Math.round(ks.top+ks.height/2-wr.top),xv=Math.round(cl-wr.left-14),xb=Math.round(cl-wr.left),yb=Math.round(b.top+b.height/2-wr.top);
+      sv.insertAdjacentHTML("beforeend",`<path d="M${xa},${ya} H${xv} V${yb} H${xb}" fill="none" stroke="#a8694c" stroke-width="1.3" stroke-dasharray="4 4"/><circle cx="${xa}" cy="${ya}" r="2.6" fill="#a8694c"/><circle cx="${xb}" cy="${yb}" r="2.6" fill="#a8694c"/>`)}}
   function dsFit(sec){const k=sec.querySelector(".stp-n"),K=k.getBoundingClientRect().top+scrollY,tg=K-60+innerHeight-50;[sec.querySelector(".dsg"),sec.querySelector(".docpg")||sec.querySelector(".dcard")].forEach(el=>{el.style.height="";const t=el.getBoundingClientRect().top+scrollY,h=Math.round(tg-t);if(h>el.scrollHeight)el.style.height=h+"px"})}
   addEventListener("resize",()=>Object.values(DS).forEach(s2=>{if(s2.classList.contains("on")){dsFit(s2);dsLine(s2)}}));
   
