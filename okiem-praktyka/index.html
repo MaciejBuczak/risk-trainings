@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Okiem praktyka – Risk Trainings | Maciej Buczak</title>
+<meta name="description" content="Okiem praktyka – osobiste uwagi Macieja Buczaka wobec koncepcji strat oczekiwanych i nieoczekiwanych.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap">
+<link rel="stylesheet" href="../rt.css">
+<style>
+.oh{padding:clamp(48px,7vw,90px) 0 clamp(28px,3vw,44px)}
+.oh .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:24px 60px;align-items:end}
+.oh h1{font-size:clamp(40px,5.6vw,72px);margin:18px 0 0;letter-spacing:-.02em}
+.oh h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d);letter-spacing:0}
+.oh p{margin:0;font-size:17px;font-weight:300;color:var(--ink2);max-width:540px}
+.oa{display:flex;align-items:center;gap:12px;margin-top:22px}
+.oa i{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--paper);font-style:normal;font:600 13px var(--body,inherit);letter-spacing:.06em}
+.oa b{display:block;font-weight:600;font-size:14px}.oa small{font-size:12.5px;color:var(--muted)}
+.otabs{display:flex;gap:10px;margin:0 0 26px}
+.otabs a{display:inline-flex;align-items:center;gap:10px;padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);text-decoration:none;color:var(--ink);font-weight:600;font-size:14px}
+.otabs a b{font-size:11px;padding:1px 8px;border-radius:999px}
+.otabs a[href="#el"] b{background:#ead9a2;color:#5c4a12}.otabs a[href="#ul"] b{background:#0d0d0d;color:#fcf9f5}
+.os{padding:clamp(20px,3vw,36px) 0;scroll-margin-top:90px}
+.os-h{display:flex;align-items:baseline;gap:14px;padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+.os-h b.k{font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px}
+.os-h h2{font-size:clamp(26px,2.6vw,34px);margin:0}
+.os-h h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d)}
+.os-h span{margin-left:auto;font-size:13px;color:var(--muted)}
+.og{display:grid;grid-template-columns:44px minmax(0,1fr) 30px minmax(0,1.3fr);column-gap:12px;row-gap:12px}
+.og-hd,.og-r{display:contents}
+.og-hd span{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:0 4px}
+.og-hd span:last-child{color:var(--terra-d)}
+.og-n{align-self:center;font-family:var(--serif);font-style:italic;font-size:28px;color:#c9b9a3}
+.og-th{display:flex;align-items:center;background:var(--panel);border-radius:16px;padding:18px 22px;font-size:15px;line-height:1.5;color:var(--ink2)}
+.og-ar{align-self:center;justify-self:center;color:var(--terra-d);font-size:18px}
+.og-me{display:flex;flex-direction:column;justify-content:center;gap:6px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--terra-d);border-radius:16px;padding:18px 24px}
+.og-me b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:21px;color:var(--ink)}
+.og-me p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink2)}
+.on-note{margin:clamp(30px,4vw,50px) 0 0;padding:18px 22px;border-radius:16px;background:#e6d8c3;font-size:14px;color:var(--ink2)}
+@media(max-width:900px){.oh .wrap{grid-template-columns:1fr}.og{grid-template-columns:1fr}.og-hd{display:none}.og-n,.og-ar{display:none}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="wrap">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav"><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../metoda/">Metoda</a><a href="../mapa-banku/">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a href="../o-mnie/">O mnie</a><a href="../eseje/">Eseje</a><a class="on" href="./">Okiem praktyka</a><a href="../#kontakt">Kontakt</a><a class="sci" href="https://maciejbuczak.github.io/">Strona naukowa ↗</a></nav>
+    <a class="brand" href="../"><span><b>Risk Trainings</b><small>Maciej Buczak · Risk Research</small></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a>
+  </div>
+</header>
+
+<main>
+<section class="oh"><div class="wrap rv"><div><span class="kick">Uwagi autora</span><h1>Okiem <em>praktyka</em></h1></div><div><p>Koncepcje strat oczekiwanych i nieoczekiwanych to fundament odpisów i kapitału. Tu zbieram moje osobiste uwagi z praktyki – to nie stanowisko nauki ani nadzoru, lecz głos kogoś, kto te modele budował i stosował.</p><div class="oa"><i>MB</i><div><b>Maciej Buczak</b><small>praktyk zarządzania ryzykiem</small></div></div></div></div></section>
+<div class="wrap"><nav class="otabs"><a href="#el"><b>EL</b>Strata oczekiwana</a><a href="#ul"><b>UL</b>Strata nieoczekiwana</a></nav></div>
+<div id="osx"></div>
+<div class="wrap"><p class="on-note">Masz inne doświadczenia? Chętnie o nich porozmawiam – <a href="mailto:maciej.buczak@gmail.com">napisz do mnie</a>.</p></div>
+</main>
+<script>
+const PTS={UL:[["Strata nieoczekiwana to kwantyl 99,9% rozkładu strat.","Raz na tysiąc lat – i kto to sprawdzi?","Nikt nie ma danych z tysiąca lat. Kwantyl tak daleko w ogonie jest bardziej wynikiem założeń o rozkładzie niż obserwacji."],
+          ["Zależności między kredytobiorcami opisuje jeden stały czynnik.","Korelacje nie są stałe","W kryzysie korelacje rosną skokowo. Model jest najsłabszy wtedy, gdy jest najbardziej potrzebny."],
+          ["Kapitał pokrywa to, czego nie da się przewidzieć w cenie.","Granica EL / UL jest umowna","Zmiana horyzontu albo definicji defaultu przesuwa część straty z odpisu do kapitału – i odwrotnie."],
+          ["Model daje jedną liczbę kapitału.","Jedna liczba usypia czujność","Ważniejsze od precyzji kwantyla są scenariusze: co konkretnie musiałoby się stać, żeby kapitał nie wystarczył."]],
+          EL:[["Strata oczekiwana to średnia, którą da się przewidzieć.","Średnia – ale z jakiego okresu?","Średnia zależy od okna danych. Kilka dobrych lat i EL wygląda nisko – akurat przed spowolnieniem."],
+          ["PD, LGD i EAD można szacować osobno i mnożyć.","Parametry ruszają się razem","W spowolnieniu rośnie jednocześnie PD, LGD i wykorzystanie limitów. Iloczyn średnich zaniża stratę."],
+          ["Scenariusze makro czynią ECL prognostyczną.","Prognoza to też założenie","Ścieżki makro i wagi scenariuszy ustalają ludzie. Zmienność odpisu bywa efektem decyzji, nie ryzyka."],
+          ["Wyższy odpis oznacza większe ryzyko portfela.","Odpis mówi też o modelu","Skok ECL może wynikać z rekalibracji albo nowych kryteriów SICR, a nie z pogorszenia portfela."]]};
+const NM={EL:["Strata oczekiwana","EL pod lupą","#ead9a2","#5c4a12"],UL:["Strata nieoczekiwana","UL pod lupą","#0d0d0d","#fcf9f5"]};
+document.getElementById("osx").innerHTML=["EL","UL"].map(K=>`<section class="os" id="${K.toLowerCase()}"><div class="wrap"><div class="os-h"><b class="k" style="background:${NM[K][2]};color:${NM[K][3]}">${K}</b><h2>${NM[K][0]} – <em>${NM[K][1]}</em></h2><span>${PTS[K].length} uwagi</span></div><div class="og"><div class="og-hd"><span></span><span>Teoria zakłada</span><span></span><span>Moim zdaniem</span></div>${PTS[K].map((x,i)=>`<div class="og-r"><span class="og-n">${String(i+1).padStart(2,"0")}</span><div class="og-th">${x[0]}</div><span class="og-ar">→</span><div class="og-me"><b>${x[1]}</b><p>${x[2]}</p></div></div>`).join("")}</div></div></section>`).join("");
+</script>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><a class="brand" href="../"><span><b>Risk Trainings</b></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a><p style="margin:14px 0 0;max-width:340px">Szkolenia z zarządzania ryzykiem dla banków i instytucji finansowych.</p></div>
+    <div><h4>Strony</h4><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../metoda/">Metoda</a><a href="../mapa-banku/">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a href="../o-mnie/">O mnie</a><a href="../eseje/">Eseje</a><a href="./">Okiem praktyka</a><a href="https://maciejbuczak.github.io/">Strona naukowa</a></div>
+    <div><h4>Kontakt</h4><a href="mailto:maciej.buczak@gmail.com">maciej.buczak@gmail.com</a><a href="https://www.linkedin.com/in/maciej-buczak-561b95120" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div class="bottom"><span>© 2026 Maciej Buczak | Risk Research</span><span>Wersja próbna strony</span></div>
+  </div>
+</footer>
+<script src="../rt.js"></script>
+</body>
+</html>
