@@ -1688,6 +1688,9 @@
 .kgrid>*{margin:0 5px}
 .kgb{font:inherit;text-align:left;cursor:pointer;position:relative;background:color-mix(in srgb,var(--dc) 34%,#f7f1e8)!important;border:0!important;box-shadow:0 -1px 0 color-mix(in srgb,var(--dc) 30%,#fff) inset;transition:opacity .3s,transform .2s,box-shadow .2s;z-index:2}
 .kgb .kgb-n{color:color-mix(in srgb,var(--dc) 75%,#000)!important}
+.kgb{padding:7px!important;display:flex!important}
+.kgb-in{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-width:0;background:#fffdf9;border-radius:11px;padding:10px 12px;position:relative}
+.kgb-in .kgb-n{margin-bottom:auto}
 .kgb:hover{transform:translateY(-1px);box-shadow:0 10px 22px -16px rgba(40,30,20,.45)}
 .kgb .kg-x{display:none;position:absolute;right:12px;top:8px;font-style:normal;font-size:16px;color:#6e5f50}
 .kgbg{display:none;grid-column:1 / -1;margin:-6px 0!important;border-radius:20px;background:color-mix(in srgb,var(--dc) 12%,#fbf7f1);border:1px solid color-mix(in srgb,var(--dc) 28%,#fbf7f1);z-index:0}
@@ -2315,7 +2318,7 @@ setEX(EX);setCX(1);
     const pl=n=>n+" "+(n===1?"koncepcja":(n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?"koncepcje":"koncepcji");
     const g=p.querySelector(".dsg");g.className="kgrid";g.removeAttribute("style");
     const DK=["K1","K2","R","O","L","C","S","M"];let col=1;
-    g.innerHTML=G.map((x,i)=>{const c0=col;col+=x[4];if(col>4)col=1;const r=Math.floor(i/2)+1;return`<button type="button" class="kgb" data-d="${DK[i]}" data-c="${c0}" data-w="${x[4]}" data-r="${r}" style="--dc:${x[2]};grid-column:${(c0-1)*15+1} / span ${x[4]*15};grid-row:${r}"><span class="kgb-n">${pl(x[3])}</span><b>${x[0]}</b><small>${x[1]}</small><i class="kg-x" aria-hidden="true">×</i></button>`}).join("");
+    g.innerHTML=G.map((x,i)=>{const c0=col;col+=x[4];if(col>4)col=1;const r=Math.floor(i/2)+1;return`<button type="button" class="kgb" data-d="${DK[i]}" data-c="${c0}" data-w="${x[4]}" data-r="${r}" style="--dc:${x[2]};grid-column:${(c0-1)*15+1} / span ${x[4]*15};grid-row:${r}"><span class="kgb-in"><span class="kgb-n">${pl(x[3])}</span><b>${x[0]}</b><small>${x[1]}</small><i class="kg-x" aria-hidden="true">×</i></span></button>`}).join("");
     const EH2=t=>String(t==null?"":t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
     const need=cb=>{if(window.RT_KON)return cb();const sc=document.createElement("script");sc.src="../../koncepcje/dane.js";sc.onload=cb;document.head.appendChild(sc)};
     const close=()=>{g.classList.remove("sel");g.querySelectorAll(".kgk").forEach(x=>x.remove());g.querySelectorAll(".kgb").forEach(b=>b.classList.remove("on","hid"))};
