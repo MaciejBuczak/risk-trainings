@@ -1684,6 +1684,22 @@
 
 /* Próba: siatka grup koncepcji */
 #ds-prb .dcard{display:none}
+#ds-prb .sds-l{display:flex;flex-direction:column}
+.klsw{margin-top:10px}
+#ds-prb h2{white-space:nowrap;font-size:36px!important}
+.kls{box-sizing:border-box;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:14px;padding:13px 18px 10px;display:flex;flex-direction:column}
+.kls-h b{display:block;font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c}
+.kls-h p{margin:5px 0 6px;font-size:12px;line-height:1.45;color:#5c564d}
+.kls-r{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;padding:5px 0;border-top:1px dashed #e0d6c6;flex:1}
+.kls-r .kx-k{justify-self:start;margin-top:2px;font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:#e3ddd1;color:#0d0d0d;line-height:1.5}
+.kls-r .kx-k.EL{background:#ead9a2;color:#5c4a12}.kls-r .kx-k.UL{background:#0d0d0d;color:#fcf9f5}.kls-r .kx-k.S{background:#9a3b25;color:#fff}.kls-r .kx-k.P{background:#cfe0e6}.kls-r .kx-k.V{background:#e1e4cf}
+.kls-r b{display:flex;justify-content:space-between;gap:8px;font-weight:600;font-size:12.5px;color:#0d0d0d}
+.kls-r b em{font-style:normal;font-weight:500;font-size:10.5px;color:#8a8378}
+.kls-r small{display:block;margin-top:2px;font-size:11px;line-height:1.4;color:#5c564d}
+.kls-f{display:flex;flex-direction:column;gap:3px;padding-top:8px;border-top:1px solid #ddd3c4;font-size:10.5px;color:#7a7266}
+.kls-f s{color:#0d0d0d}
+.kls-f .kx-rg{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:4px;background:#0d0d0d;color:#fcf9f5;font-family:var(--serif);font-style:normal;font-size:11px;margin-right:6px;vertical-align:0}
+
 .kgrid{position:relative;grid-template-columns:repeat(60,1fr)!important;column-gap:0!important}
 .kgrid>*{margin:0 5px}
 .kgb{font:inherit;text-align:left;cursor:pointer;position:relative;background:color-mix(in srgb,var(--dc) 46%,#f7f1e8)!important;border:0!important;box-shadow:0 -1px 0 color-mix(in srgb,var(--dc) 30%,#fff) inset;transition:opacity .3s,transform .2s,box-shadow .2s;z-index:2}
@@ -2274,7 +2290,7 @@ setEX(EX);setCX(1);
     if(pn&&pn.classList.contains("on")){pn.classList.remove("on");old&&old.remove();bt.innerHTML=bt.dataset.lbl;return}
     if(!pn&&isDoc){const KC=[["Model przeżycia (PD lifetime)","wybrana","Krzywe PD w czasie z danych o czasie do defaultu",1],["Macierze migracji","rozważana","Przejścia między klasami ratingowymi – za mało klas",0],["Scoring + skalowanie w czasie","rozważana","Prosty, ale słabo oddaje profil PD w czasie",0]];
       dp.insertAdjacentHTML("beforeend",`<div class="rep-p kon-p"><button type="button" class="rep-x" aria-label="Zamknij">×</button><h3 class="kon-t">Rozważane koncepcje</h3><ul class="kmet-k">${KC.map(k=>`<li class="${k[3]?"sel":""}"><b>${k[0]}</b><em>${k[1]}</em><small>${k[2]}</small></li>`).join("")}</ul><div class="kon-f"><button type="button" class="kmet-btn kon-go">Przegląd koncepcji <i>→</i></button></div></div>`);
-      pn=dp.querySelector(".rep-p");pn.querySelector(".rep-x").addEventListener("click",()=>window.__repT(sec));pn.querySelector(".kon-go").addEventListener("click",()=>{scrollToSec(SEC);setTimeout(()=>openKat("kon"),500)})}
+      pn=dp.querySelector(".rep-p");pn.querySelector(".rep-x").addEventListener("click",()=>window.__repT(sec));pn.querySelector(".kon-go").addEventListener("click",()=>{window.__openPrb?window.__openPrb():(scrollToSec(SEC),setTimeout(()=>openKat("kon"),500))})}
     if(!pn){dp.insertAdjacentHTML("beforeend",`<div class="rep-p"><button type="button" class="rep-x" aria-label="Zamknij">×</button><h3>Replikacja kodu modelu</h3><p>Niezależny zespół odtwarza obliczenia w innym środowisku (np. Python), by potwierdzić poprawność kodu.</p><ul><li><b>Ryzyko środowiska</b> – eliminuje błędy wersji, bibliotek i ustawień</li><li><b>Ryzyko implementacji</b> – wychwytuje błędy w formułach</li></ul><div class="rep-r"><span><i>Ostatnia replikacja</i><b>03.2026</b></span><span><i>Środowisko</i><b>Python 3.11</b></span><span><i>Różnica ECL</i><b>0,02%</b></span><span><i>Tolerancja</i><b>±0,1%</b></span></div></div>`);
       pn=dp.querySelector(".rep-p");pn.querySelector(".rep-x").addEventListener("click",()=>window.__repT(sec))}
     const gr=g.getBoundingClientRect(),dr=dp.getBoundingClientRect();dp.style.height=Math.round(gr.bottom-dr.top)+"px";
@@ -2311,7 +2327,10 @@ setEX(EX);setCX(1);
     if(BK.classList.contains("on")){BK.classList.remove("on");window.__bkLineOff();setTimeout(run,300)}else run()};
   window.__bkLineOff=()=>{const sv=SEC.querySelector(".bkl-svg");if(sv)sv.innerHTML=""};
   /* Próba: strona jak Silnik, z prawej siatka 4×4 – bloczki grup koncepcji */
-  {const e=DS.eng;if(e){const p=e.cloneNode(true);p.id="ds-prb";p.classList.remove("on");p.querySelector(".stp-n").textContent="Silnik obliczeniowy · próba";
+  {const e=DS.eng;if(e){const p=e.cloneNode(true);p.id="ds-prb";p.classList.remove("on");p.querySelector(".stp-n").textContent="Koncepcje modeli";p.querySelector("h2").textContent="Koncepcje modeli ryzyka";
+    p.querySelector(".dsp").textContent="Koncepcja to pomysł, jak opisać ryzyko liczbami – od scoringu i modeli przeżycia po VaR, kapitał i stres testy. Kliknij obszar, by zobaczyć jego koncepcje.";
+    {const ep=p.querySelector(".engpg");const KLS=[["EL","Strata oczekiwana","Ile średnio stracimy? Przeciętny koszt ryzyka – odpisy MSSF 9, cena kredytu, rentowność.",14],["UL","Strata nieoczekiwana","Ile możemy stracić w bardzo złym roku? Ogon rozkładu strat – podstawa kapitału.",25],["S","Scenariusze i stres","Co, jeśli stanie się coś skrajnego? Skutki wybranych zdarzeń, bez pytania o ich prawdopodobieństwo.",10],["P","Płynność","Czy wystarczy gotówki na czas? Nie wielkość straty, lecz zdolność regulowania zobowiązań.",3],["V","Ryzyko modeli","Czy modelom można ufać? Błąd samego modelu jako osobne ryzyko do zmierzenia.",2]];
+      ep.className="klsw";ep.removeAttribute("style");ep.innerHTML=`<div class="kls"><div class="kls-h"><b>Klasy modeli</b><p>Koncepcje różnią się przede wszystkim pytaniem, na które odpowiadają – to różne klasy problemów:</p></div>${KLS.map(k=>`<div class="kls-r"><span class="kx-k ${k[0]}">${k[0]}</span><div><b>${k[1]}<em>${k[3]}</em></b><small>${k[2]}</small></div></div>`).join("")}<div class="kls-f"><span><em class="kx-rg">§</em>metoda regulacyjna (wzór nadzoru) · <s>przekreślona</s> – nieaktualna</span></div></div>`}
     p.querySelectorAll(".rep-p,.dsl-svg,.rep-svg").forEach(x=>x.remove());
     const G=[["Ryzyko kredytowe – parametry","PD, LGD, EAD, ECL","#bf8165",16,3],["Ryzyko kredytowe – portfel","rozkład strat, kapitał","#8f5a40",6,1],["Ryzyko rynkowe","VaR, ES, zmienność","#b29e84",10,2],["Ryzyko operacyjne","straty operacyjne, prawne","#a07e70",7,2],["Płynność","finansowanie, odpływy","#a39f88",4,1],["Kapitał ekonomiczny","agregacja, alokacja","#c9a26a",4,3],["Stres testy","scenariusze skrajne","#6e5f50",5,3],["Ryzyko modeli","inwentarz, istotność, pomiar","#d8b3a0",2,1]];
     const pl=n=>n+" "+(n===1?"koncepcja":(n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?"koncepcje":"koncepcji");
@@ -2341,7 +2360,9 @@ setEX(EX);setCX(1);
       g.insertAdjacentHTML("beforeend",cs.map((c,i)=>{const t=T[i];return`<div class="kgk${c.old?" old":""}" style="${ins(t.c,t.s,t.r)}grid-column:${t.c} / span ${t.s};grid-row:${t.r};animation-delay:${i*25}ms"><span class="kgk-g">${EH2(c.g)}</span><span class="kx-k ${EH2(c.k)}">${EH2(c.k)}</span><b>${c.reg?'<em class="kx-rg">§</em>':""}${EH2(c.n)}</b><p class="kgk-s">${EH2(c.old||c.s)}</p></div>`}).join(""));
       g.classList.add("sel")})}));
     e.after(p);p.querySelector(".ds-back").addEventListener("click",()=>scrollToSec(SEC));
-    new MutationObserver(()=>{const on=e.classList.contains("on");p.classList.toggle("on",on);if(on)setTimeout(()=>{const k=p.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,t=g.getBoundingClientRect().top+scrollY;g.style.height=Math.max(420,Math.round(tg-t))+"px"},60)}).observe(e,{attributes:true,attributeFilter:["class"]})}}
+    const fitP=()=>{const k=p.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,t=g.getBoundingClientRect().top+scrollY;g.style.height=Math.max(420,Math.round(tg-t))+"px";const kw=p.querySelector(".kls");if(kw){kw.style.height="";const gb=g.getBoundingClientRect().bottom,kt=kw.getBoundingClientRect().top;kw.style.height=Math.max(kw.scrollHeight,Math.round(gb-kt))+"px"}};
+    window.__openPrb=()=>{p.classList.add("on");setTimeout(()=>{fitP();scrollToSec(p)},60)};addEventListener("resize",()=>{if(p.classList.contains("on"))fitP()});
+    {const kb=SD.querySelector('[data-kat="kon"]');if(kb){const nb=kb.cloneNode(true);nb.innerHTML="Koncepcje modeli <i>→</i>";kb.replaceWith(nb);nb.addEventListener("click",window.__openPrb)}}}}
   document.querySelectorAll("[data-ds]").forEach(b=>b.addEventListener("click",()=>{const s2=DS[b.dataset.ds];if(!s2)return;s2.classList.add("on");dsFit(s2);setTimeout(()=>{dsFit(s2);dsLine(s2);scrollToSec(s2)},40);setTimeout(()=>dsLine(s2),400)}));
 
     window.__hideDet0=()=>{KT.classList.remove("on");SEC.classList.remove("on","kat");document.querySelectorAll(".dsec").forEach(d=>d.classList.remove("on"));closeBlk();swapTxt(1,0);kfit()};
