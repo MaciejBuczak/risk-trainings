@@ -2144,6 +2144,11 @@ body.ustaw .mh,body.rot .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh 
 .lbm{gap:8px!important}.lbm .lbr{padding:8px 11px;gap:6px}.lbm .lbx{padding:4px 9px}.lbm .lbr>div{gap:5px}
 .lbf{padding:10px 13px!important}
 .lbf-cl .lbcl{display:grid!important;grid-template-columns:auto 1fr;column-gap:7px;row-gap:4px;align-items:center;align-content:start;padding:8px 10px!important}.lbf-cl .lbcl>span{display:contents}.lbf-cl .lbcl .lt{margin:0}.lbf-cl .lbcl b{margin:0!important}.lbf-cl .lbcl small{grid-column:1 / -1}
+.lbm{grid-template-rows:auto auto auto auto auto!important;align-content:start}
+.lbf-kl{border:1px solid color-mix(in srgb,#a8694c 22%,#fcf9f5)!important;border-top:3px solid #a8694c!important;background:color-mix(in srgb,#a8694c 7%,#fcf9f5)!important;padding:10px 12px 12px!important}
+.lbf-kl .lbcl{background:#fffdf9;border-color:color-mix(in srgb,#a8694c 18%,#fcf9f5)}.lbf-kl .lbcl:hover,.lbf-kl .lbcl.on2{border-color:#ad6b4e;box-shadow:0 2px 8px rgba(120,80,50,.08)}
+.lbf-sf{background:#0d0d0d!important;border-color:#0d0d0d!important}.lbf-sf .lbr-h{color:#d9b39b!important}.lbf-sf p{color:#d8d0c4!important}
+.lbf-sf .lbf-go{background:#ad6b4e;border-color:#ad6b4e;color:#fff}.lbf-sf .lbf-go:hover{background:#9a5c41;border-color:#9a5c41}.lbf-sf .lbf-go:active{background:#8a5238}
 .lbr-h{font:600 10px var(--body);letter-spacing:.14em;text-transform:uppercase;color:color-mix(in srgb,var(--rc) 70%,#000)}
 .lbr>div{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
 .lbx{display:inline-flex;align-items:center;gap:6px;text-align:left;border:1px solid #e0d6c6;background:#fffdf9;border-radius:10px;padding:6px 9px;font:inherit;cursor:pointer;transition:border-color .2s,opacity .2s,box-shadow .2s}
@@ -3108,7 +3113,7 @@ Object.entries(RT).forEach(([k,r])=>BI["q_"+k]={id:"q_"+k,n:r.n});
       const R3=`<div class="lbb2">${col("R","Rachunek zysków i strat","Wynik",B.filter(b=>b[1]==="R").map(b=>item(b[0])).join(""))}${col("K","Kapitał i wymogi (CRR)","Kapitał",kcol())}</div>`;
       const R4=`<div class="lbq">${[["k","Kapitał"],["l","Płynność"],["w","Wynik i portfel"]].map(g=>`<div class="lbqg"><span class="lbqg-h">${g[1]}</span>${Object.entries(RT).filter(([k,r])=>r.g===g[0]).map(([k,r])=>`<button type="button" class="lbk" data-q="${k}"><b>${EQ(r.n)} <i class="${r.dir==="↑"?"ar-u":"ar-d"}">${r.dir}</i></b><span class="fr"><em>${EQ(r.f[0])}</em><em>${EQ(r.f[1])}</em></span></button>`).join("")}</div>`).join("")}</div>`;
       const RB={mr:R1,bl:R24,rt:R4};
-      const defL={mr:`<div class="lbp lbp-d"><b class="lbp-k">Klasy problemów</b>${["EL","UL","N"].map(k=>`<button type="button" class="lbcl" data-cl="${k}"><i class="lt lt-${k==="N"?"wycena":k}">${k==="N"?"—":k}</i><span><b>${PROB[k][0]}</b><small>${PROB[k][1]}</small></span></button>`).join("")}<p class="lbp-h">Kliknij klasę, by podświetlić jej modele, albo model, by zobaczyć jego wpływ.</p></div>`,
+      const defL={mr:``,
         bl:`<div class="lbp lbp-d">${legend}<p class="lbp-h">Kropki przy pozycji pokazują, które ryzyka ją zmieniają. Kliknij pozycję.</p></div>`,
         rt:`<div class="lbp lbp-d"><b class="lbp-k">Jak czytać wskaźnik</b><p>Każdy wskaźnik to licznik i mianownik z pozycji bilansu, wyniku lub kapitału. Strzałka ↑ oznacza: im wyżej, tym lepiej; ↓ – im niżej, tym lepiej.</p><p>Modele zmieniają wskaźnik przez pozycje, z których się go liczy – czasem w liczniku i mianowniku jednocześnie.</p><p class="lbp-h">Kliknij wskaźnik.</p></div>`};
       const secs={};let prev=document.getElementById("ds-tec");
