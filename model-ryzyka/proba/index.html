@@ -1485,11 +1485,13 @@ body.ustaw .mh,body.rot .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh 
 .mh-go button:hover{background:#ad6b4e;color:#fff}
 .mh-go button:active{background:#8a5238;border-color:#8a5238;color:#fff}
 .mh-go i{font-style:normal}
-.mh-mr{margin-top:22px;max-width:300px;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;transition:opacity .45s}
+.mh .wrap>div:first-child{position:relative}
+.mh-mr{position:absolute;left:0;top:calc(100% + 26px);width:290px;background:transparent;border:0;border-top:1px solid #cdbfa9;padding:12px 0 0;display:flex;flex-direction:column;gap:7px;transition:opacity .45s;z-index:3}
 .mh-mr b{font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c}
 .mh-mr p{margin:0;font-size:12.5px;line-height:1.45;color:#3e3730}
-.mh-mr button{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;border:0;background:#ad6b4e;color:#fff;border-radius:999px;padding:7px 15px;font:600 12.5px var(--body);cursor:pointer;transition:background .2s}
-.mh-mr button:hover{background:#9a5c41}.mh-mr i{font-style:normal}
+.mh-mr button{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;border:1px solid #ad6b4e;background:transparent;color:#ad6b4e;border-radius:999px;padding:7px 16px;font:600 12.5px var(--body);cursor:pointer;transition:background .2s,color .2s}
+.mh-mr button:hover{background:#ad6b4e;color:#fff}
+.mh-mr p{font-family:var(--serif)!important;font-style:italic;font-size:14px!important;line-height:1.45!important;color:#5c564d!important}.mh-mr i{font-style:normal}
 
 .mh .wrap>div:first-child,.mh-r p{transition:opacity .45s}
 .mh.hout .wrap>div:first-child,.mh.hout .mh-r p,.mh.hsolo .wrap>div:first-child,.mh.hsolo .mh-r p{opacity:0;pointer-events:none}
