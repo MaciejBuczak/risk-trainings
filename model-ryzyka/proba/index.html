@@ -2445,8 +2445,8 @@ inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setC
 function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));renderInner()}
 /* obrót – tylko na żądanie */
 let SOLO={z:0,t:[0,0,0],k:1,b:0,ox:0,oy:0};const BASE={k:1.32,o:[-.48,-1.02]};
-let SV0={x:-4,y:-23};try{const v=JSON.parse(localStorage.getItem("rt_mrp_view")||"null");if(v&&isFinite(v.x)&&isFinite(v.y))SV0=v}catch(_){}
-let MODE="stab";try{MODE=localStorage.getItem("rt_mrp_mode")||"stab"}catch(_){}
+let SV0={x:-4,y:-23};try{if(new URLSearchParams(location.search).has("ustaw")){const v=JSON.parse(localStorage.getItem("rt_mrp_view")||"null");if(v&&isFinite(v.x)&&isFinite(v.y))SV0=v}}catch(_){}
+let MODE="stab";
 let rx=SV0.x,ry=SV0.y;
 const NDS=[...cube.querySelectorAll(".nd")];let YB=[];
 function place(){}
