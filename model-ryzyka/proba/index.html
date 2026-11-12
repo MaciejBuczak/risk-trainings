@@ -1461,6 +1461,15 @@
 .mh-r p{margin-top:26px!important;align-self:stretch;max-width:620px!important}
 .vtslot .vtabs{margin:0!important;pointer-events:auto;border-radius:999px;padding:5px}
 .vtslot .vtabs button{border-radius:999px;padding:7px 14px}
+.vtslot{display:flex;align-items:center;gap:10px}
+.vdyn{display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:#fffdf9;font-weight:600;font-size:14px;color:#0d0d0d;text-decoration:none;transition:border-color .2s}
+.vdyn:hover{border-color:#0d0d0d}
+.mh-go{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:26px}
+.mh-go span{width:100%;font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c;margin-bottom:2px}
+.mh-go button{display:inline-flex;align-items:center;gap:8px;border:1px solid #ad6b4e;background:transparent;color:#ad6b4e;border-radius:999px;padding:8px 16px;font:600 13px var(--body);cursor:pointer;transition:background .2s,color .2s}
+.mh-go button:hover{background:#ad6b4e;color:#fff}
+.mh-go button:active{background:#8a5238;border-color:#8a5238;color:#fff}
+.mh-go i{font-style:normal}
 
 .mh .wrap>div:first-child,.mh-r p{transition:opacity .45s}
 .mh.hout .wrap>div:first-child,.mh.hout .mh-r p,.mh.hsolo .wrap>div:first-child,.mh.hsolo .mh-r p{opacity:0;pointer-events:none}
@@ -2206,8 +2215,8 @@
 
 
 <section class="mh"><div class="wrap">
-  <div><span class="kick">Model ryzyka</span><h1>Model ryzyka i jego <em>komponenty</em></h1></div>
-  <div class="mh-r"><div class="vtslot" id="vtslot"></div><p>Szklana bryła to model, a w środku jego model statystyczny – PD, LGD, EAD i SICR. Dane wchodzą od dołu, wyniki wychodzą na zewnątrz. Obracaj bryłę albo przeciągnij ją; kliknij moduł.</p></div>
+  <div><span class="kick">Model ryzyka</span><h1>Model ryzyka i jego <em>komponenty</em></h1><div class="mh-go"><span>Zajrzyj do środka</span><button type="button" data-go="3">Model statystyczny <i>→</i></button><button type="button" data-go="1">Dane <i>→</i></button><button type="button" data-go="4">Wyniki <i>→</i></button></div></div>
+  <div class="mh-r"><div class="vtslot" id="vtslot"></div><p>Szklana bryła to model, a w środku jego model statystyczny – PD, LGD, EAD i SICR. Dane wchodzą od dołu, wyniki wychodzą na zewnątrz.</p></div>
 </div></section>
 
 <div class="mw">
@@ -2424,7 +2433,7 @@ function setCX(v){CX=v;cube.classList.toggle("simple",!v);HUB.n=v?"ECL":"Model s
 inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setCX(+b.dataset.mx);const mvb=e.target.closest("[data-mv]");if(mvb){MV=+mvb.dataset.mv;try{localStorage.setItem("rt_mr_mv",MV)}catch(_){}setEX(1);return}const x=e.target.closest("[data-sv]");if(x){SV=+x.dataset.sv;try{localStorage.setItem("rt_mr_sv",SV)}catch(_){}setEX(1)}});
 function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));renderInner()}
 /* obrót – tylko na żądanie */
-let SOLO={z:0,t:[0,0,0],k:1,b:0,ox:0,oy:0};const BASE={k:1.32,o:[-1.05,-.19]};
+let SOLO={z:0,t:[0,0,0],k:1,b:0,ox:0,oy:0};const BASE={k:1.32,o:[-.72,-.64]};
 let SV0={x:-5,y:-9};try{const v=JSON.parse(localStorage.getItem("rt_mrp_view")||"null");if(v&&isFinite(v.x)&&isFinite(v.y))SV0=v}catch(_){}
 let MODE="stab";try{MODE=localStorage.getItem("rt_mrp_mode")||"stab"}catch(_){}
 let rx=SV0.x,ry=SV0.y;
@@ -2884,7 +2893,7 @@ BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
     G.forEach((g,i)=>cube.querySelectorAll(g).forEach(el=>walk(el,i+1)))}
   function unsolo(cb){SK=SK;sharpOff();cube.classList.remove("stv-on");{const sc=document.getElementById("scards");sc&&sc.classList.remove("on");SG.classList.remove("on");SD.classList.remove("on");const sl=document.getElementById("slines");sl&&sl.remove();window.__hideDet0&&window.__hideDet0()}if(window.__pin){window.__pin=0;window.__closeCard&&window.__closeCard()}if(!cube.dataset.solo&&SOLO.z===0){cb(false);return}clr();zoom(0,1700);[["2",250],["1",650],["",1050]].forEach(([n,t])=>st.push(setTimeout(()=>cube.dataset.solo=n,t)));st.push(setTimeout(()=>cb(true),150))}
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)focus(+e.target.dataset.k)})},{rootMargin:"-36% 0px -62% 0px"});mw.classList.add("tabbed");story.insertAdjacentHTML("afterbegin",`<div class="vtabs" role="tablist">${["Całość","Dane","Silnik","Model statystyczny","Wyniki","Dokumentacja"].map((n,i)=>i===2||i===5?"":`<button type="button" role="tab" data-k="${i}">${n}</button>`).join("")}</div>`);
-  const vt=story.querySelector(".vtabs");{const cb=document.createElement("div");cb.className="ctlbar";document.querySelector(".mw").appendChild(cb);cb.append(document.getElementById("tabs"));{const xb=document.getElementById("xbtn"),mc=document.getElementById("mcol");if(xb&&mc){const r=document.createElement("i");r.className="xref";mc.appendChild(r);document.getElementById("tabs").appendChild(xb)}}document.getElementById("vtslot").append(vt)}vt.addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(!b)return;focus(+b.dataset.k);vt.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b))});vt.firstElementChild.classList.add("on");
+  const vt=story.querySelector(".vtabs");{const cb=document.createElement("div");cb.className="ctlbar";document.querySelector(".mw").appendChild(cb);cb.append(document.getElementById("tabs"));{const xb=document.getElementById("xbtn"),mc=document.getElementById("mcol");if(xb&&mc){const r=document.createElement("i");r.className="xref";mc.appendChild(r);document.getElementById("tabs").appendChild(xb)}}document.getElementById("vtslot").append(vt)}{const sl=document.getElementById("vtslot"),us=new URLSearchParams(location.search).has("ustaw");sl.insertAdjacentHTML("afterbegin",us?'<a class="vdyn" href="./">Stabilne</a>':'<a class="vdyn" href="?ustaw=1">Dynamiczne</a>');document.querySelectorAll(".mh-go [data-go]").forEach(b=>b.addEventListener("click",()=>{const t=vt.querySelector(`[data-k="${b.dataset.go}"]`);t&&t.click()}))}vt.addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(!b)return;focus(+b.dataset.k);vt.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b))});vt.firstElementChild.classList.add("on");
   dots.addEventListener("click",e=>{const b=e.target.closest("button");if(b)steps[+b.dataset.k].scrollIntoView({behavior:"smooth",block:"center"})});
   function explore(on){if(on){clr();cancelAnimationFrame(bt0);SOLO.z=0;SOLO.b=0;cube.dataset.solo=""}EXP=on;mw.classList.toggle("exploring",on);MODE=on?"dyn":"stab";if(on){cube.dataset.focus="";const top=mcol.parentElement.getBoundingClientRect().top+scrollY;scrollTo({top,behavior:"smooth"})}
     sc.style.opacity=0;setTimeout(()=>{fit();sc.style.opacity=1},620);if(!on){const k=Math.max(0,cur);cur=-1;setTimeout(()=>focus(k),420)}}
