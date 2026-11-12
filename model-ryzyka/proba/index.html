@@ -1993,6 +1993,22 @@
 .lwb-r ul{list-style:none;margin:0;padding:0;display:grid;gap:1px}
 .lwb-r li{font-size:10.5px;line-height:1.3;color:#5c564d;padding-left:9px;position:relative}
 .lwb-r li::before{content:"";position:absolute;left:0;top:5px;width:4px;height:4px;border-radius:50%;background:#a8694c}
+
+.lws-h2{flex-direction:row;align-items:center;gap:10px}
+.lws-h2>div:first-child{display:flex;flex-direction:column;flex:none}
+.lws-h2>div:first-child .lws-k{display:inline}
+.lws-n2{justify-content:flex-end!important;flex:1;gap:5px!important}
+.lws-n2 span{font-size:10.5px!important;padding:2px 9px!important;background:#e6d8c3!important;color:#2b2723!important}
+.lws-n2 span:first-child{background:#0d0d0d!important;color:#fcf9f5!important}
+.lawg2{grid-template-rows:auto 1fr!important}
+.lws-q{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 150px;grid-template-rows:1fr 1fr;gap:8px}
+.lwq{margin:0;background:#fcf9f5;border:1px solid #e0d6c6;border-radius:11px;padding:7px 12px 8px;display:flex;flex-direction:column;gap:4px;position:relative}
+.lwq em{font-style:normal;font:700 10px var(--body);letter-spacing:.08em;text-transform:uppercase;color:#a8694c}
+.lwq p{margin:0;font:italic 12px/1.38 var(--serif);color:#2b2723}
+.lwq-r{grid-column:3;grid-row:1 / span 2}
+.lwq-r ul{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:4px}
+.lwq-r li{font-size:11px;line-height:1.3;color:#5c564d;padding-left:9px;position:relative}
+.lwq-r li::before{content:"";position:absolute;left:0;top:5px;width:4px;height:4px;border-radius:50%;background:#a8694c}
 /* Silnik: replikacja kodu */
 .dsc.wqc{padding-bottom:0}
 .wqc h3{margin:4px 0 4px!important}
@@ -2734,12 +2750,16 @@ const RDOC={
       /* Regulacje prawne */
       {const L1=[["5.5.1","Odpis na ECL: aktywa w zamortyzowanym koszcie i FVOCI, gwarancje."],["5.5.5","Brak znaczącego wzrostu ryzyka – ECL 12-miesięczna (koszyk 1)."],["5.5.3","Znaczący wzrost ryzyka – ECL w całym okresie życia (koszyk 2)."],["5.5.9","SICR: ryzyko defaultu w okresie życia wobec ryzyka przy ujęciu."],["5.5.11","Wzruszalne domniemanie SICR przy opóźnieniu ponad 30 dni."],["5.5.17","Pomiar ECL: ważony prawdopodobieństwem, z prognozami."],["B5.5.37","Default spójny z zarządzaniem ryzykiem; domniemanie 90 dni."]];
         const L1R=["koszyki i SICR","parametry ECL","scenariusze makro","walidacja","rola zarządu"];
-        const L2=[["art. 92","Współczynniki 4,5 / 6 / 8%; output floor 72,5% od 2030 r."],["art. 143","Zezwolenie nadzorcze na stosowanie metody IRB."],["art. 151","A-IRB ograniczone: duże firmy i instytucje tylko F-IRB."],["art. 153–154","Wzory RWA dla przedsiębiorstw i ekspozycji detalicznych."],["art. 160–164","Dolne progi: PD min. 0,05% (QRRE 0,10%), progi LGD."],["art. 178","Definicja niewykonania zobowiązania (default)."],["art. 179–185","Wymogi dla szacunków PD, LGD i CCF oraz walidacja."],["art. 312–316","Ryzyko operacyjne: nowa metoda standardowa, koniec AMA."]];
+        const LQ=[["MSSF 9 · 5.5.3","(…) na każdy dzień sprawozdawczy jednostka wycenia odpis na oczekiwane straty kredytowe (…) w kwocie równej oczekiwanym stratom kredytowym w całym okresie życia, jeżeli ryzyko kredytowe (…) znacznie wzrosło od momentu początkowego ujęcia."],
+          ["MSSF 9 · 5.5.5","(…) jeżeli na dzień sprawozdawczy ryzyko kredytowe związane z instrumentem finansowym nie wzrosło znacząco od momentu początkowego ujęcia, jednostka wycenia odpis (…) w kwocie równej 12-miesięcznym oczekiwanym stratom kredytowym."],
+          ["MSSF 9 · 5.5.11","(…) przyjmuje się możliwe do odrzucenia założenie, że ryzyko kredytowe (…) znacznie wzrosło od momentu początkowego ujęcia, gdy płatności z tytułu umowy są przeterminowane o ponad 30 dni."],
+          ["MSSF 9 · 5.5.17","Jednostka wycenia oczekiwane straty kredytowe (…) w sposób uwzględniający: a) nieobciążoną i ważoną prawdopodobieństwem kwotę (…); c) racjonalne i możliwe do udokumentowania informacje (…)"]];
+        const L2=[["art. 92","Współczynniki 4,5 / 6 / 8%; output floor 72,5%."],["art. 143","Zezwolenie nadzorcze na metodę IRB."],["art. 151","A-IRB ograniczone; duże firmy – F-IRB."],["art. 153–154","Wzory RWA: firmy i detal."],["art. 160–164","Progi PD i LGD (PD min. 0,05%)."],["art. 178","Definicja defaultu."],["art. 179–185","Szacunki PD, LGD, CCF; walidacja."],["art. 312–316","Ryzyko operacyjne: nowa metoda standardowa."]];
         const ls=document.createElement("section");ls.className="sdsec dsec";ls.id="ds-law";
         const ecl=rs.querySelector(".recl").cloneNode(true);ecl.removeAttribute("style");
         ls.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Regulacje prawne</span><h2>Regulacje prawne</h2><p class="dsp">Kluczowe przepisy w liczbach i paragrafach: MSSF 9 i Rekomendacja R wyznaczają odpisy ECL, a CRR III – kapitał liczony modelami wewnętrznymi.</p></div>
           <div class="sds-r"><div class="rg-top"><button type="button" class="sd-back ds-back">↑ Model statystyczny</button><span class="rg-hd"><b>Kluczowe przepisy</b><i>wybór najważniejszych zapisów</i></span></div><div class="lawg2">
-            <section class="lws"><div class="lws-h"><div><span class="lws-k">EL · odpisy</span><b>Regulacje dla ECL</b></div><div class="lws-n"><span>MSSF 9</span><span>Rekomendacja R (KNF)</span></div></div><div class="lws-g">${L1.map(x=>`<div class="lwb"><em>${x[0]}</em><p>${x[1]}</p></div>`).join("")}<div class="lwb lwb-r"><em>Rekomendacja R</em><p>${L1R.join(" · ")}</p></div></div></section>
+            <section class="lws lws-el"><div class="lws-h lws-h2"><div><span class="lws-k">EL · odpisy</span><b>Regulacje dla ECL</b></div><div class="lws-n lws-n2">${["MSSF 9","MSSF 7","Rekomendacja R","EBA/GL/2017/06","Definicja defaultu","Rekomendacja W"].map(x=>`<span>${x}</span>`).join("")}</div></div><div class="lws-q">${LQ.map(x=>`<blockquote class="lwq"><em>${x[0]}</em><p>${x[1]}</p></blockquote>`).join("")}<div class="lwb lwb-r lwq-r"><em>Rekomendacja R</em><ul>${L1R.map(x=>`<li>${x}</li>`).join("")}</ul></div></div></section>
             <section class="lws"><div class="lws-h"><div><span class="lws-k">UL · kapitał</span><b>Regulacje dla modeli kapitałowych</b></div><div class="lws-n"><span>CRR III</span><span>Rozporządzenie (UE) 2024/1623</span></div></div><div class="lws-g">${L2.map(x=>`<div class="lwb"><em>${x[0]}</em><p>${x[1]}</p></div>`).join("")}</div></section>
           </div></div></div>`;
         ls.querySelector(".sds-l").appendChild(ecl);ls.querySelector(".sds-l").insertAdjacentHTML("beforeend",'<div class="rgo"><div class="rgo-h"><b>Otoczenie regulacyjne banku</b><button type="button" class="kmet-btn rgo-go">Szczegóły <i>→</i></button></div><p>Mapa przepisów i wytycznych dla wszystkich obszarów ryzyka – od prawa UE i ładu wewnętrznego po kapitał, nadzór i ujawnienia.</p></div>');rs.before(ls);
