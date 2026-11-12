@@ -2055,6 +2055,17 @@
 .kwb-go{flex:none;border:1px solid #ad6b4e;background:transparent;color:#ad6b4e;border-radius:999px;padding:3px 11px;font:600 11px var(--body);cursor:pointer;transition:background .2s,color .2s}
 .kwb-go:hover{background:#ad6b4e;color:#fff}
 .kwb-UL .kwb-go{border-color:#d9a88f;color:#d9a88f}.kwb-UL .kwb-go:hover{background:#ad6b4e;border-color:#ad6b4e;color:#fff}
+
+/* Otoczenie regulacyjne banku – dokumenty uzupełniające */
+.rdoc{margin-top:18px;box-sizing:border-box;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:14px;padding:13px 18px 10px;display:flex;flex-direction:column}
+.rdoc .kls-h p{margin:5px 0 4px}
+.rdoc-g{flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:7px 0;border-top:1px dashed #e0d6c6}
+.rdoc-h{display:flex;align-items:center;gap:8px}
+.rdoc-h span{font-size:10px;font-weight:700;padding:2px 9px;border-radius:999px;letter-spacing:.02em}
+.rdoc-h small{font-size:10.5px;color:#8a8378}
+.rdoc ul{list-style:none;margin:0;padding:0;display:grid;gap:1px}
+.rdoc li{font-size:11.5px;line-height:1.35;color:#2b2723;padding-left:11px;position:relative}
+.rdoc li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:#a8694c}
 /* Silnik: replikacja kodu */
 .dsc.wqc{padding-bottom:0}
 .wqc h3{margin:4px 0 4px!important}
@@ -2789,10 +2800,15 @@ const RDOC={
  S:['Wytyczne EBA – testy warunków skrajnych w bankach','Testy nadzorcze EBA / KNF','<b>ICAAP</b> – plan kapitałowy w stresie','Plan naprawy (ustawa o BFG)']};
       const RC={K:["Ryzyko kredytowe","#bf8165"],R:["Ryzyko rynkowe","#6f7f58"],O:["Ryzyko operacyjne","#8a6c90"],A:["Stopa procentowa i płynność","#4f7390"],M:["Ryzyko modeli","#a6824c"],S:["Stres testy","#5c564d"]};
       const rs=document.createElement("section");rs.className="sdsec dsec";rs.id="ds-reg";
-      rs.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Otoczenie regulacyjne banku</span><h2 class="h2s">Otoczenie regulacyjne banku</h2><p class="dsp">Przepisy i wytyczne, które wyznaczają, jak model budować, walidować i nadzorować – od prawa UE po rekomendacje KNF.</p><div class="recl"><div class="kls-h"><div class="recl-hh"><b>Regulacje dla ECL</b></div><p>Nasz przykład to model ECL – kształtują go bezpośrednio:</p></div>${[["MSSF 9","3 koszyki, ECL 12 m i dożywotnia, prognozy"],["MSSF 7","ujawnienia: zmiany odpisów, założenia"],["Rekomendacja R","KNF – klasyfikacja ekspozycji i ECL"],["EBA/GL/2017/06","ryzyko kredytowe a rachunkowość ECL"],["Definicja defaultu","CRR art. 178, EBA/GL/2016/07"],["Rekomendacja W","KNF – cykl życia i walidacja modelu"]].map(r=>`<div class="recl-r"><b>${r[0]}</b><small>${r[1]}</small></div>`).join("")}</div></div>
+      rs.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Otoczenie regulacyjne banku</span><h2 class="h2s">Otoczenie regulacyjne banku</h2><p class="dsp">Przepisy i wytyczne, które wyznaczają, jak model budować, walidować i nadzorować – od prawa UE po rekomendacje KNF.</p><div class="rdoc"><div class="kls-h"><b>Dokumenty uzupełniające</b><p>Poza przepisami regulator publikuje standardy, wytyczne i raporty, które pokazują, jak przepisy stosować w praktyce.</p></div>${[
+  ["RTS / ITS","Standardy techniczne – wiążące","#0d0d0d","#fcf9f5",["RTS – metodyka oceny metody IRB","RTS – próg istotności zaległości","RTS – istotność zmian w modelach"]],
+  ["Wytyczne","EBA, ECB, KNF – stosuj albo wyjaśnij","#ead9a2","#5c4a12",["EBA – szacowanie PD i LGD","EBA – definicja defaultu","EBA – ryzyko kredytowe a ECL"]],
+  ["Raporty z wdrożenia","Monitoring stosowania przepisów","#cfe0e6","#2b2723",["EBA – monitoring wdrożenia MSSF 9","ECB – raport końcowy TRIM","EBA – benchmarking modeli wewnętrznych"]],
+  ["Przeglądy praktyk","Jak robią to inne banki","#e1e4cf","#2b2723",["ECB – korekty modeli (overlays)","BCBS – ryzyko kredytowe a ECL","KNF – stanowiska i komunikaty"]]
+].map(g=>`<div class="rdoc-g"><div class="rdoc-h"><span style="background:${g[2]};color:${g[3]}">${g[0]}</span><small>${g[1]}</small></div><ul>${g[4].map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")}</div></div>
         <div class="sds-r"><div class="rg-top"><button type="button" class="sd-back ds-back">↑ Regulacje prawne</button><span class="rg-hd"><b>Mapa regulacji bankowych</b><i>przegląd ogólny – wszystkie obszary ryzyka</i></span></div><div class="rgw"><div class="rgt">${RTOP.map(([n,l])=>`<div><span>${n}</span>${l.map(x=>`<p>${x}</p>`).join("")}</div>`).join("")}</div><div class="rgg">${["K","R","O","A","M","S"].map(r=>`<div class="rgc" style="--gc:${RC[r][1]}"><h4>${RC[r][0]}</h4><ul>${RDOC[r].map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")}</div></div></div></div>`;
       document.getElementById("ds-kls").before(rs);
-      const fitR=()=>{const l=rs.querySelector(".recl"),g=rs.querySelector(".rgw");if(!l||!g)return;l.style.height="";l.style.height=Math.max(l.scrollHeight,Math.round(g.getBoundingClientRect().bottom-l.getBoundingClientRect().top))+"px"};
+      const fitR=()=>{const l=rs.querySelector(".rdoc"),g=rs.querySelector(".rgw");if(!l||!g)return;l.style.height="";l.style.height=Math.max(l.scrollHeight,Math.round(g.getBoundingClientRect().bottom-l.getBoundingClientRect().top))+"px"};
       /* Regulacje prawne */
       {const L1=[["5.5.1","Odpis na ECL: aktywa w zamortyzowanym koszcie i FVOCI, gwarancje."],["5.5.5","Brak znaczącego wzrostu ryzyka – ECL 12-miesięczna (koszyk 1)."],["5.5.3","Znaczący wzrost ryzyka – ECL w całym okresie życia (koszyk 2)."],["5.5.9","SICR: ryzyko defaultu w okresie życia wobec ryzyka przy ujęciu."],["5.5.11","Wzruszalne domniemanie SICR przy opóźnieniu ponad 30 dni."],["5.5.17","Pomiar ECL: ważony prawdopodobieństwem, z prognozami."],["B5.5.37","Default spójny z zarządzaniem ryzykiem; domniemanie 90 dni."]];
         const L1R=["koszyki i SICR","parametry ECL","scenariusze makro","walidacja","rola zarządu"];
