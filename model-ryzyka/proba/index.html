@@ -1832,7 +1832,7 @@
 
 /* Regulacje prawne */
 .h2s{font-size:31px!important;white-space:nowrap}
-.rgo{margin-top:12px;box-sizing:border-box;background:#f0e8dd;border:1px solid #e4d9c8;border-radius:14px;padding:11px 16px 12px}
+.rgo{margin-top:8px;box-sizing:border-box;background:#f0e8dd;border:1px solid #e4d9c8;border-radius:14px;padding:11px 16px 12px}
 .rgo-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px}
 .rgo-h b{font:600 10.5px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a8694c}
 .rgo-h .kmet-btn{padding:4px 11px}
@@ -2023,6 +2023,38 @@
 .lwq-r{grid-column:4!important}
 .lwq p{font-size:12.5px!important;line-height:1.42!important}
 .lwq{padding:10px 14px 11px!important}
+
+/* Regulacje prawne – intro, Rek. R, kwestie */
+.lintro{margin:8px 0 10px;padding:0 2px}
+.lintro b{display:block;font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c;margin-bottom:4px}
+.lintro p{margin:0;font-size:12.5px;line-height:1.5;color:#3e3730}
+.lawg2{margin-top:0!important}
+.lws-q{grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:1fr 1fr!important}
+.lwq-r{grid-column:3 / span 2!important;grid-row:2!important}
+.lwq p{font-size:12px!important;line-height:1.4!important}
+.lwq{padding:8px 11px 9px!important}
+.lrr{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.lrr blockquote{margin:0;background:#fffdf9;border-radius:9px;padding:7px 10px;display:flex;flex-direction:column;gap:3px}
+.lrr b{font:700 9.5px var(--body);letter-spacing:.06em;text-transform:uppercase;color:#a8694c}
+.lrr p{margin:0;font:italic 12px/1.4 var(--serif);color:#2b2723}
+.kwp{margin-top:12px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px}
+.kwp-t{font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c}
+.kwb{flex:1;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:14px;padding:8px 14px;display:flex;flex-direction:column;gap:2px}
+.kwb-UL{background:#0d0d0d;border-color:#0d0d0d}
+.kwb-h{display:flex;align-items:center;gap:8px}
+.kwb-h b{font-weight:600;font-size:13.5px;color:#0d0d0d}.kwb-UL .kwb-h b{color:#fcf9f5}
+.kwb .kx-k{font-style:normal;font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px}
+.kwb .kx-k.EL{background:#ead9a2;color:#5c4a12}.kwb .kx-k.UL{background:#fcf9f5;color:#0d0d0d}
+.kwb ul{list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;justify-content:space-around}
+.kwb li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:3px 0;border-top:1px dashed #e0d6c6}
+.kwb-UL li{border-color:#3a352f}
+.kwb li:first-child{border-top:0}
+.kwb li span{font-size:12px;line-height:1.35;color:#3e3730;position:relative;padding-left:12px}
+.kwb li span::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:#a8694c}
+.kwb-UL li span{color:#d8cfc2}
+.kwb-go{flex:none;border:1px solid #ad6b4e;background:transparent;color:#ad6b4e;border-radius:999px;padding:3px 11px;font:600 11px var(--body);cursor:pointer;transition:background .2s,color .2s}
+.kwb-go:hover{background:#ad6b4e;color:#fff}
+.kwb-UL .kwb-go{border-color:#d9a88f;color:#d9a88f}.kwb-UL .kwb-go:hover{background:#ad6b4e;border-color:#ad6b4e;color:#fff}
 /* Silnik: replikacja kodu */
 .dsc.wqc{padding-bottom:0}
 .wqc h3{margin:4px 0 4px!important}
@@ -2770,6 +2802,7 @@ const RDOC={
           ["MSSF 9 · 5.5.5","(…) jeżeli na dzień sprawozdawczy ryzyko kredytowe (…) nie wzrosło znacząco od momentu początkowego ujęcia, jednostka wycenia odpis (…) w kwocie równej 12-miesięcznym oczekiwanym stratom kredytowym."],
           ["MSSF 9 · 5.5.11","(…) przyjmuje się możliwe do odrzucenia założenie, że ryzyko kredytowe (…) znacznie wzrosło od momentu początkowego ujęcia, gdy płatności z tytułu umowy są przeterminowane o ponad 30 dni."],
           ["MSSF 9 · 5.5.17","Jednostka wycenia oczekiwane straty kredytowe (…) w sposób uwzględniający: a) nieobciążoną i ważoną prawdopodobieństwem kwotę (…); (…) c) racjonalne i możliwe do udokumentowania informacje (…)."]];
+        const RQ=[["Rek. 29.6 · test na dwóch okresach","(…) badanie stabilności populacji oraz dokładności oszacowań modeli w ujęciu historycznym, w podziale na co najmniej 2 podpróby obejmujące różne okresy czasowe."],["Rek. 31.2 · błędy oszacowań","W celu oceny jakości modeli MSSF 9 bank powinien wyznaczać oraz dokumentować błędy oszacowań, jak również przedziały ufności w stosunku do wszystkich szacowanych parametrów (…)."]];
         const UQ=[["CRR · art. 92 ust. 1","Z zastrzeżeniem art. 93 i 94 instytucje zawsze spełniają następujące wymogi w zakresie funduszy własnych: a) współczynnik kapitału podstawowego Tier I na poziomie 4,5 %; b) współczynnik kapitału Tier I na poziomie 6 %; c) łączny współczynnik kapitałowy na poziomie 8 %."],
           ["CRR III · art. 92 ust. 3","Instytucje obliczają łączną kwotę ekspozycji na ryzyko w następujący sposób: TREA = max {U-TREA; x∙S-TREA} (…) x = 72,5 %."],
           ["CRR · art. 143 ust. 1","Jeżeli spełnione są warunki określone w niniejszym rozdziale, właściwy organ zezwala instytucjom na obliczanie kwot ekspozycji ważonych ryzykiem przy wykorzystaniu metody wewnętrznych ratingów (…)."],
@@ -2779,10 +2812,10 @@ const RDOC={
         const UR=["A-IRB ograniczone dla dużych przedsiębiorstw i instytucji","dolne progi parametrów PD i LGD","nowa metoda standardowa dla ryzyka operacyjnego","koniec metody AMA"];
         const L2=[["art. 92","Współczynniki 4,5 / 6 / 8%; output floor 72,5%."],["art. 143","Zezwolenie nadzorcze na metodę IRB."],["art. 151","A-IRB ograniczone; duże firmy – F-IRB."],["art. 153–154","Wzory RWA: firmy i detal."],["art. 160–164","Progi PD i LGD (PD min. 0,05%)."],["art. 178","Definicja defaultu."],["art. 179–185","Szacunki PD, LGD, CCF; walidacja."],["art. 312–316","Ryzyko operacyjne: nowa metoda standardowa."]];
         const ls=document.createElement("section");ls.className="sdsec dsec";ls.id="ds-law";
-        const ecl=rs.querySelector(".recl").cloneNode(true);ecl.removeAttribute("style");
+        const ecl=document.createElement("div");ecl.className="kwp";ecl.innerHTML=`<span class="kwp-t">Kwestie problematyczne</span>${["EL","UL"].map(K=>`<div class="kwb kwb-${K}"><div class="kwb-h"><i class="kx-k ${K}">${K}</i><b>${K==="EL"?"Strata oczekiwana":"Strata nieoczekiwana"}</b></div><ul>${[1,2,3].map(n=>`<li><span>Kwestia ${n} – treść do uzupełnienia</span><button type="button" class="kwb-go">Czytaj <i>→</i></button></li>`).join("")}</ul></div>`).join("")}`;
         ls.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Regulacje prawne</span><h2>Regulacje prawne</h2><p class="dsp">Kluczowe przepisy w liczbach i paragrafach: MSSF 9 i Rekomendacja R wyznaczają odpisy ECL, a CRR III – kapitał liczony modelami wewnętrznymi.</p></div>
-          <div class="sds-r"><div class="rg-top"><button type="button" class="sd-back ds-back">↑ Model statystyczny</button><div class="lsw" role="tablist"><button type="button" class="on" data-k="el"><i class="kx-k EL">EL</i>Strata oczekiwana</button><button type="button" data-k="ul"><i class="kx-k UL">UL</i>Strata nieoczekiwana</button></div></div><div class="lawg2">
-            <section class="lws lws-el on" data-k="el"><div class="lws-h lws-h2"><div><span class="lws-k">EL · odpisy</span><b>Regulacje dla ECL</b></div><div class="lws-n lws-n2">${["MSSF 9","MSSF 7","Rekomendacja R","EBA/GL/2017/06","Definicja defaultu","Rekomendacja W"].map(x=>`<span>${x}</span>`).join("")}</div></div><div class="lws-q">${LQ.map(x=>`<blockquote class="lwq"><em>${x[0]}</em><p>${x[1]}</p></blockquote>`).join("")}<div class="lwb lwb-r lwq-r"><em>Rekomendacja R</em><ul>${L1R.map(x=>`<li>${x}</li>`).join("")}</ul></div></div></section>
+          <div class="sds-r"><div class="rg-top"><button type="button" class="sd-back ds-back">↑ Model statystyczny</button><div class="lsw" role="tablist"><button type="button" class="on" data-k="el"><i class="kx-k EL">EL</i>Strata oczekiwana</button><button type="button" data-k="ul"><i class="kx-k UL">UL</i>Strata nieoczekiwana</button></div></div><div class="lintro"><b>Regulacje prawne</b><p>Otoczenie regulacyjne to podstawowy kontekst, w jakim powstaje model ryzyka banku. Regulator wyznacza ramy, w jakich rozwiązanie modelarskie powinno się zmieścić. Model należy budować, a potem oceniać pod kątem zgodności z frameworkiem regulacyjnym obowiązującym w obszarze, w którym osadzony jest model.</p></div><div class="lawg2">
+            <section class="lws lws-el on" data-k="el"><div class="lws-h lws-h2"><div><span class="lws-k">EL · odpisy</span><b>Regulacje dla ECL</b></div><div class="lws-n lws-n2">${["MSSF 9","MSSF 7","Rekomendacja R","EBA/GL/2017/06","Definicja defaultu","Rekomendacja W"].map(x=>`<span>${x}</span>`).join("")}</div></div><div class="lws-q">${LQ.map(x=>`<blockquote class="lwq"><em>${x[0]}</em><p>${x[1]}</p></blockquote>`).join("")}<div class="lwb lwb-r lwq-r lwq-rr"><em>Rekomendacja R (KNF)</em><div class="lrr">${RQ.map(x=>`<blockquote><b>${x[0]}</b><p>${x[1]}</p></blockquote>`).join("")}</div></div></div></section>
             <section class="lws lws-el" data-k="ul"><div class="lws-h lws-h2"><div><span class="lws-k">UL · kapitał</span><b>Regulacje dla modeli kapitałowych</b></div><div class="lws-n lws-n2"><span>CRR – Rozporządzenie 575/2013</span><span>CRR III – Rozporządzenie 2024/1623</span></div></div><div class="lws-q">${UQ.map(x=>`<blockquote class="lwq"><em>${x[0]}</em><p>${x[1]}</p></blockquote>`).join("")}<div class="lwb lwb-r lwq-r"><em>Inne zmiany CRR III</em><ul>${UR.map(x=>`<li>${x}</li>`).join("")}</ul></div></div></section>
           </div></div></div>`;
         ls.querySelector(".sds-l").appendChild(ecl);
