@@ -951,6 +951,9 @@
 @property --s{syntax:"<length>";inherits:true;initial-value:300px}
 .mw.storymode .stage{display:grid!important;grid-template-columns:minmax(300px,.78fr) minmax(0,1.6fr)!important;justify-items:stretch!important;justify-content:stretch!important;gap:0 40px;align-items:start;padding:0;transition:grid-template-columns .6s cubic-bezier(.5,0,.2,1)}
 .mw.storymode .side,.mw.storymode .ctl,.mw.storymode .hint,.mw.storymode .vmode,.mw.storymode .inn{display:none!important}
+.vmode.vm-fix{display:flex!important;position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:200;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:18px;padding:10px 16px;box-shadow:0 18px 40px -20px rgba(40,30,20,.5);margin:0}
+.vm-fix .vm-h{font:600 10.5px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a8694c}
+.vm-fix[data-m="stab"] .vm-a{display:inline!important}
 .mw.storymode .mcol{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center}
 .mw.storymode .duo{margin:0!important}
 .mw.storymode .duo .scene:not(.sc2){margin:calc(var(--s)*.3) calc(var(--s)*1.05) calc(var(--s)*.3) calc(var(--s)*1.15)!important;transition:opacity .25s}
@@ -2893,7 +2896,9 @@ BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
   const ui=()=>{box.querySelectorAll("[data-vm]").forEach(b=>b.classList.toggle("on",b.dataset.vm===MODE));box.dataset.m=MODE;sc.classList.toggle("locked",MODE==="stab");a.textContent=`widok: X ${Math.round(rx)}° · Y ${Math.round(((ry%360)+540)%360-180)}°`};
   box.addEventListener("click",e=>{const b=e.target.closest("[data-vm]");if(b){MODE=b.dataset.vm;try{localStorage.setItem("rt_mrp_mode",MODE)}catch(_){}if(MODE==="stab")go(SV0.x,SV0.y);ui()}});
   sv.addEventListener("click",()=>{SV0={x:Math.round(rx),y:Math.round(((ry%360)+540)%360-180)};try{localStorage.setItem("rt_mrp_view",JSON.stringify(SV0))}catch(_){}MODE="stab";try{localStorage.setItem("rt_mrp_mode",MODE)}catch(_){}ui();sv.textContent="Zapisano ✓";setTimeout(()=>sv.textContent="Zapisz ten widok jako stabilny",1500)});
-  const o=set;set=function(){o();ui()};ui()})();
+  const o=set;set=function(){o();ui()};ui();
+  try{if(new URLSearchParams(location.search).has("ustaw")){document.body.appendChild(box);box.classList.add("vm-fix");box.insertAdjacentHTML("afterbegin",'<b class="vm-h">Ustawienie bryły</b>');
+    sv.addEventListener("click",()=>setTimeout(()=>{a.textContent=`Zapisano: X ${SV0.x}° · Y ${SV0.y}° – podaj mi te liczby`;box.dataset.m="dyn"},10))}}catch(_){}})();
 
 /* katalog koncepcji – kartoteka z kartami obszarów */
 (()=>{const K=window.RT_KON;if(!K)return;const el=document.getElementById("cat3"),wrap=document.getElementById("cat3s"),duo=document.getElementById("duo"),P=document.getElementById("catp"),LN=document.getElementById("catln");
