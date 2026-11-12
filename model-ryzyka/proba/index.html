@@ -1955,6 +1955,7 @@
 .kli .kx-k.S{background:#9a3b25;color:#fff}.kli .kx-k.P{background:#cfe0e6}.kli .kx-k.V{background:#e1e4cf}
 .kli b{font-weight:600;font-size:13.5px;color:#0d0d0d;margin-top:4px}
 .kli .klc-q{margin:0;font:italic 12px var(--serif);color:#a8694c;line-height:1.35}
+.kli .kli-d{margin:3px 0 0;font-size:11px;line-height:1.4;color:#5c564d}
 .kli small{margin-top:auto;font-size:10.5px;line-height:1.35;color:#5c564d}
 .klx2{margin-top:18px;box-sizing:border-box;display:grid;grid-template-rows:1fr 1fr;gap:12px}
 .klup{position:relative;border-radius:16px;padding:16px 18px 16px;display:flex;flex-direction:column;gap:6px;overflow:hidden;background:#fcf9f5;border:1px solid #ddd3c4}
@@ -2639,7 +2640,7 @@ setEX(EX);setCX(1);
         UL:[["Co mierzy","Odchylenie strat ponad średnią – ogon rozkładu strat."],["Jak liczymy","Kwantyl rozkładu: VaR lub ES, np. 99,9% we wzorze IRB."],["Czym pokrywa bank","Kapitałem regulacyjnym i wewnętrznym (ICAAP)."]]};
       const KM={EL:[["ECL","odpisy 12 m i lifetime"],["Scoring, rating","PD klienta"],["LGD, EAD","strata i ekspozycja"],["Pricing","koszt ryzyka w cenie"]],UL:[["IRB","kapitał dla kredytów"],["VaR / ES","ryzyko rynkowe"],["AMA","operacyjne, do CRR III"],["Kapitał wewnętrzny","ICAAP"]]};
       const KDm=Object.fromEntries(KD.map(k=>[k[0],k]));
-      const mini=k=>`<div class="kli"><div class="klc-t"><span class="kx-k ${k[0]}">${k[0]}</span><em>${pl(k[5])}</em></div><b>${k[1]}</b><p class="klc-q">${k[2]}</p><small>${k[4]}</small></div>`;
+      const mini=k=>`<div class="kli"><div class="klc-t"><span class="kx-k ${k[0]}">${k[0]}</span><em>${pl(k[5])}</em></div><b>${k[1]}</b><p class="klc-q">${k[2]}</p><p class="kli-d">${k[3]}</p></div>`;
       const wide=k=>`<article class="klc klw"><div class="klw-h"><span class="kx-k ${k[0]}">${k[0]}</span><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><em>${pl(k[5])}</em></div><div class="klw-g">${KX[k[0]].map(x=>`<div class="klw-c"><b>${x[0]}</b><p>${x[1]}</p></div>`).join("")}<div class="klw-c klw-m"><b>Kluczowe modele</b><div class="klw-mg">${KM[k[0]].map(m=>`<div><strong>${m[0]}</strong><span>${m[1]}</span></div>`).join("")}</div></div></div></article>`;
       const LUP={EL:["Strata oczekiwana pod lupą","Średnia strata wygląda niewinnie. Ale z jakiego okresu jest ta średnia – i co, gdy PD, LGD i wykorzystanie limitów rosną naraz?"],
         UL:["Strata nieoczekiwana pod lupą","Kapitał na zdarzenie raz na tysiąc lat – kto to sprawdzi? I co z korelacjami, które w kryzysie przestają być stałe?"]};
@@ -2650,7 +2651,12 @@ setEX(EX);setCX(1);
       p.before(k2);
       /* Okiem praktyka: UL pod lupą */
       k2.querySelectorAll(".pol-go").forEach(b=>b.addEventListener("click",()=>{location.href="../../okiem-praktyka/#"+b.dataset.pol.toLowerCase()}));
-      const fitK=()=>{const k=k2.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,gg=k2.querySelector(".klg3"),t=gg.getBoundingClientRect().top+scrollY;gg.style.height="";gg.style.height=Math.max(gg.scrollHeight,Math.round(tg-t))+"px";const v=k2.querySelector(".klx2");v.style.height="";v.style.height=Math.max(v.scrollHeight,Math.round(gg.getBoundingClientRect().bottom-v.getBoundingClientRect().top))+"px"};
+      const fitK=()=>{const k=k2.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,gg=k2.querySelector(".klg3"),t=gg.getBoundingClientRect().top+scrollY;gg.style.height="";gg.style.height=Math.max(gg.scrollHeight,Math.round(tg-t))+"px";const v=k2.querySelector(".klx2");v.style.height="";setTimeout(klLines,0);v.style.height=Math.max(v.scrollHeight,Math.round(gg.getBoundingClientRect().bottom-v.getBoundingClientRect().top))+"px"};
+      function klLines(){const w=k2.querySelector(".sds-w");if(!w)return;let sv=w.querySelector(".kll-svg");if(!sv){w.style.position="relative";w.insertAdjacentHTML("beforeend",'<svg class="dsl-svg kll-svg"></svg>');sv=w.querySelector(".kll-svg")}
+        const wr=w.getBoundingClientRect();sv.setAttribute("viewBox",`0 0 ${wr.width} ${wr.height}`);sv.style.width=wr.width+"px";sv.style.height=wr.height+"px";
+        const ws=[...k2.querySelectorAll(".klm .klw")];let h="";["EL","UL"].forEach((K,i)=>{const a=ws[i],c=k2.querySelector(".klup-"+K);if(!a||!c)return;const ar=a.querySelector(".klw-h").getBoundingClientRect(),aR=a.getBoundingClientRect(),cr=c.getBoundingClientRect();
+          const x0=aR.left-wr.left,y0=ar.top+ar.height/2-wr.top,x2=cr.right-wr.left,y2=cr.top+Math.min(40,cr.height/2)-wr.top,xm=Math.round((x0+x2)/2)+(i?8:-8);
+          h+=`<path d="M${x0},${y0} H${xm} V${y2} H${x2}" fill="none" stroke="#a8694c" stroke-width="1.3" stroke-dasharray="4 4"/><circle cx="${x0}" cy="${y0}" r="2.6" fill="#a8694c"/><circle cx="${x2}" cy="${y2}" r="2.6" fill="#a8694c"/>`});sv.innerHTML=h}
       window.__openKls=()=>{k2.classList.add("on");setTimeout(()=>{fitK();scrollToSec(k2)},60)};addEventListener("resize",()=>{if(k2.classList.contains("on"))fitK()});
       k2.querySelector(".ds-back").addEventListener("click",()=>window.__openPrb());
       p.querySelector(".kls-go").addEventListener("click",()=>window.__openKls());{const kb2=SD.querySelector(".sdk-kls");kb2&&kb2.addEventListener("click",()=>window.__openKls())}}
