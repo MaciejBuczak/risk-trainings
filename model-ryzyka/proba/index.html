@@ -952,7 +952,11 @@
 .mw.storymode .stage{display:grid!important;grid-template-columns:minmax(300px,.78fr) minmax(0,1.6fr)!important;justify-items:stretch!important;justify-content:stretch!important;gap:0 40px;align-items:start;padding:0;transition:grid-template-columns .6s cubic-bezier(.5,0,.2,1)}
 .mw.storymode .side,.mw.storymode .ctl,.mw.storymode .hint,.mw.storymode .vmode,.mw.storymode .inn{display:none!important}
 .vmode.vm-fix{display:flex!important;position:absolute;left:50%;top:calc(100vh + 16px);transform:translateX(-50%);z-index:200;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:18px;padding:10px 16px;box-shadow:0 18px 40px -20px rgba(40,30,20,.5);margin:0}
-body.ustaw .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh button,body.ustaw .mh .vtabs{pointer-events:auto}
+body.ustaw .mh,body.rot .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh button,body.ustaw .mh .vtabs,body.rot .mh a,body.rot .mh button,body.rot .mh .vtabs{pointer-events:auto}
+.rotb{align-self:flex-end;margin-top:30px;display:inline-flex;align-items:center;gap:8px;border:1px solid #ad6b4e;background:transparent;color:#ad6b4e;border-radius:999px;padding:8px 16px;font:600 13px var(--body);cursor:pointer;transition:background .2s,color .2s,opacity .45s}
+.rotb:hover,.rotb.on{background:#ad6b4e;color:#fff}
+.rotb i{font-style:normal}
+.mh.hout .rotb,.mh.hsolo .rotb{opacity:0;pointer-events:none}
 .rul{position:fixed;z-index:300;pointer-events:none;background:rgba(252,249,245,.88);font:600 9px var(--body);color:#a8694c}
 .rul-y{top:0;right:0;width:30px;height:100vh;border-left:1px solid #cdbfa9}
 .rul-x{left:0;bottom:0;height:22px;width:100vw;border-top:1px solid #cdbfa9}
@@ -2227,7 +2231,7 @@ body.ustaw .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh button,body.u
 
 <section class="mh"><div class="wrap">
   <div><span class="kick">Model ryzyka</span><h1>Model ryzyka i jego <em>komponenty</em></h1><div class="mh-go"><span>Zajrzyj do środka</span><button type="button" data-go="3">Model statystyczny <i>→</i></button><button type="button" data-go="1">Dane <i>→</i></button><button type="button" data-go="4">Wyniki <i>→</i></button></div></div>
-  <div class="mh-r"><div class="vtslot" id="vtslot"></div><p>Szklana bryła to model, a w środku jego model statystyczny – PD, LGD, EAD i SICR. Dane wchodzą od dołu, wyniki wychodzą na zewnątrz.</p></div>
+  <div class="mh-r"><div class="vtslot" id="vtslot"></div><p>Szklana bryła to model, a w środku jego model statystyczny – PD, LGD, EAD i SICR. Dane wchodzą od dołu, wyniki wychodzą na zewnątrz.</p><button type="button" class="rotb" id="rotb">Obróć bryłę <i>⟲</i></button></div>
 </div></section>
 
 <div class="mw">
@@ -2390,7 +2394,7 @@ function pbox(X=PX){const {W,D,Ht,at,k}=X,c=`calc(var(--s)*`,F=(w,h,t,cl,body=""
   n=X.items.length,MX=n===3?[-.18,0,.18]:[-.1,.1],ms=.085,KB=X.k==="k",bw=.085,bh=.13,FL=[2/3,4/5],
     face=(w,h,t,cl)=>`<i class="${cl}" style="width:${c}${w});height:${c}${h});margin:${c}${-h/2}) 0 0 ${c}${-w/2});transform:${t}"></i>`,
     bar=f=>{const fh=bh*f,cy=bh/2-fh/2,T=`translateY(${c}${cy}))`;return edgeBox(bw,bh,bw,"e-kbar")+[`${T} translateZ(${c}${bw/2}))`,`${T} rotateY(180deg) translateZ(${c}${bw/2}))`,`${T} rotateY(90deg) translateZ(${c}${bw/2}))`,`${T} rotateY(-90deg) translateZ(${c}${bw/2}))`].map(t=>face(bw,fh,t,"kfl")).join("")+face(bw,bw,`translateY(${c}${bh/2-fh})) rotateX(90deg)`,"kfl kft")},
-    mech=MX.map((x,i)=>`<div class="pmc" style="transform:translate3d(${c}${x}),${c}${KB?0:-.02}),${c}${KB?0:-.1}))">${KB?bar(FL[i]):edgeBox(ms,ms,ms,"e-pm")+`<i class="pmf" style="width:${c}${ms});height:${c}${ms});margin:${c}${-ms/2}) 0 0 ${c}${-ms/2});transform:translateZ(${c}${ms/2}))"></i>`}<div class="pmw" style="transform:translate3d(0,${c}${(KB?bh:ms)/2+.026}),${c}${(KB?bw:ms)/2+.004}))"><div class="yb pml"><span>${X.items[i].replace(" ","<br>")}</span></div></div></div>`).join("")
+    mech=MX.map((x,i)=>`<div class="pmc" style="transform:translate3d(${c}${x}),${c}${KB?0:-.02}),${c}${KB?0:-.1}))">${KB?bar(FL[i]):edgeBox(ms,ms,ms,"e-pm")+`<i class="pmf" style="width:${c}${ms});height:${c}${ms});margin:${c}${-ms/2}) 0 0 ${c}${-ms/2});transform:translateZ(${c}${ms/2}))"></i>`}<div class="pmw" style="transform:translate3d(0,${c}${KB?bh/2+.008:ms/2+.026}),${c}${(KB?bw:ms)/2+.004}))"><div class="yb pml"><span>${KB&&X.tagItems?X.tagItems[i]:X.items[i].replace(" ","<br>")}</span></div></div></div>`).join("")
     +(KB?"":MX.slice(0,-1).map((x,i)=>`<div class="pmb" style="transform:translate3d(${c}${MX[i]+ms/2}),${c}-.02),${c}-.1))"><div class="beam bpi" style="width:${c}${MX[i+1]-MX[i]-ms})"><i></i><i style="transform:rotateX(90deg)"></i></div></div>`).join(""));
   return`<div class="tb pbx ${k}bx" data-f="${X.f}" style="--c:${X.col};--pc:${X.col};transform:${T3(at)}">${edgeBox(W,Ht,D,"e-pb")}${F(W,Ht,`translateZ(${c}${D/2}))`,"sd",`<span class="mtag wtag ptag ${k}tag">${B}</span><span class="mtag wtag wb ptag ${k}tag">${B}</span>`)}${F(W,Ht,`rotateY(180deg) translateZ(${c}${D/2}))`,"sd")}${F(D,Ht,`rotateY(90deg) translateZ(${c}${W/2}))`,"sd")}${F(D,Ht,`rotateY(-90deg) translateZ(${c}${W/2}))`,"sd")}${F(W,D,`rotateX(90deg) translateZ(${c}${Ht/2}))`,"cp")}${F(W,D,`rotateX(-90deg) translateZ(${c}${Ht/2}))`,"cp")}${mech}</div>`}
 function tabs3(){const c=`calc(var(--s)*`,T=[[-.16,.02,-.04,.26,.18,.22],[.16,.02,-.04,.26,.18,.22]];
@@ -2918,6 +2922,7 @@ BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
   box.addEventListener("click",e=>{const b=e.target.closest("[data-vm]");if(b){MODE=b.dataset.vm;try{localStorage.setItem("rt_mrp_mode",MODE)}catch(_){}if(MODE==="stab")go(SV0.x,SV0.y);ui()}});
   sv.addEventListener("click",()=>{SV0={x:Math.round(rx),y:Math.round(((ry%360)+540)%360-180)};try{localStorage.setItem("rt_mrp_view",JSON.stringify(SV0))}catch(_){}MODE="stab";try{localStorage.setItem("rt_mrp_mode",MODE)}catch(_){}ui();sv.textContent="Zapisano ✓";setTimeout(()=>sv.textContent="Zapisz ten widok jako stabilny",1500)});
   const o=set;set=function(){o();ui()};ui();
+  {const rb=document.getElementById("rotb");if(rb)rb.addEventListener("click",()=>{const on=MODE!=="dyn";MODE=on?"dyn":"stab";document.body.classList.toggle("rot",on);rb.classList.toggle("on",on);rb.innerHTML=on?"Zakończ obracanie <i>✓</i>":"Obróć bryłę <i>⟲</i>";if(!on)go(SV0.x,SV0.y);ui()})}
   try{if(new URLSearchParams(location.search).has("ustaw")){MODE="dyn";ui();document.body.appendChild(box);box.classList.add("vm-fix");box.insertAdjacentHTML("afterbegin",'<b class="vm-h">Ustawienie bryły</b>');document.body.classList.add("ustaw");
     {let h="";for(let y=0;y<=2000;y+=10){h+=`<i class="${y%50?"":"m"}" style="top:${y}px"></i>`+(y%50||!y?"":`<b style="top:${y-5}px">${y}</b>`)}let w="";for(let x=0;x<=2600;x+=10){w+=`<i class="${x%50?"":"m"}" style="left:${x}px"></i>`+(x%100||!x?"":`<b style="left:${x+3}px">${x}</b>`)}document.body.insertAdjacentHTML("beforeend",`<div class="rul rul-y">${h}</div><div class="rul rul-x">${w}</div>`)}
     sv.addEventListener("click",()=>setTimeout(()=>{a.textContent=`Zapisano: X ${SV0.x}° · Y ${SV0.y}° – podaj mi te liczby`;box.dataset.m="dyn"},10))}}catch(_){}})();
