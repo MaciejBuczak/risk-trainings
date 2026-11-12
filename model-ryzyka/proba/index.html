@@ -2170,7 +2170,7 @@ body.ustaw .mh,body.rot .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh 
 .lbp-ch{display:flex;flex-wrap:wrap;gap:5px}.lbp-ch span{font-size:11px;padding:2px 8px;border-radius:999px;background:#fffdf9;border:1px solid #e0d6c6;border-left:3px solid var(--rc)}
 
 /* Bilans, wynik i kapitał 2×2 */
-.lb4{display:grid;grid-template-columns:1.45fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:10px}
+.lb4{display:grid;grid-template-columns:1.6fr .95fr 1fr;grid-template-rows:1fr 1fr;gap:10px}
 .lb4 .lbc-A{grid-column:1;grid-row:1}.lb4 .lbc-P{grid-column:1;grid-row:2}.lb4 .lbc-R{grid-column:2;grid-row:1 / span 2}.lb4 .lbc-K{grid-column:3;grid-row:1 / span 2}
 .lb4 .lbc{padding:9px 10px;gap:6px}
 .lb4 .lbc-h{display:flex;align-items:baseline;gap:8px}
@@ -2184,17 +2184,28 @@ body.ustaw .mh,body.rot .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh 
 .lb4 .lbc-K .lbc-b>[data-it="k_cet1"]{grid-column:span 2}
 .lb4 .lbc-K .lbi{align-self:stretch!important;max-height:none!important;height:auto!important}
 .lb4 .lbi{align-self:stretch!important;height:auto!important}
-.lb4 .lbi.dk{display:flex!important;align-items:center!important;justify-content:space-between!important}
+.lb4 .lbc .lbi{padding-right:15px!important}.lb4 .lbi,.lbi.dk{flex-direction:row!important;align-items:center!important;justify-content:flex-start!important}.lb4 .lbd{flex-direction:column!important;top:6px!important;right:5px!important}
 .lb4 .lbi{max-height:none;padding:5px 8px;min-width:0;align-items:center}
 .lb4 .lbi span{min-width:0}
-.lb4 .lbi span b{font-size:11.5px}
-.lb4 .lbi small{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb4 .lbi span b{font-size:11.5px;line-height:1.2!important}
+.lb4 .lbi small{font-size:9.5px;line-height:1.2;white-space:normal}
 .lb4 .lbi.sm{background:rgba(255,253,249,.45)}
 .lb4{gap:8px!important}.lb4 .lbc{padding:8px 9px!important;gap:5px!important}.lb4 .lbc-b{gap:4px!important}
 .lb4 .lbi{position:relative;padding:5px 8px!important}
 .lb4 .lbd{position:absolute!important;right:5px;top:5px;gap:2px!important}.lb4 .lbd i{width:5px!important;height:5px!important;border-radius:1.5px!important}
 .lb4 .lbc-K .lbg{padding:0 2px!important;line-height:1.2}.lb4 .lbc-K .lbg b{font-size:9px}.lb4 .lbc-K .lbg small{font-size:9.5px}
 .lb4 .lbc-R .lbi[data-it="r_nii"],.lb4 .lbc-R .lbi[data-it="r_netto"]{background:rgba(255,253,249,.45)}
+
+/* panel po lewej – nowy wygląd */
+.lbsec .lbp:not(.lbp-d){overflow:auto;padding:0 0 12px;gap:8px;box-shadow:0 18px 40px -28px rgba(40,30,15,.45)}
+.lbsec .lbp:not(.lbp-d)>*:not(.lbp-hd):not(.lbp-x){margin-left:16px;margin-right:16px}
+.lbp-hd{background:var(--bc);padding:14px 16px 12px;border-radius:13px 13px 0 0;display:flex;flex-direction:column;gap:4px}
+.lbp-hd .lbp-k{color:#5c564d}
+.lbp-hd p{color:#3e3730!important}
+.lbp-ml{gap:6px}
+.lbp-ml li.lbp-m{background:#fffdf9;border:1px solid #e9e0d2!important;border-left:3px solid var(--rc)!important;border-radius:9px;padding:7px 10px!important;margin:0!important}
+.lb4 .lbi.on2,.lbx.on2,.lbk.on2{border-color:#a8694c!important;box-shadow:0 0 0 2px #a8694c,0 10px 22px -12px rgba(168,105,76,.6)!important;z-index:1}
+.lbl-svg{pointer-events:none}
 /* Silnik: replikacja kodu */
 .dsc.wqc{padding-bottom:0}
 .wqc h3{margin:4px 0 4px!important}
@@ -3078,9 +3089,10 @@ Object.entries(RT).forEach(([k,r])=>BI["q_"+k]={id:"q_"+k,n:r.n});
         prev.after(sc);prev=sc;secs[k]=sc});
       const close=sc=>{sc.querySelectorAll(".on2,.dim2,.hl2,.num2,.den2").forEach(e=>e.classList.remove("on2","dim2","hl2","num2","den2"));const k=sc.id.slice(6);sc.querySelector(".lbl").innerHTML=defL[k];fitLB(sc)};
       const panel=(sc,html)=>{sc.querySelector(".lbl").innerHTML=`<div class="lbp">${html}<button type="button" class="lbp-x" aria-label="Zamknij">×</button></div>`;sc.querySelector(".lbp-x").addEventListener("click",()=>close(sc));fitLB(sc)};
-      const modelHTML=m=>`<span class="lbp-r" style="--rc:${RISK[m.r].c}">Ryzyko ${RISK[m.r].n.toLowerCase()}</span><h3>${EQ(m.n)} ${LTB(m.lt)}</h3><p>${EQ(m.d)}</p><b class="lbp-k">Gdzie zmienia liczby banku</b><ul class="lbp-l">${m.o.map(o=>`<li><b>${EQ((BI[o[0]]||{n:o[0]}).n)}${o[2]?` <i class="lt lt-${o[2]}">${o[2]}</i>`:""}</b><small>${EQ(o[1])}</small></li>`).join("")}</ul>`;
-      const itemHTML=id=>{const b=BI[id],ms=M.filter(m=>m.o.some(o=>o[0]===id));return`<span class="lbp-k">Pozycja</span><h3>${EQ(b.n)}</h3>${b.s?`<p>${EQ(b.s)}</p>`:""}<b class="lbp-k">Modele, które ją zmieniają · ${ms.length}</b>${ms.length?`<ul class="lbp-l">${ms.map(m=>{const o=m.o.find(o=>o[0]===id);return`<li style="--rc:${RISK[m.r].c}" class="lbp-m"><b>${EQ(m.n)}${o[2]?` <i class="lt lt-${o[2]}">${o[2]}</i>`:""}</b><small>${EQ(o[1])}</small></li>`}).join("")}</ul>`:`<p class="lbp-h">Żaden model z mapy nie zmienia tej pozycji bezpośrednio.</p>`}`};
-      const ratioHTML=k=>{const r=RT[k],ms=M.filter(m=>m.o.some(o=>o[0]==="q_"+k||r.num.includes(o[0])||r.den.includes(o[0])));return`<span class="lbp-k">Wskaźnik · ${r.dir==="↑"?"im wyżej, tym lepiej":"im niżej, tym lepiej"}</span><h3>${EQ(r.n)} <i class="${r.dir==="↑"?"ar-u":"ar-d"}">${r.dir}</i></h3><div class="lbp-f"><span>${EQ(r.f[0])}</span><span>${EQ(r.f[1])}</span></div><p>${EQ(r.d)}</p><div class="lbp-nd"><div><b class="lbp-k">Licznik</b>${[...new Set(r.num)].map(i=>`<span>${EQ(BI[i].n)}</span>`).join("")}</div><div><b class="lbp-k">Mianownik</b>${[...new Set(r.den)].map(i=>`<span>${EQ(BI[i].n)}</span>`).join("")}</div></div><b class="lbp-k">Modele w tle · ${ms.length}</b><div class="lbp-ch">${ms.map(m=>`<span style="--rc:${RISK[m.r].c}">${EQ(m.n)}</span>`).join("")}</div>`};
+      const modelHTML=m=>`<div class="lbp-hd" style="--bc:color-mix(in srgb,${RISK[m.r].c} 20%,#fcf9f5)"><span class="lbp-k" style="color:${RISK[m.r].c}">${/^(Ryzyko|Stres)/.test(RISK[m.r].n)?RISK[m.r].n:"Ryzyko "+RISK[m.r].n.toLowerCase()}</span><h3>${EQ(m.n)} ${LTB(m.lt)}</h3><p>${EQ(m.d)}</p></div><b class="lbp-k">Gdzie zmienia liczby banku</b><ul class="lbp-l">${m.o.map(o=>`<li><b>${EQ((BI[o[0]]||{n:o[0]}).n)}${o[2]?` <i class="lt lt-${o[2]}">${o[2]}</i>`:""}</b><small>${EQ(o[1])}</small></li>`).join("")}</ul>`;
+      const BK={A:["Aktywa","#f3e4c4"],P:["Pasywa","#e0dccb"],R:["Rachunek zysków i strat","#f9d5bd"],K:["Kapitał","#e7d4c4"],Z:["Pozabilans","#f3e4c4"]};
+      const itemHTML=id=>{const b=BI[id],ms=M.filter(m=>m.o.some(o=>o[0]===id)),bk=BK[b.k]||["Pozycja","#f0e8dd"];return`<div class="lbp-hd" style="--bc:${bk[1]}"><span class="lbp-k">${bk[0]}</span><h3>${EQ(b.n)}</h3>${b.s?`<p>${EQ(b.s)}</p>`:""}</div><b class="lbp-k">Modele, które ją zmieniają · ${ms.length}</b>${ms.length?`<ul class="lbp-l lbp-ml">${ms.map(m=>{const o=m.o.find(o=>o[0]===id);return`<li style="--rc:${RISK[m.r].c}" class="lbp-m"><b>${EQ(m.n)}${o[2]?` <i class="lt lt-${o[2]}">${o[2]}</i>`:""}</b><small>${EQ(o[1])}</small></li>`}).join("")}</ul>`:`<p class="lbp-h">Żaden model z mapy nie zmienia tej pozycji bezpośrednio.</p>`}`};
+      const ratioHTML=k=>{const r=RT[k],ms=M.filter(m=>m.o.some(o=>o[0]==="q_"+k||r.num.includes(o[0])||r.den.includes(o[0])));return`<div class="lbp-hd" style="--bc:#f0e8dd"><span class="lbp-k">Wskaźnik · ${r.dir==="↑"?"im wyżej, tym lepiej":"im niżej, tym lepiej"}</span><h3>${EQ(r.n)} <i class="${r.dir==="↑"?"ar-u":"ar-d"}">${r.dir}</i></h3><div class="lbp-f" style="background:#fffdf9"><span>${EQ(r.f[0])}</span><span>${EQ(r.f[1])}</span></div><p>${EQ(r.d)}</p></div><div class="lbp-nd"><div><b class="lbp-k">Licznik</b>${[...new Set(r.num)].map(i=>`<span>${EQ(BI[i].n)}</span>`).join("")}</div><div><b class="lbp-k">Mianownik</b>${[...new Set(r.den)].map(i=>`<span>${EQ(BI[i].n)}</span>`).join("")}</div></div><b class="lbp-k">Modele w tle · ${ms.length}</b><div class="lbp-ch">${ms.map(m=>`<span style="--rc:${RISK[m.r].c}">${EQ(m.n)}</span>`).join("")}</div>`};
       Object.entries(secs).forEach(([k,sc])=>{
         sc.querySelector(".lb-back").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
         sc.querySelectorAll(".lb-sw [data-go]").forEach(b=>b.addEventListener("click",()=>window.__openLB(b.dataset.go)));
@@ -3089,7 +3101,17 @@ Object.entries(RT).forEach(([k,r])=>BI["q_"+k]={id:"q_"+k,n:r.n});
           const cl=t.closest(".lbcl");if(cl){const c=cl.dataset.cl,on=!cl.classList.contains("on2");sc.querySelectorAll(".lbcl").forEach(x=>x.classList.toggle("on2",on&&x===cl));sc.querySelectorAll(".lbx").forEach(x=>{const m=MI[x.dataset.m];x.classList.toggle("dim2",on&&!cat(m).includes(c))});return}
           const it=t.closest(".lbi");if(it){sc.querySelectorAll(".lbi").forEach(x=>x.classList.toggle("on2",x===it));panel(sc,itemHTML(it.dataset.it));return}
           const q=t.closest(".lbk");if(q){sc.querySelectorAll(".lbk").forEach(x=>x.classList.toggle("on2",x===q));panel(sc,ratioHTML(q.dataset.q));return}})});
-      function fitLB(sc){const k=sc.querySelector(".stp-n"),tgt=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,bd=sc.querySelector(".lbbody"),t=bd.getBoundingClientRect().top+scrollY;bd.style.height="";bd.style.height=Math.max(bd.scrollHeight,Math.round(tgt-t))+"px";const l=sc.querySelector(".lbl>.lbp");if(l){l.style.height=Math.round(bd.getBoundingClientRect().bottom-l.getBoundingClientRect().top)+"px"}}
+      function fitLB(sc){const k=sc.querySelector(".stp-n"),tgt=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,bd=sc.querySelector(".lbbody"),t=bd.getBoundingClientRect().top+scrollY;bd.style.height="";bd.style.height=Math.max(bd.scrollHeight,Math.round(tgt-t))+"px";const l=sc.querySelector(".lbl>.lbp");if(l){l.style.height="";l.style.maxHeight=Math.round(bd.getBoundingClientRect().bottom-l.getBoundingClientRect().top)+"px"}lbLine(sc)}
+      function lbLine(sc){const w=sc.querySelector(".sds-w");let sv=w.querySelector(".lbl-svg");const it=sc.querySelector(".lbi.on2,.lbk.on2,.lbx.on2"),pn=sc.querySelector(".lbl>.lbp:not(.lbp-d)");if(!it||!pn){sv&&sv.remove();return}
+        if(!sv){w.style.position="relative";w.insertAdjacentHTML("beforeend",'<svg class="dsl-svg lbl-svg"></svg>');sv=w.querySelector(".lbl-svg")}
+        const wr=w.getBoundingClientRect(),ir=it.getBoundingClientRect(),pr=pn.getBoundingClientRect(),bd=sc.querySelector(".lbbody").getBoundingClientRect(),hd=pn.querySelector("h3").getBoundingClientRect();
+        const X=v=>Math.round(v-wr.left),Y=v=>Math.round(v-wr.top),x0=X(ir.left),y0=Y(ir.top+ir.height/2),x2=X(pr.right),y2=Y(hd.top+hd.height/2),xm=Math.round((x2+X(bd.left))/2);
+        const blk=it.closest(".lbc,.lbr,.lbqg"),br=blk?blk.getBoundingClientRect():bd,first=br.left-bd.left<6,inner=ir.left-br.left>24,yt=Y(bd.top)-5,xg=X(br.left)-5;let d,p0=`M${x0},${y0}`;
+        if(inner){const yg=Y(ir.top)-2.5,xc=X(ir.left+ir.width/2);p0=`M${xc},${Y(ir.top)} V${yg} H${X(br.left)+3}`;d=first?`${p0} V${yt} H${xm} V${y2} H${x2}`:`${p0} H${xg} V${yt} H${xm} V${y2} H${x2}`}
+        else d=first?`${p0} H${xm} V${y2} H${x2}`:`${p0} H${xg} V${yt} H${xm} V${y2} H${x2}`;
+        sv.setAttribute("viewBox",`0 0 ${wr.width} ${wr.height}`);sv.style.width=wr.width+"px";sv.style.height=wr.height+"px";
+        sv.innerHTML=`<defs><mask id="lblm-${sc.id}"><path d="${d}" fill="none" stroke="#fff" stroke-width="4" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" class="lblmk"/></mask></defs><path d="${d}" fill="none" stroke="#a8694c" stroke-width="1.3" stroke-dasharray="4 4" mask="url(#lblm-${sc.id})"/><circle cx="${x2}" cy="${y2}" r="3" fill="#a8694c"/>`;
+        requestAnimationFrame(()=>{const mk=sv.querySelector(".lblmk");mk.style.transition="stroke-dashoffset .6s ease";mk.getBoundingClientRect();mk.style.strokeDashoffset="0"})}
       window.__openLB=k=>{Object.values(secs).forEach(s=>s.classList.add("on"));setTimeout(()=>{Object.values(secs).forEach(fitLB);scrollToSec(secs[k])},60)};
       addEventListener("resize",()=>Object.values(secs).forEach(s=>{if(s.classList.contains("on"))fitLB(s)}))}
     window.__openPrb=()=>{p.classList.add("on");setTimeout(()=>{fitP();scrollToSec(p)},60)};addEventListener("resize",()=>{if(p.classList.contains("on"))fitP()});
