@@ -1933,6 +1933,46 @@
 .pol-me{align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:4px;background:#fcf9f5;border:1px solid #ddd3c4;border-left:3px solid #a8694c;border-radius:14px;padding:12px 18px}
 .pol-me b{font:italic 17px var(--serif);font-weight:500;color:#0d0d0d}
 .pol-me p{margin:0;font-size:12px;line-height:1.45;color:#3e3730}
+
+/* Klasy – układ 3 */
+.klg3{display:grid;grid-template-columns:minmax(0,1fr) 200px;gap:12px}
+.klm{display:grid;grid-template-rows:auto 1fr 1fr;gap:10px;min-height:0}
+.klm .klw-g{grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:1fr auto!important}
+.klm .klw-m{grid-column:1 / -1!important;grid-row:2!important}
+.klw-m .klw-mg{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;border-top:0!important;padding:0!important}
+.klg3 .kx-k{font-style:normal;font-weight:700;border-radius:999px;background:#e3ddd1;color:#0d0d0d;line-height:1.5;font-size:11px;padding:2px 9px}
+.klg3 .kx-k.EL{background:#ead9a2;color:#5c4a12}.klg3 .kx-k.UL{background:#0d0d0d;color:#fcf9f5}
+.klm .klw-c{padding:8px 11px}
+.klm .klw-c p{font-size:11.5px!important;line-height:1.42!important}
+.klm .klw{padding:10px 14px 12px!important;gap:8px!important}
+.klm .klwn{padding:10px 14px!important}
+.klm .klwn h3{font-size:15px!important}
+.klw-mg div{border-top:0!important;padding:0!important;display:flex;flex-direction:column}
+.klo{background:#f0e8dd;border:1px solid #e4d9c8;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:0}
+.klo>.klc-k{padding:0 2px}
+.kli{flex:1;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:3px}
+.kli .kx-k{font-style:normal;font-weight:700;border-radius:999px;background:#e3ddd1;color:#0d0d0d;line-height:1.5;font-size:10.5px;padding:1px 8px}
+.kli .kx-k.S{background:#9a3b25;color:#fff}.kli .kx-k.P{background:#cfe0e6}.kli .kx-k.V{background:#e1e4cf}
+.kli b{font-weight:600;font-size:13.5px;color:#0d0d0d;margin-top:4px}
+.kli .klc-q{margin:0;font:italic 12px var(--serif);color:#a8694c;line-height:1.35}
+.kli small{margin-top:auto;font-size:10.5px;line-height:1.35;color:#5c564d}
+.klx2{margin-top:18px;box-sizing:border-box;display:grid;grid-template-rows:1fr 1fr;gap:12px}
+.klup{position:relative;border-radius:16px;padding:16px 18px 16px;display:flex;flex-direction:column;gap:6px;overflow:hidden;background:#fcf9f5;border:1px solid #ddd3c4}
+.klup::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:#a8694c}
+.klup-UL{background:#0d0d0d;border-color:#0d0d0d}
+.klup-k{display:inline-flex;align-items:center;gap:8px;font:600 10px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c}
+.klup-k .kx-k{font-style:normal;letter-spacing:0;font-size:10px;font-weight:700;padding:1px 8px;border-radius:999px}
+.klup-k .kx-k.EL{background:#ead9a2;color:#5c4a12}.klup-k .kx-k.UL{background:#fcf9f5;color:#0d0d0d}
+.klup h3{margin:2px 0 0;font-weight:400;font-size:20px;line-height:1.2;color:#0d0d0d}
+.klup p{margin:0;font-size:12.5px;line-height:1.5;color:#5c564d}
+.klup-UL h3{color:#fcf9f5}.klup-UL p{color:#c9bfb0}.klup-UL .klup-k{color:#d9a88f}
+.klup-f{margin-top:auto;display:flex;align-items:center;gap:14px;padding-top:6px}
+.klup-f span{font-size:11.5px;color:#8a8378}
+.klup-b{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;background:#ad6b4e;color:#fff;font:600 13px var(--body);padding:10px 18px;cursor:pointer;box-shadow:0 10px 22px -12px rgba(173,107,78,.7);transition:background .2s,transform .2s,box-shadow .2s}
+.klup-b i{font-style:normal;transition:transform .2s}
+.klup-b:hover{background:#9a5c41;transform:translateY(-1px);box-shadow:0 14px 26px -12px rgba(173,107,78,.8)}
+.klup-b:hover i{transform:translateX(3px)}
+.klup-b:active{background:#8a5238}
 /* Silnik: replikacja kodu */
 .dsc.wqc{padding-bottom:0}
 .wqc h3{margin:4px 0 4px!important}
@@ -2595,19 +2635,22 @@ setEX(EX);setCX(1);
         ["P","Płynność","Czy wystarczy gotówki na czas?","Problemem nie jest strata, lecz czas: czy bank ma środki na bieżące zobowiązania.","LCR, NSFR, luka płynności",3],
         ["V","Ryzyko modeli","Czy modelom można ufać?","Błąd samego modelu jako osobne ryzyko: inwentarz, walidacja, bufory na niepewność.","inwentarz modeli, kwantyfikacja ryzyka modeli",2]];
       const k2=document.createElement("section");k2.className="sdsec dsec";k2.id="ds-kls";
-      const KX={EL:[["Co mierzy","Średni, spodziewany koszt ryzyka w danym horyzoncie – koszt prowadzenia działalności, a nie zaskoczenie."],["Jak liczymy","EL = PD × LGD × EAD, w horyzoncie 12 miesięcy lub całego życia (MSSF 9), z wagami scenariuszy."],["Czym pokrywa bank","Ceną kredytu – marżą za ryzyko – i odpisami w wyniku finansowym."]],
-        UL:[["Co mierzy","Odchylenie strat ponad średnią – ogon rozkładu, czyli to, czego nie da się przewidzieć w cenie."],["Jak liczymy","Kwantyl rozkładu strat: VaR lub ES na wysokim poziomie ufności, np. 99,9% we wzorze IRB."],["Czym pokrywa bank","Kapitałem – regulacyjnym (Filar 1) i wewnętrznym (Filar 2, ICAAP)."]]};
+      const KX={EL:[["Co mierzy","Spodziewany koszt ryzyka – koszt działalności, nie zaskoczenie."],["Jak liczymy","PD × LGD × EAD w horyzoncie 12 m lub całego życia."],["Czym pokrywa bank","Ceną kredytu i odpisami w wyniku finansowym."]],
+        UL:[["Co mierzy","Odchylenie strat ponad średnią – ogon rozkładu strat."],["Jak liczymy","Kwantyl rozkładu: VaR lub ES, np. 99,9% we wzorze IRB."],["Czym pokrywa bank","Kapitałem regulacyjnym i wewnętrznym (ICAAP)."]]};
       const KM={EL:[["ECL","odpisy 12 m i lifetime"],["Scoring, rating","PD klienta"],["LGD, EAD","strata i ekspozycja"],["Pricing","koszt ryzyka w cenie"]],UL:[["IRB","kapitał dla kredytów"],["VaR / ES","ryzyko rynkowe"],["AMA","operacyjne, do CRR III"],["Kapitał wewnętrzny","ICAAP"]]};
       const KDm=Object.fromEntries(KD.map(k=>[k[0],k]));
-      const small=k=>`<article class="klc klc-s"><div class="klc-t"><span class="kx-k ${k[0]}">${k[0]}</span><em>${pl(k[5])}</em></div><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><p>${k[3]}</p><p class="klc-x"><b>Przykłady:</b> ${k[4]}</p></article>`;
-      const wide=k=>`<article class="klc klw"><div class="klw-h"><span class="kx-k ${k[0]}">${k[0]}</span><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><em>${pl(k[5])}</em></div><div class="klw-g">${KX[k[0]].map(x=>`<div class="klw-c"><b>${x[0]}</b><p>${x[1]}</p></div>`).join("")}<div class="klw-c klw-m"><b>Kluczowe modele</b>${KM[k[0]].map(m=>`<div><strong>${m[0]}</strong><span>${m[1]}</span></div>`).join("")}</div><div class="klw-p"><div><b>Okiem praktyka: ${k[0]} pod lupą</b><p>Moje uwagi i wątpliwości wobec koncepcji straty ${k[0]==="UL"?"nieoczekiwanej":"oczekiwanej"}.</p></div><button type="button" class="kmet-btn pol-go" data-pol="${k[0]}">Czytaj <i>→</i></button></div></div></article>`;
+      const mini=k=>`<div class="kli"><div class="klc-t"><span class="kx-k ${k[0]}">${k[0]}</span><em>${pl(k[5])}</em></div><b>${k[1]}</b><p class="klc-q">${k[2]}</p><small>${k[4]}</small></div>`;
+      const wide=k=>`<article class="klc klw"><div class="klw-h"><span class="kx-k ${k[0]}">${k[0]}</span><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><em>${pl(k[5])}</em></div><div class="klw-g">${KX[k[0]].map(x=>`<div class="klw-c"><b>${x[0]}</b><p>${x[1]}</p></div>`).join("")}<div class="klw-c klw-m"><b>Kluczowe modele</b><div class="klw-mg">${KM[k[0]].map(m=>`<div><strong>${m[0]}</strong><span>${m[1]}</span></div>`).join("")}</div></div></div></article>`;
+      const LUP={EL:["Strata oczekiwana pod lupą","Średnia strata wygląda niewinnie. Ale z jakiego okresu jest ta średnia – i co, gdy PD, LGD i wykorzystanie limitów rosną naraz?"],
+        UL:["Strata nieoczekiwana pod lupą","Kapitał na zdarzenie raz na tysiąc lat – kto to sprawdzi? I co z korelacjami, które w kryzysie przestają być stałe?"]};
+      const lupa=K=>`<div class="klup klup-${K}"><span class="klup-k">Okiem praktyka · <i class="kx-k ${K}">${K}</i></span><h3>${LUP[K][0]}</h3><p>${LUP[K][1]}</p><div class="klup-f"><button type="button" class="klup-b pol-go" data-pol="${K}">Przeczytaj moje uwagi <i>→</i></button><span>4 tezy · 3 min</span></div></div>`;
       k2.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Klasy modeli</span><h2>Klasy modeli ryzyka</h2><p class="dsp">Każdy model odpowiada na jedno z kilku podstawowych pytań o ryzyko. Klasa mówi, jakie to pytanie i czym bank pokrywa wynik.</p>
-        <div class="klx">${small(KDm.S)}${small(KDm.P)}${small(KDm.V)}</div></div>
-        <div class="sds-r"><button type="button" class="sd-back ds-back">↓ Koncepcje modeli ryzyka</button><div class="klg2"><article class="klc klc-n klwn"><span class="klc-k">Jedna liczba, różne pytania</span><h3>Dlaczego klasa ma znaczenie</h3><p>To samo PD jest w EL średnią, w UL punktem wyjścia do kwantyla, a w stresie wynikiem scenariusza.</p></article>${wide(KDm.EL)}${wide(KDm.UL)}</div></div></div>`;
+        <div class="klx2">${lupa("EL")}${lupa("UL")}</div></div>
+        <div class="sds-r"><button type="button" class="sd-back ds-back">↓ Koncepcje modeli ryzyka</button><div class="klg3"><div class="klm"><article class="klc klc-n klwn"><span class="klc-k">Jedna liczba, różne pytania</span><h3>Dlaczego klasa ma znaczenie</h3><p>To samo PD jest w EL średnią, w UL punktem wyjścia do kwantyla, a w stresie wynikiem scenariusza.</p></article>${wide(KDm.EL)}${wide(KDm.UL)}</div><aside class="klo"><span class="klc-k">Inne klasy</span>${mini(KDm.P)}${mini(KDm.S)}${mini(KDm.V)}</aside></div></div></div>`;
       p.before(k2);
       /* Okiem praktyka: UL pod lupą */
       k2.querySelectorAll(".pol-go").forEach(b=>b.addEventListener("click",()=>{location.href="../../okiem-praktyka/#"+b.dataset.pol.toLowerCase()}));
-      const fitK=()=>{const k=k2.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,gg=k2.querySelector(".klg2"),t=gg.getBoundingClientRect().top+scrollY;gg.style.height="";gg.style.height=Math.max(gg.scrollHeight,Math.round(tg-t))+"px";const v=k2.querySelector(".klx");v.style.height="";v.style.height=Math.max(v.scrollHeight,Math.round(gg.getBoundingClientRect().bottom-v.getBoundingClientRect().top))+"px"};
+      const fitK=()=>{const k=k2.querySelector(".stp-n"),tg=k.getBoundingClientRect().top+scrollY-60+innerHeight-50,gg=k2.querySelector(".klg3"),t=gg.getBoundingClientRect().top+scrollY;gg.style.height="";gg.style.height=Math.max(gg.scrollHeight,Math.round(tg-t))+"px";const v=k2.querySelector(".klx2");v.style.height="";v.style.height=Math.max(v.scrollHeight,Math.round(gg.getBoundingClientRect().bottom-v.getBoundingClientRect().top))+"px"};
       window.__openKls=()=>{k2.classList.add("on");setTimeout(()=>{fitK();scrollToSec(k2)},60)};addEventListener("resize",()=>{if(k2.classList.contains("on"))fitK()});
       k2.querySelector(".ds-back").addEventListener("click",()=>window.__openPrb());
       p.querySelector(".kls-go").addEventListener("click",()=>window.__openKls());{const kb2=SD.querySelector(".sdk-kls");kb2&&kb2.addEventListener("click",()=>window.__openKls())}}
