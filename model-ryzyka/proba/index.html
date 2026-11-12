@@ -2439,7 +2439,7 @@ let MODE="stab";try{MODE=localStorage.getItem("rt_mrp_mode")||"stab"}catch(_){}
 let rx=SV0.x,ry=SV0.y;
 const NDS=[...cube.querySelectorAll(".nd")];let YB=[];
 function place(){}
-let set=()=>{cube.classList.remove("ease");cube.classList.toggle("fr",Math.abs(rx)<16);YB.forEach(b=>b.style.transform=`rotateY(${-ry}deg)`);cube.dataset.lf=Math.round((((-ry)%360)+360)%360/90)%4;{{const e=cube.dataset.sk==="eng"?SOLO.z:0;cube.style.setProperty("--ef",(1-.28*e).toFixed(3));cube.style.setProperty("--eh",(1-.187*e).toFixed(3))}const s0=parseFloat(getComputedStyle(cube.parentElement).getPropertyValue("--s")),Bk=1+(BASE.k-1)*SOLO.b,K=Bk+(SOLO.k-Bk)*SOLO.z,f=SOLO.b*(1-(SOLO.so?0:SOLO.z));SOLO.ox=BASE.o[0]*f*s0;SOLO.oy=BASE.o[1]*f*s0;cube.parentElement.style.translate=SOLO.so&&SOLO.z>0?`${(SOLO.so[0]*SOLO.z).toFixed(1)}px ${(SOLO.so[1]*SOLO.z).toFixed(1)}px`:"";
+let set=()=>{cube.classList.remove("ease");cube.classList.toggle("fr",Math.abs(rx)<16);YB.forEach(b=>b.style.transform=`rotateY(${-ry}deg)`);cube.dataset.lf=Math.round((((-ry)%360)+360)%360/90)%4;{{const e=cube.dataset.sk==="eng"?SOLO.z:0;cube.style.setProperty("--ef",(1-.28*e).toFixed(3));cube.style.setProperty("--eh",(1-.187*e).toFixed(3))}const s0=parseFloat(getComputedStyle(cube.parentElement).getPropertyValue("--s")),Bk=1+(BASE.k-1)*SOLO.b,K=Bk+(SOLO.k-Bk)*SOLO.z,f=SOLO.b*(1-(SOLO.so?0:SOLO.z));SOLO.ox=BASE.o[0]*f*s0;SOLO.oy=BASE.o[1]*f*s0;cube.parentElement.style.perspectiveOrigin=`calc(50% + ${SOLO.ox.toFixed(1)}px) calc(50% + ${SOLO.oy.toFixed(1)}px)`;cube.parentElement.style.translate=SOLO.so&&SOLO.z>0?`${(SOLO.so[0]*SOLO.z).toFixed(1)}px ${(SOLO.so[1]*SOLO.z).toFixed(1)}px`:"";
   if(Math.abs(K-1)>1e-4){cube.style.setProperty("--s",(s0*K).toFixed(2)+"px");cube.parentElement.style.perspective=(s0*5*K*Math.max(1,K/BASE.k)).toFixed(1)+"px"}else{cube.style.removeProperty("--s");cube.parentElement.style.perspective=""}}cube.style.transform=`translate(${SOLO.ox.toFixed(1)}px,${SOLO.oy.toFixed(1)}px) rotateX(${rx}deg) rotateY(${ry}deg) translate3d(calc(var(--s)*${(-SOLO.t[0]*SOLO.z).toFixed(4)}),calc(var(--s)*${(-SOLO.t[1]*SOLO.z).toFixed(4)}),calc(var(--s)*${(-SOLO.t[2]*SOLO.z).toFixed(4)}))`;NDS.forEach(n=>{n.style.transition="none";n.style.transform=`${n.dataset.t} rotateY(${-ry}deg) rotateX(${-rx}deg)`});place()};set();addEventListener("resize",place);
 const near=v=>ry+((((v-ry)%360)+540)%360-180);
 let tw=0;function anim(x,y,DD){cancelAnimationFrame(tw);const x0=rx,y0=ry,t0=performance.now(),D=matchMedia("(prefers-reduced-motion: reduce)").matches?1:(DD||700);
@@ -2452,6 +2452,7 @@ scene.addEventListener("pointerdown",e=>{if(MODE==="stab"||document.getElementBy
 scene.addEventListener("pointermove",e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;moved=Math.max(moved,Math.abs(dx)+Math.abs(dy));if(moved<4)return;ry=drag.ry+dx*.4;rx=Math.max(-90,Math.min(90,drag.rx-dy*.4));set()});
 scene.addEventListener("pointerup",e=>{scene.classList.remove("drag");const d=drag;drag=null;if(d&&moved<4){scene.releasePointerCapture(e.pointerId);const el=document.elementFromPoint(e.clientX,e.clientY),t=el&&el.closest("[data-f]");if(t)pick(t.dataset.f,false)}});
 scene.addEventListener("pointercancel",()=>{drag=null;scene.classList.remove("drag")});
+document.querySelector(".stage").addEventListener("pointerdown",e=>{if(MODE==="stab"||e.target.closest("#scene,button,a,#scards,.vtabs")||document.getElementById("cube").dataset.solo)return;cancelAnimationFrame(tw);drag={x:e.clientX,y:e.clientY,rx,ry};moved=0;scene.setPointerCapture(e.pointerId);scene.classList.add("drag")});
 document.querySelector(".stage").addEventListener("click",e=>{const b=e.target.closest(".fb,.ib");if(b)pick(b.dataset.f,b.classList.contains("fb"))});
 /* propozycje */
 /* panel */
@@ -2906,7 +2907,7 @@ BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
   box.addEventListener("click",e=>{const b=e.target.closest("[data-vm]");if(b){MODE=b.dataset.vm;try{localStorage.setItem("rt_mrp_mode",MODE)}catch(_){}if(MODE==="stab")go(SV0.x,SV0.y);ui()}});
   sv.addEventListener("click",()=>{SV0={x:Math.round(rx),y:Math.round(((ry%360)+540)%360-180)};try{localStorage.setItem("rt_mrp_view",JSON.stringify(SV0))}catch(_){}MODE="stab";try{localStorage.setItem("rt_mrp_mode",MODE)}catch(_){}ui();sv.textContent="Zapisano ✓";setTimeout(()=>sv.textContent="Zapisz ten widok jako stabilny",1500)});
   const o=set;set=function(){o();ui()};ui();
-  try{if(new URLSearchParams(location.search).has("ustaw")){document.body.appendChild(box);box.classList.add("vm-fix");box.insertAdjacentHTML("afterbegin",'<b class="vm-h">Ustawienie bryły</b>');
+  try{if(new URLSearchParams(location.search).has("ustaw")){MODE="dyn";ui();document.body.appendChild(box);box.classList.add("vm-fix");box.insertAdjacentHTML("afterbegin",'<b class="vm-h">Ustawienie bryły</b>');
     sv.addEventListener("click",()=>setTimeout(()=>{a.textContent=`Zapisano: X ${SV0.x}° · Y ${SV0.y}° – podaj mi te liczby`;box.dataset.m="dyn"},10))}}catch(_){}})();
 
 /* katalog koncepcji – kartoteka z kartami obszarów */
