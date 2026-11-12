@@ -2425,7 +2425,7 @@ inn.addEventListener("click",e=>{const b=e.target.closest("[data-mx]");if(b)setC
 function setEX(v){EX=v;try{localStorage.setItem("rt_mr_ex",v)}catch(_){}inn.querySelectorAll("[data-sv]").forEach(b=>b.classList.toggle("on",+b.dataset.sv===SV));inn.querySelectorAll("[data-mv]").forEach(b=>b.classList.toggle("on",+b.dataset.mv===MV));renderInner()}
 /* obrót – tylko na żądanie */
 let SOLO={z:0,t:[0,0,0],k:1,b:0,ox:0,oy:0};const BASE={k:1.32,o:[-1.05,-.19]};
-let SV0={x:-22,y:-34};try{const v=JSON.parse(localStorage.getItem("rt_mrp_view")||"null");if(v&&isFinite(v.x)&&isFinite(v.y))SV0=v}catch(_){}
+let SV0={x:-5,y:-9};try{const v=JSON.parse(localStorage.getItem("rt_mrp_view")||"null");if(v&&isFinite(v.x)&&isFinite(v.y))SV0=v}catch(_){}
 let MODE="stab";try{MODE=localStorage.getItem("rt_mrp_mode")||"stab"}catch(_){}
 let rx=SV0.x,ry=SV0.y;
 const NDS=[...cube.querySelectorAll(".nd")];let YB=[];
@@ -2436,7 +2436,7 @@ const near=v=>ry+((((v-ry)%360)+540)%360-180);
 let tw=0;function anim(x,y,DD){cancelAnimationFrame(tw);const x0=rx,y0=ry,t0=performance.now(),D=matchMedia("(prefers-reduced-motion: reduce)").matches?1:(DD||700);
   const st=t=>{const k=Math.min(1,(t-t0)/D),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;rx=x0+(x-x0)*e;ry=y0+(y-y0)*e;set();if(k<1)tw=requestAnimationFrame(st)};tw=requestAnimationFrame(st)}
 function go(x,y,D){anim(x,near(y),D)}
-document.getElementById("ctl").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(b){const[a,c]=b.dataset.r.split(",").map(Number);anim(Math.max(-90,Math.min(90,rx+a)),ry+c);return}if(e.target.closest("#biso"))go(-22,-34)});
+document.getElementById("ctl").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(b){const[a,c]=b.dataset.r.split(",").map(Number);anim(Math.max(-90,Math.min(90,rx+a)),ry+c);return}if(e.target.closest("#biso"))go(SV0.x,SV0.y)});
 function pick(id,turn){const f=AI[id];document.querySelectorAll("[data-f]").forEach(e=>e.classList.toggle("on",e.dataset.f===id));document.querySelectorAll(".rod").forEach(r=>r.classList.toggle("on",r.dataset.l.split(" ").includes(id)));if(turn&&f.v)go(f.v[0],f.v[1]);panel(f)}
 let drag=null,moved=0;
 scene.addEventListener("pointerdown",e=>{if(MODE==="stab"||document.getElementById("cube").dataset.sk==="stat"&&document.getElementById("cube").dataset.solo)return;cancelAnimationFrame(tw);drag={x:e.clientX,y:e.clientY,rx,ry};moved=0;scene.setPointerCapture(e.pointerId);scene.classList.add("drag")});
