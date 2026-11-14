@@ -2705,7 +2705,7 @@ setInterval(()=>{const on=document.querySelector("#ds-lb-wt.on .wts");if(!on){do
 })();
 </script><script>
 /* Wdrożenie procesowe: proces biznesowy (wniosek → ocena ryzyka → decyzja → umowa); model zostaje wdrożony do kroku oceny ryzyka, potem przez proces przechodzi wniosek */
-(()=>{const S=1.0,OX=40,OY=214,C=.866;const P=(x,y,z)=>[OX+(x-y)*C*S,OY+(x+y)*.5*S-z*S];
+(()=>{const S=1.0,OX=40,OY=150,C=.866;const P=(x,y,z)=>[OX+(x-y)*C*S,OY+(x+y)*.5*S-z*S];
 const Q=(u,w,z)=>P(u+w,-u+w,z),pts=a=>a.map(p=>Q(...p).map(v=>v.toFixed(1)).join(",")).join(" ");
 function box(x0,y0,z0,x1,y1,z1,o){o=o||{};const st=o.c||"#5c564d",fi=o.f||"rgba(92,86,77,.035)",ft=o.ft||"rgba(92,86,77,.06)";const pp=a=>a.map(p=>P(...p).map(v=>v.toFixed(1)).join(",")).join(" ");
   const F=(a,f)=>`<polygon points="${pp(a)}" fill="${f}" stroke="${st}" stroke-width="1.25" stroke-opacity=".85" stroke-linejoin="round"/>`;
@@ -2729,7 +2729,7 @@ function scene(){let g="";
   /* warunki */
   ["Regulacje","Szkolenia","Komunikacja"].forEach((x,i)=>{g+=`<g class="wps-g wps-g${i}" transform="translate(${8+i*98},6)"><rect width="92" height="22" rx="11" fill="#fffdf9" stroke="#cdbfa9"/><circle cx="11" cy="11" r="6.5" class="wps-gc"/><text x="11" y="14" text-anchor="middle" class="wps-gt">✓</text><text x="23" y="14.5" class="wps-gn">${x}</text></g>`});
   g+=`<g id="wpsTok"></g>`;
-  return`<svg class="wts-svg" viewBox="0 0 480 290" aria-hidden="true">${g}</svg>`}
+  return`<svg class="wts-svg" viewBox="0 0 480 222" aria-hidden="true">${g}</svg>`}
 window.__wpsHTML=()=>`<div class="lbp lbp-d wts wps"><div class="wts-hd"><b class="lbp-k">Model w procesie ECL</b><div class="wts-st">${["Warunki","Wdrożenie","Proces"].map((n,i)=>`<span data-e="${i+1}">${n}</span>`).join('<i>→</i>')}</div></div>${scene()}<p class="wts-cap">Po spełnieniu warunków model staje się częścią kwartalnego procesu ECL: z danych o portfelu liczy odpisy, które akceptuje Komitet Ryzyka, a księgowość ujmuje w wyniku.</p></div>`;
 const mod=z=>{const c=62+L/2;return box(c-12+12,-c-12+12,z,c+12+12,-c+12+12,z+24,{c:"#8f5a40",f:"rgba(143,90,64,.12)",ft:"rgba(143,90,64,.26)"})};
 const modAt=z=>{const u=62+L/2;const x0=u-12,x1=u+12;/* środek kroku w świecie: (u,-u) */return box(u-12,-u-12,z,u+12,-u+12,z+24,{c:"#8f5a40",f:"rgba(143,90,64,.12)",ft:"rgba(143,90,64,.26)"})};
@@ -2737,7 +2737,7 @@ const tok=(u)=>{const p=Q(u,0,H);return`<g transform="translate(${(p[0]-7).toFix
 let t0=0,raf=0,done=false;const END=6200,ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
 function frame(ts){const h=document.querySelector("#ds-lb-wp.on .wps");if(!h){raf=0;return}if(!t0)t0=ts;const t=Math.min(ts-t0,END);
   const gOn=[500,1000,1500].map(x=>t>=x);gOn.forEach((v,i)=>h.querySelector(".wps-g"+i).classList.toggle("on",v));
-  const fm=Math.max(0,Math.min(1,(t-1900)/1100)),z=110-(110-H)*ease(fm),inn=fm>=1;h.querySelector("#wpsM").innerHTML=modAt(z)+(()=>{const p=P(62+L/2-12,-(62+L/2)+12,z+24);return`<text x="${(p[0]-6).toFixed(1)}" y="${(p[1]-6).toFixed(1)}" class="wts-ct" style="fill:#8f5a40" text-anchor="end">MODEL ECL</text>`})();
+  const fm=Math.max(0,Math.min(1,(t-1900)/1100)),z=72-(72-H)*ease(fm),inn=fm>=1;h.querySelector("#wpsM").innerHTML=modAt(z)+(()=>{const p=P(62+L/2-12,-(62+L/2)+12,z+24);return`<text x="${(p[0]-6).toFixed(1)}" y="${(p[1]-6).toFixed(1)}" class="wts-ct" style="fill:#8f5a40" text-anchor="end">MODEL ECL</text>`})();
   h.querySelector(".wpb1").classList.toggle("on",inn);h.querySelector(".wpl1").classList.toggle("on",inn);
   const ft=Math.max(0,Math.min(1,(t-3300)/2500)),tu=-6+(186+L-8+6)*ft;h.querySelector("#wpsTok").innerHTML=ft>0?tok(tu):"";
   ST.forEach((s,i)=>{if(i!==1)h.querySelector(".wpb"+i).classList.toggle("on",ft>0&&tu>=s.u-4);if(i!==1)h.querySelector(".wpl"+i).classList.toggle("on",ft>0&&tu>=s.u-4)});
