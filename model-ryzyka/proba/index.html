@@ -2305,6 +2305,10 @@ body.wdm .mh .wrap>div:first-child,body.wdm .mh-r>:not(.vtslot),body.wdm .mw .st
 .wte{display:flex;align-items:stretch;gap:6px}.wte-c{flex:1;border-radius:11px;padding:9px 10px;display:flex;flex-direction:column;gap:2px;background:#f0e8dd}.wte-c b{font:700 13px ui-monospace,Menlo,Consolas,monospace;color:#0d0d0d}.wte-c small{font-size:10.5px;line-height:1.3;color:#5c564d}.wte-c em{margin-top:auto;font-style:normal;font:600 11px ui-monospace,Menlo,Consolas,monospace;color:#a8694c}
 .wte-2{background:#0d0d0d}.wte-2 b{color:#fcf9f5}.wte-2 small{color:#cfc6b9}.wte-2 em{color:#d9b39b}.wte-a{align-self:center;font-style:normal;color:#b29e84}
 .wtk{margin-top:auto}
+.wty{display:flex;flex-direction:column;margin-top:4px}.wty .lbqg-h{margin-bottom:4px}
+.wty-r{display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid #ece4d8}.wty-r:last-child{border-bottom:0}
+.wty-i{flex:none;width:34px;height:34px;border-radius:9px;background:#f3e9dc;display:grid;place-items:center}.wty-i svg{width:20px;height:20px;fill:none;stroke:#c0782f;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.wty-r b{display:block;font-size:12.5px;font-weight:600;color:#0d0d0d;line-height:1.25}.wty-r small{display:block;font-size:11px;color:#5c564d}
 .wpg{grid-template-columns:1fr 1fr;grid-template-rows:1fr auto}.wpc{grid-column:1 / -1}
 .wpr{display:grid;gap:6px}.wpr-r{display:grid;grid-template-columns:1fr auto;gap:2px 10px;background:#f0e8dd;border-radius:11px;padding:8px 11px}.wpr-r b{font-size:13px;font-weight:600;color:#0d0d0d}.wpr-r em{font-style:normal;font-size:10.5px;font-weight:600;color:#a8694c;align-self:center}.wpr-r small{grid-column:1 / -1;font-size:11.5px;color:#5c564d}
 .wpl{display:grid;gap:0}.wpl-r{display:grid;grid-template-columns:26px 150px 1fr;align-items:baseline;gap:6px;padding:8px 0;border-bottom:1px dashed #e6dccd}.wpl-r i{font:italic 12px var(--serif);color:#a8694c}.wpl-r b{font-size:12.5px;font-weight:600;color:#0d0d0d}.wpl-r small{font-size:11.5px;color:#5c564d}
@@ -2636,7 +2640,7 @@ const ENV=[{k:"dev",n:"DEV",t:0,a:22,h:42,c:"#7d8b95",r:[["Wersja","1.8-dev"],["
 function scene(){let g="";
   /* szyna na podłodze */
   const r0=P(-30,30,0),r1=P(166,-166,0);g+=`<line x1="${r0[0]}" y1="${r0[1]}" x2="${r1[0]}" y2="${r1[1]}" stroke="#cdbfa9" stroke-width="1"/>`;
-  ENV.forEach((e,i)=>{const c=e.t,y=-e.t;g+=box(c-e.a,y-e.a,0,c+e.a,y+e.a,e.h,{cl:"wts-env wts-"+e.k});const f=P(c+e.a,y+e.a,0);g+=tag(f[0]-46,f[1]+10,e.n,e.r,e.c,"wts-t-"+e.k);
+  ENV.forEach((e,i)=>{const c=e.t,y=-e.t;g+=box(c-e.a,y-e.a,0,c+e.a,y+e.a,e.h,{cl:"wts-env wts-"+e.k});const f=P(c+e.a,y+e.a,0),ty=P(ENV[2].t+ENV[2].a,-ENV[2].t+ENV[2].a,0)[1]+20;g+=tag(f[0]-46-(e.k==="prod"?10:0),ty,e.n,e.r,e.c,"wts-t-"+e.k);
     if(i<2){const n=ENV[i+1],p=P(c+e.a+4,y-e.a-4,0),q=P(n.t-n.a-4,-n.t+n.a+4,0);const m=P((c+n.t)/2,-(c+n.t)/2,0);g+=`<line x1="${(m[0]-14).toFixed(1)}" y1="${m[1].toFixed(1)}" x2="${(m[0]+12).toFixed(1)}" y2="${m[1].toFixed(1)}" stroke="#ad6b4e" stroke-width="1.4" stroke-dasharray="4 3" class="wts-flow" marker-end="url(#wtsA)"/>`}});
   /* dane pod PROD, wyniki nad PROD */
   const pr=ENV[2],pc=P(pr.t,-pr.t,0),db=[pc[0]+72,pc[1]+30];
@@ -2646,22 +2650,22 @@ function scene(){let g="";
   g+=`<path d="M${wy[0]},${wy[1]-2} C ${wy[0]+40},${wy[1]-40} ${ox+120},${oy+30} ${ox+92},${oy+16}" fill="none" stroke="#8f5a40" stroke-width="1.3" stroke-dasharray="3 3" class="wts-flow wts-out"/>`;
   g+=tag(ox,oy,"WYNIKI",[["ECL","3,80 mld zł"]],"#8f5a40","wts-res");
   g+=`<g id="wtsCube"></g>`;
-  return`<svg class="wts-svg" viewBox="0 0 480 330" aria-hidden="true"><defs><marker id="wtsA" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#ad6b4e"/></marker></defs>${g}</svg>`}
+  return`<svg class="wts-svg" viewBox="0 0 480 340" aria-hidden="true"><defs><marker id="wtsA" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#ad6b4e"/></marker></defs>${g}</svg>`}
 window.__wtsHTML=()=>`<div class="lbp lbp-d wts"><div class="wts-hd"><b class="lbp-k">Droga kodu na produkcję</b><div class="wts-st">${["DEV","TEST","PROD"].map((n,i)=>`<span data-e="${["dev","test","prod"][i]}">${n}</span>`).join('<i>→</i>')}</div></div>${scene()}<p class="wts-cap">Ta sama wersja kodu przechodzi przez trzy środowiska. Na produkcję trafia dopiero po testach i odbiorze – i stamtąd co miesiąc liczy wyniki.</p></div>`;
 /* animacja kostki modelu */
 const H=[0,0,0];const at=(e,z)=>[e.t,-e.t,z];const E=ENV;
 const K=[[...at(E[0],96),0],[...at(E[0],10),1],[...at(E[0],10),1],[...at(E[0],96),0],[...at(E[1],96),0],[...at(E[1],10),2],[...at(E[1],10),2],[...at(E[1],96),0],[...at(E[2],106),0],[...at(E[2],14),3],[...at(E[2],14),3],[...at(E[2],14),3]],DUR=[700,700,1300,500,800,700,1600,500,800,700,2000,900];
 const cube=(x,y,z,s)=>{const a=s/2;return box(x-a,y-a,z,x+a,y+a,z+s,{c:"#7b4d8f",f:"rgba(123,77,143,.12)",ft:"rgba(123,77,143,.22)"})};
-let t0=0,raf=0;const TOT=DUR.reduce((a,b)=>a+b,0),ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
-function frame(ts){const host=document.querySelector("#ds-lb-wt.on .wts");if(!host){raf=0;return}const g=host.querySelector("#wtsCube");if(!t0)t0=ts;let t=(ts-t0)%TOT,i=0;while(t>DUR[i]){t-=DUR[i];i++}
+let t0=0,raf=0,done=false;const TOT=DUR.reduce((a,b)=>a+b,0),ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+function frame(ts){const host=document.querySelector("#ds-lb-wt.on .wts");if(!host){raf=0;return}const g=host.querySelector("#wtsCube");if(!t0)t0=ts;const END=TOT-DUR[DUR.length-1]-DUR[DUR.length-2]*.01;let t=Math.min(ts-t0,END),i=0;while(t>DUR[i]&&i<DUR.length-1){t-=DUR[i];i++}const fin=ts-t0>=END;
   const a=K[i],b=K[(i+1)%K.length],f=ease(t/DUR[i]);const x=a[0]+(b[0]-a[0])*f,y=a[1]+(b[1]-a[1])*f,z=a[2]+(b[2]-a[2])*f;const p=P(x,y,z+16);
   g.innerHTML=cube(x,y,z,16)+`<text x="${(p[0]+14).toFixed(1)}" y="${(p[1]-2).toFixed(1)}" class="wts-ct">kod v1.7</text>`;
   const stage=a[3]||(b[3]&&f>.6?b[3]:0),ek=["","dev","test","prod"][stage];
   host.querySelectorAll(".wts-env").forEach(e=>e.classList.toggle("act",!!ek&&e.classList.contains("wts-"+ek)));host.querySelectorAll(".wts-st span").forEach(s=>s.classList.toggle("on",s.dataset.e===ek));
   host.classList.toggle("live",ek==="prod");
   const sec=document.getElementById("ds-lb-wt");if(sec){const st=[...sec.querySelectorAll(".icp-s")],m={dev:[0,1],test:[2,3],prod:[4,5]}[ek]||[];st.forEach((s,j)=>s.classList.toggle("hl",m.includes(j)))}
-  raf=requestAnimationFrame(frame)}
-setInterval(()=>{if(!raf&&document.querySelector("#ds-lb-wt.on .wts")){t0=0;raf=requestAnimationFrame(frame)}},500);
+  if(fin){raf=0;done=true;return}raf=requestAnimationFrame(frame)}
+setInterval(()=>{const on=document.querySelector("#ds-lb-wt.on .wts");if(!on){done=false;return}if(!raf&&!done){t0=0;raf=requestAnimationFrame(frame)}},400);
 })();
 </script>
 <script src="../../koncepcje/model.js?v=1"></script><script src="../../koncepcje/dane.js?v=20261104b"></script><script src="../../koncepcje/techniki.js?v=20261104b"></script>
@@ -3381,7 +3385,7 @@ Object.entries(RT).forEach(([k,r])=>BI["q_"+k]={id:"q_"+k,n:r.n});
       const WTS=[["Specyfikacja","opis formuł, segmentów i parametrów z dokumentacji v2.6"],["Kod produkcyjny","SAS 11.4 · silnik v1.7 · code review"],["Testy","jednostkowe, regresyjne, porównanie z modelem referencyjnym"],["Odbiór","akceptacja właściciela modelu i walidacji"],["Uruchomienie","przeniesienie na PROD w oknie zmian"],["Monitoring","pierwsze przeliczenia porównane z testem równoległym"]];
       const R9=`<div class="wtg"><div class="icp">${WTS.map((x,i)=>`<div class="icp-s"><span>${String(i+1).padStart(2,"0")}</span><b>${x[0]}</b><small>${x[1]}</small></div>`).join("")}</div>
         <div class="wkb"><span class="lbqg-h">Testy przed uruchomieniem</span><table class="wtt"><thead><tr><th>Test</th><th>Zakres</th><th>Wynik</th></tr></thead><tbody>${[["Jednostkowe","każdy moduł osobno","64 / 64"],["Regresyjne","cały przebieg na danych historycznych","128 / 128"],["Model referencyjny","ECL z kodu a ECL z modelu zatwierdzonego","Δ 0,02%"],["Test równoległy","3 miesiące obok starej wersji","zgodny"],["Wydajność","pełny portfel","42 min"]].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td><b>${r[2]}</b></td></tr>`).join("")}</tbody></table></div>
-        <div class="wkb"><span class="lbqg-h">Środowiska i wersje</span><div class="wte">${[["DEV","programowanie i testy jednostkowe","v1.8-dev"],["TEST","testy regresyjne i odbiór","v1.7"],["PROD","przeliczenia miesięczne","v1.7"]].map((e,i)=>`<div class="wte-c wte-${i}"><b>${e[0]}</b><small>${e[1]}</small><em>${e[2]}</em></div>`).join('<i class="wte-a">→</i>')}</div><div class="icw-k wtk"><div><small>Rejestr zmian</small><b>14 zmian · 2025</b></div><div><small>Ostatnie wdrożenie</small><b>14.03.2026</b></div><div><small>Rozbieżności z dokumentacją</small><b>brak</b></div></div></div></div>`;
+        <div class="wkb"><span class="lbqg-h">Środowiska i wersje</span><div class="wte">${[["DEV","programowanie i testy jednostkowe","v1.8-dev"],["TEST","testy regresyjne i odbiór","v1.7"],["PROD","przeliczenia miesięczne","v1.7"]].map((e,i)=>`<div class="wte-c wte-${i}"><b>${e[0]}</b><small>${e[1]}</small><em>${e[2]}</em></div>`).join('<i class="wte-a">→</i>')}</div><div class="wty"><span class="lbqg-h">Typy wdrożenia modelu</span>${[["Replikacja kodu modelu","w środowisku produkcyjnym",'<rect x="7" y="7" width="9" height="9" rx="2"/><path d="M4 13V5a1 1 0 0 1 1-1h8"/>'],["Integracja kodu modelu","ze środowiskiem produkcyjnym",'<path d="M8 4h3v2.2a1.6 1.6 0 1 0 3 0V4h3v3h-2.2a1.6 1.6 0 1 0 0 3H17v6H4v-6h2.2a1.6 1.6 0 1 0 0-3H4V4z" transform="scale(.9) translate(1 1)"/>'],["Integracja wyników modelu","ze środowiskiem produkcyjnym",'<rect x="4" y="5" width="12" height="10" rx="1.5"/><path d="M4 8.5h12M8.5 8.5V15"/>']].map(x=>`<div class="wty-r"><span class="wty-i"><svg viewBox="0 0 20 20">${x[2]}</svg></span><span><b>${x[0]}</b><small>${x[1]}</small></span></div>`).join("")}</div><div class="icw-k wtk"><div><small>Rejestr zmian</small><b>14 zmian · 2025</b></div><div><small>Ostatnie wdrożenie</small><b>14.03.2026</b></div><div><small>Rozbieżności z dokumentacją</small><b>brak</b></div></div></div></div>`;
       const WPR=[["Odpisy ECL","co kwartał","Departament Ryzyka liczy · Komitet zatwierdza · Księgowość ujmuje"],["Decyzje kredytowe","codziennie","scoring i PD w systemie wniosków"],["Ceny kredytów","przy każdej ofercie","koszt ryzyka w cenie"],["Plan i ICAAP","rocznie","scenariusze i kapitał wewnętrzny"]];
       const WRL=[["Właściciel modelu","odpowiada za model i jego zmiany"],["Użytkownicy","stosują wyniki w procesach"],["Walidacja","niezależnie ocenia model"],["IT","utrzymuje silnik i dane"],["Audyt wewnętrzny","sprawdza cały cykl życia"]];
       const R10=`<div class="wtg wpg"><div class="wkb"><span class="lbqg-h">Gdzie model zmienia decyzje</span><div class="wpr">${WPR.map(r=>`<div class="wpr-r"><b>${r[0]}</b><em>${r[1]}</em><small>${r[2]}</small></div>`).join("")}</div></div>
