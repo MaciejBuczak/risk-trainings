@@ -2015,6 +2015,15 @@ body.ustaw .mh,body.rot .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh 
 .klup-b:hover{background:#9a5c41;transform:translateY(-1px);box-shadow:0 14px 26px -12px rgba(173,107,78,.8)}
 .klup-b:hover i{transform:translateX(3px)}
 .klup-b:active{background:#8a5238}
+.klup{gap:4px!important;padding:11px 14px 12px 18px!important}.klup h3{font-size:18px!important;margin:0 0 6px!important}
+.klqg{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1;min-height:0}
+.klqb{display:flex;flex-direction:column;gap:4px;background:#fff;border:1px solid #e6dccd;border-radius:12px;padding:9px 11px 10px;min-height:0}
+.klqb-k{font:600 9.5px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a8694c}
+.klqb b{font:400 15px/1.2 var(--display);color:#0d0d0d}
+.klqh{display:flex;align-items:center;gap:10px;margin-bottom:6px}.klqh h3{margin:0!important}
+.klqb p{font-size:11.5px!important;line-height:1.45!important;margin:0!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.klqb-b{margin-top:auto;align-self:flex-start;padding:7px 14px!important;font-size:12px!important}
+.klup-UL .klqb{background:#1c1a17;border-color:#2e2a25}.klup-UL .klqb b{color:#fcf9f5}.klup-UL .klqb p{color:#c9bfb0}.klup-UL .klqb-k{color:#d9a88f}
 
 /* Regulacje prawne – układ poziomy */
 .lawg2{display:grid;grid-template-rows:1fr 1fr;gap:12px}
@@ -3039,7 +3048,8 @@ setEX(EX);setCX(1);
       const wide=k=>`<article class="klc klw"><div class="klw-h"><span class="kx-k ${k[0]}">${k[0]}</span><h3>${k[1]}</h3><p class="klc-q">${k[2]}</p><em>${pl(k[5])}</em></div><div class="klw-g">${KX[k[0]].map(x=>`<div class="klw-c"><b>${x[0]}</b><p>${x[1]}</p></div>`).join("")}<div class="klw-c klw-m"><b>Kluczowe modele</b><div class="klw-mg">${KM[k[0]].map(m=>`<div><strong>${m[0]}</strong><span>${m[1]}</span></div>`).join("")}</div></div></div></article>`;
       const LUP={EL:["Strata oczekiwana pod lupą","Średnia strata wygląda niewinnie. Ale z jakiego okresu jest ta średnia – i co, gdy PD, LGD i wykorzystanie limitów rosną naraz?"],
         UL:["Strata nieoczekiwana pod lupą","Kapitał na zdarzenie raz na tysiąc lat – kto to sprawdzi? I co z korelacjami, które w kryzysie przestają być stałe?"]};
-      const lupa=K=>`<div class="klup klup-${K}"><span class="klup-k">Okiem praktyka · <i class="kx-k ${K}">${K}</i></span><h3>${LUP[K][0]}</h3><p>${LUP[K][1]}</p><div class="klup-f"><button type="button" class="klup-b pol-go" data-pol="${K}">Przeczytaj moje uwagi <i>→</i></button><span>4 tezy · 3 min</span></div></div>`;
+      const LB2={EL:["ec","Odpisy i koszt ryzyka","Koszyki, pokrycie i koszt ryzyka w wyniku banku."],UL:["ic","Adekwatność kapitałowa","ICAAP, kapitał wewnętrzny i współczynnik."]};
+      const lupa=K=>`<div class="klup klup-${K}"><div class="klqh"><span class="klup-k"><i class="kx-k ${K}">${K}</i></span><h3>${K==="EL"?"Strata oczekiwana":"Strata nieoczekiwana"}</h3></div><div class="klqg"><div class="klqb"><span class="klqb-k">W liczbach banku</span><b>${LB2[K][1]}</b><p>${LB2[K][2]}</p><button type="button" class="klup-b klqb-b" onclick="window.__openLB&&window.__openLB('${LB2[K][0]}')">Zobacz <i>→</i></button></div><div class="klqb"><span class="klqb-k">Okiem praktyka</span><b>${K} pod lupą</b><p>${K==="EL"?"Średnia strata – ale z jakiego okresu?":"Kapitał na zdarzenie raz na tysiąc lat."}</p><button type="button" class="klup-b klqb-b pol-go" data-pol="${K}">Przeczytaj <i>→</i></button></div></div></div>`;
       k2.innerHTML=`<div class="sds-w"><div class="sds-l"><span class="stp-n">Klasy modeli</span><h2>Klasy modeli ryzyka</h2><p class="dsp">Każdy model odpowiada na jedno z kilku podstawowych pytań o ryzyko. Klasa mówi, jakie to pytanie i czym bank pokrywa wynik.</p>
         <div class="klx2">${lupa("EL")}${lupa("UL")}</div></div>
         <div class="sds-r"><button type="button" class="sd-back ds-back">↓ Koncepcje modeli ryzyka</button><div class="klg3"><div class="klm"><article class="klc klc-n klwn"><span class="klc-k">Jedna liczba, różne pytania</span><h3>Dlaczego klasa ma znaczenie</h3><p>To samo PD jest w EL średnią, w UL punktem wyjścia do kwantyla, a w stresie wynikiem scenariusza.</p></article>${wide(KDm.EL)}${wide(KDm.UL)}</div><aside class="klo"><span class="klc-k">Inne klasy</span>${mini(KDm.P)}${mini(KDm.S)}${mini(KDm.V)}</aside></div></div></div>`;
