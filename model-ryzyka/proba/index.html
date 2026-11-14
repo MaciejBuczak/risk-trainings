@@ -2286,7 +2286,14 @@ body.ustaw .mh,body.rot .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh 
 .wts-flow{animation:wtsF 1.2s linear infinite}@keyframes wtsF{to{stroke-dashoffset:-14}}
 .wts-res,.wts-out{opacity:.25;transition:opacity .5s}.wts.live .wts-res,.wts.live .wts-out{opacity:1}
 .wts-cap{margin:0!important;font-size:12px!important;line-height:1.5!important;color:#5c564d!important}
-#ds-lb-wt .icp-s{transition:background .4s}#ds-lb-wt .icp-s.hl{background:#d9b39b!important}
+#ds-lb-wt .icp-s,#ds-lb-wp .icp-s{transition:background .4s}#ds-lb-wp .icp-s.hl{background:#d9b39b!important}
+.wps-pr polygon{transition:fill .4s,stroke .4s}.wps-pr.on polygon{fill:rgba(173,107,78,.16);stroke:#ad6b4e}
+.wps-ok{font:700 10px var(--body);fill:#ad6b4e;opacity:0;transition:opacity .4s}.wps-ok.on{opacity:1}
+.wps-br{transition:stroke .3s}.wps-br.on{stroke:#ad6b4e;stroke-dasharray:none}
+.wps-t{opacity:.45;transition:opacity .4s}.wps-t.on{opacity:1}
+.wps-bar{transform-box:fill-box;transform-origin:0% 50%;transition:transform .7s ease}.wps-gate.open .wps-bar{transform:rotate(-62deg)}
+.wps-gc{fill:#f0e8dd;stroke:#cdbfa9;transition:fill .3s,stroke .3s}.wps-gt{font:700 8px var(--body);fill:#fff;opacity:0;transition:opacity .3s}.wps-g.on .wps-gc{fill:#5e7a4e;stroke:#5e7a4e}.wps-g.on .wps-gt{opacity:1}.wps-g.on rect{stroke:#5e7a4e}
+.wps-gn{font:700 8.5px var(--body);fill:#0d0d0d}.wps-gs{font:500 7px var(--body);fill:#6b645a}#ds-lb-wt .icp-s.hl{background:#d9b39b!important}
 .mh-mr{top:calc(100% + 16px)!important;width:220px!important;gap:5px!important;padding-top:9px!important}.mh-mr:not(.mh-wd){top:calc(100% + 124px)!important}.mh-mr p{font-size:13px!important;line-height:1.4!important;margin:0!important}.mh-mr button{white-space:nowrap;align-self:flex-start;padding:5px 14px!important}
 body.wdm .mh .wrap>div:first-child,body.wdm .mh-r>:not(.vtslot),body.wdm .mw .stage{visibility:hidden!important;pointer-events:none!important}
 #ds-lb-wd{margin-top:-360px;position:relative;z-index:4;background:transparent}
@@ -2672,46 +2679,53 @@ function frame(ts){const host=document.querySelector("#ds-lb-wt.on .wts");if(!ho
 setInterval(()=>{const on=document.querySelector("#ds-lb-wt.on .wts");if(!on){done=false;return}if(!raf&&!done){t0=0;raf=requestAnimationFrame(frame)}},400);
 })();
 </script><script>
-/* Wdrożenie procesowe: scena REGULACJE → UŻYTKOWNICY → DECYZJE, wyniki modelu wchodzą do procesów banku */
-(()=>{const S=1.34,OX=58,OY=236,C=.866;const P=(x,y,z)=>[OX+(x-y)*C*S,OY+(x+y)*.5*S-z*S];
+/* Wdrożenie procesowe: model → bramka warunków (regulacje, szkolenia, komunikacja) → wyniki rozchodzą się do procesów banku */
+(()=>{const S=1.0,OX=72,OY=222,C=.866;const P=(x,y,z)=>[OX+(x-y)*C*S,OY+(x+y)*.5*S-z*S];
 const pts=a=>a.map(p=>P(...p).map(v=>v.toFixed(1)).join(",")).join(" ");
 function box(x0,y0,z0,x1,y1,z1,o){o=o||{};const st=o.c||"#5c564d",fi=o.f||"rgba(92,86,77,.035)",ft=o.ft||"rgba(92,86,77,.06)";
   const L=(a,b)=>{const p=P(...a),q=P(...b);return`<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${q[0].toFixed(1)}" y2="${q[1].toFixed(1)}" stroke="${st}" stroke-width=".8" stroke-dasharray="3 3" opacity=".4"/>`};
-  const F=a=>`<polygon points="${pts(a)}" fill="${fi}" stroke="${st}" stroke-width="1.25" stroke-opacity=".85" stroke-linejoin="round"/>`;
-  return`<g class="${o.cl||""}">${L([x0,y0,z0],[x1,y0,z0])}${L([x0,y0,z0],[x0,y1,z0])}${L([x0,y0,z0],[x0,y0,z1])}${F([[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]])}${F([[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]])}<polygon points="${pts([[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]])}" fill="${ft}" stroke="${st}" stroke-width="1.25" stroke-opacity=".85" stroke-linejoin="round"/></g>`}
-function tag(x,y,h,rows,col,cl){const w=92,rh=12;return`<g class="wts-tag ${cl||""}" transform="translate(${x.toFixed(1)},${y.toFixed(1)})"><rect x="0" y="0" width="${w}" height="${15+rows.length*rh+3}" rx="3" fill="#fffdf9" stroke="${col}" stroke-width="1"/><path d="M0,3 a3 3 0 0 1 3,-3 h${w-6} a3 3 0 0 1 3,3 v10 h-${w} z" fill="${col}"/><text x="6" y="9.8" class="wts-th">${h}</text>${rows.map((r,i)=>`<text x="6" y="${24+i*rh}" class="wts-tr">${r[0]}</text><text x="${w-6}" y="${24+i*rh}" class="wts-tv" text-anchor="end">${r[1]}</text>`).join("")}</g>`}
-const ENV=[{k:"dev",n:"REGULACJE",t:0,a:22,h:42,c:"#7d8b95",r:[["Podręcznik","v3.1"],["Instrukcja","v3.1"]]},{k:"test",n:"UŻYTKOWNICY",t:68,a:22,h:42,c:"#b0895f",r:[["Szkolenia","46 osób"],["Status","znany"]]},{k:"prod",n:"DECYZJE",t:136,a:26,h:56,c:"#2b2723",r:[["Procesy","4"],["Od","Q1 2026"]]}];
+  const F=(a,f)=>`<polygon points="${pts(a)}" fill="${f}" stroke="${st}" stroke-width="1.25" stroke-opacity=".85" stroke-linejoin="round"/>`;
+  return`<g class="${o.cl||""}">${o.nd?"":L([x0,y0,z0],[x1,y0,z0])+L([x0,y0,z0],[x0,y1,z0])+L([x0,y0,z0],[x0,y0,z1])}${F([[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]],fi)}${F([[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]],fi)}${F([[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],ft)}</g>`}
+function tag(x,y,h,rows,col,cl,w){w=w||92;const rh=12;return`<g class="wts-tag ${cl||""}" transform="translate(${x.toFixed(1)},${y.toFixed(1)})"><rect x="0" y="0" width="${w}" height="${15+rows.length*rh+3}" rx="3" fill="#fffdf9" stroke="${col}" stroke-width="1"/><path d="M0,3 a3 3 0 0 1 3,-3 h${w-6} a3 3 0 0 1 3,3 v10 h-${w} z" fill="${col}"/><text x="6" y="9.8" class="wts-th">${h}</text>${rows.map((r,i)=>`<text x="6" y="${24+i*rh}" class="wts-tr">${r[0]}</text><text x="${w-6}" y="${24+i*rh}" class="wts-tv" text-anchor="end">${r[1]}</text>`).join("")}</g>`}
+const PR=[{u:96,n:"ODPISY",r:[["co kwartał",""]]},{u:136,n:"KREDYTY",r:[["codziennie",""]]},{u:176,n:"CENY",r:[["w ofercie",""]]},{u:216,n:"ICAAP",r:[["co rok",""]]}];
+const D=34,TU0=34,TU1=232,GU=60;
+const G=[["Regulacje","podręcznik · instrukcja"],["Szkolenia","46 użytkowników"],["Komunikacja","status dla interesariuszy"]];
 function scene(){let g="";
-  /* szyna na podłodze */
-  const r0=P(-30,30,0),r1=P(166,-166,0);g+=`<line x1="${r0[0]}" y1="${r0[1]}" x2="${r1[0]}" y2="${r1[1]}" stroke="#cdbfa9" stroke-width="1"/>`;
-  ENV.forEach((e,i)=>{const c=e.t,y=-e.t;g+=box(c-e.a,y-e.a,0,c+e.a,y+e.a,e.h,{cl:"wts-env wts-"+e.k});const f=P(c+e.a,y+e.a,0),ty=P(ENV[2].t+ENV[2].a,-ENV[2].t+ENV[2].a,0)[1]+20;g+=tag(f[0]-46-(e.k==="prod"?10:0),ty,e.n,e.r,e.c,"wts-t-"+e.k);
-    if(i<2){const n=ENV[i+1],p=P(c+e.a+4,y-e.a-4,0),q=P(n.t-n.a-4,-n.t+n.a+4,0);const m=P((c+n.t)/2,-(c+n.t)/2,0);g+=`<line x1="${(m[0]-14).toFixed(1)}" y1="${m[1].toFixed(1)}" x2="${(m[0]+12).toFixed(1)}" y2="${m[1].toFixed(1)}" stroke="#ad6b4e" stroke-width="1.4" stroke-dasharray="4 3" class="wts-flow" marker-end="url(#wpsA)"/>`}});
-  /* dane pod PROD, wyniki nad PROD */
-  const pr=ENV[2],pc=P(pr.t,-pr.t,0),db=[pc[0]+72,pc[1]+30];
-  g+=`<path d="M${db[0]-24},${db[1]-4} C ${pc[0]+40},${db[1]-4} ${pc[0]+30},${pc[1]+8} ${pc[0]+22},${pc[1]-4}" fill="none" stroke="#4f7390" stroke-width="1.2" stroke-dasharray="3 3" class="wts-flow"/>`;
-  g+=`<g class="wts-db">${[-16,0,16].map(dx=>`<circle cx="${db[0]+dx}" cy="${db[1]-8}" r="5" fill="#fffdf9" stroke="#4f7390" stroke-width="1.2"/><path d="M${db[0]+dx-8},${db[1]+8} a8 8 0 0 1 16 0" fill="#fffdf9" stroke="#4f7390" stroke-width="1.2"/>`).join("")}<text x="${db[0]+24}" y="${db[1]+24}" class="wts-lb" fill="#4f7390" text-anchor="end">INTERESARIUSZE</text></g>`;
-  const wt=P(pr.t,-pr.t,pr.h+0),wy=P(pr.t+pr.a,-pr.t-pr.a,pr.h);const ox=wt[0]-46,oy=8;
-  g+=`<path d="M${wy[0]},${wy[1]-2} C ${wy[0]+40},${wy[1]-40} ${ox+120},${oy+30} ${ox+92},${oy+16}" fill="none" stroke="#8f5a40" stroke-width="1.3" stroke-dasharray="3 3" class="wts-flow wts-out"/>`;
-  g+=tag(ox,oy,"W PROCESACH",[["Odpisy","kwartalnie"],["Ceny","na bieżąco"]],"#8f5a40","wts-res");
-  g+=`<g id="wpsCube"></g>`;
-  return`<svg class="wts-svg" viewBox="0 0 480 340" aria-hidden="true"><defs><marker id="wpsA" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#ad6b4e"/></marker></defs>${g}</svg>`}
-window.__wpsHTML=()=>`<div class="lbp lbp-d wts wps"><div class="wts-hd"><b class="lbp-k">Droga do decyzji</b><div class="wts-st">${["Regulacje","Ludzie","Decyzje"].map((n,i)=>`<span data-e="${["dev","test","prod"][i]}">${n}</span>`).join('<i>→</i>')}</div></div>${scene()}<p class="wts-cap">Wyniki modelu trafiają do decyzji dopiero, gdy procedury są zaktualizowane, a użytkownicy przeszkoleni. O statusie modelu wiedzą wszyscy interesariusze.</p></div>`;
-/* animacja kostki modelu */
-const H=[0,0,0];const at=(e,z)=>[e.t,-e.t,z];const E=ENV;
-const K=[[...at(E[0],96),0],[...at(E[0],10),1],[...at(E[0],10),1],[...at(E[0],96),0],[...at(E[1],96),0],[...at(E[1],10),2],[...at(E[1],10),2],[...at(E[1],96),0],[...at(E[2],106),0],[...at(E[2],14),3],[...at(E[2],14),3],[...at(E[2],14),3]],DUR=[700,700,1300,500,800,700,1600,500,800,700,2000,900];
-const cube=(x,y,z,s)=>{const a=s/2;return box(x-a,y-a,z,x+a,y+a,z+s,{c:"#8f5a40",f:"rgba(143,90,64,.12)",ft:"rgba(143,90,64,.24)"})};
-let t0=0,raf=0,done=false;const TOT=DUR.reduce((a,b)=>a+b,0),ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
-function frame(ts){const host=document.querySelector("#ds-lb-wp.on .wps");if(!host){raf=0;return}const g=host.querySelector("#wpsCube");if(!t0)t0=ts;const END=TOT-DUR[DUR.length-1]-DUR[DUR.length-2]*.01;let t=Math.min(ts-t0,END),i=0;while(t>DUR[i]&&i<DUR.length-1){t-=DUR[i];i++}const fin=ts-t0>=END;
-  const a=K[i],b=K[(i+1)%K.length],f=ease(t/DUR[i]);const x=a[0]+(b[0]-a[0])*f,y=a[1]+(b[1]-a[1])*f,z=a[2]+(b[2]-a[2])*f;const p=P(x,y,z+16);
-  g.innerHTML=cube(x,y,z,16)+`<text x="${(p[0]+14).toFixed(1)}" y="${(p[1]-2).toFixed(1)}" class="wts-ct" style="fill:#8f5a40">wyniki v3.1</text>`;
-  const stage=a[3]||(b[3]&&f>.6?b[3]:0),ek=["","dev","test","prod"][stage];
-  host.querySelectorAll(".wts-env").forEach(e=>e.classList.toggle("act",!!ek&&e.classList.contains("wts-"+ek)));host.querySelectorAll(".wts-st span").forEach(s=>s.classList.toggle("on",s.dataset.e===ek));
-  host.classList.toggle("live",ek==="prod");
-  const sec=document.getElementById("ds-lb-wp");if(sec){const st=[...sec.querySelectorAll(".icp-s")],m={dev:[0,1],test:[2,3],prod:[4,5]}[ek]||[];st.forEach((s,j)=>s.classList.toggle("hl",m.includes(j)))}
-  if(fin){raf=0;done=true;return}raf=requestAnimationFrame(frame)}
+  const r0=P(-40,40,0),r1=P(290,-290,0);g+=`<line x1="${r0[0]}" y1="${r0[1]}" x2="${r1[0]}" y2="${r1[1]}" stroke="#e0d6c6" stroke-width="1"/>`;
+  /* procesy: płaskie płyty */
+  PR.forEach((p,i)=>{g+=box(p.u-15,-p.u-15,0,p.u+15,-p.u+15,7,{cl:"wps-pr wps-p"+i,nd:1});const c=P(p.u,-p.u,7);g+=`<text x="${c[0].toFixed(1)}" y="${(c[1]+3).toFixed(1)}" class="wps-ok wps-k${i}" text-anchor="middle">✓</text>`});
+  /* pień i odgałęzienia na podłodze (z przodu płyt) */
+  const a=P(TU0+D*.0,-TU0+D*.0+30,0),T=u=>P(u+D/2,-u+D/2,0);const t0=T(TU0),t1=T(TU1);
+  g+=`<line x1="${t0[0]}" y1="${t0[1]}" x2="${t1[0]}" y2="${t1[1]}" stroke="#cdbfa9" stroke-width="1.3" stroke-dasharray="4 3"/>`;
+  g+=`<line id="wpsTr" x1="${t0[0]}" y1="${t0[1]}" x2="${t0[0]}" y2="${t0[1]}" stroke="#ad6b4e" stroke-width="1.8"/>`;
+  PR.forEach((p,i)=>{const q=T(p.u),f=P(p.u+15,-p.u+15,0);g+=`<line x1="${q[0]}" y1="${q[1]}" x2="${(f[0]-12).toFixed(1)}" y2="${(f[1]-7).toFixed(1)}" stroke="#cdbfa9" stroke-width="1.1" stroke-dasharray="3 3" class="wps-br wps-b${i}"/>`});
+  /* bramka na pniu */
+  const gb=T(GU),gt=[gb[0],gb[1]-34];g+=`<g class="wps-gate"><line x1="${gb[0]}" y1="${gb[1]+6}" x2="${gt[0]}" y2="${gt[1]}" stroke="#56514a" stroke-width="1.6"/><line class="wps-bar" x1="${gb[0]-1}" y1="${gb[1]-26}" x2="${gb[0]+40}" y2="${gb[1]-6}" stroke="#56514a" stroke-width="3" stroke-linecap="round"/></g>`;
+  /* model */
+  g+=box(-26,-26,0,26,26,52,{cl:"wps-model",c:"#5c564d"});const mi=P(0,0,26);g+=box(-9,-9,18,9,9,36,{c:"#8f5a40",f:"rgba(143,90,64,.14)",ft:"rgba(143,90,64,.26)",nd:1});
+  const mt=P(-26,26,0);g+=tag(mt[0]-4,mt[1]+16,"MODEL",[["Wyniki","v3.1"]],"#56514a","",74);
+  /* warunki: trzy znaczniki nad bramką */
+  G.forEach((x,i)=>{const X=gt[0]-30+i*0,Y=gt[1]-104+i*30;g+=`<g class="wps-g wps-g${i}" transform="translate(${(gt[0]+18).toFixed(1)},${(gt[1]-100+i*30).toFixed(1)})"><rect width="128" height="24" rx="12" fill="#fffdf9" stroke="#cdbfa9"/><circle cx="12" cy="12" r="7" class="wps-gc"/><text x="12" y="15.2" text-anchor="middle" class="wps-gt">✓</text><text x="25" y="10.5" class="wps-gn">${x[0]}</text><text x="25" y="19.5" class="wps-gs">${x[1]}</text></g>`});
+  g+=`<path d="M${gt[0]+18},${gt[1]-28} C ${gt[0]+4},${gt[1]-26} ${gt[0]},${gt[1]-14} ${gt[0]},${gt[1]-2}" fill="none" stroke="#cdbfa9" stroke-width="1" stroke-dasharray="3 3"/>`;
+  /* etykiety procesów – w jednym rzędzie */
+  const ty=P(TU1+D/2,-TU1+D/2,0)[1]+16;PR.forEach((p,i)=>{const c=P(p.u+15,-p.u+15,0);g+=tag(c[0]-44,ty,p.n,p.r,"#8f5a40","wps-t wps-t"+i,62)});
+  g+=`<circle id="wpsDot" r="4" fill="#ad6b4e" opacity="0"/>`;
+  return`<svg class="wts-svg" viewBox="0 0 480 300" aria-hidden="true">${g}</svg>`}
+window.__wpsHTML=()=>`<div class="lbp lbp-d wts wps"><div class="wts-hd"><b class="lbp-k">Droga do decyzji</b><div class="wts-st">${["Warunki","Uruchomienie","Decyzje"].map((n,i)=>`<span data-e="${i+1}">${n}</span>`).join('<i>→</i>')}</div></div>${scene()}<p class="wts-cap">Wyniki trafiają do procesów dopiero wtedy, gdy regulacje są zaktualizowane, użytkownicy przeszkoleni, a interesariusze wiedzą o statusie modelu.</p></div>`;
+const T=u=>P(u+D/2,-u+D/2,0);
+let t0=0,raf=0,done=false;const END=5200;
+function frame(ts){const h=document.querySelector("#ds-lb-wp.on .wps");if(!h){raf=0;return}if(!t0)t0=ts;const t=Math.min(ts-t0,END);
+  const gOn=[700,1250,1800].map(x=>t>=x);gOn.forEach((v,i)=>h.querySelector(".wps-g"+i).classList.toggle("on",v));const open=t>=2300;h.querySelector(".wps-gate").classList.toggle("open",open);
+  const f=Math.max(0,Math.min(1,(t-2500)/2000)),u=TU0+(TU1-TU0)*f,a=T(TU0),b=T(u),tr=h.querySelector("#wpsTr");tr.setAttribute("x2",b[0].toFixed(1));tr.setAttribute("y2",b[1].toFixed(1));
+  const d=h.querySelector("#wpsDot");d.setAttribute("cx",b[0].toFixed(1));d.setAttribute("cy",b[1].toFixed(1));d.setAttribute("opacity",f>0&&f<1?1:0);
+  PR.forEach((p,i)=>{const on=f>0&&u>=p.u+8;h.querySelectorAll(`.wps-p${i},.wps-b${i},.wps-k${i},.wps-t${i}`).forEach(e=>e.classList.toggle("on",on))});
+  const ph=t<2300?1:t<4500?2:3;h.querySelectorAll(".wts-st span").forEach(s=>s.classList.toggle("on",+s.dataset.e===ph&&t>500));h.classList.toggle("live",ph===3);
+  const sec=document.getElementById("ds-lb-wp");if(sec){const m=t<500?[]:ph===1?[0,1,2,3].filter((x,j)=>j===0?gOn[0]:j===1?gOn[0]:j===2?gOn[1]:gOn[2]):ph===2?[4]:[4,5];sec.querySelectorAll(".icp-s").forEach((s,j)=>s.classList.toggle("hl",m.includes(j)))}
+  if(t>=END){raf=0;done=true;return}raf=requestAnimationFrame(frame)}
 setInterval(()=>{const on=document.querySelector("#ds-lb-wp.on .wps");if(!on){done=false;return}if(!raf&&!done){t0=0;raf=requestAnimationFrame(frame)}},400);
 })();
 </script>
+
 <script src="../../koncepcje/model.js?v=1"></script><script src="../../koncepcje/dane.js?v=20261104b"></script><script src="../../koncepcje/techniki.js?v=20261104b"></script>
 <script>
 (()=>{
