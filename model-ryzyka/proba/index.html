@@ -2205,9 +2205,6 @@ body.ustaw .mh,body.rot .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh 
 .lbk i.ar-u,.lbp i.ar-u{font-style:normal;color:#5e7a4e;display:inline}.lbk i.ar-d,.lbp i.ar-d{font-style:normal;color:#9a3b25;display:inline}
 .lbk .fr{display:flex;flex-direction:column;font-size:10.5px;color:#5c564d}.lbk .fr em{font-style:normal}.lbk .fr em:first-child{border-bottom:1px solid #cdbfa9;padding-bottom:2px;margin-bottom:2px}
 .lbk:hover{border-color:#ad6b4e}
-.navback{position:fixed;left:22px;bottom:14px;z-index:60;display:inline-flex;align-items:center;gap:6px;max-width:min(420px,calc(100vw - 44px));font:500 12px var(--body);color:#0d0d0d;background:#fcf9f5;border:1px solid #cdbfa9;border-radius:999px;padding:7px 14px 7px 11px;cursor:pointer;box-shadow:0 10px 24px -14px rgba(40,30,15,.55);opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .3s,transform .3s,background .2s,border-color .2s}
-.navback.on{opacity:1;pointer-events:auto;transform:none}.navback:hover{background:#fff;border-color:#ad6b4e}.navback:active{background:#f0e8dd}
-.navback i{font-style:normal;color:#ad6b4e;font-weight:700}.navback b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dbgo{position:absolute;z-index:6;font:600 13px var(--body);border:1px solid #ad6b4e;background:#f5efe7;color:#ad6b4e;border-radius:999px;padding:8px 17px;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity .5s,transform .5s,background .2s,color .2s;white-space:nowrap}
 .dbgo.on{opacity:1;pointer-events:auto;transform:none}.dbgo:hover{background:#ad6b4e;color:#fff}.dbgo:active{background:#8a5238;color:#fff}.dbgo i{font-style:normal;margin-left:5px}
 .pzl{display:flex;flex-direction:column;gap:12px}
@@ -2988,21 +2985,7 @@ setEX(EX);setCX(1);
   addEventListener("resize",()=>Object.values(DS).forEach(s2=>{if(s2.classList.contains("on")){dsFit(s2);dsLine(s2)}}));
   
 {const d=SD.querySelector(".sd-docs");d&&d.remove()}
-  /* powrót do poprzedniej strony: każde przejście przez scrollToSec zapamiętuje, skąd przyszliśmy */
-  const NAV=[];let navBack=false;const navBtn=document.createElement("button");navBtn.type="button";navBtn.className="navback";document.body.appendChild(navBtn);
-  const secName=x=>{if(!x)return"początek";const h=x.querySelector(".sds-l h2,h2");return h?h.textContent.trim():"poprzednia strona"};
-  function navCur(){const L=[SEC,...document.querySelectorAll(".sdsec.dsec.on")].filter(x=>x&&x.offsetHeight&&getComputedStyle(x).display!=="none");let best=null;for(const x of L){const r=x.getBoundingClientRect();if(r.top<=160&&r.bottom>160){best=x}}return best}
-  function navDraw(){const e=NAV[NAV.length-1];navBtn.classList.toggle("on",!!e);if(e)navBtn.innerHTML=`<i>←</i> Wróć: <b>${secName(e.sec)}</b>`}
-  let navPend=null;const navSnap=()=>{const c=navCur();return{sec:c,dy:c?scrollY-(c.getBoundingClientRect().top+scrollY):0,y:scrollY,t:Date.now()}};
-  document.addEventListener("click",ev=>{if(!navBack&&ev.target.closest("button,a"))navPend=navSnap()},true);
-  function navPush(target){if(navBack)return;const e=navPend&&Date.now()-navPend.t<2500?navPend:navSnap();navPend=null;if(e.sec===target)return;NAV.push(e);if(NAV.length>30)NAV.shift();navDraw()}
-  navBtn.addEventListener("click",()=>{const e=NAV.pop();navDraw();if(!e)return;navBack=true;const x=e.sec;
-    const go=()=>{const top=x?x.getBoundingClientRect().top+scrollY+e.dy:e.y;scrollTo({top:Math.max(0,top),behavior:"smooth"});setTimeout(()=>{navBack=false},900)};
-    if(x&&x.classList.contains("lbsec")&&!x.classList.contains("on")){window.__openLB&&window.__openLB(x.id.slice(6));setTimeout(go,180)}
-    else if(x&&x!==SEC&&!x.classList.contains("on")){x.classList.add("on");dispatchEvent(new Event("resize"));setTimeout(go,120)}
-    else go()});
-  document.addEventListener("click",ev=>{if(ev.target.closest(".vtabs button,.vdyn")){NAV.length=0;navDraw()}},true);
-  function scrollToSec(sec){navPush(sec);if(sec===SEC){scrollTo({top:window.__SL||730,behavior:"smooth"});return}const k=sec.querySelector(".stp-n"),off=60;scrollTo({top:k.getBoundingClientRect().top+scrollY-off,behavior:"smooth"})}
+  function scrollToSec(sec){if(sec===SEC){scrollTo({top:window.__SL||730,behavior:"smooth"});return}const k=sec.querySelector(".stp-n"),off=60;scrollTo({top:k.getBoundingClientRect().top+scrollY-off,behavior:"smooth"})}
   {const cats=SD.querySelector(".sd-cats");if(cats)SD.appendChild(cats);{const nv=document.querySelector(".bk-nav");nv&&SEC.querySelector(".sds-l").appendChild(nv)}SEC.querySelector(".sds-l").appendChild(BK)}
   window.__bkLine=k=>{const w=SEC.querySelector(".sds-w"),col=SD.querySelector(`.sd-more[data-k="${k}"]`).closest(".sdc");if(!w||!col)return;w.style.position="relative";
     const run=()=>{let sv=w.querySelector(".bkl-svg");if(!sv){w.insertAdjacentHTML("beforeend",'<svg class="bkl-svg"></svg>');sv=w.querySelector(".bkl-svg")}
