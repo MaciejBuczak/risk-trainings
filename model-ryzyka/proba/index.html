@@ -2278,6 +2278,15 @@ body.ustaw .mh,body.rot .mh{pointer-events:none}body.ustaw .mh a,body.ustaw .mh 
 .lbp-ic{gap:9px!important}.lbp-ic h3{margin:0;font:400 22px var(--serif);color:#0d0d0d}.lbp-ic p{margin:0;font-size:12.5px;line-height:1.5;color:#5c564d}
 .ic-go{align-self:flex-start;margin-top:4px;text-decoration:none;font:600 13px var(--body);background:#ad6b4e;color:#fff;border-radius:999px;padding:9px 18px;transition:background .2s}.ic-go:hover{background:#9a5c41}.ic-go:active{background:#8a5238}.ic-go i{font-style:normal;margin-left:5px}
 .ic-v{font-weight:600;color:#0d0d0d!important}
+.wts{gap:6px!important;background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}
+.wts-hd{display:flex;align-items:center;justify-content:space-between;gap:10px}.wts-st{display:flex;align-items:center;gap:6px;font:700 11px ui-monospace,Menlo,Consolas,monospace;color:#8a8173}.wts-st i{font-style:normal;color:#cdbfa9}.wts-st span{padding:3px 9px;border-radius:999px;border:1px solid #ddd3c4;transition:background .3s,color .3s,border-color .3s}.wts-st span.on{background:#0d0d0d;color:#fcf9f5;border-color:#0d0d0d}
+.wts-svg{width:100%;height:auto;display:block;overflow:visible}
+.wts-th{font:700 italic 7.5px var(--body);letter-spacing:.18em;fill:#fff}.wts-tr{font:500 7.5px var(--body);fill:#6b645a}.wts-tv{font:700 7.5px var(--body);fill:#0d0d0d}.wts-lb{font:700 8px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em}.wts-ct{font:700 8px ui-monospace,Menlo,Consolas,monospace;fill:#7b4d8f}
+.wts-env polygon,.wts-env line{transition:stroke .4s,fill .4s}.wts-env.act polygon{stroke:#ad6b4e;fill:rgba(173,107,78,.07)}.wts-env.act line{stroke:#ad6b4e}
+.wts-flow{animation:wtsF 1.2s linear infinite}@keyframes wtsF{to{stroke-dashoffset:-14}}
+.wts-res,.wts-out{opacity:.25;transition:opacity .5s}.wts.live .wts-res,.wts.live .wts-out{opacity:1}
+.wts-cap{margin:0!important;font-size:12px!important;line-height:1.5!important;color:#5c564d!important}
+#ds-lb-wt .icp-s{transition:background .4s}#ds-lb-wt .icp-s.hl{background:#d9b39b!important}
 .mh-mr{top:calc(100% + 24px)!important;width:340px!important;display:grid!important;grid-template-columns:1fr auto;column-gap:14px;row-gap:4px!important;align-items:center;padding-top:10px!important}.mh-mr>b{grid-column:1 / -1}.mh-mr:not(.mh-wd){top:calc(100% + 112px)!important}.mh-mr p{font-size:13px!important;line-height:1.4!important;margin:0!important}.mh-mr button{white-space:nowrap}
 body.wdm .mh .wrap>div:first-child,body.wdm .mh-r>:not(.vtslot),body.wdm .mw .stage{visibility:hidden!important;pointer-events:none!important}
 #ds-lb-wd{margin-top:-360px;position:relative;z-index:4;background:transparent}
@@ -2614,6 +2623,47 @@ body.wdm .mh .wrap>div:first-child,body.wdm .mh-r>:not(.vtslot),body.wdm .mw .st
     <div class="bottom"><span>© 2026 Maciej Buczak | Risk Research</span><span>Wersja próbna strony</span></div>
   </div>
 </footer>
+<script>
+/* Wdrożenie techniczne: scena DEV → TEST → PROD (rysunek liniowy jak bryły modelu), kostka modelu przechodzi przez środowiska */
+(()=>{const S=1.34,OX=58,OY=236,C=.866;const P=(x,y,z)=>[OX+(x-y)*C*S,OY+(x+y)*.5*S-z*S];
+const pts=a=>a.map(p=>P(...p).map(v=>v.toFixed(1)).join(",")).join(" ");
+function box(x0,y0,z0,x1,y1,z1,o){o=o||{};const st=o.c||"#5c564d",fi=o.f||"rgba(92,86,77,.035)",ft=o.ft||"rgba(92,86,77,.06)";
+  const L=(a,b)=>{const p=P(...a),q=P(...b);return`<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${q[0].toFixed(1)}" y2="${q[1].toFixed(1)}" stroke="${st}" stroke-width=".8" stroke-dasharray="3 3" opacity=".4"/>`};
+  const F=a=>`<polygon points="${pts(a)}" fill="${fi}" stroke="${st}" stroke-width="1.25" stroke-opacity=".85" stroke-linejoin="round"/>`;
+  return`<g class="${o.cl||""}">${L([x0,y0,z0],[x1,y0,z0])}${L([x0,y0,z0],[x0,y1,z0])}${L([x0,y0,z0],[x0,y0,z1])}${F([[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]])}${F([[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]])}<polygon points="${pts([[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]])}" fill="${ft}" stroke="${st}" stroke-width="1.25" stroke-opacity=".85" stroke-linejoin="round"/></g>`}
+function tag(x,y,h,rows,col,cl){const w=92,rh=12;return`<g class="wts-tag ${cl||""}" transform="translate(${x.toFixed(1)},${y.toFixed(1)})"><rect x="0" y="0" width="${w}" height="${15+rows.length*rh+3}" rx="3" fill="#fffdf9" stroke="${col}" stroke-width="1"/><path d="M0,3 a3 3 0 0 1 3,-3 h${w-6} a3 3 0 0 1 3,3 v10 h-${w} z" fill="${col}"/><text x="6" y="9.8" class="wts-th">${h}</text>${rows.map((r,i)=>`<text x="6" y="${24+i*rh}" class="wts-tr">${r[0]}</text><text x="${w-6}" y="${24+i*rh}" class="wts-tv" text-anchor="end">${r[1]}</text>`).join("")}</g>`}
+const ENV=[{k:"dev",n:"DEV",t:0,a:22,h:42,c:"#7d8b95",r:[["Wersja","1.8-dev"],["Testy","jednostkowe"]]},{k:"test",n:"TEST",t:68,a:22,h:42,c:"#b0895f",r:[["Wersja","1.7"],["Testy","128 / 128"]]},{k:"prod",n:"PROD",t:136,a:26,h:56,c:"#2b2723",r:[["Wersja","1.7"],["Liczy","co miesiąc"]]}];
+function scene(){let g="";
+  /* szyna na podłodze */
+  const r0=P(-30,30,0),r1=P(166,-166,0);g+=`<line x1="${r0[0]}" y1="${r0[1]}" x2="${r1[0]}" y2="${r1[1]}" stroke="#cdbfa9" stroke-width="1"/>`;
+  ENV.forEach((e,i)=>{const c=e.t,y=-e.t;g+=box(c-e.a,y-e.a,0,c+e.a,y+e.a,e.h,{cl:"wts-env wts-"+e.k});const f=P(c+e.a,y+e.a,0);g+=tag(f[0]-46,f[1]+10,e.n,e.r,e.c,"wts-t-"+e.k);
+    if(i<2){const n=ENV[i+1],p=P(c+e.a+4,y-e.a-4,0),q=P(n.t-n.a-4,-n.t+n.a+4,0);const m=P((c+n.t)/2,-(c+n.t)/2,0);g+=`<line x1="${(m[0]-14).toFixed(1)}" y1="${m[1].toFixed(1)}" x2="${(m[0]+12).toFixed(1)}" y2="${m[1].toFixed(1)}" stroke="#ad6b4e" stroke-width="1.4" stroke-dasharray="4 3" class="wts-flow" marker-end="url(#wtsA)"/>`}});
+  /* dane pod PROD, wyniki nad PROD */
+  const pr=ENV[2],pc=P(pr.t,-pr.t,0),db=[pc[0]+72,pc[1]+30];
+  g+=`<path d="M${db[0]-24},${db[1]-4} C ${pc[0]+40},${db[1]-4} ${pc[0]+30},${pc[1]+8} ${pc[0]+22},${pc[1]-4}" fill="none" stroke="#4f7390" stroke-width="1.2" stroke-dasharray="3 3" class="wts-flow"/>`;
+  g+=`<g class="wts-db"><path d="M${db[0]-22},${db[1]-6} v16 a22 6 0 0 0 44 0 v-16" fill="rgba(79,115,144,.06)" stroke="#4f7390" stroke-width="1.2"/><ellipse cx="${db[0]}" cy="${db[1]-6}" rx="22" ry="6" fill="#fffdf9" stroke="#4f7390" stroke-width="1.2"/><path d="M${db[0]-22},${db[1]+2} a22 6 0 0 0 44 0" fill="none" stroke="#4f7390" stroke-width=".8" opacity=".6"/><text x="${db[0]}" y="${db[1]+28}" class="wts-lb" fill="#4f7390" text-anchor="middle">DANE</text></g>`;
+  const wt=P(pr.t,-pr.t,pr.h+0),wy=P(pr.t+pr.a,-pr.t-pr.a,pr.h);const ox=wt[0]-46,oy=8;
+  g+=`<path d="M${wy[0]},${wy[1]-2} C ${wy[0]+40},${wy[1]-40} ${ox+120},${oy+30} ${ox+92},${oy+16}" fill="none" stroke="#8f5a40" stroke-width="1.3" stroke-dasharray="3 3" class="wts-flow wts-out"/>`;
+  g+=tag(ox,oy,"WYNIKI",[["ECL","3,80 mld zł"]],"#8f5a40","wts-res");
+  g+=`<g id="wtsCube"></g>`;
+  return`<svg class="wts-svg" viewBox="0 0 480 330" aria-hidden="true"><defs><marker id="wtsA" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#ad6b4e"/></marker></defs>${g}</svg>`}
+window.__wtsHTML=()=>`<div class="lbp lbp-d wts"><div class="wts-hd"><b class="lbp-k">Droga kodu na produkcję</b><div class="wts-st">${["DEV","TEST","PROD"].map((n,i)=>`<span data-e="${["dev","test","prod"][i]}">${n}</span>`).join('<i>→</i>')}</div></div>${scene()}<p class="wts-cap">Ta sama wersja kodu przechodzi przez trzy środowiska. Na produkcję trafia dopiero po testach i odbiorze – i stamtąd co miesiąc liczy wyniki.</p></div>`;
+/* animacja kostki modelu */
+const H=[0,0,0];const at=(e,z)=>[e.t,-e.t,z];const E=ENV;
+const K=[[...at(E[0],96),0],[...at(E[0],10),1],[...at(E[0],10),1],[...at(E[0],96),0],[...at(E[1],96),0],[...at(E[1],10),2],[...at(E[1],10),2],[...at(E[1],96),0],[...at(E[2],106),0],[...at(E[2],14),3],[...at(E[2],14),3],[...at(E[2],14),3]],DUR=[700,700,1300,500,800,700,1600,500,800,700,2000,900];
+const cube=(x,y,z,s)=>{const a=s/2;return box(x-a,y-a,z,x+a,y+a,z+s,{c:"#7b4d8f",f:"rgba(123,77,143,.12)",ft:"rgba(123,77,143,.22)"})};
+let t0=0,raf=0;const TOT=DUR.reduce((a,b)=>a+b,0),ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+function frame(ts){const host=document.querySelector("#ds-lb-wt.on .wts");if(!host){raf=0;return}const g=host.querySelector("#wtsCube");if(!t0)t0=ts;let t=(ts-t0)%TOT,i=0;while(t>DUR[i]){t-=DUR[i];i++}
+  const a=K[i],b=K[(i+1)%K.length],f=ease(t/DUR[i]);const x=a[0]+(b[0]-a[0])*f,y=a[1]+(b[1]-a[1])*f,z=a[2]+(b[2]-a[2])*f;const p=P(x,y,z+16);
+  g.innerHTML=cube(x,y,z,16)+`<text x="${(p[0]+14).toFixed(1)}" y="${(p[1]-2).toFixed(1)}" class="wts-ct">kod v1.7</text>`;
+  const stage=a[3]||(b[3]&&f>.6?b[3]:0),ek=["","dev","test","prod"][stage];
+  host.querySelectorAll(".wts-env").forEach(e=>e.classList.toggle("act",!!ek&&e.classList.contains("wts-"+ek)));host.querySelectorAll(".wts-st span").forEach(s=>s.classList.toggle("on",s.dataset.e===ek));
+  host.classList.toggle("live",ek==="prod");
+  const sec=document.getElementById("ds-lb-wt");if(sec){const st=[...sec.querySelectorAll(".icp-s")],m={dev:[0,1],test:[2,3],prod:[4,5]}[ek]||[];st.forEach((s,j)=>s.classList.toggle("hl",m.includes(j)))}
+  raf=requestAnimationFrame(frame)}
+setInterval(()=>{if(!raf&&document.querySelector("#ds-lb-wt.on .wts")){t0=0;raf=requestAnimationFrame(frame)}},500);
+})();
+</script>
 <script src="../../koncepcje/model.js?v=1"></script><script src="../../koncepcje/dane.js?v=20261104b"></script><script src="../../koncepcje/techniki.js?v=20261104b"></script>
 <script>
 (()=>{
@@ -3339,7 +3389,7 @@ Object.entries(RT).forEach(([k,r])=>BI["q_"+k]={id:"q_"+k,n:r.n});
         <div class="wkb wpc"><span class="lbqg-h">Przed startem w procesach</span><div class="wpc-g">${["procedura stosowania modelu przyjęta","harmonogram przeliczeń i terminy","szkolenia dla użytkowników","nakładki i wyjątki – zasady i akceptacja","raporty dla zarządu i komitetu","test użycia: wyniki naprawdę w decyzjach"].map(x=>`<span><i>✓</i>${x}</span>`).join("")}</div></div></div>`;
       const RB={mr:R1,bl:R24,rt:R4,ic:R5,ec:R6,dm:R7,wd:R8,wt:R9,wp:R10,pz:`<div class="pzw"><div class="pzw-t"><i></i><i></i><i></i><span>Klient SQL · STAGING_ECL</span><em class="pzw-st">połączono</em></div><div class="pzw-tabs"></div><pre class="pzw-q"></pre><div class="pzw-g"></div><div class="pzw-s"><span class="pzw-n"></span><span class="pzw-m"></span></div></div>`};
       const defL={mr:``,
-        bl:``,wd:``,wt:``,wp:``,dm:`<div class="lbp lbp-d dmv"><b class="lbp-k">Jedna wersja danych</b><h3>ABT_PD_2025Q4</h3><div class="dmv-g">${[["Stan na","31.12.2025"],["Wiersze","1 149 600"],["Zmienne","12"],["Źródła","DWH v4.2 · CRM v2.8 · MAKRO v1.5"]].map(x=>`<div><small>${x[0]}</small><b>${x[1]}</b></div>`).join("")}</div><p>Ta sama tabela – z tym samym identyfikatorem wersji – musi być widoczna w modelu, w silniku i w dokumentacji.</p></div>`,
+        bl:``,wd:``,wt:window.__wtsHTML?window.__wtsHTML():``,wp:``,dm:`<div class="lbp lbp-d dmv"><b class="lbp-k">Jedna wersja danych</b><h3>ABT_PD_2025Q4</h3><div class="dmv-g">${[["Stan na","31.12.2025"],["Wiersze","1 149 600"],["Zmienne","12"],["Źródła","DWH v4.2 · CRM v2.8 · MAKRO v1.5"]].map(x=>`<div><small>${x[0]}</small><b>${x[1]}</b></div>`).join("")}</div><p>Ta sama tabela – z tym samym identyfikatorem wersji – musi być widoczna w modelu, w silniku i w dokumentacji.</p></div>`,
         pz:`<div class="pzl"><div class="pzl-st">${[["src","00","Źródła","3 tabele"],["int","01","Integracja","3 → 1"],["fil","02","Filtrowanie","−4,2%"],["cln","03","Oczyszczanie","0,8%"]].map(x=>`<button type="button" class="pzb" data-st="${x[0]}"><span>${x[1]}</span><b>${x[2]}</b><em>${x[3]}</em></button>`).join("")}</div><div class="pzl-d"></div><button type="button" class="pzl-play">Odtwórz po kolei <i>▶</i></button></div>`,
         ec:`<div class="lbp lbp-d lbp-ic"><b class="lbp-k">Odpisy – problematyczne kwestie</b><h3>Procykliczność odpisów</h3><a class="ic-go" href="../../okiem-praktyka/#el">Przeczytaj moje uwagi <i>→</i></a><p>Odpisy rosną, gdy gospodarka zwalnia – i ograniczają kredyt wtedy, gdy jest najbardziej potrzebny. Wagi scenariuszy i nakładki zarządcze to w dużej mierze ocena ekspercka.</p></div>`,
         ic:`<div class="lbp lbp-d lbp-ic"><b class="lbp-k">Adekwatność kapitałowa – problematyczne kwestie</b><h3>Strata raz na tysiąc lat</h3><p>Kwantyl 99,9% to strata, której bank nie widział w danych. Korelacje w kryzysie przestają być stałe, a dywersyfikacja znika.</p><a class="ic-go" href="../../okiem-praktyka/#ul">Przeczytaj moje uwagi <i>→</i></a></div><div class="lbp lbp-d lbp-ic lbp-sys"><b class="lbp-k">Problemy finansowe banku · ryzyko systemowe · kryzysy</b><h3>Kryzysy stuletnie co dziesięć lat</h3><p>Modele zakładają, że skrajne straty są rzadkie i niezależne. Historia pokazuje, że kryzysy wracają, a ryzyka rosną razem.</p><a class="ic-go" href="../../okiem-praktyka/kryzysy-co-10-lat/">Przeczytaj <i>→</i></a></div>`,
