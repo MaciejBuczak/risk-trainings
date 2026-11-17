@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="../rt.css">
 <style>
+.top .wrap,.foot .wrap{max-width:1380px}
 .bnk .wrap{max-width:1380px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 60px;align-items:start;position:relative;min-height:calc(100vh - 120px)}
 .bnk{padding:clamp(24px,3vw,44px) 0 0;position:relative}
 .bnk h1{font-size:clamp(32px,3.6vw,50px);margin:16px 0 0;letter-spacing:-.02em}
@@ -55,8 +56,8 @@
       <div class="bnk-fr"><b>Adekwatność kapitałowa</b><p>Kapitał na straty nieoczekiwane.</p><a class="bnk-pill" href="../model-ryzyka/#ic">Zobacz <i>→</i></a></div>
     </div>
   </div>
-  <div class="bnk-r"><nav class="bnk-tabs" aria-label="Bank"><a class="on" href="./">Bank</a><a href="../model-ryzyka/#bl">Bilans i wynik</a><a href="../model-ryzyka/#rt">Wskaźniki</a><a href="../model-ryzyka/#mr">Modele w banku</a></nav><p class="bnk-d">Bank ocenia się trzema pytaniami: czy udźwignie straty, czy wystarczy mu pieniędzy i ile kosztuje go ryzyko. Za każdą z tych liczb stoją modele – od PD i LGD po LCR i kapitał ekonomiczny.</p></div>
-  <div class="bnk-stage"><svg id="bg" viewBox="78 -8 844 408" preserveAspectRatio="xMidYMid meet" aria-label="Bank w liczbach: kapitał, płynność i wynik"></svg></div>
+  <div class="bnk-r"><nav class="bnk-tabs" aria-label="Bank"><a class="on" href="./">Bank</a><a href="../model-ryzyka/#bl">Bilans i wynik</a><a href="../model-ryzyka/#rt">Wskaźniki</a><a href="../model-ryzyka/#mr">Modele w banku</a></nav><p class="bnk-d">Bilans, wynik i kapitał banku – i modele ryzyka, które zmieniają każdą z tych liczb. Strata oczekiwana trafia do odpisów, nieoczekiwana do wymogów kapitałowych, a całość działa w ramach regulacji.</p></div>
+  <div class="bnk-stage"><svg id="bg" viewBox="78 -8 844 408" preserveAspectRatio="xMidYMid meet" aria-label="Bank jako system: bilans, modele ryzyka, wynik, kapitał i regulacje"></svg></div>
 </div></section>
 </main>
 
@@ -69,40 +70,43 @@
   </div>
 </footer>
 <script>
-/* Grafika: trzy wskaźniki banku (kapitał, płynność, wynik) i karta „Bank w liczbach” */
-(()=>{const sv=document.getElementById("bg"),NS="http://www.w3.org/2000/svg";
-const Z=["#c49ea1","#d0a991","#d6cb8a","#c3caa7","#a7b5a0"];
-const G=[{x:230,k:"Kapitał",q:"czy bank udźwignie straty",m:"CET1",v:15.8,lo:0,hi:25,unit:"%",min:[10.5,"wymóg"],ap:[13,"apetyt"],z:[[0,10.5,0],[10.5,13,2],[13,25,4]],sub:[["łączny wsp.","18,9%"],["dźwignia","7,1%"]]},
- {x:500,k:"Płynność",q:"czy wystarczy pieniędzy",m:"LCR",v:158,lo:0,hi:250,unit:"%",min:[100,"wymóg"],ap:[120,"apetyt"],z:[[0,100,0],[100,120,2],[120,250,4]],sub:[["NSFR","132%"],["depozyty / kredyty","1,14"]]},
- {x:770,k:"Wynik",q:"ile kosztuje ryzyko",m:"koszt ryzyka",v:.24,lo:0,hi:1.2,unit:"%",min:[.9,"limit"],ap:[.6,"apetyt"],z:[[0,.6,4],[.6,.9,2],[.9,1.2,0]],sub:[["ROE","12,4%"],["NPL","3,1%"]],low:1}];
-const A0=-210,A1=30,R=74,W=15,cy=150;
-const P=(cx,a,r)=>[cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)];
-const ang=(g,v)=>A0+(A1-A0)*(v-g.lo)/(g.hi-g.lo);
-const arc=(cx,a,b,r)=>{const p=P(cx,a,r),q=P(cx,b,r);return `M${p[0].toFixed(1)},${p[1].toFixed(1)} A${r},${r} 0 ${b-a>180?1:0} 1 ${q[0].toFixed(1)},${q[1].toFixed(1)}`};
-const fmt=(g,v)=>(g.hi<5?v.toFixed(2):v.toFixed(v<100?1:0)).replace(".",",").replace(/,0$/,"");
-let h=`<defs><filter id="bsh" x="-10%" y="-30%" width="120%" height="170%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#3c2814" flood-opacity=".12"/></filter></defs>`;
-G.forEach(g=>{const cx=g.x;
-  h+=`<text x="${cx}" y="18" text-anchor="middle" font-size="9.5" font-weight="600" letter-spacing="1.6" fill="#a8694c">${g.k.toUpperCase()}</text><text x="${cx}" y="31" text-anchor="middle" font-size="9.5" fill="#8a8173" font-style="italic" style="font-family:var(--serif)">${g.q}</text>`;
-  h+=`<circle cx="${cx}" cy="${cy}" r="${R+W/2+9}" fill="#f6efe6" stroke="#e6dccd"/>`;
-  g.z.forEach(([a,b,c])=>{h+=`<path d="${arc(cx,ang(g,a)+.8,ang(g,b)-.8,R)}" fill="none" stroke="${Z[c]}" stroke-width="${W}" opacity=".45"/>`});
-  const va=ang(g,g.v);h+=`<path d="${arc(cx,A0,va,R-W/2-6)}" fill="none" stroke="${g.low?Z[4]:Z[4]}" stroke-width="5" stroke-linecap="round"/>`;
-  [[g.min,"#8a5238"],[g.ap,"#5c564d"]].forEach(([[t,l],c],i)=>{const a=ang(g,t),p1=P(cx,a,R-W/2-2),p2=P(cx,a,R+W/2+4),pl=P(cx,a,R+W/2+16);h+=`<line x1="${p1[0]}" y1="${p1[1]}" x2="${p2[0]}" y2="${p2[1]}" stroke="${c}" stroke-width="1.6"/><text x="${pl[0]}" y="${pl[1]+3}" text-anchor="${Math.cos(a*Math.PI/180)<-.2?"end":Math.cos(a*Math.PI/180)>.2?"start":"middle"}" font-size="8.5" fill="${c}">${l} ${fmt(g,t)}${g.unit}</text>`});
-  const pv=P(cx,va,R);h+=`<circle cx="${pv[0]}" cy="${pv[1]}" r="6.5" fill="#fffdf9" stroke="#0d0d0d" stroke-width="1.6"/>`;
-  h+=`<circle cx="${cx}" cy="${cy}" r="34" fill="#fffdf9" stroke="#e6dccd"/><text x="${cx}" y="${cy+6}" text-anchor="middle" font-size="21" font-weight="400" fill="#0d0d0d" style="font-family:'Archivo Black',sans-serif">${fmt(g,g.v)}%</text><text x="${cx}" y="${cy+20}" text-anchor="middle" font-size="8.5" fill="#8a8173">${g.m}</text>`;
-  g.sub.forEach((s,i)=>{const y=cy+R+28+i*14;h+=`<text x="${cx-6}" y="${y}" text-anchor="end" font-size="9.5" fill="#5c564d">${s[0]}</text><text x="${cx+6}" y="${y}" font-size="9.5" font-weight="600" fill="#0d0d0d">${s[1]}</text>`});
-  h+=`<circle cx="${cx}" cy="${cy+R+56}" r="2.6" fill="#8a8173"/><path d="M${cx},${cy+R+58} V${cy+R+76}" stroke="#a9a091" stroke-dasharray="3 3"/>`});
-const yb=cy+R+76;h+=`<path d="M${G[0].x},${yb} H${G[2].x}" stroke="#a9a091" stroke-dasharray="3 3"/><circle cx="${G[1].x}" cy="${yb}" r="2.6" fill="#8a8173"/><path d="M${G[1].x},${yb} V${yb+18}" stroke="#a9a091" stroke-dasharray="3 3"/>`;
-const cx0=170,cw=660,ct=yb+18,ch=92;
-h+=`<g filter="url(#bsh)"><rect x="${cx0}" y="${ct}" width="${cw}" height="${ch}" rx="10" fill="#fcf9f5" stroke="#e6dccd"/></g><path d="M${cx0+10},${ct} H${cx0+cw-10} Q${cx0+cw},${ct} ${cx0+cw},${ct+10} V${ct+24} H${cx0} V${ct+10} Q${cx0},${ct} ${cx0+10},${ct} Z" fill="#efe5d6"/>`;
-h+=`<text x="${cx0+14}" y="${ct+16}" font-size="11" font-style="italic" font-weight="600" fill="#2b2723" style="font-family:var(--serif)">Bank w liczbach</text><text x="${cx0+cw-14}" y="${ct+16}" text-anchor="end" font-size="8.5" fill="#5c564d">bank przykładowy · stan na 31.12.2025 · mld zł</text>`;
-h+=`<text x="${cx0+14}" y="${ct+62}" font-size="26" fill="#0d0d0d" style="font-family:'Archivo Black',sans-serif">64,5</text><text x="${cx0+82}" y="${ct+50}" font-size="9.5" fill="#5c564d">aktywa</text><text x="${cx0+82}" y="${ct+63}" font-size="9.5" fill="#5c564d">razem</text>`;
-h+=`<line x1="${cx0+150}" y1="${ct+34}" x2="${cx0+150}" y2="${ct+82}" stroke="#e6dccd"/>`;
-[["Kredyty netto","48,2",Z[4]],["Odpisy ECL (−)","−3,8",Z[1]],["Wynik brutto","1,90",Z[3]]].forEach((r,i)=>{const y=ct+43+i*15;h+=`<rect x="${cx0+166}" y="${y-7}" width="8" height="8" rx="1.5" fill="${r[2]}"/><text x="${cx0+182}" y="${y}" font-size="9.5" fill="#2b2723">${r[0]}</text><text x="${cx0+320}" y="${y}" text-anchor="end" font-size="9.5" font-weight="600" font-style="italic" fill="#0d0d0d">${r[1]}</text>`});
-h+=`<line x1="${cx0+340}" y1="${ct+34}" x2="${cx0+340}" y2="${ct+82}" stroke="#e6dccd"/>`;
-const bx=cx0+356,bw=180;["kapitał","płynność","wynik"].forEach((l,i)=>{const y=ct+43+i*15;h+=`<text x="${bx}" y="${y}" font-size="9" fill="#5c564d">${l}</text>`;[0,1,2,3,4].forEach(j=>{h+=`<rect x="${bx+58+j*22}" y="${y-7}" width="20" height="7" rx="2" fill="${Z[j]}" opacity="${j===4?1:.55}"/>`});h+=`<path d="M${bx+58+4*22+10},${y-11} l-3,-4 h6 z" fill="#0d0d0d"/>`});
-h+=`<text x="${cx0+cw-14}" y="${ct+52}" text-anchor="end" font-size="9.5" fill="#5c564d">trzy liczby</text><text x="${cx0+cw-14}" y="${ct+66}" text-anchor="end" font-size="10" font-style="italic" fill="#5e7a4e" style="font-family:var(--serif)">w apetycie na ryzyko</text>`;
+/* Grafika: bank jako system – bilans w środku, modele ryzyka podpięte do pozycji, wynik i kapitał pod spodem, wskaźniki, a wokół regulacje */
+(()=>{const sv=document.getElementById("bg");
+const C={el:"#a8694c",ul:"#4f7390",alm:"#7a5c99",pl:"#8a8a3c",ink:"#2b2723",mut:"#8a8173",ln:"#e6dccd",card:"#fcf9f5",pan:"#efe5d6"};
+const T=(x,y,t,o={})=>`<text x="${x}" y="${y}" font-size="${o.s||9.5}" ${o.a?`text-anchor="${o.a}"`:""} ${o.w?`font-weight="${o.w}"`:""} fill="${o.c||C.ink}" ${o.ls?`letter-spacing="${o.ls}"`:""} ${o.i?`font-style="italic" style="font-family:var(--serif)"`:""}${o.d?` style="font-family:'Archivo Black',sans-serif"`:""}>${t}</text>`;
+let h=`<defs><filter id="bsh" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#3c2814" flood-opacity=".12"/></filter><marker id="ba" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#a9a091"/></marker></defs>`;
+// otoczenie regulacyjne
+h+=`<rect x="96" y="6" width="808" height="392" rx="26" fill="rgba(239,229,214,.28)" stroke="#cdbfa9" stroke-dasharray="5 5"/>`;
+h+=`<rect x="330" y="-6" width="340" height="22" rx="11" fill="#f4efe8" stroke="#cdbfa9"/>`+T(500,9,"REGULACJE · MSSF 9 · CRR III · REKOMENDACJE KNF",{a:"middle",s:8.5,w:600,ls:1.2,c:C.el});
+// bilans
+const bx=330,by=38,bw=340,bh=196;
+h+=`<g filter="url(#bsh)"><rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="12" fill="${C.card}" stroke="${C.ln}"/></g><path d="M${bx+12},${by} H${bx+bw-12} Q${bx+bw},${by} ${bx+bw},${by+12} V${by+28} H${bx} V${by+12} Q${bx},${by} ${bx+12},${by} Z" fill="${C.pan}"/>`;
+h+=T(bx+14,by+19,"Bilans banku",{s:12,w:600,i:1})+T(bx+bw-14,by+19,"mld zł",{a:"end",s:8.5,c:C.mut});
+h+=`<line x1="${bx+bw/2}" y1="${by+36}" x2="${bx+bw/2}" y2="${by+bh-12}" stroke="${C.ln}"/>`;
+const AK=[["Kasa i papiery","16,3","pp"],["Kredyty brutto","52,0","kr"],["Odpisy ECL (−)","−3,8","ecl"],["= Aktywa","64,5","s"]],PA=[["Depozyty","48,9","dep"],["Emisje","6,1","em"],["Kapitał własny","9,5","kap"],["= Pasywa","64,5","s"]];
+const RY={};
+[[AK,bx+12,"AKTYWA"],[PA,bx+bw/2+12,"PASYWA"]].forEach(([L,x,lab])=>{h+=T(x,by+50,lab,{s:8.5,w:600,ls:1.4,c:C.mut});L.forEach((r,i)=>{const y=by+74+i*30,w=bw/2-24;
+  if(r[2]==="s")h+=`<line x1="${x}" y1="${y-14}" x2="${x+w}" y2="${y-14}" stroke="#b29e84" stroke-width="1.2"/>`;
+  else h+=`<rect x="${x}" y="${y-14}" width="${w}" height="22" rx="6" fill="${r[2]==="ecl"?"#f6e9e2":"#fffdf9"}" stroke="${r[2]==="ecl"?"#e3c3b2":"#ece3d6"}"/>`;
+  h+=T(x+8,y+1,r[0],{s:9.5,w:r[2]==="s"?600:400,c:r[2]==="ecl"?"#8a4f37":C.ink})+T(x+w-8,y+1,r[1],{a:"end",s:9.5,w:600,i:r[2]!=="s",c:r[2]==="ecl"?"#8a4f37":C.ink});RY[r[2]]=[x,y-3,x+w]})});
+// modele po lewej i prawej
+const ML=[["PD · LGD · EAD","straty kredytowe",C.el,"kr",56],["Scenariusze makro","forward-looking",C.el,"ecl",92],["VaR · IRRBB","ryzyko rynkowe",C.ul,"pp",128]],MR=[["Modele depozytów","osad i oprocentowanie",C.alm,"dep",56],["LCR · NSFR","płynność",C.pl,"dep",92],["Kapitał ekonomiczny","ryzyko nieoczekiwane",C.ul,"kap",128]];
+h+=T(184,40,"MODELE RYZYKA",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut})+T(816,40,"MODELE RYZYKA",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut});
+ML.forEach(m=>{const y=m[4]+12,x=120,w=128;h+=`<rect x="${x}" y="${y-13}" width="${w}" height="30" rx="8" fill="${C.card}" stroke="${C.ln}"/><rect x="${x}" y="${y-13}" width="3.5" height="30" rx="1.5" fill="${m[2]}"/>`+T(x+11,y,m[0],{s:9.5,w:600,c:m[2]})+T(x+11,y+11,m[1],{s:8,c:C.mut});const t=RY[m[3]];h+=`<path d="M${x+w},${y+1} C${x+w+40},${y+1} ${t[0]-40},${t[1]} ${t[0]-2},${t[1]}" fill="none" stroke="${m[2]}" stroke-width="1.1" stroke-dasharray="3 3" opacity=".8"/><circle cx="${t[0]-2}" cy="${t[1]}" r="2.3" fill="${m[2]}"/>`});
+MR.forEach(m=>{const y=m[4]+12,w=128,x=880-w;h+=`<rect x="${x}" y="${y-13}" width="${w}" height="30" rx="8" fill="${C.card}" stroke="${C.ln}"/><rect x="${x+w-3.5}" y="${y-13}" width="3.5" height="30" rx="1.5" fill="${m[2]}"/>`+T(x+w-11,y,m[0],{a:"end",s:9.5,w:600,c:m[2]})+T(x+w-11,y+11,m[1],{a:"end",s:8,c:C.mut});const t=RY[m[3]];h+=`<path d="M${x},${y+1} C${x-40},${y+1} ${t[2]+40},${t[1]} ${t[2]+2},${t[1]}" fill="none" stroke="${m[2]}" stroke-width="1.1" stroke-dasharray="3 3" opacity=".8"/><circle cx="${t[2]+2}" cy="${t[1]}" r="2.3" fill="${m[2]}"/>`});
+// modele w procesach
+h+=T(184,190,"W PROCESACH BANKU",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut});["kredytowanie","wycena i rezerwy","planowanie kapitału"].forEach((t,i)=>{const y=206+i*19;h+=`<rect x="128" y="${y-11}" width="112" height="16" rx="8" fill="#fffdf9" stroke="${C.ln}"/>`+T(184,y+1,t,{a:"middle",s:8.5,c:"#5c564d"})});
+h+=T(816,190,"REGULACJE",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut});["MSSF 9 · odpisy","CRR III · kapitał","KNF · modele"].forEach((t,i)=>{const y=206+i*19;h+=`<rect x="760" y="${y-11}" width="112" height="16" rx="8" fill="#fffdf9" stroke="${C.ln}"/>`+T(816,y+1,t,{a:"middle",s:8.5,c:"#5c564d"})});
+// wynik i kapitał
+const cy=266,cw=164,chh=84;
+[[bx,"Wynik","EL","odpisy ECL w roku","−126 mln zł","koszt ryzyka 0,24%",C.el,"ecl"],[bx+bw-cw,"Kapitał","UL","wymóg na straty nieoczekiwane","3,6 mld zł","RWA 30,1 mld zł",C.ul,"kap"]].forEach(([x,t1,b,t2,v,t3,c,k])=>{h+=`<g filter="url(#bsh)"><rect x="${x}" y="${cy}" width="${cw}" height="${chh}" rx="10" fill="${C.card}" stroke="${C.ln}"/></g><rect x="${x}" y="${cy}" width="${cw}" height="4" rx="2" fill="${c}"/>`+T(x+12,cy+21,t1,{s:11.5,w:600,i:1})+`<rect x="${x+cw-34}" y="${cy+11}" width="22" height="14" rx="4" fill="${c}"/>`+T(x+cw-23,cy+21.5,b,{a:"middle",s:8.5,w:600,c:"#fff"})+T(x+12,cy+35,t2,{s:8,c:C.mut})+T(x+12,cy+59,v,{s:15,d:1})+T(x+12,cy+74,t3,{s:8,c:"#5c564d"});
+  const sx=x+cw/2;h+=`<circle cx="${sx}" cy="${by+bh}" r="2.4" fill="#a9a091"/><path d="M${sx},${by+bh} V${cy-6}" stroke="#a9a091" stroke-dasharray="3 3" marker-end="url(#ba)"/>`});
+// wskaźniki
+const KY=[["CET1","15,8%",C.ul],["LCR","158%",C.pl],["NPL","3,1%",C.el],["ROE","12,4%",C.alm]];
+h+=T(500,cy+102,"WSKAŹNIKI BANKU",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut});
+KY.forEach((k,i)=>{const x=332+i*86,y=cy+109;h+=`<rect x="${x}" y="${y}" width="78" height="26" rx="13" fill="#fffdf9" stroke="${C.ln}"/><circle cx="${x+12}" cy="${y+13}" r="3.5" fill="${k[2]}"/>`+T(x+20,y+17,k[0],{s:8.5,c:"#5c564d"})+T(x+70,y+17,k[1],{a:"end",s:9.5,w:600})});
 sv.innerHTML=h;
-const al=()=>{const d=document.querySelector('.bnk-d'),c=sv.querySelector('circle');if(!d||!c||innerWidth<=980){d&&(d.style.cssText='');return}d.style.marginLeft='0';d.style.maxWidth='none';const cr=c.getBoundingClientRect(),dr=d.getBoundingClientRect(),tb=document.querySelector('.bnk-tabs').getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+'px';d.style.width=Math.round(tb.right-cr.left)+'px'};al();addEventListener('resize',al);document.fonts&&document.fonts.ready.then(al)})();
+const al=()=>{const d=document.querySelector('.bnk-d'),c=sv.querySelector('rect');if(!d||!c||innerWidth<=980){d&&(d.style.cssText='');return}d.style.marginLeft='0';d.style.maxWidth='none';const cr=c.getBoundingClientRect(),dr=d.getBoundingClientRect(),tb=document.querySelector('.bnk-tabs').getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+'px';d.style.width=Math.round(tb.right-cr.left)+'px'};al();addEventListener('resize',al);document.fonts&&document.fonts.ready.then(al)})();
 </script>
 <script src="../rt.js"></script>
 </body>
