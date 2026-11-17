@@ -3004,7 +3004,7 @@ html.bank #ds-lb-mr,html.bank #ds-lb-zr,html.bank #ds-lb-pz,html.bank #ds-lb-db{
     </div>
   </div>
   <div class="bnk-r"><nav class="bnk-tabs" aria-label="Bank"><a class="on" href="#" data-lb="">Bank</a><a href="#" data-lb="bl">Bilans i wynik</a><a href="#" data-lb="mr">Modele w banku</a><a href="#" data-lb="law">Regulacje</a></nav><p class="bnk-d">Bilans, wynik i kapitał banku – i modele ryzyka, które zmieniają każdą z tych liczb. Strata oczekiwana trafia do odpisów, nieoczekiwana do wymogów kapitałowych, a całość działa w ramach regulacji.</p></div>
-  <div class="bnk-stage"><svg id="bg" viewBox="114 28 772 380" preserveAspectRatio="xMidYMid meet" aria-label="Bank jako gmach: procesy, modele ryzyka, bilans i regulacje"></svg></div>
+  <div class="bnk-stage"><svg id="bg" viewBox="96 28 808 380" preserveAspectRatio="xMidYMid meet" aria-label="Bank jako gmach: procesy, modele ryzyka, bilans i regulacje"></svg></div>
 </div></section>
 
 
@@ -4502,14 +4502,15 @@ h+=T(500,159,"BILANS · WYNIK · KAPITAŁ · WSKAŹNIKI",{a:"middle",s:9.5,w:600
 // dach – regulacje
 h+=`<path d="M266,132 L500,58 L734,132 Z" fill="url(#bgs)" stroke="${L}" stroke-width="1.1"/><path d="M300,126 L500,66 L700,126 Z" fill="#f6efe6" stroke="${L}" stroke-width=".6" opacity=".9"/>`;
 h+=T(500,104,"REGULACJE",{a:"middle",s:9.5,w:600,ls:2.6,c:"#a8694c"})+T(500,117,"MSSF 9 · CRR III · Rekomendacje KNF",{a:"middle",s:8,i:1,c:"#5c564d"});
-// etykiety
-const TG=(x,y,w,hd,b1,c,lx,ly)=>{const ex=lx>x?x+w:x;let g=`<line x1="${ex}" y1="${y+22}" x2="${lx}" y2="${ly}" stroke="${c}" stroke-width="1" stroke-dasharray="3 3"/><circle cx="${lx}" cy="${ly}" r="2.6" fill="${c}"/>`;
-  g+=`<rect x="${x}" y="${y}" width="${w}" height="44" rx="6" fill="#fffdf9" stroke="#ddd3c4"/><path d="M${x+6},${y} H${x+w-6} Q${x+w},${y} ${x+w},${y+6} V${y+16} H${x} V${y+6} Q${x},${y} ${x+6},${y} Z" fill="${c}"/>`;
-  g+=T(x+9,y+11.5,hd,{s:7.5,w:600,ls:1.4,c:"#fff"})+T(x+9,y+33,b1,{s:8.6,c:"#2b2723"});return g};
-h+=TG(118,133,140,"EL · ODPISY","strata oczekiwana → wynik","#a8694c",280,155);
-h+=TG(742,133,140,"UL · KAPITAŁ","nieoczekiwana → wymogi","#4f7390",720,155);
-h+=TG(118,244,140,"MODELE RYZYKA","kolumna = rodzaj ryzyka","#bf8165",297,266);
-h+=TG(762,344,124,"W PROCESACH","fundament banku","#6f7f58",740,377);
+// etykiety – tabliczki w stylu gmachu
+const TG=(x,y,w,hd,b1,c,lx,ly)=>{const H=58,cy=y+H/2,ex=lx>x?x+w:x;let g=`<path d="M${ex},${cy} H${lx} V${ly}" fill="none" stroke="${L}" stroke-width=".9" stroke-dasharray="2 3" opacity=".8"/><circle cx="${lx}" cy="${ly}" r="3" fill="#fffdf9" stroke="${c}" stroke-width="1.4"/>`;
+  g+=`<rect x="${x}" y="${y}" width="${w}" height="${H}" fill="#fffdf9" stroke="${L}" stroke-width="1"/><rect x="${x+3.5}" y="${y+3.5}" width="${w-7}" height="${H-7}" fill="none" stroke="#d9cdb9" stroke-width=".7"/>`;
+  g+=`<path d="M${x+w/2-4},${y} l4,-4 l4,4 l-4,4 z" fill="${c}"/>`;
+  g+=T(x+w/2,y+20,hd,{a:"middle",s:8.2,w:600,ls:2,c})+`<line x1="${x+w/2-22}" y1="${y+27}" x2="${x+w/2+22}" y2="${y+27}" stroke="#cdbfa9" stroke-width=".8"/>`+T(x+w/2,y+43,b1,{a:"middle",s:10.5,i:1,c:"#3e3730"});return g};
+h+=TG(100,66,164,"EL · ODPISY","strata oczekiwana → wynik","#a8694c",284,150);
+h+=TG(736,66,164,"UL · KAPITAŁ","nieoczekiwana → wymogi","#4f7390",716,150);
+h+=TG(100,206,164,"MODELE RYZYKA","kolumna = rodzaj ryzyka","#bf8165",297,235);
+h+=TG(736,290,164,"W PROCESACH","fundament banku","#6f7f58",748,377);
 sv.innerHTML=h;
 const al=()=>{const d=document.querySelector('.bnk-d'),c=sv.querySelector('rect');if(!d||!c||innerWidth<=980){d&&(d.style.cssText='');return}d.style.marginLeft='0';d.style.maxWidth='none';const cr={left:Math.min(...[...sv.querySelectorAll('rect')].map(r=>r.getBoundingClientRect().left))},dr=d.getBoundingClientRect(),tb=document.querySelector('.bnk-tabs').getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+'px';d.style.width=Math.round(tb.right-cr.left)+'px'};al();addEventListener('resize',al);document.fonts&&document.fonts.ready.then(al)})();
 </script>
