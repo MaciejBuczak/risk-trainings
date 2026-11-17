@@ -32,8 +32,8 @@
 .bnk-fr b{grid-column:1 / -1;font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c}
 .bnk-fr p{margin:0;font:italic 13px/1.4 var(--serif);color:#5c564d;white-space:nowrap}
 .bnk-fr .bnk-pill{padding:5px 14px;font-size:12.5px;min-width:100px;justify-content:center;box-sizing:border-box}
-.bnk-stage{position:absolute;left:28%;right:0;top:160px;z-index:2}
-.bnk-stage svg{width:100%;height:calc(100vh - 351px);max-height:420px;min-height:320px;display:block;overflow:visible}
+.bnk-stage{position:absolute;left:28%;right:0;top:136px;z-index:2}
+.bnk-stage svg{width:100%;height:calc(100vh - 309px);max-height:560px;min-height:340px;display:block;overflow:visible}
 .bnk-stage text{font-family:var(--body)}
 @media (max-width:980px){.bnk .wrap{grid-template-columns:1fr;min-height:0}.bnk-r{align-items:flex-start}.bnk-tabs{flex-wrap:wrap;width:auto;border-radius:18px}.bnk-frs{margin-top:28px}.bnk-stage{position:static;margin:20px 0 40px}}
 </style>
@@ -57,7 +57,7 @@
     </div>
   </div>
   <div class="bnk-r"><nav class="bnk-tabs" aria-label="Bank"><a class="on" href="./">Bank</a><a href="../model-ryzyka/#bl">Bilans i wynik</a><a href="../model-ryzyka/#rt">Wskaźniki</a><a href="../model-ryzyka/#mr">Modele w banku</a></nav><p class="bnk-d">Bilans, wynik i kapitał banku – i modele ryzyka, które zmieniają każdą z tych liczb. Strata oczekiwana trafia do odpisów, nieoczekiwana do wymogów kapitałowych, a całość działa w ramach regulacji.</p></div>
-  <div class="bnk-stage"><svg id="bg" viewBox="78 -8 844 408" preserveAspectRatio="xMidYMid meet" aria-label="Bank jako system: bilans, modele ryzyka, wynik, kapitał i regulacje"></svg></div>
+  <div class="bnk-stage"><svg id="bg" viewBox="114 28 772 380" preserveAspectRatio="xMidYMid meet" aria-label="Bank jako system: bilans, modele ryzyka, wynik, kapitał i regulacje"></svg></div>
 </div></section>
 </main>
 
@@ -75,9 +75,6 @@
 const C={el:"#a8694c",ul:"#4f7390",alm:"#7a5c99",pl:"#8a8a3c",ink:"#2b2723",mut:"#8a8173",ln:"#e6dccd",card:"#fcf9f5",pan:"#efe5d6"};
 const T=(x,y,t,o={})=>`<text x="${x}" y="${y}" font-size="${o.s||9.5}" ${o.a?`text-anchor="${o.a}"`:""} ${o.w?`font-weight="${o.w}"`:""} fill="${o.c||C.ink}" ${o.ls?`letter-spacing="${o.ls}"`:""} ${o.i?`font-style="italic" style="font-family:var(--serif)"`:""}${o.d?` style="font-family:'Archivo Black',sans-serif"`:""}>${t}</text>`;
 let h=`<defs><filter id="bsh" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#3c2814" flood-opacity=".12"/></filter><marker id="ba" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#a9a091"/></marker></defs>`;
-// otoczenie regulacyjne
-h+=`<rect x="96" y="6" width="808" height="392" rx="26" fill="rgba(239,229,214,.28)" stroke="#cdbfa9" stroke-dasharray="5 5"/>`;
-h+=`<rect x="330" y="-6" width="340" height="22" rx="11" fill="#f4efe8" stroke="#cdbfa9"/>`+T(500,9,"REGULACJE · MSSF 9 · CRR III · REKOMENDACJE KNF",{a:"middle",s:8.5,w:600,ls:1.2,c:C.el});
 // bilans
 const bx=330,by=38,bw=340,bh=196;
 h+=`<g filter="url(#bsh)"><rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="12" fill="${C.card}" stroke="${C.ln}"/></g><path d="M${bx+12},${by} H${bx+bw-12} Q${bx+bw},${by} ${bx+bw},${by+12} V${by+28} H${bx} V${by+12} Q${bx},${by} ${bx+12},${by} Z" fill="${C.pan}"/>`;
@@ -106,7 +103,7 @@ const KY=[["CET1","15,8%",C.ul],["LCR","158%",C.pl],["NPL","3,1%",C.el],["ROE","
 h+=T(500,cy+102,"WSKAŹNIKI BANKU",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut});
 KY.forEach((k,i)=>{const x=332+i*86,y=cy+109;h+=`<rect x="${x}" y="${y}" width="78" height="26" rx="13" fill="#fffdf9" stroke="${C.ln}"/><circle cx="${x+12}" cy="${y+13}" r="3.5" fill="${k[2]}"/>`+T(x+20,y+17,k[0],{s:8.5,c:"#5c564d"})+T(x+70,y+17,k[1],{a:"end",s:9.5,w:600})});
 sv.innerHTML=h;
-const al=()=>{const d=document.querySelector('.bnk-d'),c=sv.querySelector('rect');if(!d||!c||innerWidth<=980){d&&(d.style.cssText='');return}d.style.marginLeft='0';d.style.maxWidth='none';const cr=c.getBoundingClientRect(),dr=d.getBoundingClientRect(),tb=document.querySelector('.bnk-tabs').getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+'px';d.style.width=Math.round(tb.right-cr.left)+'px'};al();addEventListener('resize',al);document.fonts&&document.fonts.ready.then(al)})();
+const al=()=>{const d=document.querySelector('.bnk-d'),c=sv.querySelector('rect');if(!d||!c||innerWidth<=980){d&&(d.style.cssText='');return}d.style.marginLeft='0';d.style.maxWidth='none';const cr={left:Math.min(...[...sv.querySelectorAll('rect')].map(r=>r.getBoundingClientRect().left))},dr=d.getBoundingClientRect(),tb=document.querySelector('.bnk-tabs').getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+'px';d.style.width=Math.round(tb.right-cr.left)+'px'};al();addEventListener('resize',al);document.fonts&&document.fonts.ready.then(al)})();
 </script>
 <script src="../rt.js"></script>
 </body>
