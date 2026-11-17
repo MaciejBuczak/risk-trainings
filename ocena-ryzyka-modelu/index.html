@@ -104,7 +104,7 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
       s+=`<path id="${pid}" d="M${f(p0x)},${f(p0y)} A${r},${r} 0 0 ${dn?0:1} ${f(p1x)},${f(p1y)}" fill="none"/><text class="ag-lab"><textPath href="#${pid}" startOffset="50%" text-anchor="middle">${c[0]} <tspan class="ag-lvn">${c[1]}</tspan></textPath></text></g>`;h+=s});
     h+=`<circle cx="${x}" cy="${cy}" r="${R0-4}" fill="#fcf9f5" stroke="#ddd3c4"/><g class="agc" data-g="${gi}"></g>`});
   /* zbieżne linie do oceny końcowej */
-  const fy=298,fx=G[0].cx-R0-5*RW-14,fw=G[2].cx+R0+5*RW+14-fx,F=G.reduce((a,g)=>a+g.w*g.s,0),yj=284;
+  const fy=298,fx=G[0].cx-R0-5*RW-14,fw=G[2].cx+R0+5*RW+14-fx,F=G.reduce((a,g)=>a+g.w*g.s,0),yj=Math.round((cy+R0+5*RW+32+fy)/2);
   G.forEach(g=>{const y0=cy+R0+5*RW+32;h+=`<path d="M${g.cx},${y0} V${yj} H500" class="ag-dash"/><circle cx="${g.cx}" cy="${y0}" r="2.8" fill="#a09580"/>`});
   h+=`<path d="M500,${yj} V${fy}" class="ag-dash"/><circle cx="500" cy="${yj}" r="3.2" fill="#a09580"/>`;
   const fh=100;h+=`<g filter="url(#agsh)"><rect x="${fx}" y="${fy}" width="${fw}" height="${fh}" rx="12" fill="#fcf9f5" stroke="#ddd3c4"/></g><rect x="${fx}" y="${fy}" width="${fw}" height="30" rx="12" fill="#eae1d3"/><rect x="${fx}" y="${fy+18}" width="${fw}" height="12" fill="#eae1d3"/>
