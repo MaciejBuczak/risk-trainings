@@ -74,7 +74,7 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
     </div>
   </div>
   <div class="mh-r"><nav class="vtabs" aria-label="Ocena ryzyka modelu"><a class="on" href="./">Ryzyko modelu</a><a href="../model-ryzyka/?lb=kj">Komponent jakościowy</a><a href="../model-ryzyka/?lb=ki">Komponent ilościowy</a><a href="../model-ryzyka/?lb=rw">Proces walidacji</a></nav><p>Trzy oceny – jakościowa, ilościowa i jakości danych – każda w skali 1–5. Ocena końcowa modelu to ich średnia ważona.</p></div>
-  <div class="stage"><svg id="ag" viewBox="0 -6 1000 426" preserveAspectRatio="xMidYMid meet" aria-label="Mapa ryzyka modelu"></svg></div>
+  <div class="stage"><svg id="ag" viewBox="130 -16 740 436" preserveAspectRatio="xMidYMid meet" aria-label="Mapa ryzyka modelu"></svg></div>
 </div></section>
 </main>
 
@@ -89,23 +89,23 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
 <a class="vdyn" href="../model-ryzyka/" title="Model ryzyka" style="right:14px">M</a>
 <script>
 (()=>{const sv=document.getElementById("ag"),QC=["","#c49ea1","#d0a991","#d6cb8a","#c3caa7","#a7b5a0"],QL=["","niska","słaba","przeciętna","dobra","bardzo dobra"],f=v=>v.toFixed(1),pl=v=>v.toFixed(1).replace(".",",");
-  const G=[{n:"Komponent jakościowy",w:.4,cx:170,c:[["Koncepcja",5],["Założenia",4],["Dane",5],["Stosowanie",4]]},
+  const G=[{n:"Komponent jakościowy",w:.4,cx:255,c:[["Koncepcja",5],["Założenia",4],["Dane",5],["Stosowanie",4]]},
            {n:"Komponent ilościowy",w:.4,cx:500,c:[["Backtesting",4],["Stabilność",4],["Benchmarking",5],["Wrażliwość",3]]},
-           {n:"Jakość danych (DQM)",w:.2,cx:830,c:[["Kompletność",4],["Poprawność",5],["Spójność",2],["Aktualność",4],["Unikalność",5]]}];
+           {n:"Jakość danych (DQM)",w:.2,cx:745,c:[["Kompletność",4],["Poprawność",5],["Spójność",2],["Aktualność",4],["Unikalność",5]]}];
   const cy=150,R0=36,RW=10.5,gap=.05,P=(x,a,r)=>[x+r*Math.sin(a),cy-r*Math.cos(a)];
   const arc=(x,a0,a1,r0,r1)=>{const [x0,y0]=P(x,a0,r1),[x1,y1]=P(x,a1,r1),[x2,y2]=P(x,a1,r0),[x3,y3]=P(x,a0,r0),L=a1-a0>Math.PI?1:0;return`M${f(x0)},${f(y0)} A${r1},${r1} 0 ${L} 1 ${f(x1)},${f(y1)} L${f(x2)},${f(y2)} A${r0},${r0} 0 ${L} 0 ${f(x3)},${f(y3)}Z`};
   let h=`<defs><filter id="agsh" x="-20%" y="-30%" width="140%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#5c4a36" flood-opacity=".12"/></filter></defs>`;
   G.forEach((g,gi)=>{g.s=g.c.reduce((a,c)=>a+c[1],0)/g.c.length;const n=g.c.length,x=g.cx;
-    h+=`<text x="${x}" y="12" text-anchor="middle" class="ag-k">${g.n.toUpperCase()}</text><text x="${x}" y="28" text-anchor="middle" class="ag-lv">waga ${Math.round(g.w*100)}%</text>`;
+    h+=`<text x="${x}" y="2" text-anchor="middle" class="ag-k">${g.n.toUpperCase()}</text><text x="${x}" y="17" text-anchor="middle" class="ag-lv">waga ${Math.round(g.w*100)}%</text>`;
     for(let k=1;k<=5;k++)h+=`<circle class="ag-ring" cx="${x}" cy="${cy}" r="${R0+k*RW}"/>`;
     g.c.forEach((c,i)=>{const a0=i/n*2*Math.PI+gap,a1=(i+1)/n*2*Math.PI-gap,am=(a0+a1)/2;let s=`<g class="ag-seg" data-g="${gi}" data-i="${i}">`;
       for(let k=1;k<=5;k++)s+=`<path d="${arc(x,a0,a1,R0+(k-1)*RW+1.5,R0+k*RW-1.5)}" fill="${k<=c[1]?QC[c[1]]:"#f3ece2"}" class="${k<=c[1]?"f":""}" style="transform-origin:${x}px ${cy}px;animation-delay:${(gi*.15+i*.05+k*.04).toFixed(2)}s"/>`;
-      const [lx,ly]=P(x,am,R0+5*RW+14),an=Math.sin(am),ta=an>.25?"start":an<-.25?"end":"middle",dy=Math.cos(am)>.5?-2:Math.cos(am)<-.5?10:4;
-      s+=`<text x="${f(lx)}" y="${f(ly+dy)}" text-anchor="${ta}" class="ag-lab">${c[0]} <tspan class="ag-lvn">${c[1]}</tspan></text></g>`;h+=s});
+      const up=Math.cos(am)>=0,sn=Math.sin(am),side=Math.abs(sn)>.3,lx=side?x+(sn>0?7:-7):x,ly=up?cy-(R0+5*RW)-9:cy+(R0+5*RW)+17+(side||n<5?0:17),ta=side?(sn>0?"start":"end"):"middle";
+      s+=`<text x="${f(lx)}" y="${f(ly)}" text-anchor="${ta}" class="ag-lab">${c[0]} <tspan class="ag-lvn">${c[1]}</tspan></text></g>`;h+=s});
     h+=`<circle cx="${x}" cy="${cy}" r="${R0-4}" fill="#fcf9f5" stroke="#ddd3c4"/><g class="agc" data-g="${gi}"></g>`});
   /* zbieżne linie do oceny końcowej */
   const fy=314,fw=320,fx=500-fw/2,F=G.reduce((a,g)=>a+g.w*g.s,0);
-  G.forEach(g=>{const y0=cy+R0+5*RW+42;h+=`<path d="M${g.cx},${y0} V${y0+10} H${500+(g.cx-500)*.28} V${fy}" class="ag-dash"/><circle cx="${g.cx}" cy="${y0}" r="2.8" fill="#a09580"/>`});
+  G.forEach(g=>{const y0=cy+R0+5*RW+42;h+=`<path d="M${g.cx},${y0} V${y0+10} H${500+(g.cx-500)*.3} V${fy}" class="ag-dash"/><circle cx="${g.cx}" cy="${y0}" r="2.8" fill="#a09580"/>`});
   h+=`<g filter="url(#agsh)"><rect x="${fx}" y="${fy}" width="${fw}" height="104" rx="12" fill="#fcf9f5" stroke="#ddd3c4"/></g><rect x="${fx}" y="${fy}" width="${fw}" height="30" rx="12" fill="#eae1d3"/><rect x="${fx}" y="${fy+18}" width="${fw}" height="12" fill="#eae1d3"/>
     <text x="${fx+14}" y="${fy+20}" class="ag-t">Ocena końcowa modelu</text><text x="${fx+fw-14}" y="${fy+20}" text-anchor="end" class="ag-s">średnia ważona</text>
     <text x="${fx+14}" y="${fy+66}" class="ag-c1" style="font-size:30px">${pl(F)}</text><text x="${fx+70}" y="${fy+66}" class="ag-c2">/ 5 · ${QL[Math.round(F)]}</text>
