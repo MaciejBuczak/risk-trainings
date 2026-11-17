@@ -2842,7 +2842,15 @@ svg.hov .ag-seg.on{opacity:1}
 .dbc-b p{margin:0;font-size:11.5px;line-height:1.45;color:#3e3730}
 .dbc-p{margin-top:auto;font-size:10.5px;color:#6b645a;border-top:1px dashed #e0d6c6;padding-top:5px}.dbc-p b{font:600 9px var(--body);letter-spacing:.12em;text-transform:uppercase;color:#a8694c;margin-right:3px}
 #ds-lb-db .dd2{flex:1;align-content:start}
-#ds-lb-db .dd2 tbody tr.hl{background:#f3e4d6}#ds-lb-db .dd2 .t td{padding:7.5px 6px}
+#ds-lb-db .dd2 tbody tr.hl{background:#f3e4d6}
+#ds-lb-db .dbw{display:flex;flex-direction:column;gap:10px;height:100%}
+.dbr{flex:1;background:#fcf9f5;border:1px solid #ddd3c4;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.dbr-b{flex:1;display:grid;grid-template-columns:236px 1fr;min-height:0}
+.dbr-d{display:flex;flex-direction:column;gap:5px;padding:8px 12px 8px;background:color-mix(in srgb,var(--bg) 45%,#fcf9f5);border-right:1px solid #ece3d6}
+.dbr-d small{font:600 9px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a8694c}
+.dbr-d p{margin:0;font-size:11.5px;line-height:1.42;color:#3e3730}
+.dbr-t{padding:0 4px;display:flex;flex-direction:column;justify-content:center}
+#ds-lb-db .dd2 .t td{padding:4px 6px}
 .dbg{display:block;width:100%;max-width:400px;margin:4px 0 2px}
 .dbg text{font-family:var(--body)}
 .dbk-go{margin-top:14px;display:inline-flex;align-items:center;gap:8px;border:1px solid #ad6b4e;background:transparent;color:#ad6b4e;border-radius:999px;padding:7px 16px;font:600 12.5px var(--body);cursor:pointer}.dbk-go:hover{background:#ad6b4e;color:#fff}.dbk-go i{font-style:normal}
@@ -4335,13 +4343,12 @@ const KR=[["KR-0048211","hipoteczny","03.2019","412 380","2025-12"],["KR-0048217
 const KO={"KR-0048211":["0,8%","1,1%","×1,4","+0,3 pp","1"],"KR-0048217":["2,1%","6,8%","×3,2","+4,7 pp","2"],"KR-0051109":[null,"1,9%","—","—","1"],"KR-0052774":["0,6%","0,7%","×1,2","+0,1 pp","1"],"KR-0053012":["1,5%","100%","—","—","3"]};
 const DF={"KR-0048211":[0,0,"—","—"],"KR-0048217":[45,0,"—","—"],"KR-0051109":[0,0,"—","—"],"KR-0052774":[0,0,"—","—"],"KR-0053012":[120,1,"09.2025","DPD>90"]};
 const k=(v,c)=>`<span class="dk ${c}">${v}</span>`;
-window.__dbHTML=()=>`<div class="dbw"><div class="dbs">${B.map(b=>`<div class="dbc" style="--c:${b.c};--bg:${b.bg}"><div class="dbc-h">${ico(b.i)}<b>${b.n}</b></div><div class="dbc-b"><p>${b.r}</p><div class="dbc-e">${b.e.map(x=>`<i>${x}</i>`).join("")}</div><div class="dbc-p"><b>Uwaga</b> ${b.p}</div></div></div>`).join("")}</div>
-<div class="dd2">
- <div class="ddb w" data-db="kr"><div class="db-h">${ico(I1)}<b>DWH_KREDYTY</b><em>v4.2</em><span>1 204 518 kredytów · stan 31.12.2025</span></div><table class="t tkr"><thead><tr><th>ID_KREDYTU</th><th>Produkt</th><th>Udzielony</th><th class="n">Saldo (zł)</th><th>Data stanu</th></tr></thead><tbody>${KR.map((r,i)=>`<tr data-i="${i}"><td>${k(r[0],"kr")}</td><td>${r[1]}</td><td>${r[2]}</td><td class="n${r[3]==="1 980 000"?" out":""}">${r[3]}</td><td>${k(r[4],"kw")}</td></tr>`).join("")}</tbody></table></div>
- <div class="ddb" data-db="ko"><div class="db-h">${ico(I2)}<b>KOSZYKI</b><em>v3.0</em><span>MSSF 9 · SICR</span></div><table class="t tko"><thead><tr><th>ID_KREDYTU</th><th class="n">Ryz. pocz.</th><th class="n">Ryz. dziś</th><th class="n">Wzr. wzgl.</th><th class="n">Wzr. bezwzgl.</th><th class="n">Koszyk</th></tr></thead><tbody>${KR.map((r,i)=>{const o=KO[r[0]];return`<tr data-i="${i}"><td>${k(r[0],"kr")}</td><td class="n${o[0]==null?" miss":""}">${o[0]||""}</td><td class="n">${o[1]}</td><td class="n">${o[2]}</td><td class="n">${o[3]}</td><td class="n"><b class="kz kz${o[4]}">${o[4]}</b></td></tr>`}).join("")}</tbody></table></div>
- <div class="ddb" data-db="df"><div class="db-h">${ico(I3)}<b>DEFAULTY</b><em>v1.6</em><span>90 dni · UTP</span></div><table class="t tdf"><thead><tr><th>ID_KREDYTU</th><th class="n">DPD</th><th class="n">Def.</th><th>Data def.</th><th>Przyczyna</th></tr></thead><tbody>${KR.map((r,i)=>{const o=DF[r[0]];return`<tr data-i="${i}"><td>${k(r[0],"kr")}</td><td class="n">${o[0]}</td><td class="n"><b class="dfl dfl${o[1]}">${o[1]}</b></td><td>${o[2]}</td><td>${o[3]}</td></tr>`}).join("")}</tbody></table></div>
-</div></div>`;
-const hov=ho=>ho.addEventListener("mouseover",e=>{const t=e.target.closest(".dd2 tbody tr");ho.querySelectorAll(".dd2 tbody tr").forEach(r=>r.classList.toggle("hl",!!t&&r.dataset.i===t.dataset.i))});
+const T=[`<table class="t tkr"><thead><tr><th>ID_KREDYTU</th><th>Produkt</th><th>Udzielony</th><th class="n">Saldo (zł)</th><th>Data stanu</th></tr></thead><tbody>${KR.map((r,i)=>`<tr data-i="${i}"><td>${k(r[0],"kr")}</td><td>${r[1]}</td><td>${r[2]}</td><td class="n${r[3]==="1 980 000"?" out":""}">${r[3]}</td><td>${k(r[4],"kw")}</td></tr>`).join("")}</tbody></table>`,
+`<table class="t tko"><thead><tr><th>ID_KREDYTU</th><th class="n">Ryz. pocz.</th><th class="n">Ryz. dziś</th><th class="n">Wzr. wzgl.</th><th class="n">Wzr. bezwzgl.</th><th class="n">Koszyk</th></tr></thead><tbody>${KR.map((r,i)=>{const o=KO[r[0]];return`<tr data-i="${i}"><td>${k(r[0],"kr")}</td><td class="n${o[0]==null?" miss":""}">${o[0]||""}</td><td class="n">${o[1]}</td><td class="n">${o[2]}</td><td class="n">${o[3]}</td><td class="n"><b class="kz kz${o[4]}">${o[4]}</b></td></tr>`}).join("")}</tbody></table>`,
+`<table class="t tdf"><thead><tr><th>ID_KREDYTU</th><th class="n">DPD</th><th class="n">Default</th><th>Data defaultu</th><th>Przyczyna</th></tr></thead><tbody>${KR.map((r,i)=>{const o=DF[r[0]];return`<tr data-i="${i}"><td>${k(r[0],"kr")}</td><td class="n">${o[0]}</td><td class="n"><b class="dfl dfl${o[1]}">${o[1]}</b></td><td>${o[2]}</td><td>${o[3]}</td></tr>`}).join("")}</tbody></table>`];
+const H=[["kr","v4.2","1 204 518 kredytów · stan 31.12.2025"],["ko","v3.0","MSSF 9 · SICR"],["df","v1.6","definicja: 90 dni · UTP"]];
+window.__dbHTML=()=>`<div class="dd2 dbw">${B.map((b,j)=>`<div class="dbr" data-db="${H[j][0]}" style="--c:${b.c};--bg:${b.bg}"><div class="db-h">${ico(b.i)}<b>${b.n}</b><em>${H[j][1]}</em><span>${H[j][2]}</span></div><div class="dbr-b"><div class="dbr-d"><small>Rola w ECL</small><p>${b.r}</p><div class="dbc-e">${b.e.map(x=>`<i>${x}</i>`).join("")}</div><div class="dbc-p"><b>Uwaga</b> ${b.p}</div></div><div class="dbr-t">${T[j]}</div></div></div>`).join("")}</div>`;
+const hov=ho=>ho.addEventListener("mouseover",e=>{const t=e.target.closest(".dd2 tbody tr");if(!t)return;ho.querySelectorAll(".dd2 tbody tr").forEach(r=>r.classList.toggle("hl",!!t&&r.dataset.i===t.dataset.i))});
 const fill=()=>{const ho=document.querySelector("#ds-lb-db .dd2-host");if(ho&&!ho.firstChild){ho.innerHTML=window.__dbHTML();hov(ho);ho.addEventListener("mouseleave",()=>ho.querySelectorAll(".hl").forEach(r=>r.classList.remove("hl")));return true}return !!ho};if(!fill()){const t=setInterval(()=>{if(fill())clearInterval(t)},200)}
 })();
 </script>
