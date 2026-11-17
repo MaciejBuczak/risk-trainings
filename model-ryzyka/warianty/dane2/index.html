@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dane – wariant 2 – Risk Trainings | Maciej Buczak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../rt.css">
+<style>
+:root{--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--kr:#bf8165;--kl:#4f7390;--kw:#8a7f3c}
+.top .wrap,.foot .wrap,.d2 .wrap{max-width:1380px}
+.d2{padding:clamp(24px,3vw,44px) 0 40px}
+.d2 .wrap{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.6fr);gap:20px 48px;align-items:start}
+.d2 h1{font-size:clamp(30px,3.2vw,44px);margin:14px 0 0;letter-spacing:-.02em;line-height:1.05}
+.d2 h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d)}
+.d2-l p.lead{margin:18px 0 0;font-size:15.5px;font-weight:300;color:var(--ink2);line-height:1.6}
+.keys{margin-top:24px;border-top:1px solid #cdbfa9;padding-top:12px}
+.keys>b{display:block;font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c;margin-bottom:10px}
+.key{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:12.5px;color:#3e3730}
+.key code{font:600 11px var(--mono);padding:3px 8px;border-radius:6px;color:#fff}
+.key small{color:#8a8173}
+.hint{margin-top:14px;font:italic 13px/1.45 var(--serif);color:#6b645a}
+.back{display:inline-flex;align-items:center;gap:8px;margin-top:22px;border:1px solid #ad6b4e;color:#ad6b4e;border-radius:999px;padding:7px 16px;font:600 12.5px var(--body);text-decoration:none}
+.back:hover{background:#ad6b4e;color:#fff}
+.d2-r{position:relative;display:grid;grid-template-columns:1.28fr 1fr;gap:14px}
+.db{background:#fcf9f5;border:1px solid #ddd3c4;border-radius:14px;overflow:hidden;position:relative}
+.db.w{grid-column:1 / -1}
+.db-h{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#eaf0f3;border-bottom:1px solid #dbe3e8}
+.db-h svg{width:18px;height:18px;flex:none;fill:none;stroke:#4f7390;stroke-width:1.4}
+.db-h b{font:600 13px var(--mono);color:#1f3b52}
+.db-h em{font-style:normal;font:600 10px var(--body);color:#4f7390;background:#fff;border:1px solid #cfdbe3;border-radius:999px;padding:1px 8px}
+.db-h span{margin-left:auto;font-size:11px;color:#5c6a75;white-space:nowrap}
+.db-d{padding:6px 14px 2px;font-size:11.5px;color:#5c564d;display:flex;gap:16px;flex-wrap:wrap}
+.db-d i{font-style:normal;color:#8a8173}
+table.t{width:100%;border-collapse:collapse;font:400 11.5px var(--mono);color:#2b2723}
+.t th{font:600 9.5px var(--body);letter-spacing:.08em;text-transform:uppercase;color:#8a8173;text-align:left;padding:7px 10px 5px;border-bottom:1px solid #ece3d6;white-space:nowrap}
+.t td{padding:4px 10px;border-bottom:1px dashed #efe7db;white-space:nowrap}
+.t tr:last-child td{border-bottom:0}
+.t td.n{text-align:right}
+.t th.n{text-align:right}
+.t tbody tr{transition:background .15s;cursor:default}
+.t tbody tr.hl{background:#f6ece2}
+.t tbody tr.dim{opacity:.45}
+.k{font-weight:600;border-radius:4px;padding:1px 5px}
+.k.kr{background:#f5e3da;color:#8a4f37}.k.kl{background:#dde8f0;color:#2f5576}.k.kw{background:#efe9cf;color:#6b6128}
+.miss{color:#b4674f}.miss::after{content:"brak";font:600 9px var(--body);margin-left:4px;background:#f6e2da;border-radius:3px;padding:0 4px}
+.out{color:#7a6420;font-weight:600}.out::after{content:"skrajna";font:600 9px var(--body);margin-left:4px;background:#f1e8c6;border-radius:3px;padding:0 4px;color:#7a6420}
+.more{padding:5px 14px 8px;font-size:11px;color:#8a8173}
+.join{grid-column:1 / -1;background:#f0e8dd;border:1px solid #e2d6c4;border-radius:14px;padding:10px 14px 12px}
+.join-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.join-h b{font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c}
+.join-h span{font:italic 12.5px var(--serif);color:#6b645a}
+.rec{display:flex;gap:5px}
+.rec div{flex:1 1 auto;min-width:0;background:#fcf9f5;border-radius:7px;padding:4px 7px;border-left:3px solid var(--c)}
+.rec small{display:block;white-space:nowrap;font:600 8.5px var(--body);letter-spacing:.06em;text-transform:uppercase;color:#8a8173}
+.rec b{font:600 11px var(--mono);color:#1c1a17;white-space:nowrap}
+#lk{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:3}
+@media(max-width:1000px){.d2 .wrap{grid-template-columns:1fr}.d2-r{grid-template-columns:1fr}.db{overflow-x:auto}}
+</style>
+</head>
+<body>
+<header class="top tst" id="top">
+  <div class="wrap">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav"><a href="../../../">Start</a><a href="../../../szkolenia/">Szkolenia</a><a href="../../../metoda/">Metoda</a><a href="../../../mapa-banku/">Mapa banku</a><a class="on" href="../../">Model ryzyka</a><a href="../../../ocena-ryzyka-modelu/">Ryzyko modelu</a><a href="../../../o-mnie/">O mnie</a><a href="../../../eseje/">Eseje</a><a href="../../../okiem-praktyka/">Okiem praktyka</a><a href="../../../#kontakt">Kontakt</a><a class="sci" href="https://maciejbuczak.github.io/">Strona naukowa ↗</a></nav>
+    <a class="brand" href="../../../"><span><b>Risk Trainings</b><small>Maciej Buczak · Risk Research</small></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a>
+  </div>
+</header>
+<main>
+<section class="d2"><div class="wrap">
+ <div class="d2-l">
+  <span class="kick">01 · Dane · wariant 2</span>
+  <h1>Trzy źródła, <em>jeden rekord</em></h1>
+  <p class="lead">Model zasilają trzy bazy: kredyty z hurtowni, klienci z CRM i scenariusze makroekonomiczne. Każda ma swoją wersję i klucz – po nim rekordy łączą się w jeden wiersz próby modelowej.</p>
+  <div class="keys"><b>Klucze łączenia</b>
+   <div class="key"><code style="background:#bf8165">ID_KREDYTU</code><small>kredyt w hurtowni</small></div>
+   <div class="key"><code style="background:#4f7390">ID_KLIENTA</code><small>kredyt → klient w CRM</small></div>
+   <div class="key"><code style="background:#a09140">KWARTAŁ</code><small>data stanu → scenariusz makro</small></div>
+   <p class="hint">Najedź na kredyt, by zobaczyć jego klienta, kwartał w scenariuszach i rekord, który trafia do modelu.</p>
+  </div>
+  <a class="back" href="../../">← Model ryzyka</a>
+ </div>
+ <div class="d2-r" id="d2r">
+  <svg id="lk"></svg>
+  <div class="db w" data-db="kr"><div class="db-h"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7.5" ry="2.8"/><path d="M4.5 6v12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V6M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/></svg><b>DWH_KREDYTY</b><em>v4.2</em><span>1 204 518 rekordów · stan 31.12.2025 · hurtownia danych</span></div>
+   <table class="t" id="tkr"><thead><tr><th>ID_KREDYTU</th><th>ID_KLIENTA</th><th>Produkt</th><th class="n">Saldo (zł)</th><th class="n">DPD</th><th>Koszyk</th><th>Data stanu</th></tr></thead><tbody></tbody></table><div class="more">… i 1 204 513 kolejnych · 18 kolumn</div></div>
+  <div class="db" data-db="kl"><div class="db-h"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.8-3.2 2.9-5 5.5-5s4.7 1.8 5.5 5M16 6.5h5M16 10h4M16 13.5h3"/></svg><b>CRM_KLIENCI</b><em>v2.8</em><span>862 140 klientów</span></div>
+   <table class="t" id="tkl"><thead><tr><th>ID_KLIENTA</th><th>Segment</th><th class="n">Dochód (zł)</th><th>Region</th><th class="n">Lata w banku</th></tr></thead><tbody></tbody></table><div class="more">… dochód: 3,1% braków</div></div>
+  <div class="db" data-db="mk"><div class="db-h"><svg viewBox="0 0 24 24"><path d="M3.5 18.5l5-6 4 3.5 7.5-9"/><path d="M15.5 7h4.5v4.5"/></svg><b>MAKRO_SCENARIUSZE</b><em>v1.5</em><span>3 × 40 kwartałów</span></div>
+   <table class="t" id="tmk"><thead><tr><th>Scenariusz</th><th>Kwartał</th><th class="n">PKB r/r</th><th class="n">Bezrob.</th><th class="n">WIBOR</th></tr></thead><tbody></tbody></table><div class="more">… scenariusze: bazowy 60%, negatywny 30%, pozytywny 10%</div></div>
+  <div class="join"><div class="join-h"><b>Rekord w próbie modelowej</b><span id="jn">po integracji, filtrowaniu i oczyszczeniu</span></div><div class="rec" id="rec"></div></div>
+ </div>
+</div></section>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div><a class="brand" href="../../../"><span><b>Risk Trainings</b></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a><p style="margin:14px 0 0;max-width:340px">Szkolenia z zarządzania ryzykiem dla banków i instytucji finansowych.</p></div>
+    <div><h4>Strony</h4><a href="../../../">Start</a><a href="../../../szkolenia/">Szkolenia</a><a href="../../../metoda/">Metoda</a><a href="../../../mapa-banku/">Mapa banku</a><a href="../../">Model ryzyka</a><a href="../../../ocena-ryzyka-modelu/">Ryzyko modelu</a><a href="../../../o-mnie/">O mnie</a><a href="../../../eseje/">Eseje</a><a href="../../../okiem-praktyka/">Okiem praktyka</a><a href="https://maciejbuczak.github.io/">Strona naukowa</a></div>
+    <div><h4>Kontakt</h4><a href="mailto:maciej.buczak@gmail.com">maciej.buczak@gmail.com</a><a href="https://www.linkedin.com/in/maciej-buczak-561b95120" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div class="bottom"><span>© 2026 Maciej Buczak | Risk Research</span><span>Wersja próbna strony</span></div>
+  </div>
+</footer>
+<script>
+(()=>{
+const KR=[["KR-0048211","KL-10027","hipoteczny","412 380",0,"1","2025Q4"],["KR-0048217","KL-20491","konsumpcyjny","18 940",45,"2","2025Q4"],["KR-0051109","KL-10027","karta kredytowa","6 120",0,"1","2025Q4"],["KR-0052774","KL-31108","hipoteczny","1 980 000",0,"1","2025Q4"],["KR-0053012","KL-40266","firmowy","254 600",120,"3","2025Q4"]];
+const KL=[["KL-10027","detal","9 400","mazowieckie",12],["KL-20491","detal",null,"śląskie",3],["KL-31108","detal","61 000","pomorskie",7],["KL-40266","MŚP","38 000","wielkopolskie",9]];
+const MK=[["bazowy","2025Q4","+3,1%","5,0%","5,85%"],["negatywny","2025Q4","−1,4%","7,2%","6,90%"],["bazowy","2026Q1","+3,3%","4,9%","5,60%"]];
+const k=(v,c)=>`<span class="k ${c}">${v}</span>`;
+document.querySelector("#tkr tbody").innerHTML=KR.map((r,i)=>`<tr data-i="${i}" data-kl="${r[1]}" data-q="${r[6]}"><td>${k(r[0],"kr")}</td><td>${k(r[1],"kl")}</td><td>${r[2]}</td><td class="n${r[3]==="1 980 000"?" out":""}">${r[3]}</td><td class="n">${r[4]}</td><td>${r[5]}</td><td>${k(r[6],"kw")}</td></tr>`).join("");
+document.querySelector("#tkl tbody").innerHTML=KL.map(r=>`<tr data-kl="${r[0]}"><td>${k(r[0],"kl")}</td><td>${r[1]}</td><td class="n${r[2]==null?" miss":""}">${r[2]==null?"":r[2]}</td><td>${r[3]}</td><td class="n">${r[4]}</td></tr>`).join("");
+document.querySelector("#tmk tbody").innerHTML=MK.map(r=>`<tr data-q="${r[1]}" data-s="${r[0]}"><td>${r[0]}</td><td>${k(r[1],"kw")}</td><td class="n">${r[2]}</td><td class="n">${r[3]}</td><td class="n">${r[4]}</td></tr>`).join("");
+const box=document.getElementById("d2r"),sv=document.getElementById("lk"),rec=document.getElementById("rec");
+const show=i=>{const r=KR[i],c=KL.find(x=>x[0]===r[1]),m=MK.find(x=>x[1]===r[6]&&x[0]==="bazowy");
+  document.querySelectorAll("#tkr tbody tr").forEach(t=>{t.classList.toggle("hl",+t.dataset.i===i);t.classList.toggle("dim",+t.dataset.i!==i)});
+  document.querySelectorAll("#tkl tbody tr").forEach(t=>{t.classList.toggle("hl",t.dataset.kl===r[1]);t.classList.toggle("dim",t.dataset.kl!==r[1])});
+  document.querySelectorAll("#tmk tbody tr").forEach(t=>{const on=t.dataset.q===r[6]&&t.dataset.s==="bazowy";t.classList.toggle("hl",on);t.classList.toggle("dim",!on)});
+  const F=[["ID_KREDYTU",r[0],"#bf8165"],["Produkt",r[2],"#bf8165"],["Saldo",r[3]+" zł","#bf8165"],["DPD",r[4],"#bf8165"],["Koszyk",r[5],"#bf8165"],["Segment",c[1],"#4f7390"],["Dochód",c[2]==null?"mediana*":c[2]+" zł","#4f7390"],["Staż",c[4]+" l.","#4f7390"],["PKB r/r",m[2],"#a09140"],["Bezrobocie",m[3],"#a09140"],["WIBOR",m[4],"#a09140"]];
+  rec.innerHTML=F.map(f=>`<div style="--c:${f[2]}"><small>${f[0]}</small><b>${f[1]}</b></div>`).join("");
+  document.getElementById("jn").textContent=r[3]==="1 980 000"?"saldo skrajne – sprawdzone i zostawione w próbie":c[2]==null?"* brak dochodu uzupełniony medianą segmentu":"po integracji, filtrowaniu i oczyszczeniu";
+  draw()};
+const draw=()=>{const b=box.getBoundingClientRect(),R=e=>e.getBoundingClientRect(),st='fill="none" stroke-width="1.4" stroke-dasharray="4 4"';let h="";
+  const a=document.querySelector("#tkr tbody tr.hl td:nth-child(2) .k"),c=document.querySelector("#tkl tbody tr.hl td:first-child .k"),q=document.querySelector("#tkr tbody tr.hl td:nth-child(7) .k"),m=document.querySelector("#tmk tbody tr.hl td:nth-child(2) .k");
+  if(a&&c){const p=R(a),t=R(c),x1=p.left+p.width/2-b.left,y1=p.bottom-b.top,x2=t.left+t.width/2-b.left,y2=t.top-b.top,ym=(R(document.querySelector('[data-db="kr"]')).bottom+R(document.querySelector('[data-db="kl"]')).top)/2-b.top;h+=`<path d="M${x1},${y1} V${ym} H${x2} V${y2}" stroke="#4f7390" ${st}/><circle cx="${x1}" cy="${y1}" r="2.6" fill="#4f7390"/><circle cx="${x2}" cy="${y2}" r="2.6" fill="#4f7390"/>`}
+  if(q&&m){const p=R(q),t=R(m),x1=p.left+p.width/2-b.left,y1=p.bottom-b.top,x2=t.left+t.width/2-b.left,y2=t.top-b.top,ym=(R(document.querySelector('[data-db="kr"]')).bottom+R(document.querySelector('[data-db="mk"]')).top)/2-b.top+4;h+=`<path d="M${x1},${y1} V${ym} H${x2} V${y2}" stroke="#a09140" ${st}/><circle cx="${x1}" cy="${y1}" r="2.6" fill="#a09140"/><circle cx="${x2}" cy="${y2}" r="2.6" fill="#a09140"/>`}
+  sv.setAttribute("viewBox",`0 0 ${b.width} ${b.height}`);sv.style.width=b.width+"px";sv.style.height=b.height+"px";sv.innerHTML=h};
+document.querySelectorAll("#tkr tbody tr").forEach(t=>t.addEventListener("mouseenter",()=>show(+t.dataset.i)));
+addEventListener("resize",draw);show(0);document.fonts&&document.fonts.ready.then(draw);
+})();
+</script>
+<script src="../../../rt.js"></script>
+</body>
+</html>
