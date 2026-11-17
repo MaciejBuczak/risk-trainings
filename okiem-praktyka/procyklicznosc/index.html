@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Procykliczność czy antycykliczność – Okiem praktyka | Risk Trainings</title>
+<meta name="description" content="Odpisy MSSF 9 a kapitał: procykliczność straty oczekiwanej i antycykliczność regulacji kapitałowych.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap">
+<link rel="stylesheet" href="../../rt.css">
+<style>
+.eb0{padding:34px 0 clamp(22px,2.6vw,32px)}
+.crumb{display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:10px}
+.crumb:hover{color:var(--ink)}
+.eb0 h1{font-size:clamp(40px,5vw,64px);margin:10px 0 14px;letter-spacing:-.02em;max-width:900px}
+.eb0 h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d);letter-spacing:0}
+.lead{font-family:var(--serif);font-style:italic;font-size:clamp(19px,1.7vw,23px);line-height:1.5;color:var(--ink2);max-width:820px;margin:0}
+.meta{display:flex;align-items:center;gap:18px;margin-top:24px;font-size:13px;color:var(--muted)}
+.meta .au2{display:inline-flex;align-items:center;gap:10px}
+.meta .au2 i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--paper);font-style:normal;font-size:11px;font-weight:600}
+.meta b{color:var(--ink);font-weight:600}
+.eg2{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(30px,5vw,70px);align-items:start;padding-bottom:clamp(40px,5vw,70px)}
+.art{max-width:680px}
+.art p{font-size:16.5px;line-height:1.75;color:var(--ink2);margin:0 0 18px}
+.art p:first-child::first-letter{font-family:var(--serif);font-style:italic;font-size:58px;float:left;line-height:.9;margin:6px 10px 0 0;color:var(--terra-d)}
+.art p:last-of-type::after{content:"";display:inline-block;width:8px;height:8px;margin-left:8px;background:var(--terra-d);vertical-align:1px}
+.art h3{font-size:21px;margin:30px 0 12px}
+.art blockquote{margin:26px 0;padding:6px 0 6px 22px;border-left:3px solid var(--terra);font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.5;color:var(--ink)}
+.asd{position:sticky;top:96px;display:flex;flex-direction:column;gap:14px}
+.kw{background:#e6d8c3;border-radius:20px;padding:20px 22px}
+.kw b.h,.src b.h{display:block;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-d);margin-bottom:12px}
+.kw ol{list-style:none;margin:0;padding:0;counter-reset:k;display:grid;gap:12px}
+.kw li{counter-increment:k;display:grid;grid-template-columns:26px 1fr;gap:8px;font-size:14px;line-height:1.5;color:var(--ink)}
+.kw li::before{content:counter(k,decimal-leading-zero);font-family:var(--serif);font-style:italic;font-size:17px;color:var(--terra-d)}
+.src{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 20px}
+.src a{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px dashed var(--line);text-decoration:none;color:var(--ink)}
+.src a:first-of-type{border-top:0}
+.src a span.ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:11px;font-weight:700;flex:none}
+.src a b{display:block;font-size:14px;font-weight:600}.src a small{font-size:12px;color:var(--muted)}
+.src a i{margin-left:auto;font-style:normal;color:var(--terra-d)}
+.src a:hover b{color:var(--terra-d)}
+.fa{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;text-decoration:none;color:inherit;margin-top:30px;transition:border-color .2s,box-shadow .2s}
+.fa-k{margin-top:52px}
+.fa:hover{border-color:var(--ink);box-shadow:0 22px 46px -30px rgba(40,30,15,.45)}
+.fa-im{background:var(--panel);min-height:260px;overflow:hidden}
+.fa-im img{width:100%;height:100%;object-fit:cover;filter:saturate(.75) sepia(.12);transition:transform .6s}
+.fa:hover img{transform:scale(1.03)}
+.fa-tx{display:flex;flex-direction:column;padding:26px 28px}
+.fa-tx .tg{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tan)}
+.fa-tx h3{font-size:24px;line-height:1.15;margin:12px 0 10px}
+.fa-tx p{margin:0 0 14px;font-size:14.5px;line-height:1.6;color:var(--muted);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.fa-ft{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.fa-ft b{color:var(--ink);font-weight:600}.fa-ft .rd{font-weight:600;color:var(--ink)}.fa-ft .rd i{font-style:normal;color:var(--terra-d)}
+.todo{display:inline-block;margin-left:6px;font-size:10px;font-weight:600;padding:1px 6px;border-radius:999px;background:#f3e4c4;color:#8a6a2c}
+@media(max-width:900px){.eg2{grid-template-columns:1fr}.asd{position:static}.fa{grid-template-columns:1fr}}
+.todo-p{font-size:14px;color:#8a8173}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="wrap">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav"><a href="../../">Start</a><a href="../../szkolenia/">Szkolenia</a><a href="../../metoda/">Metoda</a><a href="../../mapa-banku/">Mapa banku</a><a href="../../model-ryzyka/">Model ryzyka</a><a href="../../ocena-ryzyka-modelu/">Ryzyko modelu</a><a href="../../bank/">Bank</a><a href="../../o-mnie/">O mnie</a><a href="../../eseje/">Eseje</a><a class="on" href="../">Okiem praktyka</a><a href="../../#kontakt">Kontakt</a><a class="sci" href="https://maciejbuczak.github.io/">Strona naukowa ↗</a></nav>
+    <a class="brand" href="../../"><span><b>Risk Trainings</b><small>Maciej Buczak · Risk Research</small></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a>
+  </div>
+</header>
+
+<main>
+<section class="eb0"><div class="wrap">
+  <a class="crumb" href="../#el">← Okiem praktyka · Strata oczekiwana</a><br>
+  <span class="kick">Okiem praktyka · EL i UL</span>
+  <h1>Procykliczność <em>czy antycykliczność</em></h1>
+  <p class="lead">Odpisy według MSSF 9 mają reagować na cykl szybko – i przez to wzmacniają go. Regulacje kapitałowe próbują ten sam cykl wygładzać. Bank żyje jednocześnie w obu logikach.</p>
+  <div class="meta"><span class="au2"><i>MB</i><span><b>Maciej Buczak</b></span></span><span>szkic · listopad 2026</span><span><span class="todo">tekst do uzupełnienia</span></span></div>
+</div></section>
+<section style="padding-top:0"><div class="wrap eg2">
+  <article class="art">
+    <p>MSSF 9 zastąpił model strat poniesionych modelem strat oczekiwanych właśnie po to, żeby odpisy nie przychodziły „za późno i za mało”. ECL ma patrzeć w przyszłość: uwzględniać scenariusze makroekonomiczne i przenosić kredyty do koszyka 2, gdy tylko ryzyko istotnie wzrośnie. W efekcie odpisy rosną gwałtownie na początku spowolnienia – obniżają wynik i kapitał wtedy, gdy bank najbardziej potrzebuje zdolności do kredytowania. Z perspektywy straty oczekiwanej ta procykliczność jest więc zamierzona: odpis ma pokazywać bieżący obraz ryzyka.</p>
+    <p>Z perspektywy straty nieoczekiwanej cel jest odwrotny. Kapitał ma działać antycyklicznie: bufor antycykliczny (CCyB) buduje się w dobrych czasach i uwalnia w złych, parametry IRB szacuje się przez cykl (TTC) i w warunkach dekoniunktury (LGD downturn), a stres testy sprawdzają, czy kapitał wystarczy w kryzysie. Regulator chce, żeby wymogi kapitałowe nie spadały w boomie i nie rosły skokowo w recesji.</p>
+    <h3>Dwie logiki w jednym bilansie</h3>
+    <p>Na to napięcie od lat zwraca uwagę Jón Daníelsson. Już w odpowiedzi środowiska akademickiego na Bazyleę II ostrzegał, że modele ryzyka oparte na bieżących danych wzmacniają cykl – wszyscy uczestnicy rynku reagują na te same sygnały w tym samym momencie. W „The Illusion of Control” rozwija tę myśl: regulacje, które mają stabilizować system, mogą same stawać się źródłem ryzyka systemowego.</p>
+    <blockquote>Odpis ma być procykliczny, kapitał – antycykliczny. Pytanie, czy jedno nie znosi drugiego.</blockquote>
+    <p class="todo-p"><span class="todo">Do rozwinięcia:</span> jak odpisy MSSF 9 przechodzą do kapitału CET1 (przepisy przejściowe), interakcja z CCyB, doświadczenia z pandemii (nakładki zarządcze, wstrzymanie migracji do koszyka 2), wnioski dla praktyki.</p>
+  </article>
+  <aside class="asd">
+    <div class="kw"><b class="h">Kluczowe wnioski</b><ol><li>MSSF 9 zakłada szybką reakcję odpisów na cykl – EL jest z założenia procykliczna.</li><li>Regulacje kapitałowe (CCyB, TTC, downturn) mają działać antycyklicznie dla UL.</li><li>Odpisy obniżają kapitał – obie logiki spotykają się w CET1.</li><li>Daníelsson: modele ryzyka i regulacje same mogą wzmacniać cykl.</li></ol></div>
+    <div class="src"><b class="h">Źródła</b>
+      <a href="https://www.bis.org/bcbs/ca/fmg.pdf" target="_blank" rel="noopener"><span class="ic" style="background:#0d0d0d;color:#fcf9f5">JD</span><span><b>An Academic Response to Basel II</b><small>Daníelsson i in., LSE FMG, 2001</small></span><i>↗</i></a>
+      <a href="https://www.modelsandrisk.org/" target="_blank" rel="noopener"><span class="ic" style="background:#e6d8c3;color:#5c4a12">JD</span><span><b>The Illusion of Control</b><small>J. Daníelsson, Yale University Press, 2022</small></span><i>↗</i></a>
+      <a href="#" rel="noopener"><span class="ic" style="background:#dfe7e2;color:#2f5b4a">MB</span><span><b>Pełne opracowanie</b><small>Risk Research <span class="todo">do napisania</span></small></span><i>↗</i></a>
+    </div>
+  </aside>
+</div></section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><a class="brand" href="../../"><span><b>Risk Trainings</b></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a><p style="margin:14px 0 0;max-width:340px">Szkolenia z zarządzania ryzykiem dla banków i instytucji finansowych.</p></div>
+    <div><h4>Strony</h4><a href="../../">Start</a><a href="../../szkolenia/">Szkolenia</a><a href="../../metoda/">Metoda</a><a href="../../mapa-banku/">Mapa banku</a><a href="../../model-ryzyka/">Model ryzyka</a><a href="../../ocena-ryzyka-modelu/">Ryzyko modelu</a><a href="../../bank/">Bank</a><a href="../../o-mnie/">O mnie</a><a href="../../eseje/">Eseje</a><a href="../">Okiem praktyka</a><a href="https://maciejbuczak.github.io/">Strona naukowa</a></div>
+    <div><h4>Kontakt</h4><a href="mailto:maciej.buczak@gmail.com">maciej.buczak@gmail.com</a><a href="https://www.linkedin.com/in/maciej-buczak-561b95120" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div class="bottom"><span>© 2026 Maciej Buczak | Risk Research</span><span>Wersja próbna strony</span></div>
+  </div>
+</footer>
+<script src="../../rt.js"></script>
+</body>
+</html>
