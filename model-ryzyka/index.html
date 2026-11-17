@@ -2751,7 +2751,7 @@ body.wdm .mh .wrap>div:first-child,body.wdm .mh-r>:not(.vtslot),body.wdm .mw .st
 .sds-r .sd-cats .sdk-k{font-size:9px!important;letter-spacing:.12em!important}
 
 /* === Ryzyko modelu (tryb ocena) === */
-html:not(.ocena) .orm{display:none}.orm .wrap>*{transition:opacity .45s}.orm.hout .wrap>*{opacity:0;pointer-events:none}html.ocena .mh,html.ocena .mw>.stage,html.ocena .vdyn{display:none!important}
+html:not(.ocena) .orm{display:none}html.ocena #ds-lb-zr,html.ocena #ds-lb-mr,html.ocena #ds-lb-pz{margin-top:0!important}html.ocena .mh,html.ocena .mw>.stage,html.ocena .vdyn{display:none!important}
 .orm .wrap{max-width:1380px}
 .orm{padding:clamp(24px,3vw,44px) 0 0;position:relative}
 .orm .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 60px;align-items:start;position:relative;min-height:calc(100vh - 120px)}
@@ -4251,7 +4251,7 @@ tabs.addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b)se
 })();
 document.addEventListener("click",e=>{const a=e.target.closest(".orm [data-lb]");if(!a)return;e.preventDefault();const k=a.dataset.lb;if(k)window.__openLB&&window.__openLB(k);else scrollTo({top:0,behavior:"smooth"})});
 </script>
-<script>if(document.documentElement.classList.contains("ocena")){{const mh=document.querySelector(".mh"),o=document.querySelector(".orm"),cp=()=>{o.classList.toggle("hout",mh.classList.contains("hout")||mh.classList.contains("hsolo")||!!document.querySelector(".lbsec.on"))};new MutationObserver(cp).observe(mh,{attributes:true,attributeFilter:["class"]});setInterval(cp,300);cp()}document.addEventListener("click",e=>{if(e.target.closest(".lb-back")||e.target.closest('.orm [data-lb=""]')){scrollTo({top:0,behavior:"smooth"});setTimeout(()=>document.querySelectorAll(".lbsec.on").forEach(x=>x.classList.remove("on")),450)}},true);document.querySelectorAll('.nav a,.foot a').forEach(a=>{const h=a.getAttribute("href");if(h==="./"){a.classList.remove("on");a.setAttribute("href","../model-ryzyka/")}else if(h==="../ocena-ryzyka-modelu/"){a.setAttribute("href","./");if(a.closest(".nav"))a.classList.add("on")}});document.querySelectorAll(".lb-back").forEach(b=>{if(b.textContent.trim()==="↑ Model ryzyka")b.textContent="↑ Ryzyko modelu"})}</script>
+<script>if(document.documentElement.classList.contains("ocena")){{const mh=document.querySelector(".mh"),o=document.querySelector(".orm"),cp=()=>{o.classList.toggle("hout",mh.classList.contains("hout")||mh.classList.contains("hsolo")||!!document.querySelector(".lbsec.on"))};new MutationObserver(cp).observe(mh,{attributes:true,attributeFilter:["class"]});setInterval(cp,300);cp()}document.addEventListener("click",e=>{if(e.target.closest('.orm [data-lb=""]'))scrollTo({top:0,behavior:"smooth"})},true);document.querySelectorAll('.nav a,.foot a').forEach(a=>{const h=a.getAttribute("href");if(h==="./"){a.classList.remove("on");a.setAttribute("href","../model-ryzyka/")}else if(h==="../ocena-ryzyka-modelu/"){a.setAttribute("href","./");if(a.closest(".nav"))a.classList.add("on")}});document.querySelectorAll(".lb-back").forEach(b=>{if(b.textContent.trim()==="↑ Model ryzyka")b.textContent="↑ Ryzyko modelu"})}</script>
 <script src="../rt.js"></script>
 
 <script>
