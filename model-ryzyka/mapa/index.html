@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Mapa strony – Model ryzyka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0d0d0d;--paper:#f4efe8;--card:#fcf9f5;--line:#ddd3c4;--panel:#f0e8dd;--tan:#b29e84;--terra:#a8694c;--btn:#ad6b4e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 14px/1.55 Poppins,system-ui,sans-serif}
+.w{max-width:1480px;margin:0 auto;padding:40px 28px 90px}
+.back{display:inline-block;margin-bottom:22px;color:var(--ink);text-decoration:none;font-weight:500}
+.k{font:600 11px Poppins;letter-spacing:.2em;text-transform:uppercase;color:var(--terra)}
+h1{font:400 clamp(32px,4.4vw,48px)/1.05 "Archivo Black",sans-serif;margin:10px 0 12px}
+.lead{max-width:720px;color:#5c564d;margin:0 0 18px;font-weight:300;font-size:15px}
+.lg{display:flex;flex-wrap:wrap;gap:18px;align-items:center;font-size:12px;color:#5c564d;margin-bottom:30px}
+.lg i{display:inline-block;width:26px;height:0;border-top:2px solid;vertical-align:middle;margin-right:7px}
+.lg .l1 i{border-color:#0d0d0d}.lg .l2 i{border-color:#bf8165}.lg .l3 i{border-color:#bf8165;border-top-style:dashed}
+.lg .tip{font:italic 13px "Source Serif 4",serif;color:#8a8173}
+.pg{position:relative;margin:0 0 70px}
+.pg-h{display:flex;align-items:baseline;gap:14px;border-top:1px solid #cdbfa9;padding-top:14px;margin-bottom:22px}
+.pg-h h2{font:400 26px "Archivo Black",sans-serif;margin:0}
+.pg-h span{font:italic 14px "Source Serif 4",serif;color:#8a8173}
+#app{position:relative}
+.rows{position:relative;display:flex;flex-direction:column;gap:70px}
+.row{display:flex;flex-wrap:wrap;justify-content:center;gap:56px 34px;position:relative;z-index:2}
+.row-k{position:absolute;left:0;top:-30px;font:600 10px Poppins;letter-spacing:.16em;text-transform:uppercase;color:#a9a091}
+.n{width:232px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:box-shadow .2s,opacity .2s,border-color .2s;cursor:default}
+.n.root{border-color:#ad6b4e;box-shadow:0 0 0 2px rgba(173,107,78,.25)}
+.n img{display:block;width:100%;aspect-ratio:1536/730;object-fit:cover;object-position:top;border-bottom:1px solid var(--line);cursor:zoom-in;background:#eee}
+.n-b{padding:8px 10px 9px}
+.n-k{font:600 9px Poppins;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)}
+.n-t{font-weight:600;font-size:13px;line-height:1.3;margin:1px 0 5px}
+.n ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.n li{font-size:10.5px;line-height:1.35;color:#5c564d;display:flex;gap:5px}
+.n li b{font-weight:500;color:#2b2723}
+.n li i{font-style:normal;color:#bf8165;flex:none}
+.n li.x i{color:#b29e84}
+.n li.t i{color:#0d0d0d}.n li em{font-style:normal;color:#8a8173}.n li u{text-decoration:none;font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#b29e84;border-radius:3px;padding:0 4px;margin-left:3px}
+#app.hv .n{opacity:.3}#app.hv .n.on{opacity:1}#app.hv .n.me{opacity:1;border-color:#ad6b4e;box-shadow:0 8px 26px -14px rgba(60,40,20,.45)}
+svg.ed{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
+svg.ed path[data-f]{fill:none;stroke-width:1.3;opacity:.45;transition:opacity .2s,stroke-width .2s}
+svg.ed path.tab{stroke:#0d0d0d}svg.ed path.go{stroke:#bf8165}
+svg.ed path.up{stroke-dasharray:5 4}
+#app.hv svg.ed path[data-f]{opacity:.05}#app.hv svg.ed path.on{opacity:1;stroke-width:2.2}
+.box{position:fixed;inset:0;background:rgba(20,16,12,.72);display:none;align-items:center;justify-content:center;z-index:50;padding:30px;cursor:zoom-out}
+.box.on{display:flex}.box figure{margin:0;max-width:min(1536px,94vw)}.box img{width:100%;border-radius:10px;display:block}
+.box figcaption{color:#f4efe8;font:500 14px Poppins;margin-top:10px}
+@media (max-width:700px){.w{padding:28px 16px 60px}.n{width:100%}}
+</style>
+</head>
+<body>
+<div class="w">
+<a class="back" href="../">← Model ryzyka</a>
+<div class="k">Mapa strony</div>
+<h1>Mapa połączeń</h1>
+<p class="lead">Wszystkie widoki stron Model ryzyka i Ryzyko modelu – z miniaturą i przyciskami, które prowadzą dalej. Rzędy idą od strony startowej w głąb: im niżej, tym więcej kliknięć od startu.</p>
+<div class="lg"><span class="l1"><i></i>zakładka</span><span class="l2"><i></i>przycisk prowadzi do widoku</span><span class="l3"><i></i>powrót wyżej (linia przerywana)</span><span class="tip">Najedź na widok, by zobaczyć jego połączenia. Kliknij miniaturę, by ją powiększyć.</span></div>
+<div id="app"></div>
+</div>
+<div class="box" id="box"><figure><img alt=""><figcaption></figcaption></figure></div>
+<script>
+const G={"nodes": {"tab0": {"id": "tab0", "page": "mr", "v": "tab0", "title": "Model ryzyka i jego komponenty", "tab": "Model ryzyka", "img": "img/mr-tab0.jpg"}, "tab3": {"id": "tab3", "page": "mr", "v": "tab3", "title": "ECL i jego składniki", "tab": "Model statystyczny", "img": "img/mr-tab3.jpg"}, "tab1": {"id": "tab1", "page": "mr", "v": "tab1", "title": "Dane do modelu", "tab": "Dane", "img": "img/mr-tab1.jpg"}, "tab4": {"id": "tab4", "page": "mr", "v": "tab4", "title": "Od liczby do sprawozdania", "tab": "Wyniki", "img": "img/mr-tab4.jpg"}, "wd": {"id": "wd", "page": "mr", "v": "wd", "title": "Wdrożenie modelu", "tab": null, "img": "img/mr-wd.jpg"}, "wt": {"id": "wt", "page": "mr", "v": "wt", "title": "Wdrożenie techniczne", "tab": null, "img": "img/mr-wt.jpg"}, "wp": {"id": "wp", "page": "mr", "v": "wp", "title": "Wdrożenie procesowe", "tab": null, "img": "img/mr-wp.jpg"}, "mp": {"id": "mp", "page": "mr", "v": "mp", "title": "Modele ryzyka w procesach banku", "tab": null, "img": "img/mr-mp.jpg"}, "mr": {"id": "mr", "page": "mr", "v": "mr", "title": "Modele ryzyka banku", "tab": null, "img": "img/mr-mr.jpg"}, "rj": {"id": "rj", "page": "mr", "v": "rj", "title": "Rejestr modeli banku", "tab": null, "img": "img/mr-rj.jpg"}, "doc": {"id": "doc", "page": "mr", "v": "doc", "title": "Dokumentacja modelu", "tab": null, "img": "img/mr-doc.jpg"}, "eng": {"id": "eng", "page": "mr", "v": "eng", "title": "Silnik obliczeniowy", "tab": null, "img": "img/mr-eng.jpg"}, "ec": {"id": "ec", "page": "mr", "v": "ec", "title": "Odpisy i koszt ryzyka", "tab": null, "img": "img/mr-ec.jpg"}, "ic": {"id": "ic", "page": "mr", "v": "ic", "title": "Adekwatność kapitałowa", "tab": null, "img": "img/mr-ic.jpg"}, "bl": {"id": "bl", "page": "mr", "v": "bl", "title": "Bilans, wynik i kapitał", "tab": null, "img": "img/mr-bl.jpg"}, "rt": {"id": "rt", "page": "mr", "v": "rt", "title": "Wskaźniki banku", "tab": null, "img": "img/mr-rt.jpg"}, "db": {"id": "db", "page": "mr", "v": "db", "title": "Bazy danych", "tab": null, "img": "img/mr-db.jpg"}, "pz": {"id": "pz", "page": "mr", "v": "pz", "title": "Przetwarzanie danych", "tab": null, "img": "img/mr-pz.jpg"}, "law": {"id": "law", "page": "mr", "v": "law", "title": "Regulacje prawne", "tab": null, "img": "img/mr-law.jpg"}, "reg": {"id": "reg", "page": "mr", "v": "reg", "title": "Otoczenie regulacyjne banku", "tab": null, "img": "img/mr-reg.jpg"}, "kls": {"id": "kls", "page": "mr", "v": "kls", "title": "Klasy modeli ryzyka", "tab": null, "img": "img/mr-kls.jpg"}, "prb": {"id": "prb", "page": "mr", "v": "prb", "title": "Koncepcje modeli ryzyka", "tab": null, "img": "img/mr-prb.jpg"}, "tec": {"id": "tec", "page": "mr", "v": "tec", "title": "Techniki ilościowe budowy modeli", "tab": null, "img": "img/mr-tec.jpg"}, "orm": {"id": "orm", "page": "rm", "v": "orm", "title": "Ocena ryzyka modelu", "tab": null, "img": "img/rm-orm.jpg"}, "zr": {"id": "zr", "page": "rm", "v": "zr", "title": "Zarządzanie ryzykiem modeli", "tab": null, "img": "img/rm-zr.jpg"}, "rw": {"id": "rw", "page": "rm", "v": "rw", "title": "Proces walidacji", "tab": null, "img": "img/rm-rw.jpg"}, "kj": {"id": "kj", "page": "rm", "v": "kj", "title": "Komponent jakościowy walidacji", "tab": null, "img": "img/rm-kj.jpg"}, "ki": {"id": "ki", "page": "rm", "v": "ki", "title": "Komponent ilościowy walidacji", "tab": null, "img": "img/rm-ki.jpg"}, "lg": {"id": "lg", "page": "rm", "v": "lg", "title": "Logika biznesowa modelu", "tab": null, "img": "img/rm-lg.jpg"}, "dq": {"id": "dq", "page": "rm", "v": "dq", "title": "Działania właściciela modelu", "tab": null, "img": "img/rm-dq.jpg"}, "tev": {"id": "tev", "page": "rm", "v": "tev", "title": "Techniki ilościowe walidacji modeli", "tab": null, "img": "img/rm-tev.jpg"}}, "edges": [{"from": "tab0", "to": "tab3", "t": "Model statystyczny →", "kind": "go"}, {"from": "tab0", "to": "tab1", "t": "Dane →", "kind": "go"}, {"from": "tab0", "to": "tab4", "t": "Wyniki →", "kind": "go"}, {"from": "tab0", "to": "wd", "t": "Zobacz →", "kind": "go"}, {"from": "tab0", "to": "orm", "t": "Zobacz →", "kind": "go"}, {"from": "tab0", "to": "mr", "t": "Zobacz ↓", "kind": "go"}, {"from": "wd", "to": "wt", "t": "Szczegóły ↓", "kind": "go"}, {"from": "wd", "to": "wp", "t": "Szczegóły ↓", "kind": "go"}, {"from": "mp", "to": "tab0", "t": "Zobacz →", "kind": "go"}, {"from": "tab4", "to": "bl", "t": "W liczbach banku: bilans, wynik, wskaźniki ↓", "kind": "go"}, {"from": "tab3", "to": "doc", "t": "Szczegóły →", "kind": "go"}, {"from": "tab3", "to": "eng", "t": "Szczegóły →", "kind": "go"}, {"from": "tab3", "to": "ec", "t": "Zobacz →", "kind": "go"}, {"from": "tab1", "to": "tab3", "t": "Model statystyczny →", "kind": "go"}, {"from": "tab1", "to": "dq", "t": "Zobacz →", "kind": "go"}, {"from": "tab1", "to": "pz", "t": "Przetwarzanie danych ↓", "kind": "go"}, {"from": "tab1", "to": "db", "t": "Bazy danych ↓", "kind": "go"}, {"from": "mr", "to": "rj", "t": "Zobacz ↓", "kind": "go"}, {"from": "mr", "to": "kls", "t": "Zobacz →", "kind": "go"}, {"from": "mr", "to": "bl", "t": "Zobacz →", "kind": "go"}, {"from": "rj", "to": "mr", "t": "Zobacz ↑", "kind": "go"}, {"from": "zr", "to": "mr", "t": "Modele w banku →", "kind": "go"}, {"from": "zr", "to": "rj", "t": "Rejestr modeli →", "kind": "go"}, {"from": "zr", "to": "rw", "t": "Zobacz →", "kind": "go"}, {"from": "zr", "to": "dq", "t": "Zobacz →", "kind": "go"}, {"from": "rw", "to": "kj", "t": "Komponent jakościowy ↓", "kind": "go"}, {"from": "rw", "to": "ki", "t": "Komponent ilościowy ↓", "kind": "go"}, {"from": "rw", "to": "lg", "t": "Logika biznesowa →", "kind": "go"}, {"from": "rw", "to": "url:../okiem-praktyka/", "t": "Kwestie problematyczne →", "kind": "link"}, {"from": "kj", "to": "ki", "t": "Komponent ilościowy →", "kind": "go"}, {"from": "kj", "to": "lg", "t": "Logika biznesowa →", "kind": "go"}, {"from": "ki", "to": "tev", "t": "Zobacz →", "kind": "go"}, {"from": "ki", "to": "kj", "t": "Komponent jakościowy →", "kind": "go"}, {"from": "ki", "to": "lg", "t": "Logika biznesowa →", "kind": "go"}, {"from": "lg", "to": "kj", "t": "Komponent jakościowy →", "kind": "go"}, {"from": "lg", "to": "ki", "t": "Komponent ilościowy →", "kind": "go"}, {"from": "dq", "to": "rw", "t": "Proces walidacji →", "kind": "go"}, {"from": "dq", "to": "pz", "t": "Przetwarzanie danych →", "kind": "go"}, {"from": "db", "to": "pz", "t": "Przetwarzanie danych ↓", "kind": "go"}, {"from": "pz", "to": "tab1", "t": "Dane do modelu ↑", "kind": "go"}, {"from": "pz", "to": "tab3", "t": "Model statystyczny ↑", "kind": "go"}, {"from": "tab3", "to": "law", "t": "Regulacje →", "kind": "go"}, {"from": "tab3", "to": "kls", "t": "Klasy modeli →", "kind": "go"}, {"from": "tab3", "to": "prb", "t": "Koncepcje modeli →", "kind": "go"}, {"from": "tab3", "to": "tec", "t": "Techniki ilościowe →", "kind": "go"}, {"from": "law", "to": "ec", "t": "Zobacz →", "kind": "go"}, {"from": "law", "to": "ic", "t": "Zobacz →", "kind": "go"}, {"from": "law", "to": "reg", "t": "Szczegóły →", "kind": "go"}, {"from": "kls", "to": "ec", "t": "Zobacz →", "kind": "go"}, {"from": "kls", "to": "url:../okiem-praktyka/#el", "t": "Przeczytaj →", "kind": "link"}, {"from": "kls", "to": "ic", "t": "Zobacz →", "kind": "go"}, {"from": "kls", "to": "url:../okiem-praktyka/#ul", "t": "Przeczytaj →", "kind": "link"}, {"from": "prb", "to": "kls", "t": "Szczegóły →", "kind": "go"}, {"from": "tev", "to": "tec", "t": "Zobacz →", "kind": "go"}, {"from": "tev", "to": "ki", "t": "Komponent ilościowy →", "kind": "go"}, {"from": "tev", "to": "rw", "t": "Proces walidacji →", "kind": "go"}, {"from": "bl", "to": "mr", "t": "Modele ryzyka banku →", "kind": "go"}, {"from": "bl", "to": "rt", "t": "Wskaźniki finansowe →", "kind": "go"}, {"from": "bl", "to": "ec", "t": "Odpisy i koszt ryzyka →", "kind": "go"}, {"from": "bl", "to": "ic", "t": "Adekwatność kapitałowa →", "kind": "go"}, {"from": "rt", "to": "bl", "t": "Bilans, wynik i kapitał →", "kind": "go"}, {"from": "ec", "to": "url:../okiem-praktyka/#el", "t": "Przeczytaj moje uwagi →", "kind": "link"}, {"from": "ec", "to": "bl", "t": "Bilans, wynik i kapitał →", "kind": "go"}, {"from": "ec", "to": "ic", "t": "Adekwatność kapitałowa →", "kind": "go"}, {"from": "ic", "to": "url:../okiem-praktyka/#ul", "t": "Przeczytaj moje uwagi →", "kind": "link"}, {"from": "ic", "to": "url:../okiem-praktyka/kryzysy-co-10-lat/", "t": "Przeczytaj →", "kind": "link"}, {"from": "ic", "to": "bl", "t": "Bilans, wynik i kapitał →", "kind": "go"}, {"from": "ic", "to": "ec", "t": "Odpisy i koszt ryzyka →", "kind": "go"}, {"from": "orm", "to": "rw", "t": "Proces walidacji →", "kind": "go"}, {"from": "orm", "to": "kj", "t": "Komponent jakościowy →", "kind": "go"}, {"from": "orm", "to": "ki", "t": "Komponent ilościowy →", "kind": "go"}, {"from": "orm", "to": "zr", "t": "Zobacz →", "kind": "go"}, {"from": "orm", "to": "dq", "t": "Zobacz →", "kind": "go"}, {"from": "orm", "to": "rw", "t": "Proces walidacji", "kind": "go"}, {"from": "orm", "to": "kj", "t": "Komponent jakościowy", "kind": "go"}, {"from": "orm", "to": "ki", "t": "Komponent ilościowy", "kind": "go"}, {"from": "tab0", "to": "tab3", "t": "zakładka Model statystyczny", "kind": "tab"}, {"from": "tab0", "to": "tab1", "t": "zakładka Dane", "kind": "tab"}, {"from": "tab0", "to": "tab4", "t": "zakładka Wyniki", "kind": "tab"}, {"from": "tab0", "to": "wd", "t": "zakładka Wdrożenie modelu", "kind": "tab"}, {"from": "wd", "to": "mp", "t": "Zobacz mapę", "kind": "go"}]};
+const PN={mr:["Model ryzyka","strona z bryłą modelu"],rm:["Ryzyko modelu","strona oceny ryzyka modelu"]};
+const ROOT={mr:"tab0",rm:"orm"};
+const app=document.getElementById("app");
+const ext=u=>{u=u.replace(/^url:/,"");if(u.includes("okiem-praktyka")){const h=u.split("#")[1],p=u.split("okiem-praktyka/")[1]||"";return "Okiem praktyka"+(h?" · "+h.toUpperCase():p&&!p.startsWith("#")?" · "+p.replace(/\/$/,"").replace(/-/g," "):"")}return u};
+const out={};G.edges.forEach(e=>(out[e.from]=out[e.from]||[]).push(e));
+const ROWS={};
+for(const P of ["mr","rm"]){
+  const N=Object.values(G.nodes).filter(n=>n.page===P);
+  const D={[ROOT[P]]:0},q=[ROOT[P]];while(q.length){const a=q.shift();(out[a]||[]).forEach(e=>{const t=G.nodes[e.to];if(t&&t.page===P&&D[e.to]==null){D[e.to]=D[a]+1;q.push(e.to)}})}
+  N.forEach(n=>{if(D[n.id]==null){const ins=G.edges.filter(e=>e.to===n.id&&D[e.from]!=null).map(e=>D[e.from]+1);D[n.id]=ins.length?Math.min(...ins):1}});
+  const rows=[];N.forEach(n=>(rows[D[n.id]]=rows[D[n.id]]||[]).push(n));
+  const pos={};rows.forEach((r,ri)=>{if(!r)return;if(ri>0)r.sort((a,b)=>{const f=x=>{const ps=G.edges.filter(e=>e.to===x.id&&pos[e.from]!=null).map(e=>pos[e.from]);return ps.length?ps.reduce((s,v)=>s+v,0)/ps.length:999};return f(a)-f(b)});r.forEach((n,i)=>pos[n.id]=i)});
+  ROWS[P]=rows.filter(Boolean);
+}
+const card=n=>{const L=out[n.id]||[],seen=new Set();
+  const li=L.filter(e=>{const k=e.to;if(seen.has(k))return false;seen.add(k);return true}).map(e=>{const tg=G.nodes[e.to];const tt=tg?(tg.tab?"zakładka "+tg.tab:tg.title):ext(e.to);const same=L.filter(x=>x.to===e.to).map(x=>x.t.replace(/[→↓↑←↻]/g,"").trim()).filter(x=>x&&!/^zakładka/.test(x)&&x!==(tg?tg.title:"")&&x!==(tg&&tg.tab||""));const btn=[...new Set(same)].join(", ");
+    return `<li class="${e.kind==="link"?"x":L.some(x=>x.to===e.to&&x.kind==="tab")?"t":""}${tg&&tg.page!==n.page?" pg2":""}"><i>→</i><span><b>${tt}</b>${btn?` <em>· ${btn}</em>`:""}${tg&&tg.page!==n.page?` <u>${PN[tg.page][0]}</u>`:""}</span></li>`}).join("");
+  return `<div class="n${n.id===ROOT[n.page]?" root":""}" data-id="${n.id}"><img loading="lazy" src="${n.img}" alt=""><div class="n-b"><div class="n-k">${n.tab?"zakładka · "+n.tab:n.id===ROOT[n.page]?"start":"podstrona"}</div><div class="n-t">${n.title}</div>${li?`<ul>${li}</ul>`:""}</div></div>`};
+app.innerHTML=`<svg class="ed"></svg>`+["mr","rm"].map(P=>`<section class="pg"><div class="pg-h"><h2>${PN[P][0]}</h2><span>${PN[P][1]} · ${Object.values(G.nodes).filter(n=>n.page===P).length} widoków</span></div><div class="rows">${ROWS[P].map((r,ri)=>`<div class="row">${ri===0?"":`<span class="row-k">${ri} ${ri===1?"kliknięcie":ri<5?"kliknięcia":"kliknięć"} od startu</span>`}${r.map(card).join("")}</div>`).join("")}</div></section>`).join("");
+const svg=app.querySelector("svg.ed");
+const draw=()=>{const rb=app.getBoundingClientRect();svg.setAttribute("viewBox",`0 0 ${rb.width} ${rb.height}`);let h="";const done=new Set();
+  G.edges.forEach((e,i)=>{const k=e.from+">"+e.to;if(done.has(k))return;done.add(k);const a=app.querySelector(`[data-id="${e.from}"]`),b=app.querySelector(`[data-id="${e.to}"]`);if(!a||!b||a===b)return;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();
+    const tab=G.edges.some(x=>x.from===e.from&&x.to===e.to&&x.kind==="tab");const back=G.edges.some(x=>x.from===e.to&&x.to===e.from);let d,cls=tab?"tab":"go";
+    const off=((i%5)-2)*7;
+    if(B.top>A.bottom+4){const x1=A.left+A.width/2-rb.left+off,y1=A.bottom-rb.top,x2=B.left+B.width/2-rb.left-off,y2=B.top-rb.top,m=Math.min(160,(y2-y1)/2);d=`M${x1},${y1} C${x1},${y1+m} ${x2},${y2-m} ${x2},${y2}`}
+    else if(A.top>B.bottom+4){cls+=" up";const l=B.left+B.width/2>A.left+A.width/2;const x1=(l?A.right:A.left)-rb.left,y1=A.top+40-rb.top,x2=(l?B.left:B.right)-rb.left,y2=B.top+60-rb.top,c=Math.max(60,Math.abs(x2-x1)/2);d=`M${x1},${y1} C${x1+(l?c:-c)},${y1} ${x2+(l?-c:c)},${y2} ${x2},${y2}`}
+    else{const l=B.left>A.left,x1=A.left+A.width/2-rb.left+off,y1=A.top-rb.top,x2=B.left+B.width/2-rb.left-off,y2=B.top-rb.top,c=40+Math.abs(x2-x1)/6;d=`M${x1},${y1} C${x1},${y1-c} ${x2},${y2-c} ${x2},${y2}`;cls+=" side"}
+    h+=`<path class="${cls}" data-f="${e.from}" data-t="${e.to}" d="${d}" marker-end="url(#ah-${tab?"t":"g"})"/>`});
+  svg.innerHTML=`<defs><marker id="ah-g" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#bf8165"/></marker><marker id="ah-t" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0d0d0d"/></marker></defs>`+h};
+draw();addEventListener("resize",draw);document.fonts&&document.fonts.ready.then(draw);app.querySelectorAll("img").forEach(im=>im.addEventListener("load",draw));setTimeout(draw,500);
+app.addEventListener("mouseover",ev=>{const n=ev.target.closest(".n");if(!n)return;const id=n.dataset.id;app.classList.add("hv");app.querySelectorAll(".n").forEach(x=>x.classList.remove("on","me"));n.classList.add("me");svg.querySelectorAll("path[data-f]").forEach(p=>{const on=p.dataset.f===id||p.dataset.t===id;p.classList.toggle("on",on);if(on){const o=app.querySelector(`[data-id="${p.dataset.f===id?p.dataset.t:p.dataset.f}"]`);o&&o.classList.add("on")}})});
+app.addEventListener("mouseleave",()=>{app.classList.remove("hv");svg.querySelectorAll("path.on").forEach(p=>p.classList.remove("on"))});
+const box=document.getElementById("box");
+app.addEventListener("click",e=>{const im=e.target.closest(".n img");if(!im)return;const n=im.closest(".n");box.querySelector("img").src=im.src;box.querySelector("figcaption").textContent=n.querySelector(".n-t").textContent;box.classList.add("on")});
+box.addEventListener("click",()=>box.classList.remove("on"));addEventListener("keydown",e=>{if(e.key==="Escape")box.classList.remove("on")});
+</script>
+</body>
+</html>
