@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="../rt.css">
-<script>if(/ocena-ryzyka-modelu/.test(location.pathname)){document.documentElement.classList.add("ocena");document.title="Ocena ryzyka modelu – Risk Trainings | Maciej Buczak"}</script>
+<script>if(/ocena-ryzyka-modelu/.test(location.pathname)){document.documentElement.classList.add("ocena");document.title="Ocena ryzyka modelu – Risk Trainings | Maciej Buczak"}if(/\/bank\//.test(location.pathname)){document.documentElement.classList.add("bank");document.title="Bank, modele i procesy – Risk Trainings | Maciej Buczak"}</script>
 <style>
 .mh{padding:clamp(24px,3vw,44px) 0 0}
 .mh .wrap,.top .wrap,.foot .wrap,.mw{max-width:1380px}
@@ -2938,6 +2938,37 @@ svg.hov .ag-seg.on{opacity:1}
 .dbg text{font-family:var(--body)}
 .dbk-go{margin-top:14px;display:inline-flex;align-items:center;gap:8px;border:1px solid #ad6b4e;background:transparent;color:#ad6b4e;border-radius:999px;padding:7px 16px;font:600 12.5px var(--body);cursor:pointer}.dbk-go:hover{background:#ad6b4e;color:#fff}.dbk-go i{font-style:normal}
 #ds-lb-db .dd2-host{height:100%}
+
+/* === Bank (tryb bank) === */
+html:not(.bank) .bnk{display:none}
+html.bank .mh,html.bank .mw>.stage,html.bank .vdyn{display:none!important}
+html.bank #ds-lb-mr,html.bank #ds-lb-zr,html.bank #ds-lb-pz,html.bank #ds-lb-db{margin-top:0!important}
+
+.bnk .wrap{max-width:1380px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 60px;align-items:start;position:relative;min-height:calc(100vh - 120px)}
+.bnk{padding:clamp(24px,3vw,44px) 0 0;position:relative}
+.bnk h1{font-size:clamp(32px,3.6vw,50px);margin:16px 0 0;letter-spacing:-.02em}
+.bnk h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d)}
+.bnk-l{position:relative;z-index:3}
+.bnk-r{display:flex;flex-direction:column;align-items:flex-end;position:relative;z-index:3}
+.bnk-r p{text-align:left;margin:26px 0 0;align-self:flex-start;max-width:620px;font-size:16px;font-weight:300;color:var(--ink2)}
+.bnk-tabs{display:flex;gap:2px;padding:5px;border-radius:999px;background:#fffdf9;border:1px solid var(--line);width:max-content}
+.bnk-tabs a{white-space:nowrap;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:999px;color:var(--ink2);text-decoration:none;transition:background .2s,color .2s}
+.bnk-tabs a:hover{background:rgba(13,13,13,.05)}
+.bnk-tabs a.on{background:var(--ink);color:var(--paper)}
+.bnk-go{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:26px}
+.bnk-go>span{font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c;margin-bottom:2px}
+.bnk-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #ad6b4e;background:transparent;color:#ad6b4e;border-radius:999px;padding:8px 16px;font:600 13px var(--body);text-decoration:none;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap}
+.bnk-pill:hover{background:#ad6b4e;color:#fff}
+.bnk-pill:active{background:#8a5238;border-color:#8a5238;color:#fff}
+.bnk-frs{margin-top:35px;width:300px}
+.bnk-fr{border-top:1px solid #cdbfa9;padding:8px 0 10px;display:grid;grid-template-columns:auto auto;justify-content:space-between;align-items:center;column-gap:14px;row-gap:2px}
+.bnk-fr b{grid-column:1 / -1;font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c}
+.bnk-fr p{margin:0;font:italic 13px/1.4 var(--serif);color:#5c564d;white-space:nowrap}
+.bnk-fr .bnk-pill{padding:5px 14px;font-size:12.5px;min-width:100px;justify-content:center;box-sizing:border-box}
+.bnk-stage{position:absolute;left:28%;right:0;top:170px;z-index:2}
+.bnk-stage svg{width:100%;height:calc(100vh - 343px);max-height:560px;min-height:340px;display:block;overflow:visible}
+.bnk-stage text{font-family:var(--body)}
+@media (max-width:980px){.bnk .wrap{grid-template-columns:1fr;min-height:0}.bnk-r{align-items:flex-start}.bnk-tabs{flex-wrap:wrap;width:auto;border-radius:18px}.bnk-frs{margin-top:28px}.bnk-stage{position:static;margin:20px 0 40px}}
 </style>
 <style>.ctlbar{display:none!important}html.obj .ctlbar{display:flex!important}</style><script>if(new URLSearchParams(location.search).has("obejrzyj"))document.documentElement.classList.add("obj")</script><style>.vdyn.vwar{right:48px}html.bezpokoju #dfloor,html.bezpokoju .bgv,html.bezpokoju .bg3,html.bezpokoju .bgf,html.bezpokoju .bgs{display:none!important}.vdyn.vtlo{right:82px;cursor:pointer;font-family:inherit}.vdyn.vmap{right:116px}html.bezpokoju .vdyn.vtlo{border-color:#ad6b4e;color:#ad6b4e;background:#f6ebe3}</style><script>if(new URLSearchParams(location.search).has("bezpokoju"))document.documentElement.classList.add("bezpokoju")</script></head>
 <body>
@@ -2961,6 +2992,19 @@ svg.hov .ag-seg.on{opacity:1}
   </div>
   <div class="orm-r"><nav class="orm-tabs" aria-label="Ocena ryzyka modelu"><a class="on" href="#" data-lb="">Ryzyko modelu</a><a href="#" data-lb="rw">Proces walidacji</a><a href="#" data-lb="kj">Komponent jakościowy</a><a href="#" data-lb="ki">Komponent ilościowy</a></nav><p class="orm-d">Ocena modelu składa się z trzech ocen: jakościowej, ilościowej i jakości danych – każda w skali od 1 do 5. Ocena końcowa to ich średnia ważona, porównana z progiem akceptacji 3,0.</p></div>
   <div class="orm-stage"><svg id="ag" viewBox="78 -8 844 408" preserveAspectRatio="xMidYMid meet" aria-label="Mapa ryzyka modelu"></svg></div>
+</div></section>
+<section class="bnk"><div class="wrap">
+  <div class="bnk-l"><span class="kick">Bilans, wynik i kapitał</span><h1>Bank, modele<br><em>i procesy</em></h1>
+    <div class="bnk-go"><span>Zajrzyj do środka banku</span><a class="bnk-pill" href="#" data-lb="bl">Bilans, wynik i kapitał <i>→</i></a><a class="bnk-pill" href="#" data-lb="rt">Wskaźniki banku <i>→</i></a><a class="bnk-pill" href="#" data-lb="mr">Modele ryzyka banku <i>→</i></a></div>
+    <div class="bnk-frs">
+      <div class="bnk-fr"><b>Modele w procesach banku</b><p>Gdzie w banku działają modele.</p><a class="bnk-pill" href="#" data-lb="mp">Zobacz <i>→</i></a></div>
+      <div class="bnk-fr"><b>Odpisy i koszt ryzyka</b><p>Strata oczekiwana w wyniku.</p><a class="bnk-pill" href="#" data-lb="ec">Zobacz <i>→</i></a></div>
+      <div class="bnk-fr"><b>Adekwatność kapitałowa</b><p>Kapitał na straty nieoczekiwane.</p><a class="bnk-pill" href="#" data-lb="ic">Zobacz <i>→</i></a></div>
+      
+    </div>
+  </div>
+  <div class="bnk-r"><nav class="bnk-tabs" aria-label="Bank"><a class="on" href="#" data-lb="">Bank</a><a href="#" data-lb="bl">Bilans i wynik</a><a href="#" data-lb="mr">Modele w banku</a><a href="#" data-lb="law">Regulacje</a></nav><p class="bnk-d">Bilans, wynik i kapitał banku – i modele ryzyka, które zmieniają każdą z tych liczb. Strata oczekiwana trafia do odpisów, nieoczekiwana do wymogów kapitałowych, a całość działa w ramach regulacji.</p></div>
+  <div class="bnk-stage"><svg id="bg" viewBox="114 28 772 380" preserveAspectRatio="xMidYMid meet" aria-label="Bank jako system: bilans, modele ryzyka, wynik, kapitał i regulacje"></svg></div>
 </div></section>
 
 
@@ -4100,7 +4144,7 @@ Object.entries(RT).forEach(([k,r])=>BI["q_"+k]={id:"q_"+k,n:r.n});
       setInterval(()=>{const k=document.querySelector("#ds-lb-mr .lbf-kl"),n=document.querySelector("#ds-lb-mr .rjnb");if(!k||!n||!k.offsetParent)return;const d=n.getBoundingClientRect().bottom-k.getBoundingClientRect().bottom;if(Math.abs(d)>.5)n.style.bottom=((parseFloat(getComputedStyle(n).bottom)||0)+d).toFixed(1)+"px"},400);
       {const mh=document.querySelector(".mh");mh&&new MutationObserver(()=>{if(mh.classList.contains("hsolo")||mh.classList.contains("hout")){secs.mr.classList.remove("on");secs.rj.classList.remove("on");secs.zr.classList.remove("on");secs.rw.classList.remove("on");secs.kj.classList.remove("on");secs.ki.classList.remove("on");secs.lg.classList.remove("on");secs.dq&&secs.dq.classList.remove("on");secs.zm&&secs.zm.classList.remove("on")}}).observe(mh,{attributes:true,attributeFilter:["class"]})}
       {const s1=document.querySelector('.stp[data-focus="db"]');s1&&new MutationObserver(()=>{if(!s1.classList.contains("on")){secs.pz.classList.remove("on");secs.db&&secs.db.classList.remove("on");secs.dm&&secs.dm.classList.remove("on")}}).observe(s1,{attributes:true,attributeFilter:["class"]})}
-      const grp=k=>k==="zr"||k==="rw"||k==="kj"||k==="ki"||k==="lg"||k==="dq"||k==="zm"||k==="rj"?"zr":k==="mr"?"mr":k==="pz"||k==="dm"||k==="db"?"d":k==="wd"||k==="wt"||k==="wp"||k==="mp"?"i":"w";window.__openLB=k=>{if(k==="db"||k==="pz"){const s1=document.querySelector('.stp[data-focus="db"]'),t=document.querySelector('.vtabs button[data-k="1"]');if(!window.__dbF&&s1&&!s1.classList.contains("on")&&t&&!document.documentElement.classList.contains("ocena")){t.click();let n=0;const w=()=>{if(s1.classList.contains("on")||n++>40){setTimeout(()=>{window.__dbF=1;window.__openLB(k);window.__dbF=0},300)}else setTimeout(w,150)};w();return}}Object.entries(secs).forEach(([kk,s])=>s.classList.toggle("on",grp(kk)===grp(k)));if(k==="pz"||k==="dm")window.__pzInit&&window.__pzInit(secs.pz);setTimeout(()=>{Object.values(secs).forEach(fitLB);if(k==="wd")scrollTo({top:0,behavior:"smooth"});else scrollToSec(secs[k])},60)};
+      const grp=k=>document.documentElement.classList.contains("bank")&&["bl","rt","mr","mp","ec","ic"].includes(k)?"bank":k==="zr"||k==="rw"||k==="kj"||k==="ki"||k==="lg"||k==="dq"||k==="zm"||k==="rj"?"zr":k==="mr"?"mr":k==="pz"||k==="dm"||k==="db"?"d":k==="wd"||k==="wt"||k==="wp"||k==="mp"?"i":"w";window.__openLB=k=>{if(k==="db"||k==="pz"){const s1=document.querySelector('.stp[data-focus="db"]'),t=document.querySelector('.vtabs button[data-k="1"]');if(!window.__dbF&&s1&&!s1.classList.contains("on")&&t&&!document.documentElement.classList.contains("ocena")){t.click();let n=0;const w=()=>{if(s1.classList.contains("on")||n++>40){setTimeout(()=>{window.__dbF=1;window.__openLB(k);window.__dbF=0},300)}else setTimeout(w,150)};w();return}}Object.entries(secs).forEach(([kk,s])=>s.classList.toggle("on",grp(kk)===grp(k)));if(k==="pz"||k==="dm")window.__pzInit&&window.__pzInit(secs.pz);setTimeout(()=>{Object.values(secs).forEach(fitLB);if(k==="wd")scrollTo({top:0,behavior:"smooth"});else scrollToSec(secs[k])},60)};
       /* zakładka Wdrożenie modelu */
       const wdInit=()=>{const vt=document.querySelector(".vtabs");if(!vt){setTimeout(wdInit,100);return}if(!vt.querySelector('[data-k="w"]')){vt.insertAdjacentHTML("beforeend",'<button type="button" role="tab" data-k="w">Wdrożenie modelu</button>')}
         const offW=()=>{document.body.classList.remove("wdm");["wd","wt","wp","mp"].forEach(x=>secs[x].classList.remove("on"))};
@@ -4434,7 +4478,61 @@ const fill=()=>{const ho=document.querySelector("#ds-lb-db .dd2-host");if(ho&&!h
 })();
 </script>
 
-<script>addEventListener("load",()=>{const h=location.hash.slice(1);if(/^[a-z]{2,3}$/.test(h)&&document.getElementById("ds-lb-"+h))setTimeout(()=>{window.__openLB&&window.__openLB(h);history.replaceState(null,"",location.pathname)},700)});</script>
+<script>addEventListener("load",()=>{const h=location.hash.slice(1);if(/^[a-z]{2,4}$/.test(h)&&(document.getElementById("ds-lb-"+h)||document.getElementById("ds-"+h)))setTimeout(()=>{const F={law:"__openLaw",reg:"__openReg",kls:"__openKls",prb:"__openPrb",tev:"__openTev",tec:"__openTec"};if(document.getElementById("ds-lb-"+h))window.__openLB&&window.__openLB(h);else if(F[h])window[F[h]]&&window[F[h]]();else{const b=document.querySelector(`[data-ds="${h}"]`);b&&b.click()}history.replaceState(null,"",location.pathname)},h==="reg"?900:700)});</script>
+<script>
+/* Grafika: bank jako system – bilans w środku, modele ryzyka podpięte do pozycji, wynik i kapitał pod spodem, wskaźniki, a wokół regulacje */
+(()=>{if(!document.documentElement.classList.contains("bank"))return;const sv=document.getElementById("bg");
+const C={el:"#a8694c",ul:"#4f7390",alm:"#7a5c99",pl:"#8a8a3c",ink:"#2b2723",mut:"#8a8173",ln:"#e6dccd",card:"#fcf9f5",pan:"#efe5d6"};
+const T=(x,y,t,o={})=>`<text x="${x}" y="${y}" font-size="${o.s||9.5}" ${o.a?`text-anchor="${o.a}"`:""} ${o.w?`font-weight="${o.w}"`:""} fill="${o.c||C.ink}" ${o.ls?`letter-spacing="${o.ls}"`:""} ${o.i?`font-style="italic" style="font-family:var(--serif)"`:""}${o.d?` style="font-family:'Archivo Black',sans-serif"`:""}>${t}</text>`;
+let h=`<defs><filter id="bsh" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#3c2814" flood-opacity=".12"/></filter><marker id="ba" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#a9a091"/></marker></defs>`;
+// bilans
+const bx=330,by=38,bw=340,bh=196;
+h+=`<g filter="url(#bsh)"><rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="12" fill="${C.card}" stroke="${C.ln}"/></g><path d="M${bx+12},${by} H${bx+bw-12} Q${bx+bw},${by} ${bx+bw},${by+12} V${by+28} H${bx} V${by+12} Q${bx},${by} ${bx+12},${by} Z" fill="${C.pan}"/>`;
+h+=T(bx+14,by+19,"Bilans banku",{s:12,w:600,i:1})+T(bx+bw-14,by+19,"mld zł",{a:"end",s:8.5,c:C.mut});
+h+=`<line x1="${bx+bw/2}" y1="${by+36}" x2="${bx+bw/2}" y2="${by+bh-12}" stroke="${C.ln}"/>`;
+const AK=[["Kasa i papiery","16,3","pp"],["Kredyty brutto","52,0","kr"],["Odpisy ECL (−)","−3,8","ecl"],["= Aktywa","64,5","s"]],PA=[["Depozyty","48,9","dep"],["Emisje","6,1","em"],["Kapitał własny","9,5","kap"],["= Pasywa","64,5","s"]];
+const RY={};
+[[AK,bx+12,"AKTYWA"],[PA,bx+bw/2+12,"PASYWA"]].forEach(([L,x,lab])=>{h+=T(x,by+50,lab,{s:8.5,w:600,ls:1.4,c:C.mut});L.forEach((r,i)=>{const y=by+74+i*30,w=bw/2-24;
+  if(r[2]==="s")h+=`<line x1="${x}" y1="${y-14}" x2="${x+w}" y2="${y-14}" stroke="#b29e84" stroke-width="1.2"/>`;
+  else h+=`<rect x="${x}" y="${y-14}" width="${w}" height="22" rx="6" fill="${r[2]==="ecl"?"#f6e9e2":"#fffdf9"}" stroke="${r[2]==="ecl"?"#e3c3b2":"#ece3d6"}"/>`;
+  h+=T(x+8,y+1,r[0],{s:9.5,w:r[2]==="s"?600:400,c:r[2]==="ecl"?"#8a4f37":C.ink})+T(x+w-8,y+1,r[1],{a:"end",s:9.5,w:600,i:r[2]!=="s",c:r[2]==="ecl"?"#8a4f37":C.ink});RY[r[2]]=[x,y-3,x+w]})});
+// modele po lewej i prawej
+const ML=[["PD · LGD · EAD","straty kredytowe",C.el,"kr",56],["Scenariusze makro","forward-looking",C.el,"ecl",92],["VaR · IRRBB","ryzyko rynkowe",C.ul,"pp",128]],MR=[["Modele depozytów","osad i oprocentowanie",C.alm,"dep",56],["LCR · NSFR","płynność",C.pl,"dep",92],["Kapitał ekonomiczny","ryzyko nieoczekiwane",C.ul,"kap",128]];
+h+=T(184,40,"MODELE RYZYKA",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut})+T(816,40,"MODELE RYZYKA",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut});
+ML.forEach(m=>{const y=m[4]+12,x=120,w=128;h+=`<rect x="${x}" y="${y-13}" width="${w}" height="30" rx="8" fill="${C.card}" stroke="${C.ln}"/><rect x="${x}" y="${y-13}" width="3.5" height="30" rx="1.5" fill="${m[2]}"/>`+T(x+11,y,m[0],{s:9.5,w:600,c:m[2]})+T(x+11,y+11,m[1],{s:8,c:C.mut});const t=RY[m[3]];h+=`<path d="M${x+w},${y+1} C${x+w+40},${y+1} ${t[0]-40},${t[1]} ${t[0]-2},${t[1]}" fill="none" stroke="${m[2]}" stroke-width="1.1" stroke-dasharray="3 3" opacity=".8"/><circle cx="${t[0]-2}" cy="${t[1]}" r="2.3" fill="${m[2]}"/>`});
+MR.forEach(m=>{const y=m[4]+12,w=128,x=880-w;h+=`<rect x="${x}" y="${y-13}" width="${w}" height="30" rx="8" fill="${C.card}" stroke="${C.ln}"/><rect x="${x+w-3.5}" y="${y-13}" width="3.5" height="30" rx="1.5" fill="${m[2]}"/>`+T(x+w-11,y,m[0],{a:"end",s:9.5,w:600,c:m[2]})+T(x+w-11,y+11,m[1],{a:"end",s:8,c:C.mut});const t=RY[m[3]];h+=`<path d="M${x},${y+1} C${x-40},${y+1} ${t[2]+40},${t[1]} ${t[2]+2},${t[1]}" fill="none" stroke="${m[2]}" stroke-width="1.1" stroke-dasharray="3 3" opacity=".8"/><circle cx="${t[2]+2}" cy="${t[1]}" r="2.3" fill="${m[2]}"/>`});
+// modele w procesach
+h+=T(184,190,"W PROCESACH BANKU",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut});["kredytowanie","wycena i rezerwy","planowanie kapitału"].forEach((t,i)=>{const y=206+i*19;h+=`<rect x="128" y="${y-11}" width="112" height="16" rx="8" fill="#fffdf9" stroke="${C.ln}"/>`+T(184,y+1,t,{a:"middle",s:8.5,c:"#5c564d"})});
+h+=T(816,190,"REGULACJE",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut});["MSSF 9 · odpisy","CRR III · kapitał","KNF · modele"].forEach((t,i)=>{const y=206+i*19;h+=`<rect x="760" y="${y-11}" width="112" height="16" rx="8" fill="#fffdf9" stroke="${C.ln}"/>`+T(816,y+1,t,{a:"middle",s:8.5,c:"#5c564d"})});
+// wynik i kapitał
+const cy=266,cw=164,chh=84;
+[[bx,"Wynik","EL","odpisy ECL w roku","−126 mln zł","koszt ryzyka 0,24%",C.el,"ecl"],[bx+bw-cw,"Kapitał","UL","wymóg na straty nieoczekiwane","3,6 mld zł","RWA 30,1 mld zł",C.ul,"kap"]].forEach(([x,t1,b,t2,v,t3,c,k])=>{h+=`<g filter="url(#bsh)"><rect x="${x}" y="${cy}" width="${cw}" height="${chh}" rx="10" fill="${C.card}" stroke="${C.ln}"/></g><rect x="${x}" y="${cy}" width="${cw}" height="4" rx="2" fill="${c}"/>`+T(x+12,cy+21,t1,{s:11.5,w:600,i:1})+`<rect x="${x+cw-34}" y="${cy+11}" width="22" height="14" rx="4" fill="${c}"/>`+T(x+cw-23,cy+21.5,b,{a:"middle",s:8.5,w:600,c:"#fff"})+T(x+12,cy+35,t2,{s:8,c:C.mut})+T(x+12,cy+59,v,{s:15,d:1})+T(x+12,cy+74,t3,{s:8,c:"#5c564d"});
+  const sx=x+cw/2;h+=`<circle cx="${sx}" cy="${by+bh}" r="2.4" fill="#a9a091"/><path d="M${sx},${by+bh} V${cy-6}" stroke="#a9a091" stroke-dasharray="3 3" marker-end="url(#ba)"/>`});
+// wskaźniki
+const KY=[["CET1","15,8%",C.ul],["LCR","158%",C.pl],["NPL","3,1%",C.el],["ROE","12,4%",C.alm]];
+h+=T(500,cy+102,"WSKAŹNIKI BANKU",{a:"middle",s:8.5,w:600,ls:1.4,c:C.mut});
+KY.forEach((k,i)=>{const x=332+i*86,y=cy+109;h+=`<rect x="${x}" y="${y}" width="78" height="26" rx="13" fill="#fffdf9" stroke="${C.ln}"/><circle cx="${x+12}" cy="${y+13}" r="3.5" fill="${k[2]}"/>`+T(x+20,y+17,k[0],{s:8.5,c:"#5c564d"})+T(x+70,y+17,k[1],{a:"end",s:9.5,w:600})});
+sv.innerHTML=h;
+const al=()=>{const d=document.querySelector('.bnk-d'),c=sv.querySelector('rect');if(!d||!c||innerWidth<=980){d&&(d.style.cssText='');return}d.style.marginLeft='0';d.style.maxWidth='none';const cr={left:Math.min(...[...sv.querySelectorAll('rect')].map(r=>r.getBoundingClientRect().left))},dr=d.getBoundingClientRect(),tb=document.querySelector('.bnk-tabs').getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+'px';d.style.width=Math.round(tb.right-cr.left)+'px'};al();addEventListener('resize',al);document.fonts&&document.fonts.ready.then(al)})();
+</script>
+<script>
+/* Strumienie: Model ryzyka / Ryzyko modelu / Bank – podstrony mają swój dom; przejście do podstrony z innego strumienia przenosi na jego stronę */
+(()=>{const H=document.documentElement,BANK=["bl","rt","mr","mp","ec","ic","law","reg"],here=H.classList.contains("bank")?"bank":H.classList.contains("ocena")?"ocena":"model";
+ const home=k=>BANK.includes(k)?"bank":"model",URL={bank:"../bank/",model:"../model-ryzyka/"};
+ const need=k=>{const hm=home(k);return (hm==="bank")!==(here==="bank")?URL[hm]+"#"+k:null};
+ const wrap=(n,kf)=>{const o=window[n];if(typeof o!=="function"||o.__rt)return;const w=function(...a){const k=kf(a);const u=k&&need(k);if(u){location.href=u;return}return o.apply(this,a)};w.__rt=1;Object.keys(o).forEach(x=>w[x]=o[x]);window[n]=w};
+ const hook=()=>{wrap("__openLB",a=>a[0]);[["__openLaw","law"],["__openReg","reg"],["__openKls","kls"],["__openPrb","prb"],["__openTev","tev"],["__openTec","tec"],["__openWd","wd"]].forEach(([n,k])=>wrap(n,()=>k))};
+ hook();setTimeout(hook,400);setTimeout(hook,1500);addEventListener("load",hook);
+ document.addEventListener("click",e=>{const d=e.target.closest('[data-ds="doc"],[data-ds="eng"]');if(d&&here==="bank"){e.preventDefault();e.stopImmediatePropagation();location.href="../model-ryzyka/#"+d.dataset.ds}},true);
+ if(here!=="bank")return;
+ const mv=()=>{const g=id=>document.getElementById(id);const rt=g("ds-lb-rt"),mr=g("ds-lb-mr"),mp=g("ds-lb-mp"),ic=g("ds-lb-ic"),law=g("ds-law"),reg=g("ds-reg");if(rt&&mr&&mp&&!mr.dataset.mv){rt.after(mr);mr.after(mp);mr.dataset.mv=1}if(ic&&law&&reg&&!law.dataset.mv){ic.after(law);law.after(reg);law.dataset.mv=1}
+   document.querySelectorAll("#ds-lb-bl .lb-back,#ds-lb-rt .lb-back,#ds-lb-ec .lb-back,#ds-lb-ic .lb-back,#ds-lb-mr .lb-back,#ds-lb-mp .lb-back,#ds-law .ds-back").forEach(b=>{if(!/Bank$/.test(b.textContent))b.textContent="↑ Bank"})};
+ mv();setTimeout(mv,500);setTimeout(mv,1600);addEventListener("load",mv);
+ document.addEventListener("click",e=>{const b=e.target.closest("#ds-law .ds-back");if(b){e.preventDefault();e.stopImmediatePropagation();scrollTo({top:0,behavior:"smooth"})}},true);
+ document.addEventListener("click",e=>{const a=e.target.closest(".bnk [data-lb]");if(!a)return;e.preventDefault();const k=a.dataset.lb;if(!k){scrollTo({top:0,behavior:"smooth"});return}if(k==="law")window.__openLaw&&window.__openLaw();else window.__openLB&&window.__openLB(k)});
+ document.querySelectorAll(".nav a,.foot a").forEach(a=>{const h=a.getAttribute("href");if(h==="./"){a.classList.remove("on");a.setAttribute("href","../model-ryzyka/")}else if(h==="../bank/"){a.setAttribute("href","./");if(a.closest(".nav"))a.classList.add("on")}});
+})();
+</script>
 <script src="../rt.js"></script>
 
 <script>
