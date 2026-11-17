@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="../rt.css">
-<script>if(/ocena-ryzyka-modelu/.test(location.pathname)){document.documentElement.classList.add("ocena");document.title="Ocena ryzyka modelu – Risk Trainings | Maciej Buczak"}if(/\/bank\//.test(location.pathname)){document.documentElement.classList.add("bank");document.title="Bank, modele i procesy – Risk Trainings | Maciej Buczak"}</script>
+<script>if(/ocena-ryzyka-modelu/.test(location.pathname)){document.documentElement.classList.add("ocena");document.title="Ocena ryzyka modelu – Risk Trainings | Maciej Buczak"}if(/\/bank\//.test(location.pathname)){document.documentElement.classList.add("bank");document.title="Bank, modele i procesy – Risk Trainings | Maciej Buczak"}if(/^#[a-z]{2,4}$/.test(location.hash))document.documentElement.classList.add("hjump");</script>
 <style>
 .mh{padding:clamp(24px,3vw,44px) 0 0}
 .mh .wrap,.top .wrap,.foot .wrap,.mw{max-width:1380px}
@@ -2986,6 +2986,9 @@ html.bank #ds-lb-mr,html.bank #ds-lb-zr,html.bank #ds-lb-pz,html.bank #ds-lb-db{
 #ds-lb-rt .lbfl{background:transparent!important;box-shadow:none!important;border:1.6px solid #bf8165!important;align-self:end;padding-top:14px}#ds-lb-rt .lbfl-g{flex:none;align-content:start;row-gap:8px}#ds-lb-rt .lbfl-n{min-height:59px;box-sizing:border-box}#ds-lb-rt .lbfl{gap:14px}
 
 .lbf-kl{grid-template-rows:1fr!important;row-gap:0!important;min-height:162px;box-sizing:border-box}#ds-lb-mr .lbf-kl{position:relative;top:2px}.lbf-kl .lbf-cl{align-self:center;align-items:stretch}
+
+html.hjump body{opacity:0}
+body{transition:opacity .25s}
 </style>
 <style>.ctlbar{display:none!important}html.obj .ctlbar{display:flex!important}</style><script>if(new URLSearchParams(location.search).has("obejrzyj"))document.documentElement.classList.add("obj")</script><style>.vdyn.vwar{right:48px}html.bezpokoju #dfloor,html.bezpokoju .bgv,html.bezpokoju .bg3,html.bezpokoju .bgf,html.bezpokoju .bgs{display:none!important}.vdyn.vtlo{right:82px;cursor:pointer;font-family:inherit}.vdyn.vmap{right:116px}html.bezpokoju .vdyn.vtlo{border-color:#ad6b4e;color:#ad6b4e;background:#f6ebe3}</style><script>if(new URLSearchParams(location.search).has("bezpokoju"))document.documentElement.classList.add("bezpokoju")</script></head>
 <body>
@@ -4507,7 +4510,10 @@ const fill=()=>{const ho=document.querySelector("#ds-lb-db .dd2-host");if(ho&&!h
 })();
 </script>
 
-<script>addEventListener("load",()=>{const h=location.hash.slice(1);if(/^[a-z]{2,4}$/.test(h)&&(document.getElementById("ds-lb-"+h)||document.getElementById("ds-"+h)))setTimeout(()=>{const F={law:"__openLaw",reg:"__openReg",kls:"__openKls",prb:"__openPrb",tev:"__openTev",tec:"__openTec"};if(document.getElementById("ds-lb-"+h))window.__openLB&&window.__openLB(h);else if(F[h])window[F[h]]&&window[F[h]]();else{const b=document.querySelector(`[data-ds="${h}"]`);b&&b.click()}history.replaceState(null,"",location.pathname)},h==="reg"?900:700)});</script>
+<script>addEventListener("load",()=>{const h=location.hash.slice(1),H=document.documentElement;const show=()=>H.classList.remove("hjump");if(!(/^[a-z]{2,4}$/.test(h)&&(document.getElementById("ds-lb-"+h)||document.getElementById("ds-"+h)))){show();return}
+ const st=window.scrollTo;window.scrollTo=function(a,b){if(a&&typeof a==="object")return st.call(window,{...a,behavior:"instant"});return st.call(window,a,b)};
+ const F={law:"__openLaw",reg:"__openReg",kls:"__openKls",prb:"__openPrb",tev:"__openTev",tec:"__openTec"};const go=()=>{if(document.getElementById("ds-lb-"+h))window.__openLB&&window.__openLB(h);else if(F[h])window[F[h]]&&window[F[h]]();else{const b=document.querySelector(`[data-ds="${h}"]`);b&&b.click()}history.replaceState(null,"",location.pathname)};
+ setTimeout(go,h==="reg"?250:60);setTimeout(()=>{window.scrollTo=st;show()},h==="db"||h==="pz"?9000:h==="reg"?1000:700);setTimeout(show,9500)});</script>
 <script>
 /* Grafika: bank jako gmach – fundament z procesów, kolumny-rodzaje ryzyka (modele), belka bilans·wynik·kapitał, dach z regulacji */
 (()=>{if(!document.documentElement.classList.contains("bank"))return;const sv=document.getElementById("bg");
