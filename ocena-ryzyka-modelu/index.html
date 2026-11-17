@@ -104,14 +104,22 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
       s+=`<path id="${pid}" d="M${f(p0x)},${f(p0y)} A${r},${r} 0 0 ${dn?0:1} ${f(p1x)},${f(p1y)}" fill="none"/><text class="ag-lab"><textPath href="#${pid}" startOffset="50%" text-anchor="middle">${c[0]} <tspan class="ag-lvn">${c[1]}</tspan></textPath></text></g>`;h+=s});
     h+=`<circle cx="${x}" cy="${cy}" r="${R0-4}" fill="#fcf9f5" stroke="#ddd3c4"/><g class="agc" data-g="${gi}"></g>`});
   /* zbieżne linie do oceny końcowej */
-  const fy=314,fw=320,fx=500-fw/2,F=G.reduce((a,g)=>a+g.w*g.s,0);
-  G.forEach(g=>{const y0=cy+R0+5*RW+32;h+=`<path d="M${g.cx},${y0} V${y0+10} H${500+(g.cx-500)*.3} V${fy}" class="ag-dash"/><circle cx="${g.cx}" cy="${y0}" r="2.8" fill="#a09580"/>`});
-  h+=`<g filter="url(#agsh)"><rect x="${fx}" y="${fy}" width="${fw}" height="104" rx="12" fill="#fcf9f5" stroke="#ddd3c4"/></g><rect x="${fx}" y="${fy}" width="${fw}" height="30" rx="12" fill="#eae1d3"/><rect x="${fx}" y="${fy+18}" width="${fw}" height="12" fill="#eae1d3"/>
-    <text x="${fx+14}" y="${fy+20}" class="ag-t">Ocena końcowa modelu</text><text x="${fx+fw-14}" y="${fy+20}" text-anchor="end" class="ag-s">średnia ważona</text>
-    <text x="${fx+14}" y="${fy+66}" class="ag-c1" style="font-size:30px">${pl(F)}</text><text x="${fx+70}" y="${fy+66}" class="ag-c2">/ 5 · ${QL[Math.round(F)]}</text>
-    <line x1="${fx+14}" x2="${fx+fw-14}" y1="${fy+78}" y2="${fy+78}" stroke="#ece3d6"/><text x="${fx+14}" y="${fy+95}" class="ag-s">${G.map(g=>Math.round(g.w*100)+"% × "+pl(g.s)).join("  +  ")}</text>`;
-  const bx=fx+fw-14-150,by=fy+56;for(let k=1;k<=5;k++)h+=`<rect x="${bx+(k-1)*30}" y="${by-8}" width="28" height="9" rx="3" fill="${QC[k]}"/>`;
-  const tx=bx+2*30-1;h+=`<line x1="${tx}" x2="${tx}" y1="${by-13}" y2="${by+5}" stroke="#0d0d0d" stroke-width="1.2"/><text x="${tx}" y="${by+16}" text-anchor="middle" class="ag-lv">próg 3,0</text><path d="M${bx+(F-1)*30+14},${by-11} l-4,-6 h8z" fill="#0d0d0d"/>`;
+  const fy=298,fx=G[0].cx-R0-5*RW-14,fw=G[2].cx+R0+5*RW+14-fx,F=G.reduce((a,g)=>a+g.w*g.s,0),yj=284;
+  G.forEach(g=>{const y0=cy+R0+5*RW+32;h+=`<path d="M${g.cx},${y0} V${yj} H500" class="ag-dash"/><circle cx="${g.cx}" cy="${y0}" r="2.8" fill="#a09580"/>`});
+  h+=`<path d="M500,${yj} V${fy}" class="ag-dash"/><circle cx="500" cy="${yj}" r="3.2" fill="#a09580"/>`;
+  const fh=122;h+=`<g filter="url(#agsh)"><rect x="${fx}" y="${fy}" width="${fw}" height="${fh}" rx="12" fill="#fcf9f5" stroke="#ddd3c4"/></g><rect x="${fx}" y="${fy}" width="${fw}" height="30" rx="12" fill="#eae1d3"/><rect x="${fx}" y="${fy+18}" width="${fw}" height="12" fill="#eae1d3"/>
+    <text x="${fx+16}" y="${fy+20}" class="ag-t">Ocena końcowa modelu</text><text x="${fx+fw-16}" y="${fy+20}" text-anchor="end" class="ag-s">Model ECL · v3.1 · walidacja okresowa 30.04.2026</text>`;
+  /* lewa część: wynik */
+  h+=`<text x="${fx+16}" y="${fy+76}" class="ag-c1" style="font-size:32px">${pl(F)}</text><text x="${fx+76}" y="${fy+66}" class="ag-c2">/ 5</text><text x="${fx+76}" y="${fy+82}" class="ag-s">${QL[Math.round(F)]}</text>`;
+  /* środek: składniki */
+  const mx0=fx+170;h+=`<line x1="${mx0-20}" x2="${mx0-20}" y1="${fy+40}" y2="${fy+fh-12}" stroke="#ece3d6"/>`;
+  G.forEach((g,k)=>{const y=fy+54+k*19;h+=`<rect x="${mx0}" y="${y-8}" width="9" height="9" rx="2" fill="${QC[Math.round(g.s)]}"/><text x="${mx0+16}" y="${y}" class="ag-s">${g.n}</text><text x="${mx0+190}" y="${y}" text-anchor="end" class="ag-lv">${Math.round(g.w*100)}%</text><text x="${mx0+226}" y="${y}" text-anchor="end" class="ag-v">${pl(g.s)}</text>`});
+  /* prawa: skala, próg, decyzja */
+  const rx0=mx0+256;h+=`<line x1="${rx0}" x2="${rx0}" y1="${fy+40}" y2="${fy+fh-12}" stroke="#ece3d6"/>`;
+  const bx=rx0+20,by=fy+68;for(let k=1;k<=5;k++)h+=`<rect x="${bx+(k-1)*30}" y="${by-8}" width="28" height="9" rx="3" fill="${QC[k]}"/><text x="${bx+(k-1)*30+14}" y="${by+12}" text-anchor="middle" class="ag-lv">${k}</text>`;
+  const tx=bx+2*30-1;h+=`<line x1="${tx}" x2="${tx}" y1="${by-13}" y2="${by+3}" stroke="#0d0d0d" stroke-width="1.2"/><path d="M${(bx+(F-1)*30+14).toFixed(1)},${by-11} l-4,-6 h8z" fill="#0d0d0d"/>`;
+  const ok=F>=3;h+=`<text x="${bx+164}" y="${by-2}" class="ag-s">próg akceptacji 3,0</text><text x="${bx+164}" y="${by+13}" class="ag-v" style="fill:${ok?"#5e7a52":"#9a3b25"}">${ok?"w apetycie na ryzyko":"poza apetytem"}</text>`;
+  h+=`<line x1="${fx+16}" x2="${fx+fw-16}" y1="${fy+fh-26}" y2="${fy+fh-26}" stroke="#ece3d6"/><text x="${fx+16}" y="${fy+fh-10}" class="ag-lv">${G.map(g=>Math.round(g.w*100)+"% × "+pl(g.s)).join("  +  ")}  =  ${pl(F)}</text><text x="${fx+fw-16}" y="${fy+fh-10}" text-anchor="end" class="ag-lv">2 zalecenia · najsłabszy obszar: spójność danych</text>`;
   sv.innerHTML=h;
   const ctr=(gi,t1,t2)=>{sv.querySelector(`.agc[data-g="${gi}"]`).innerHTML=`<text x="${G[gi].cx}" y="${cy+8}" text-anchor="middle" class="ag-c1" style="font-size:22px">${t1}</text>`};
   const def=gi=>ctr(gi,pl(G[gi].s),QL[Math.round(G[gi].s)]);G.forEach((_,gi)=>def(gi));
