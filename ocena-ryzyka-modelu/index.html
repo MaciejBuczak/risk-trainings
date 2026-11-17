@@ -73,7 +73,7 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
       <div class="fr"><b>Właściciel modelu</b><p>Monitoring i jakość danych.</p><a class="pill" href="../model-ryzyka/?lb=dq">Zobacz <i>→</i></a></div>
     </div>
   </div>
-  <div class="mh-r"><nav class="vtabs" aria-label="Ocena ryzyka modelu"><a class="on" href="./">Ryzyko modelu</a><a href="../model-ryzyka/?lb=kj">Komponent jakościowy</a><a href="../model-ryzyka/?lb=ki">Komponent ilościowy</a><a href="../model-ryzyka/?lb=rw">Proces walidacji</a></nav><p class="mh-d">Ocena modelu składa się z trzech ocen: jakościowej, ilościowej i jakości danych – każda w skali od 1 do 5, gdzie wyżej znaczy lepiej. Ocena końcowa to ich średnia ważona, porównana z progiem akceptacji 3,0.</p></div>
+  <div class="mh-r"><nav class="vtabs" aria-label="Ocena ryzyka modelu"><a class="on" href="./">Ryzyko modelu</a><a href="../model-ryzyka/?lb=kj">Komponent jakościowy</a><a href="../model-ryzyka/?lb=ki">Komponent ilościowy</a><a href="../model-ryzyka/?lb=rw">Proces walidacji</a></nav><p class="mh-d">Ocena modelu składa się z trzech ocen: jakościowej, ilościowej i jakości danych – każda w skali od 1 do 5, gdzie wyżej znaczy lepiej. Ocena końcowa to ich średnia ważona, porównana z progiem akceptacji 3,0. Wynik poniżej progu oznacza model poza apetytem.</p></div>
   <div class="stage"><svg id="ag" viewBox="130 -8 740 408" preserveAspectRatio="xMidYMid meet" aria-label="Mapa ryzyka modelu"></svg></div>
 </div></section>
 </main>
@@ -92,7 +92,7 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
   const G=[{n:"Komponent jakościowy",w:.4,cx:258,c:[["Koncepcja",5],["Założenia",4],["Dane",5],["Stosowanie",4]]},
            {n:"Komponent ilościowy",w:.4,cx:500,c:[["Backtesting",4],["Stabilność",4],["Benchmarking",5],["Wrażliwość",3]]},
            {n:"Jakość danych (DQM)",w:.2,cx:742,c:[["Kompletność",4],["Poprawność",5],["Spójność",2],["Aktualność",4],["Unikalność",5]]}];
-  const cy=150,R0=36,RW=10.5,gap=.05,P=(x,a,r)=>[x+r*Math.sin(a),cy-r*Math.cos(a)];
+  const cy=141,R0=36,RW=10.5,gap=.05,P=(x,a,r)=>[x+r*Math.sin(a),cy-r*Math.cos(a)];
   const arc=(x,a0,a1,r0,r1)=>{const [x0,y0]=P(x,a0,r1),[x1,y1]=P(x,a1,r1),[x2,y2]=P(x,a1,r0),[x3,y3]=P(x,a0,r0),L=a1-a0>Math.PI?1:0;return`M${f(x0)},${f(y0)} A${r1},${r1} 0 ${L} 1 ${f(x1)},${f(y1)} L${f(x2)},${f(y2)} A${r0},${r0} 0 ${L} 0 ${f(x3)},${f(y3)}Z`};
   let h=`<defs><filter id="agsh" x="-20%" y="-30%" width="140%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#5c4a36" flood-opacity=".12"/></filter></defs>`;
   G.forEach((g,gi)=>{g.s=g.c.reduce((a,c)=>a+c[1],0)/g.c.length;const n=g.c.length,x=g.cx;
@@ -120,7 +120,7 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
   const tx=bx+2*30-1;h+=`<line x1="${tx}" x2="${tx}" y1="${by-13}" y2="${by+3}" stroke="#0d0d0d" stroke-width="1.2"/><path d="M${(bx+(F-1)*30+14).toFixed(1)},${by-11} l-4,-6 h8z" fill="#0d0d0d"/>`;
   const ok=F>=3;h+=`<text x="${bx+162}" y="${fy+49}" class="ag-s">próg 3,0</text><text x="${bx+162}" y="${fy+68}" class="ag-v" style="fill:${ok?"#5e7a52":"#9a3b25"}">${ok?"w apetycie":"poza apetytem"}</text><text x="${bx+162}" y="${fy+87}" class="ag-v" style="fill:${ok?"#5e7a52":"#9a3b25"}">na ryzyko</text>`;
   sv.innerHTML=h;
-  const al=()=>{const d=document.querySelector(".mh-d"),c=sv.querySelector("rect[filter],g[filter] rect");if(!d||!c||innerWidth<=980){d&&(d.style.cssText="");return}d.style.marginLeft="0";d.style.maxWidth="none";const cr=c.getBoundingClientRect(),dr=d.getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+"px";d.style.width=Math.round(cr.width)+"px"};
+  const al=()=>{const d=document.querySelector(".mh-d"),c=sv.querySelector("rect[filter],g[filter] rect");if(!d||!c||innerWidth<=980){d&&(d.style.cssText="");return}d.style.marginLeft="0";d.style.maxWidth="none";const cr=c.getBoundingClientRect(),dr=d.getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+"px";const tb=document.querySelector(".vtabs").getBoundingClientRect();d.style.width=Math.round(tb.right-cr.left)+"px"};
   al();addEventListener("resize",al);document.fonts&&document.fonts.ready.then(al);
   const ctr=(gi,t1,t2)=>{sv.querySelector(`.agc[data-g="${gi}"]`).innerHTML=`<text x="${G[gi].cx}" y="${cy+8}" text-anchor="middle" class="ag-c1" style="font-size:22px">${t1}</text>`};
   const def=gi=>ctr(gi,pl(G[gi].s),QL[Math.round(G[gi].s)]);G.forEach((_,gi)=>def(gi));
