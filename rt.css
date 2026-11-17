@@ -109,3 +109,8 @@ section{padding:clamp(64px,9vw,120px) 0}
 
 .nav a{white-space:nowrap}
 @media(min-width:861px){.nav a{padding:8px 9px}.nav{gap:2px}.top .wrap{gap:20px}}@media(min-width:861px) and (max-width:1120px){.nav a{padding:7px 7px;font-size:13px}.nav .sci{display:none}}
+/* menu z pozycją Ocena ryzyka modelu – ciaśniej, żeby logo się mieściło */
+@media(min-width:861px){.top .wrap{gap:18px}.nav{gap:2px}.nav a{padding:8px 9px}.nav .sci{margin-left:2px}}
+@media(min-width:861px) and (max-width:1700px){.nav a{font-size:13px;padding:7px 5.5px}.nav .sci{font-size:12px}}@media(min-width:861px) and (max-width:1440px){.brand small{display:none}}
+@media(min-width:861px) and (max-width:1240px){.nav .sci{display:none}}
+@media(min-width:861px) and (max-width:1120px){.nav a{font-size:12.5px;padding:6px 5px}}
