@@ -113,7 +113,7 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
   const bx=fx+fw-14-150,by=fy+56;for(let k=1;k<=5;k++)h+=`<rect x="${bx+(k-1)*30}" y="${by-8}" width="28" height="9" rx="3" fill="${QC[k]}"/>`;
   const tx=bx+2*30-1;h+=`<line x1="${tx}" x2="${tx}" y1="${by-13}" y2="${by+5}" stroke="#0d0d0d" stroke-width="1.2"/><text x="${tx}" y="${by+16}" text-anchor="middle" class="ag-lv">próg 3,0</text><path d="M${bx+(F-1)*30+14},${by-11} l-4,-6 h8z" fill="#0d0d0d"/>`;
   sv.innerHTML=h;
-  const ctr=(gi,t1,t2)=>{sv.querySelector(`.agc[data-g="${gi}"]`).innerHTML=`<text x="${G[gi].cx}" y="${cy+7}" text-anchor="middle" class="ag-c1" style="font-size:22px">${t1}</text><text x="${G[gi].cx}" y="${cy+21}" text-anchor="middle" class="ag-lv">${t2}</text>`};
+  const ctr=(gi,t1,t2)=>{sv.querySelector(`.agc[data-g="${gi}"]`).innerHTML=`<text x="${G[gi].cx}" y="${cy+8}" text-anchor="middle" class="ag-c1" style="font-size:22px">${t1}</text>`};
   const def=gi=>ctr(gi,pl(G[gi].s),QL[Math.round(G[gi].s)]);G.forEach((_,gi)=>def(gi));
   sv.querySelectorAll(".ag-seg").forEach(e=>{const gi=+e.dataset.g,c=G[gi].c[+e.dataset.i];e.addEventListener("mouseenter",()=>{sv.classList.add("hov");e.classList.add("on");ctr(gi,String(c[1]),c[0].toLowerCase())});e.addEventListener("mouseleave",()=>{sv.classList.remove("hov");e.classList.remove("on");def(gi)})});
 })();
