@@ -3136,7 +3136,7 @@ setEX(EX);setCX(1);
 (()=>{const mw=document.querySelector(".mw"),story=document.getElementById("story"),mcol=document.getElementById("mcol"),sc=document.getElementById("scene"),dots=document.getElementById("sdots"),steps=[...story.querySelectorAll(".stp")];
   const VIEW={all:null,db:[-16,24],eng:[-48,-24],stat:[-14,-20],wyn:[-20,-58],doc:[-8,-12]};
   let cur=-1,EXP=false;mw.classList.add("storymode");
-  function fit(){const w=mcol.clientWidth,hgt=innerHeight;const sz=Math.max(150,Math.min(EXP?420:360,(w-40)/3.25,(hgt-120)/1.75));sc.style.setProperty("--s",sz+"px","important");setTimeout(()=>set(),30)}
+  function fit(){const w=mcol.clientWidth,hgt=innerHeight;const sz=Math.max(150,Math.min(EXP?420:360,(w-40)/3.408,(hgt-120)/1.75));sc.style.setProperty("--s",sz+"px","important");setTimeout(()=>set(),30)}
   let fz=0;function focus(k){if(k===cur&&!EXP)return;const old=steps[cur];clearTimeout(fz);if(old&&!EXP&&document.querySelector(".mw.tabbed")){if(old.dataset.focus==="all"){const mh=document.querySelector(".mh");mh&&mh.classList.add("hout")}old.classList.add("out");fz=setTimeout(()=>{old.classList.remove("out");focusNow(k)},450);return}focusNow(k)}
   let tt=0;function heroMode(all){const st=document.querySelector(".story"),mh=document.querySelector(".mh");if(!st||!mh)return;st.style.translate="";if(all){mh.classList.remove("hout","hsolo");return}const D=st.getBoundingClientRect().top+(parseFloat(getComputedStyle(st).paddingTop)||0)-mh.querySelector(".kick").getBoundingClientRect().top;st.style.translate=`0 ${-Math.round(D)}px`;mh.classList.add("hsolo");mh.classList.remove("hout")}
   addEventListener("resize",()=>{const mh=document.querySelector(".mh");if(mh&&mh.classList.contains("hsolo"))heroMode(false)});
@@ -3942,7 +3942,7 @@ BK.querySelector(".sd-blk-x").addEventListener("click",closeBlk);
   function explore(on){if(on){clr();cancelAnimationFrame(bt0);SOLO.z=0;SOLO.b=0;cube.dataset.solo=""}EXP=on;mw.classList.toggle("exploring",on);MODE=on?"dyn":"stab";if(on){cube.dataset.focus="";const top=mcol.parentElement.getBoundingClientRect().top+scrollY;scrollTo({top,behavior:"smooth"})}
     sc.style.opacity=0;setTimeout(()=>{fit();sc.style.opacity=1},620);if(!on){const k=Math.max(0,cur);cur=-1;setTimeout(()=>focus(k),420)}}
   document.getElementById("xbtn").addEventListener("click",()=>explore(true));document.getElementById("xback").addEventListener("click",()=>explore(false));
-  addEventListener("keydown",e=>{if(e.key==="Escape"&&EXP)explore(false)});addEventListener("resize",fit);fit();focus(0)})();
+  addEventListener("keydown",e=>{if(e.key==="Escape"&&EXP)explore(false)});addEventListener("resize",fit);fit();addEventListener("load",fit);document.fonts&&document.fonts.ready.then(fit);{let lw=0;new ResizeObserver(()=>{const w=mcol.clientWidth;if(w!==lw){lw=w;fit()}}).observe(mcol)};focus(0)})();
 
 /* Stabilne / Dynamiczne */
 (()=>{const box=document.getElementById("vmode"),a=document.getElementById("vma"),sv=document.getElementById("vms"),sc=document.getElementById("scene");
