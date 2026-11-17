@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Bank – Risk Trainings | Maciej Buczak</title>
+<meta name="description" content="Bank w liczbach: bilans, wynik i kapitał – i modele ryzyka, które zmieniają każdą z tych liczb.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../rt.css">
+<style>
+.bnk .wrap{max-width:1380px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 60px;align-items:start;position:relative;min-height:calc(100vh - 120px)}
+.bnk{padding:clamp(24px,3vw,44px) 0 0;position:relative}
+.bnk h1{font-size:clamp(32px,3.6vw,50px);margin:16px 0 0;letter-spacing:-.02em}
+.bnk h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d)}
+.bnk-l{position:relative;z-index:3}
+.bnk-r{display:flex;flex-direction:column;align-items:flex-end;position:relative;z-index:3}
+.bnk-r p{text-align:left;margin:26px 0 0;align-self:flex-start;max-width:620px;font-size:16px;font-weight:300;color:var(--ink2)}
+.bnk-tabs{display:flex;gap:2px;padding:5px;border-radius:999px;background:#fffdf9;border:1px solid var(--line);width:max-content}
+.bnk-tabs a{white-space:nowrap;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:999px;color:var(--ink2);text-decoration:none;transition:background .2s,color .2s}
+.bnk-tabs a:hover{background:rgba(13,13,13,.05)}
+.bnk-tabs a.on{background:var(--ink);color:var(--paper)}
+.bnk-go{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:26px}
+.bnk-go>span{font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c;margin-bottom:2px}
+.bnk-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #ad6b4e;background:transparent;color:#ad6b4e;border-radius:999px;padding:8px 16px;font:600 13px var(--body);text-decoration:none;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap}
+.bnk-pill:hover{background:#ad6b4e;color:#fff}
+.bnk-pill:active{background:#8a5238;border-color:#8a5238;color:#fff}
+.bnk-frs{margin-top:93px;width:300px}
+.bnk-fr{border-top:1px solid #cdbfa9;padding:8px 0 10px;display:grid;grid-template-columns:auto auto;justify-content:space-between;align-items:center;column-gap:14px;row-gap:2px}
+.bnk-fr b{grid-column:1 / -1;font:600 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#a8694c}
+.bnk-fr p{margin:0;font:italic 13px/1.4 var(--serif);color:#5c564d;white-space:nowrap}
+.bnk-fr .bnk-pill{padding:5px 14px;font-size:12.5px;min-width:100px;justify-content:center;box-sizing:border-box}
+.bnk-stage{position:absolute;left:28%;right:0;top:160px;z-index:2}
+.bnk-stage svg{width:100%;height:calc(100vh - 351px);max-height:420px;min-height:320px;display:block;overflow:visible}
+.bnk-stage text{font-family:var(--body)}
+@media (max-width:980px){.bnk .wrap{grid-template-columns:1fr;min-height:0}.bnk-r{align-items:flex-start}.bnk-tabs{flex-wrap:wrap;width:auto;border-radius:18px}.bnk-frs{margin-top:28px}.bnk-stage{position:static;margin:20px 0 40px}}
+</style>
+</head>
+<body>
+<header class="top tst" id="top">
+  <div class="wrap">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav"><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../metoda/">Metoda</a><a href="../mapa-banku/">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a href="../ocena-ryzyka-modelu/">Ryzyko modelu</a><a class="on" href="./">Bank</a><a href="../o-mnie/">O mnie</a><a href="../eseje/">Eseje</a><a href="../okiem-praktyka/">Okiem praktyka</a><a href="../#kontakt">Kontakt</a><a class="sci" href="https://maciejbuczak.github.io/">Strona naukowa ↗</a></nav>
+    <a class="brand" href="../"><span><b>Risk Trainings</b><small>Maciej Buczak · Risk Research</small></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a>
+  </div>
+</header>
+
+<main>
+<section class="bnk"><div class="wrap">
+  <div class="bnk-l"><span class="kick">Bilans, wynik i kapitał</span><h1>Bank<br><em>w liczbach</em></h1>
+    <div class="bnk-go"><span>Zajrzyj do środka banku</span><a class="bnk-pill" href="../model-ryzyka/#bl">Bilans, wynik i kapitał <i>→</i></a><a class="bnk-pill" href="../model-ryzyka/#rt">Wskaźniki banku <i>→</i></a><a class="bnk-pill" href="../model-ryzyka/#mr">Modele ryzyka banku <i>→</i></a></div>
+    <div class="bnk-frs">
+      <div class="bnk-fr"><b>Odpisy i koszt ryzyka</b><p>Strata oczekiwana w wyniku.</p><a class="bnk-pill" href="../model-ryzyka/#ec">Zobacz <i>→</i></a></div>
+      <div class="bnk-fr"><b>Adekwatność kapitałowa</b><p>Kapitał na straty nieoczekiwane.</p><a class="bnk-pill" href="../model-ryzyka/#ic">Zobacz <i>→</i></a></div>
+    </div>
+  </div>
+  <div class="bnk-r"><nav class="bnk-tabs" aria-label="Bank"><a class="on" href="./">Bank</a><a href="../model-ryzyka/#bl">Bilans i wynik</a><a href="../model-ryzyka/#rt">Wskaźniki</a><a href="../model-ryzyka/#mr">Modele w banku</a></nav><p class="bnk-d">Bank ocenia się trzema pytaniami: czy udźwignie straty, czy wystarczy mu pieniędzy i ile kosztuje go ryzyko. Za każdą z tych liczb stoją modele – od PD i LGD po LCR i kapitał ekonomiczny.</p></div>
+  <div class="bnk-stage"><svg id="bg" viewBox="78 -8 844 408" preserveAspectRatio="xMidYMid meet" aria-label="Bank w liczbach: kapitał, płynność i wynik"></svg></div>
+</div></section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><a class="brand" href="../"><span><b>Risk Trainings</b></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a><p style="margin:14px 0 0;max-width:340px">Szkolenia z zarządzania ryzykiem dla banków i instytucji finansowych.</p></div>
+    <div><h4>Strony</h4><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../metoda/">Metoda</a><a href="../mapa-banku/">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a href="../ocena-ryzyka-modelu/">Ryzyko modelu</a><a href="./">Bank</a><a href="../o-mnie/">O mnie</a><a href="../eseje/">Eseje</a><a href="../okiem-praktyka/">Okiem praktyka</a><a href="https://maciejbuczak.github.io/">Strona naukowa</a></div>
+    <div><h4>Kontakt</h4><a href="mailto:maciej.buczak@gmail.com">maciej.buczak@gmail.com</a><a href="https://www.linkedin.com/in/maciej-buczak-561b95120" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div class="bottom"><span>© 2026 Maciej Buczak | Risk Research</span><span>Wersja próbna strony</span></div>
+  </div>
+</footer>
+<script>
+/* Grafika: trzy wskaźniki banku (kapitał, płynność, wynik) i karta „Bank w liczbach” */
+(()=>{const sv=document.getElementById("bg"),NS="http://www.w3.org/2000/svg";
+const Z=["#c49ea1","#d0a991","#d6cb8a","#c3caa7","#a7b5a0"];
+const G=[{x:230,k:"Kapitał",q:"czy bank udźwignie straty",m:"CET1",v:15.8,lo:0,hi:25,unit:"%",min:[10.5,"wymóg"],ap:[13,"apetyt"],z:[[0,10.5,0],[10.5,13,2],[13,25,4]],sub:[["łączny wsp.","18,9%"],["dźwignia","7,1%"]]},
+ {x:500,k:"Płynność",q:"czy wystarczy pieniędzy",m:"LCR",v:158,lo:0,hi:250,unit:"%",min:[100,"wymóg"],ap:[120,"apetyt"],z:[[0,100,0],[100,120,2],[120,250,4]],sub:[["NSFR","132%"],["depozyty / kredyty","1,14"]]},
+ {x:770,k:"Wynik",q:"ile kosztuje ryzyko",m:"koszt ryzyka",v:.24,lo:0,hi:1.2,unit:"%",min:[.9,"limit"],ap:[.6,"apetyt"],z:[[0,.6,4],[.6,.9,2],[.9,1.2,0]],sub:[["ROE","12,4%"],["NPL","3,1%"]],low:1}];
+const A0=-210,A1=30,R=74,W=15,cy=150;
+const P=(cx,a,r)=>[cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)];
+const ang=(g,v)=>A0+(A1-A0)*(v-g.lo)/(g.hi-g.lo);
+const arc=(cx,a,b,r)=>{const p=P(cx,a,r),q=P(cx,b,r);return `M${p[0].toFixed(1)},${p[1].toFixed(1)} A${r},${r} 0 ${b-a>180?1:0} 1 ${q[0].toFixed(1)},${q[1].toFixed(1)}`};
+const fmt=(g,v)=>(g.hi<5?v.toFixed(2):v.toFixed(v<100?1:0)).replace(".",",").replace(/,0$/,"");
+let h=`<defs><filter id="bsh" x="-10%" y="-30%" width="120%" height="170%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#3c2814" flood-opacity=".12"/></filter></defs>`;
+G.forEach(g=>{const cx=g.x;
+  h+=`<text x="${cx}" y="18" text-anchor="middle" font-size="9.5" font-weight="600" letter-spacing="1.6" fill="#a8694c">${g.k.toUpperCase()}</text><text x="${cx}" y="31" text-anchor="middle" font-size="9.5" fill="#8a8173" font-style="italic" style="font-family:var(--serif)">${g.q}</text>`;
+  h+=`<circle cx="${cx}" cy="${cy}" r="${R+W/2+9}" fill="#f6efe6" stroke="#e6dccd"/>`;
+  g.z.forEach(([a,b,c])=>{h+=`<path d="${arc(cx,ang(g,a)+.8,ang(g,b)-.8,R)}" fill="none" stroke="${Z[c]}" stroke-width="${W}" opacity=".45"/>`});
+  const va=ang(g,g.v);h+=`<path d="${arc(cx,A0,va,R-W/2-6)}" fill="none" stroke="${g.low?Z[4]:Z[4]}" stroke-width="5" stroke-linecap="round"/>`;
+  [[g.min,"#8a5238"],[g.ap,"#5c564d"]].forEach(([[t,l],c],i)=>{const a=ang(g,t),p1=P(cx,a,R-W/2-2),p2=P(cx,a,R+W/2+4),pl=P(cx,a,R+W/2+16);h+=`<line x1="${p1[0]}" y1="${p1[1]}" x2="${p2[0]}" y2="${p2[1]}" stroke="${c}" stroke-width="1.6"/><text x="${pl[0]}" y="${pl[1]+3}" text-anchor="${Math.cos(a*Math.PI/180)<-.2?"end":Math.cos(a*Math.PI/180)>.2?"start":"middle"}" font-size="8.5" fill="${c}">${l} ${fmt(g,t)}${g.unit}</text>`});
+  const pv=P(cx,va,R);h+=`<circle cx="${pv[0]}" cy="${pv[1]}" r="6.5" fill="#fffdf9" stroke="#0d0d0d" stroke-width="1.6"/>`;
+  h+=`<circle cx="${cx}" cy="${cy}" r="34" fill="#fffdf9" stroke="#e6dccd"/><text x="${cx}" y="${cy+6}" text-anchor="middle" font-size="21" font-weight="400" fill="#0d0d0d" style="font-family:'Archivo Black',sans-serif">${fmt(g,g.v)}%</text><text x="${cx}" y="${cy+20}" text-anchor="middle" font-size="8.5" fill="#8a8173">${g.m}</text>`;
+  g.sub.forEach((s,i)=>{const y=cy+R+28+i*14;h+=`<text x="${cx-6}" y="${y}" text-anchor="end" font-size="9.5" fill="#5c564d">${s[0]}</text><text x="${cx+6}" y="${y}" font-size="9.5" font-weight="600" fill="#0d0d0d">${s[1]}</text>`});
+  h+=`<circle cx="${cx}" cy="${cy+R+56}" r="2.6" fill="#8a8173"/><path d="M${cx},${cy+R+58} V${cy+R+76}" stroke="#a9a091" stroke-dasharray="3 3"/>`});
+const yb=cy+R+76;h+=`<path d="M${G[0].x},${yb} H${G[2].x}" stroke="#a9a091" stroke-dasharray="3 3"/><circle cx="${G[1].x}" cy="${yb}" r="2.6" fill="#8a8173"/><path d="M${G[1].x},${yb} V${yb+18}" stroke="#a9a091" stroke-dasharray="3 3"/>`;
+const cx0=170,cw=660,ct=yb+18,ch=92;
+h+=`<g filter="url(#bsh)"><rect x="${cx0}" y="${ct}" width="${cw}" height="${ch}" rx="10" fill="#fcf9f5" stroke="#e6dccd"/></g><path d="M${cx0+10},${ct} H${cx0+cw-10} Q${cx0+cw},${ct} ${cx0+cw},${ct+10} V${ct+24} H${cx0} V${ct+10} Q${cx0},${ct} ${cx0+10},${ct} Z" fill="#efe5d6"/>`;
+h+=`<text x="${cx0+14}" y="${ct+16}" font-size="11" font-style="italic" font-weight="600" fill="#2b2723" style="font-family:var(--serif)">Bank w liczbach</text><text x="${cx0+cw-14}" y="${ct+16}" text-anchor="end" font-size="8.5" fill="#5c564d">bank przykładowy · stan na 31.12.2025 · mld zł</text>`;
+h+=`<text x="${cx0+14}" y="${ct+62}" font-size="26" fill="#0d0d0d" style="font-family:'Archivo Black',sans-serif">64,5</text><text x="${cx0+82}" y="${ct+50}" font-size="9.5" fill="#5c564d">aktywa</text><text x="${cx0+82}" y="${ct+63}" font-size="9.5" fill="#5c564d">razem</text>`;
+h+=`<line x1="${cx0+150}" y1="${ct+34}" x2="${cx0+150}" y2="${ct+82}" stroke="#e6dccd"/>`;
+[["Kredyty netto","48,2",Z[4]],["Odpisy ECL (−)","−3,8",Z[1]],["Wynik brutto","1,90",Z[3]]].forEach((r,i)=>{const y=ct+43+i*15;h+=`<rect x="${cx0+166}" y="${y-7}" width="8" height="8" rx="1.5" fill="${r[2]}"/><text x="${cx0+182}" y="${y}" font-size="9.5" fill="#2b2723">${r[0]}</text><text x="${cx0+320}" y="${y}" text-anchor="end" font-size="9.5" font-weight="600" font-style="italic" fill="#0d0d0d">${r[1]}</text>`});
+h+=`<line x1="${cx0+340}" y1="${ct+34}" x2="${cx0+340}" y2="${ct+82}" stroke="#e6dccd"/>`;
+const bx=cx0+356,bw=180;["kapitał","płynność","wynik"].forEach((l,i)=>{const y=ct+43+i*15;h+=`<text x="${bx}" y="${y}" font-size="9" fill="#5c564d">${l}</text>`;[0,1,2,3,4].forEach(j=>{h+=`<rect x="${bx+58+j*22}" y="${y-7}" width="20" height="7" rx="2" fill="${Z[j]}" opacity="${j===4?1:.55}"/>`});h+=`<path d="M${bx+58+4*22+10},${y-11} l-3,-4 h6 z" fill="#0d0d0d"/>`});
+h+=`<text x="${cx0+cw-14}" y="${ct+52}" text-anchor="end" font-size="9.5" fill="#5c564d">trzy liczby</text><text x="${cx0+cw-14}" y="${ct+66}" text-anchor="end" font-size="10" font-style="italic" fill="#5e7a4e" style="font-family:var(--serif)">w apetycie na ryzyko</text>`;
+sv.innerHTML=h;
+const al=()=>{const d=document.querySelector('.bnk-d'),c=sv.querySelector('circle');if(!d||!c||innerWidth<=980){d&&(d.style.cssText='');return}d.style.marginLeft='0';d.style.maxWidth='none';const cr=c.getBoundingClientRect(),dr=d.getBoundingClientRect(),tb=document.querySelector('.bnk-tabs').getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+'px';d.style.width=Math.round(tb.right-cr.left)+'px'};al();addEventListener('resize',al);document.fonts&&document.fonts.ready.then(al)})();
+</script>
+<script src="../rt.js"></script>
+</body>
+</html>
