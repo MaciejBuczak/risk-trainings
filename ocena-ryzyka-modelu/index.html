@@ -100,12 +100,12 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
     for(let k=1;k<=5;k++)h+=`<circle class="ag-ring" cx="${x}" cy="${cy}" r="${R0+k*RW}"/>`;
     g.c.forEach((c,i)=>{const a0=i/n*2*Math.PI+gap,a1=(i+1)/n*2*Math.PI-gap,am=(a0+a1)/2;let s=`<g class="ag-seg" data-g="${gi}" data-i="${i}">`;
       for(let k=1;k<=5;k++)s+=`<path d="${arc(x,a0,a1,R0+(k-1)*RW+1.5,R0+k*RW-1.5)}" fill="${k<=c[1]?QC[c[1]]:"#f3ece2"}" class="${k<=c[1]?"f":""}" style="transform-origin:${x}px ${cy}px;animation-delay:${(gi*.15+i*.05+k*.04).toFixed(2)}s"/>`;
-      const RR=R0+5*RW,cs=Math.cos(am),dn=cs<-.2,r=dn?RR+13:RR+5,[p0x,p0y]=P(x,dn?a1:a0,r),[p1x,p1y]=P(x,dn?a0:a1,r),pid=`agp${gi}_${i}`;
+      const RR=R0+5*RW,cs=Math.cos(am),dn=cs<-.2,r=dn?RR+19:RR+10,[p0x,p0y]=P(x,dn?a1:a0,r),[p1x,p1y]=P(x,dn?a0:a1,r),pid=`agp${gi}_${i}`;
       s+=`<path id="${pid}" d="M${f(p0x)},${f(p0y)} A${r},${r} 0 0 ${dn?0:1} ${f(p1x)},${f(p1y)}" fill="none"/><text class="ag-lab"><textPath href="#${pid}" startOffset="50%" text-anchor="middle">${c[0]} <tspan class="ag-lvn">${c[1]}</tspan></textPath></text></g>`;h+=s});
     h+=`<circle cx="${x}" cy="${cy}" r="${R0-4}" fill="#fcf9f5" stroke="#ddd3c4"/><g class="agc" data-g="${gi}"></g>`});
   /* zbieżne linie do oceny końcowej */
   const fy=314,fw=320,fx=500-fw/2,F=G.reduce((a,g)=>a+g.w*g.s,0);
-  G.forEach(g=>{const y0=cy+R0+5*RW+26;h+=`<path d="M${g.cx},${y0} V${y0+10} H${500+(g.cx-500)*.3} V${fy}" class="ag-dash"/><circle cx="${g.cx}" cy="${y0}" r="2.8" fill="#a09580"/>`});
+  G.forEach(g=>{const y0=cy+R0+5*RW+32;h+=`<path d="M${g.cx},${y0} V${y0+10} H${500+(g.cx-500)*.3} V${fy}" class="ag-dash"/><circle cx="${g.cx}" cy="${y0}" r="2.8" fill="#a09580"/>`});
   h+=`<g filter="url(#agsh)"><rect x="${fx}" y="${fy}" width="${fw}" height="104" rx="12" fill="#fcf9f5" stroke="#ddd3c4"/></g><rect x="${fx}" y="${fy}" width="${fw}" height="30" rx="12" fill="#eae1d3"/><rect x="${fx}" y="${fy+18}" width="${fw}" height="12" fill="#eae1d3"/>
     <text x="${fx+14}" y="${fy+20}" class="ag-t">Ocena końcowa modelu</text><text x="${fx+fw-14}" y="${fy+20}" text-anchor="end" class="ag-s">średnia ważona</text>
     <text x="${fx+14}" y="${fy+66}" class="ag-c1" style="font-size:30px">${pl(F)}</text><text x="${fx+70}" y="${fy+66}" class="ag-c2">/ 5 · ${QL[Math.round(F)]}</text>
