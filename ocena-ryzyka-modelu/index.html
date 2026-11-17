@@ -74,7 +74,7 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
     </div>
   </div>
   <div class="mh-r"><nav class="vtabs" aria-label="Ocena ryzyka modelu"><a class="on" href="./">Ryzyko modelu</a><a href="../model-ryzyka/?lb=kj">Komponent jakościowy</a><a href="../model-ryzyka/?lb=ki">Komponent ilościowy</a><a href="../model-ryzyka/?lb=rw">Proces walidacji</a></nav><p class="mh-d">Ocena modelu składa się z trzech ocen: jakościowej, ilościowej i jakości danych – każda w skali od 1 do 5, gdzie wyżej znaczy lepiej. Ocena końcowa to ich średnia ważona, porównana z progiem akceptacji 3,0. Wynik poniżej progu oznacza model poza apetytem.</p></div>
-  <div class="stage"><svg id="ag" viewBox="130 -8 740 408" preserveAspectRatio="xMidYMid meet" aria-label="Mapa ryzyka modelu"></svg></div>
+  <div class="stage"><svg id="ag" viewBox="78 -8 844 408" preserveAspectRatio="xMidYMid meet" aria-label="Mapa ryzyka modelu"></svg></div>
 </div></section>
 </main>
 
@@ -89,9 +89,9 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
 <a class="vdyn" href="../model-ryzyka/" title="Model ryzyka" style="right:14px">M</a>
 <script>
 (()=>{const sv=document.getElementById("ag"),QC=["","#c49ea1","#d0a991","#d6cb8a","#c3caa7","#a7b5a0"],QL=["","niska","słaba","przeciętna","dobra","bardzo dobra"],f=v=>v.toFixed(1),pl=v=>v.toFixed(1).replace(".",",");
-  const G=[{n:"Komponent jakościowy",w:.4,cx:258,c:[["Koncepcja",5],["Założenia",4],["Dane",5],["Stosowanie",4]]},
+  const G=[{n:"Komponent jakościowy",w:.4,cx:205,c:[["Koncepcja",5],["Założenia",4],["Dane",5],["Stosowanie",4]]},
            {n:"Komponent ilościowy",w:.4,cx:500,c:[["Backtesting",4],["Stabilność",4],["Benchmarking",5],["Wrażliwość",3]]},
-           {n:"Jakość danych (DQM)",w:.2,cx:742,c:[["Kompletność",4],["Poprawność",5],["Spójność",2],["Aktualność",4],["Unikalność",5]]}];
+           {n:"Jakość danych (DQM)",w:.2,cx:795,c:[["Kompletność",4],["Poprawność",5],["Spójność",2],["Aktualność",4],["Unikalność",5]]}];
   const cy=141,R0=36,RW=10.5,gap=.05,P=(x,a,r)=>[x+r*Math.sin(a),cy-r*Math.cos(a)];
   const arc=(x,a0,a1,r0,r1)=>{const [x0,y0]=P(x,a0,r1),[x1,y1]=P(x,a1,r1),[x2,y2]=P(x,a1,r0),[x3,y3]=P(x,a0,r0),L=a1-a0>Math.PI?1:0;return`M${f(x0)},${f(y0)} A${r1},${r1} 0 ${L} 1 ${f(x1)},${f(y1)} L${f(x2)},${f(y2)} A${r0},${r0} 0 ${L} 0 ${f(x3)},${f(y3)}Z`};
   let h=`<defs><filter id="agsh" x="-20%" y="-30%" width="140%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#5c4a36" flood-opacity=".12"/></filter></defs>`;
@@ -112,11 +112,11 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
   /* lewa część: wynik */
   h+=`<text x="${fx+16}" y="${fy+76}" class="ag-c1" style="font-size:32px">${pl(F)}</text><text x="${fx+76}" y="${fy+66}" class="ag-c2">/ 5</text><text x="${fx+76}" y="${fy+82}" class="ag-s">${QL[Math.round(F)]}</text>`;
   /* środek: składniki */
-  const mx0=fx+170;h+=`<line x1="${mx0-20}" x2="${mx0-20}" y1="${fy+40}" y2="${fy+fh-12}" stroke="#ece3d6"/>`;
+  const mx0=fx+Math.round(fw*.27);h+=`<line x1="${mx0-20}" x2="${mx0-20}" y1="${fy+40}" y2="${fy+fh-12}" stroke="#ece3d6"/>`;
   G.forEach((g,k)=>{const y=fy+49+k*19;h+=`<rect x="${mx0}" y="${y-8}" width="9" height="9" rx="2" fill="${QC[Math.round(g.s)]}"/><text x="${mx0+16}" y="${y}" class="ag-s">${g.n}</text><text x="${mx0+190}" y="${y}" text-anchor="end" class="ag-lv">${Math.round(g.w*100)}%</text><text x="${mx0+226}" y="${y}" text-anchor="end" class="ag-v">${pl(g.s)}</text>`});
   /* prawa: skala, próg, decyzja */
-  const rx0=mx0+256;h+=`<line x1="${rx0}" x2="${rx0}" y1="${fy+40}" y2="${fy+fh-12}" stroke="#ece3d6"/>`;
-  const bx=rx0+20,by=fy+68;for(let k=1;k<=5;k++)h+=`<rect x="${bx+(k-1)*30}" y="${by-8}" width="28" height="9" rx="3" fill="${QC[k]}"/><text x="${bx+(k-1)*30+14}" y="${by+12}" text-anchor="middle" class="ag-lv">${k}</text>`;
+  const rx0=fx+Math.round(fw*.64);h+=`<line x1="${rx0}" x2="${rx0}" y1="${fy+40}" y2="${fy+fh-12}" stroke="#ece3d6"/>`;
+  const bx=rx0+Math.round((fx+fw-rx0-230)/2),by=fy+68;for(let k=1;k<=5;k++)h+=`<rect x="${bx+(k-1)*30}" y="${by-8}" width="28" height="9" rx="3" fill="${QC[k]}"/><text x="${bx+(k-1)*30+14}" y="${by+12}" text-anchor="middle" class="ag-lv">${k}</text>`;
   const tx=bx+2*30-1;h+=`<line x1="${tx}" x2="${tx}" y1="${by-13}" y2="${by+3}" stroke="#0d0d0d" stroke-width="1.2"/><path d="M${(bx+(F-1)*30+14).toFixed(1)},${by-11} l-4,-6 h8z" fill="#0d0d0d"/>`;
   const ok=F>=3;h+=`<text x="${bx+162}" y="${fy+49}" class="ag-s">próg 3,0</text><text x="${bx+162}" y="${fy+68}" class="ag-v" style="fill:${ok?"#5e7a52":"#9a3b25"}">${ok?"w apetycie":"poza apetytem"}</text><text x="${bx+162}" y="${fy+87}" class="ag-v" style="fill:${ok?"#5e7a52":"#9a3b25"}">na ryzyko</text>`;
   sv.innerHTML=h;
