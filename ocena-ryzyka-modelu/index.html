@@ -2795,6 +2795,7 @@ svg.hov .ag-seg.on{opacity:1}
 .ag-v{font:italic 600 11.5px var(--serif);fill:#1c1a17}
 .ag-dash{fill:none;stroke:#a09580;stroke-width:1.2;stroke-dasharray:4 4}
 @media (max-width:980px){.orm .wrap{grid-template-columns:1fr;min-height:0}.orm-r{align-items:flex-start}.orm-tabs{flex-wrap:wrap;width:auto;border-radius:18px}.orm-frs{margin-top:28px}.orm-stage{position:static;margin:20px 0 40px}}
+.lb-top .nav-back{margin-right:auto}.lb-top .lb-back,.lb-top .ds-back{margin-left:auto!important;margin-top:0!important;margin-bottom:0!important}.lb-top .ds-back{display:inline-flex!important}
 </style>
 <style>.ctlbar{display:none!important}html.obj .ctlbar{display:flex!important}</style><script>if(new URLSearchParams(location.search).has("obejrzyj"))document.documentElement.classList.add("obj")</script><style>.vdyn.vwar{right:48px}html.bezpokoju #dfloor,html.bezpokoju .bgv,html.bezpokoju .bg3,html.bezpokoju .bgf,html.bezpokoju .bgs{display:none!important}.vdyn.vtlo{right:82px;cursor:pointer;font-family:inherit}html.bezpokoju .vdyn.vtlo{border-color:#ad6b4e;color:#ad6b4e;background:#f6ebe3}</style><script>if(new URLSearchParams(location.search).has("bezpokoju"))document.documentElement.classList.add("bezpokoju")</script></head>
 <body>
@@ -4252,6 +4253,20 @@ tabs.addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b)se
 document.addEventListener("click",e=>{const a=e.target.closest(".orm [data-lb]");if(!a)return;e.preventDefault();const k=a.dataset.lb;if(k)window.__openLB&&window.__openLB(k);else scrollTo({top:0,behavior:"smooth"})});
 </script>
 <script>if(document.documentElement.classList.contains("ocena")){{const mh=document.querySelector(".mh"),o=document.querySelector(".orm"),cp=()=>{o.classList.toggle("hout",mh.classList.contains("hout")||mh.classList.contains("hsolo")||!!document.querySelector(".lbsec.on"))};new MutationObserver(cp).observe(mh,{attributes:true,attributeFilter:["class"]});setInterval(cp,300);cp()}document.addEventListener("click",e=>{if(e.target.closest('.orm [data-lb=""]'))scrollTo({top:0,behavior:"smooth"})},true);document.querySelectorAll('.nav a,.foot a').forEach(a=>{const h=a.getAttribute("href");if(h==="./"){a.classList.remove("on");a.setAttribute("href","../model-ryzyka/")}else if(h==="../ocena-ryzyka-modelu/"){a.setAttribute("href","./");if(a.closest(".nav"))a.classList.add("on")}});document.querySelectorAll(".lb-back").forEach(b=>{if(b.textContent.trim()==="↑ Model ryzyka")b.textContent="↑ Ryzyko modelu"})}</script>
+<script>
+/* Nawigacja: „← Wróć” – poprzednia strona; „↑ …” – strona wyżej w logice (po prawej) */
+(()=>{let ST=[],BACK=false;const vis=()=>{const e=[...document.querySelectorAll(".lbsec.on,#ds-tev.on,#ds-tec.on")].find(x=>{const r=x.getBoundingClientRect();return r.top<260&&r.bottom>260});return e?(e.id==="ds-tev"?"tev":e.id==="ds-tec"?"tec":e.id.slice(6)):"top"};
+  const go=(k)=>{BACK=true;if(k==="top")scrollTo({top:0,behavior:"smooth"});else if(k==="tev")window.__openTev&&window.__openTev();else if(k==="tec")window.__openTec&&window.__openTec();else window.__openLB&&window.__openLB(k);BACK=false};
+  const note=k=>{if(BACK)return;const c=vis();if(c===k)return;ST.push(c);if(ST.length>40)ST.shift()};
+  const wrap=(n,f)=>{const o=window[n];if(typeof o!=="function"||o.__nav)return;const w=function(...a){note(f(...a));return o.apply(this,a)};w.__nav=1;window[n]=w};
+  const hook=()=>{wrap("__openLB",k=>k);wrap("__openTev",()=>"tev");wrap("__openTec",()=>"tec");
+    document.querySelectorAll(".lb-top").forEach(t=>{if(t.querySelector(".nav-back"))return;t.insertAdjacentHTML("afterbegin",'<button type="button" class="sd-back nav-back">← Wróć</button>')});
+    document.querySelectorAll(".ds-back").forEach(b=>{if(b.parentElement.classList.contains("lb-top"))return;const d=document.createElement("div");d.className="lb-top";b.before(d);d.appendChild(b);d.insertAdjacentHTML("afterbegin",'<button type="button" class="sd-back nav-back">← Wróć</button>')})};
+  hook();setTimeout(hook,500);setTimeout(hook,1500);addEventListener("load",hook);
+  document.addEventListener("click",e=>{const b=e.target.closest(".nav-back");if(b){e.preventDefault();e.stopPropagation();go(ST.length?ST.pop():"top");return}
+    const a=e.target.closest(".lb-back,.ds-back,[data-go],.zcy-go,.kj-go,.ki-go,.rwx-go,.tvb-go");if(a&&!a.closest(".orm")){const c=vis();setTimeout(()=>{const n=vis();if(n!==c&&ST[ST.length-1]!==c)ST.push(c)},1200)}},true);
+})();
+</script>
 <script src="../rt.js"></script>
 
 <script>
