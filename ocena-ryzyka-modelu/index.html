@@ -97,7 +97,7 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
   let h=`<defs><filter id="agsh" x="-20%" y="-30%" width="140%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#5c4a36" flood-opacity=".12"/></filter></defs>`;
   G.forEach((g,gi)=>{g.s=g.c.reduce((a,c)=>a+c[1],0)/g.c.length;const n=g.c.length,x=g.cx;
     h+=`<text x="${x}" y="2" text-anchor="middle" class="ag-k">${g.n.toUpperCase()}</text><text x="${x}" y="17" text-anchor="middle" class="ag-lv">waga ${Math.round(g.w*100)}%</text>`;
-    for(let k=1;k<=5;k++)h+=`<circle class="ag-ring" cx="${x}" cy="${cy}" r="${R0+k*RW}"/>`;h+=`<circle cx="${x}" cy="${cy}" r="${R0+5*RW+9}" fill="none" stroke="#f1e9de" stroke-width="16"/>`;
+    for(let k=1;k<=5;k++)h+=`<circle class="ag-ring" cx="${x}" cy="${cy}" r="${R0+k*RW}"/>`;
     g.c.forEach((c,i)=>{const a0=i/n*2*Math.PI+gap,a1=(i+1)/n*2*Math.PI-gap,am=(a0+a1)/2;let s=`<g class="ag-seg" data-g="${gi}" data-i="${i}">`;
       for(let k=1;k<=5;k++)s+=`<path d="${arc(x,a0,a1,R0+(k-1)*RW+1.5,R0+k*RW-1.5)}" fill="${k<=c[1]?QC[c[1]]:"#f3ece2"}" class="${k<=c[1]?"f":""}" style="transform-origin:${x}px ${cy}px;animation-delay:${(gi*.15+i*.05+k*.04).toFixed(2)}s"/>`;
       const RR=R0+5*RW,cs=Math.cos(am),dn=cs<-.2,r=dn?RR+13:RR+5,[p0x,p0y]=P(x,dn?a1:a0,r),[p1x,p1y]=P(x,dn?a0:a1,r),pid=`agp${gi}_${i}`;
