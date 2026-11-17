@@ -2985,7 +2985,7 @@ html.bank #ds-lb-mr,html.bank #ds-lb-zr,html.bank #ds-lb-pz,html.bank #ds-lb-db{
 #ds-lb-rt .lbqg-k{background:#f3ebe0!important}#ds-lb-rt .lbqg-l{background:#ece0cf!important}#ds-lb-rt .lbqg-w{background:#e5d6c1!important}
 #ds-lb-rt .lbfl{background:transparent!important;box-shadow:none!important;border:1.6px solid #bf8165!important;align-self:end;padding-top:14px}#ds-lb-rt .lbfl-g{flex:none;align-content:start;row-gap:8px}#ds-lb-rt .lbfl-n{min-height:59px;box-sizing:border-box}#ds-lb-rt .lbfl{gap:14px}
 
-.lbf-kl{grid-template-rows:1fr!important;row-gap:0!important;min-height:162px;box-sizing:border-box}#ds-lb-mr .lbf-kl{position:relative;top:2px}.lbf-kl .lbf-cl{align-self:center;align-items:stretch}
+.lbf-kl{grid-template-rows:1fr!important;row-gap:0!important;min-height:162px;box-sizing:border-box}#ds-lb-mr .lbf-kl{position:relative}.lbf-kl .lbf-cl{align-self:center;align-items:stretch}
 
 html.hjump body{opacity:0}
 body{transition:opacity .25s}
@@ -4566,6 +4566,11 @@ const al=()=>{const d=document.querySelector('.bnk-d'),c=sv.querySelector('rect'
  document.addEventListener("click",e=>{const a=e.target.closest(".bnk [data-lb]");if(!a)return;e.preventDefault();const k=a.dataset.lb;if(!k){scrollTo({top:0,behavior:"smooth"});return}if(k==="law")window.__openLaw&&window.__openLaw();else window.__openLB&&window.__openLB(k)});
  document.querySelectorAll(".nav a,.foot a").forEach(a=>{const h=a.getAttribute("href");if(h==="./"){a.classList.remove("on");a.setAttribute("href","../model-ryzyka/")}else if(h==="../bank/"){a.setAttribute("href","./");if(a.closest(".nav"))a.classList.add("on")}});
 })();
+</script>
+<script>
+/* Modele ryzyka banku: ramka „Klasy problemów” zawsze dolną krawędzią na poziomie przycisku „Bilans, wynik i kapitał” */
+(()=>{const al=()=>{const sc=document.getElementById("ds-lb-mr");if(!sc)return;const k=sc.querySelector(".lbf-kl"),b=sc.querySelector('.lb-nb [data-go="bl"]');if(!k||!b||!k.offsetParent)return;k.style.top="0px";const d=b.getBoundingClientRect().bottom-k.getBoundingClientRect().bottom;k.style.top=Math.max(0,Math.round(d*10)/10)+"px"};
+ const t=()=>{const sc=document.getElementById("ds-lb-mr");if(!sc){setTimeout(t,300);return}new ResizeObserver(al).observe(sc);new MutationObserver(()=>setTimeout(al,50)).observe(sc,{attributes:true,attributeFilter:["class","style"]});addEventListener("resize",()=>setTimeout(al,100));setTimeout(al,500)};t()})();
 </script>
 <script src="../rt.js"></script>
 
