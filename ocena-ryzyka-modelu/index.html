@@ -17,7 +17,7 @@
 .mh h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d)}
 .mh-l{position:relative;z-index:3}
 .mh-r{display:flex;flex-direction:column;align-items:flex-end;position:relative;z-index:3}
-.mh-r p{margin:26px 0 0;align-self:stretch;max-width:620px;font-size:16px;font-weight:300;color:var(--ink2)}
+.mh-r p{margin:26px 0 0;align-self:flex-start;max-width:620px;font-size:16px;font-weight:300;color:var(--ink2)}
 .vtabs{display:flex;gap:2px;padding:5px;border-radius:999px;background:#fffdf9;border:1px solid var(--line);width:max-content}
 .vtabs a{white-space:nowrap;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:999px;color:var(--ink2);text-decoration:none;transition:background .2s,color .2s}
 .vtabs a:hover{background:rgba(13,13,13,.05)}
@@ -73,7 +73,7 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
       <div class="fr"><b>Właściciel modelu</b><p>Monitoring i jakość danych.</p><a class="pill" href="../model-ryzyka/?lb=dq">Zobacz <i>→</i></a></div>
     </div>
   </div>
-  <div class="mh-r"><nav class="vtabs" aria-label="Ocena ryzyka modelu"><a class="on" href="./">Ryzyko modelu</a><a href="../model-ryzyka/?lb=kj">Komponent jakościowy</a><a href="../model-ryzyka/?lb=ki">Komponent ilościowy</a><a href="../model-ryzyka/?lb=rw">Proces walidacji</a></nav><p>Trzy oceny – jakościowa, ilościowa i jakości danych – każda w skali 1–5. Ocena końcowa modelu to ich średnia ważona.</p></div>
+  <div class="mh-r"><nav class="vtabs" aria-label="Ocena ryzyka modelu"><a class="on" href="./">Ryzyko modelu</a><a href="../model-ryzyka/?lb=kj">Komponent jakościowy</a><a href="../model-ryzyka/?lb=ki">Komponent ilościowy</a><a href="../model-ryzyka/?lb=rw">Proces walidacji</a></nav><p class="mh-d">Ocena modelu składa się z trzech ocen: jakościowej, ilościowej i jakości danych – każda w skali od 1 do 5, gdzie wyżej znaczy lepiej. Ocena końcowa to ich średnia ważona, porównana z progiem akceptacji 3,0.</p></div>
   <div class="stage"><svg id="ag" viewBox="130 -8 740 408" preserveAspectRatio="xMidYMid meet" aria-label="Mapa ryzyka modelu"></svg></div>
 </div></section>
 </main>
@@ -113,13 +113,15 @@ svg.hov .ag-seg{opacity:.35}svg.hov .ag-seg.on{opacity:1}
   h+=`<text x="${fx+16}" y="${fy+76}" class="ag-c1" style="font-size:32px">${pl(F)}</text><text x="${fx+76}" y="${fy+66}" class="ag-c2">/ 5</text><text x="${fx+76}" y="${fy+82}" class="ag-s">${QL[Math.round(F)]}</text>`;
   /* środek: składniki */
   const mx0=fx+170;h+=`<line x1="${mx0-20}" x2="${mx0-20}" y1="${fy+40}" y2="${fy+fh-12}" stroke="#ece3d6"/>`;
-  G.forEach((g,k)=>{const y=fy+54+k*19;h+=`<rect x="${mx0}" y="${y-8}" width="9" height="9" rx="2" fill="${QC[Math.round(g.s)]}"/><text x="${mx0+16}" y="${y}" class="ag-s">${g.n}</text><text x="${mx0+190}" y="${y}" text-anchor="end" class="ag-lv">${Math.round(g.w*100)}%</text><text x="${mx0+226}" y="${y}" text-anchor="end" class="ag-v">${pl(g.s)}</text>`});
+  G.forEach((g,k)=>{const y=fy+49+k*19;h+=`<rect x="${mx0}" y="${y-8}" width="9" height="9" rx="2" fill="${QC[Math.round(g.s)]}"/><text x="${mx0+16}" y="${y}" class="ag-s">${g.n}</text><text x="${mx0+190}" y="${y}" text-anchor="end" class="ag-lv">${Math.round(g.w*100)}%</text><text x="${mx0+226}" y="${y}" text-anchor="end" class="ag-v">${pl(g.s)}</text>`});
   /* prawa: skala, próg, decyzja */
   const rx0=mx0+256;h+=`<line x1="${rx0}" x2="${rx0}" y1="${fy+40}" y2="${fy+fh-12}" stroke="#ece3d6"/>`;
   const bx=rx0+20,by=fy+68;for(let k=1;k<=5;k++)h+=`<rect x="${bx+(k-1)*30}" y="${by-8}" width="28" height="9" rx="3" fill="${QC[k]}"/><text x="${bx+(k-1)*30+14}" y="${by+12}" text-anchor="middle" class="ag-lv">${k}</text>`;
   const tx=bx+2*30-1;h+=`<line x1="${tx}" x2="${tx}" y1="${by-13}" y2="${by+3}" stroke="#0d0d0d" stroke-width="1.2"/><path d="M${(bx+(F-1)*30+14).toFixed(1)},${by-11} l-4,-6 h8z" fill="#0d0d0d"/>`;
-  const ok=F>=3;h+=`<text x="${bx+164}" y="${by-2}" class="ag-s">próg akceptacji 3,0</text><text x="${bx+164}" y="${by+13}" class="ag-v" style="fill:${ok?"#5e7a52":"#9a3b25"}">${ok?"w apetycie na ryzyko":"poza apetytem"}</text>`;
+  const ok=F>=3;h+=`<text x="${bx+162}" y="${fy+49}" class="ag-s">próg 3,0</text><text x="${bx+162}" y="${fy+68}" class="ag-v" style="fill:${ok?"#5e7a52":"#9a3b25"}">${ok?"w apetycie":"poza apetytem"}</text><text x="${bx+162}" y="${fy+87}" class="ag-v" style="fill:${ok?"#5e7a52":"#9a3b25"}">na ryzyko</text>`;
   sv.innerHTML=h;
+  const al=()=>{const d=document.querySelector(".mh-d"),c=sv.querySelector("rect[filter],g[filter] rect");if(!d||!c||innerWidth<=980){d&&(d.style.cssText="");return}d.style.marginLeft="0";d.style.maxWidth="none";const cr=c.getBoundingClientRect(),dr=d.getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+"px";d.style.width=Math.round(cr.width)+"px"};
+  al();addEventListener("resize",al);document.fonts&&document.fonts.ready.then(al);
   const ctr=(gi,t1,t2)=>{sv.querySelector(`.agc[data-g="${gi}"]`).innerHTML=`<text x="${G[gi].cx}" y="${cy+8}" text-anchor="middle" class="ag-c1" style="font-size:22px">${t1}</text>`};
   const def=gi=>ctr(gi,pl(G[gi].s),QL[Math.round(G[gi].s)]);G.forEach((_,gi)=>def(gi));
   sv.querySelectorAll(".ag-seg").forEach(e=>{const gi=+e.dataset.g,c=G[gi].c[+e.dataset.i];e.addEventListener("mouseenter",()=>{sv.classList.add("hov");e.classList.add("on");ctr(gi,String(c[1]),c[0].toLowerCase())});e.addEventListener("mouseleave",()=>{sv.classList.remove("hov");e.classList.remove("on");def(gi)})});
