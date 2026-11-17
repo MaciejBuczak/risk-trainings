@@ -4140,7 +4140,11 @@ Object.entries(RT).forEach(([k,r])=>BI["q_"+k]={id:"q_"+k,n:r.n});
         const wr=w.getBoundingClientRect(),ir=it.getBoundingClientRect(),pr=pn.getBoundingClientRect(),bd=sc.querySelector(".lbbody").getBoundingClientRect(),hd=pn.querySelector("h3").getBoundingClientRect();
         const X=v=>Math.round(v-wr.left),Y=v=>Math.round(v-wr.top),x0=X(ir.left),y0=Y(ir.top+ir.height/2),x2=X(pr.right),y2=Y(hd.top+hd.height/2),xm=Math.round((x2+X(bd.left))/2);
         const blk=it.closest(".lbc,.lbr,.lbqg,.icr"),br=blk?blk.getBoundingClientRect():bd,first=br.left-bd.left<6,inner=ir.left-br.left>24,yt=Y(bd.top)-5,xg=X(br.left)-5;let d,p0=`M${x0},${y0}`;
-        if(inner){const xc=X(ir.left+ir.width/2),yu=Y(br.top)-7;d=`M${xc},${Y(ir.top)} V${yu} H${xm} V${y2} H${x2}`}
+        if(inner&&sc.id==="ds-lb-bl"&&blk){const sib=[...blk.querySelectorAll(".lbi")].filter(x=>x!==it&&x.offsetParent).map(x=>x.getBoundingClientRect()),last=!sib.some(r=>r.top>ir.bottom-2),right=!sib.some(r=>r.left>ir.right-2&&r.top<ir.bottom&&r.bottom>ir.top),xc=X(ir.left+ir.width/2),ym=Y(ir.top+ir.height/2);
+          if(last){d=`M${xc},${Y(ir.bottom)} V${Y(br.bottom)+4} H${xm} V${y2} H${x2}`}
+          else if(right){const up=(ir.top+ir.height/2)-br.top<br.bottom-(ir.top+ir.height/2),yv=up?Y(bd.top)-4:Y(bd.bottom)+4;d=`M${X(ir.right)},${ym} H${X(br.right)+4} V${yv} H${xm} V${y2} H${x2}`}
+          else{d=`M${xc},${Y(ir.top)} V${Y(br.top)-4} H${xm} V${y2} H${x2}`}}
+        else if(inner){const xc=X(ir.left+ir.width/2),yu=Y(br.top)-7;d=`M${xc},${Y(ir.top)} V${yu} H${xm} V${y2} H${x2}`}
         else d=first?`${p0} H${xm} V${y2} H${x2}`:`${p0} H${xg} V${yt} H${xm} V${y2} H${x2}`;
         sv.setAttribute("viewBox",`0 0 ${wr.width} ${wr.height}`);sv.style.width=wr.width+"px";sv.style.height=wr.height+"px";
         sv.innerHTML=`<defs><mask id="lblm-${sc.id}"><path d="${d}" fill="none" stroke="#fff" stroke-width="4" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" class="lblmk"/></mask></defs><path d="${d}" fill="none" stroke="#a8694c" stroke-width="1.3" stroke-dasharray="4 4" mask="url(#lblm-${sc.id})"/><circle cx="${x2}" cy="${y2}" r="3" fill="#a8694c"/>`;
