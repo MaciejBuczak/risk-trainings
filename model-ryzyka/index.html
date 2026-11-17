@@ -4140,10 +4140,18 @@ Object.entries(RT).forEach(([k,r])=>BI["q_"+k]={id:"q_"+k,n:r.n});
         const wr=w.getBoundingClientRect(),ir=it.getBoundingClientRect(),pr=pn.getBoundingClientRect(),bd=sc.querySelector(".lbbody").getBoundingClientRect(),hd=pn.querySelector("h3").getBoundingClientRect();
         const X=v=>Math.round(v-wr.left),Y=v=>Math.round(v-wr.top),x0=X(ir.left),y0=Y(ir.top+ir.height/2),x2=X(pr.right),y2=Y(hd.top+hd.height/2),xm=Math.round((x2+X(bd.left))/2);
         const blk=it.closest(".lbc,.lbr,.lbqg,.icr"),br=blk?blk.getBoundingClientRect():bd,first=br.left-bd.left<6,inner=ir.left-br.left>24,yt=Y(bd.top)-5,xg=X(br.left)-5;let d,p0=`M${x0},${y0}`;
-        if(inner&&sc.id==="ds-lb-bl"&&blk){const sib=[...blk.querySelectorAll(".lbi")].filter(x=>x!==it&&x.offsetParent).map(x=>x.getBoundingClientRect()),last=!sib.some(r=>r.top>ir.bottom-2),right=!sib.some(r=>r.left>ir.right-2&&r.top<ir.bottom&&r.bottom>ir.top),xc=X(ir.left+ir.width/2),ym=Y(ir.top+ir.height/2);
-          if(last){d=`M${xc},${Y(ir.bottom)} V${Y(br.bottom)+4} H${xm} V${y2} H${x2}`}
-          else if(right){const up=(ir.top+ir.height/2)-br.top<br.bottom-(ir.top+ir.height/2),yv=up?Y(bd.top)-4:Y(bd.bottom)+4;d=`M${X(ir.right)},${ym} H${X(br.right)+4} V${yv} H${xm} V${y2} H${x2}`}
-          else{d=`M${xc},${Y(ir.top)} V${Y(br.top)-4} H${xm} V${y2} H${x2}`}}
+        if(sc.id==="ds-lb-bl"&&blk){const F=c=>{const e=sc.querySelector(".lbc-"+c);return e?e.getBoundingClientRect():null},A=F("A"),P=F("P"),R=F("R"),K=F("K"),fc=(blk.className.match(/lbc-([A-Z])/)||[])[1];
+          const sib=[...blk.querySelectorAll(".lbi")].filter(x=>x!==it&&x.offsetParent).map(x=>x.getBoundingClientRect()),ov=r=>r.top<ir.bottom-2&&r.bottom>ir.top+2;
+          const topR=!sib.some(r=>r.bottom<ir.top+2),lastR=!sib.some(r=>r.top>ir.bottom-2),leftC=!sib.some(r=>ov(r)&&r.right<ir.left+2),rightC=!sib.some(r=>ov(r)&&r.left>ir.right-2);
+          const yT=Y(bd.top)-4,yB=Y(bd.bottom)+4,yM=A&&P?Y((A.bottom+P.top)/2):null,g1=A&&R?X((A.right+R.left)/2):null,g2=R&&K?X((R.right+K.left)/2):null,gR=X(bd.right)+4;
+          const xc=X(ir.left+ir.width/2),yc=Y(ir.top+ir.height/2),C=[];const fin=(pts)=>{pts.push([xm,y2],[x2,y2]);let L=0;for(let q=1;q<pts.length;q++)L+=Math.abs(pts[q][0]-pts[q-1][0])+Math.abs(pts[q][1]-pts[q-1][1]);C.push([L,pts])};
+          const viaGap=(sx,sy,xv)=>{const H=[yT,yB];if(yM!=null&&xv===g1)H.push(yM);H.forEach(yh=>fin([[sx,sy],[xv,sy],[xv,yh],[xm,yh]]))};
+          if(topR){const yh=fc==="P"&&yM!=null?yM:yT;fin([[xc,Y(ir.top)],[xc,yh],[xm,yh]])}
+          if(lastR){const yh=fc==="A"&&yM!=null?yM:yB;fin([[xc,Y(ir.bottom)],[xc,yh],[xm,yh]])}
+          if(leftC){if(fc==="A"||fc==="P")fin([[X(ir.left),yc],[xm,yc]]);else viaGap(X(ir.left),yc,fc==="R"?g1:g2)}
+          if(rightC){viaGap(X(ir.right),yc,fc==="A"||fc==="P"?g1:fc==="R"?g2:gR)}
+          if(!C.length)fin([[xc,Y(ir.top)],[xc,yT],[xm,yT]]);
+          C.sort((a,b)=>a[0]-b[0]);const pts=C[0][1].filter((p,q,a)=>q===0||p[0]!==a[q-1][0]||p[1]!==a[q-1][1]);d="M"+pts.map(p=>p[0]+","+p[1]).join(" L")}
         else if(inner){const xc=X(ir.left+ir.width/2),yu=Y(br.top)-7;d=`M${xc},${Y(ir.top)} V${yu} H${xm} V${y2} H${x2}`}
         else d=first?`${p0} H${xm} V${y2} H${x2}`:`${p0} H${xg} V${yt} H${xm} V${y2} H${x2}`;
         sv.setAttribute("viewBox",`0 0 ${wr.width} ${wr.height}`);sv.style.width=wr.width+"px";sv.style.height=wr.height+"px";
