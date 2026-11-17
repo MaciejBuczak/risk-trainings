@@ -28,7 +28,7 @@ h1{font:400 clamp(32px,4.4vw,48px)/1.05 "Archivo Black",sans-serif;margin:10px 0
 .rows{position:relative;display:flex;flex-direction:column;gap:70px}
 .row{display:flex;flex-wrap:wrap;justify-content:center;gap:56px 34px;position:relative;z-index:2}
 .row-k{position:absolute;left:0;top:-30px;font:600 10px Poppins;letter-spacing:.16em;text-transform:uppercase;color:#a9a091}
-.n{width:232px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:box-shadow .2s,opacity .2s,border-color .2s;cursor:default}
+.n.pin{outline:2px solid #ad6b4e;outline-offset:2px}.n{cursor:pointer!important;width:232px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:box-shadow .2s,opacity .2s,border-color .2s;cursor:default}
 .n.root{border-color:#ad6b4e;box-shadow:0 0 0 2px rgba(173,107,78,.25)}
 .n img{display:block;width:100%;aspect-ratio:1536/730;object-fit:cover;object-position:top;border-bottom:1px solid var(--line);cursor:zoom-in;background:#eee}
 .n-b{padding:8px 10px 9px}
@@ -58,7 +58,7 @@ svg.ed path.up{stroke-dasharray:5 4}
 <div class="k">Mapa strony</div>
 <h1>Mapa połączeń</h1>
 <p class="lead">Wszystkie widoki stron Model ryzyka i Ryzyko modelu – z miniaturą i przyciskami, które prowadzą dalej. Rzędy idą od strony startowej w głąb: im niżej, tym więcej kliknięć od startu.</p>
-<div class="lg"><span class="l1"><i></i>zakładka</span><span class="l2"><i></i>przycisk prowadzi do widoku</span><span class="l3"><i></i>powrót wyżej (linia przerywana)</span><span class="tip">Najedź na widok, by zobaczyć jego połączenia. Kliknij miniaturę, by ją powiększyć.</span></div>
+<div class="lg"><span class="l1"><i></i>zakładka</span><span class="l2"><i></i>przycisk prowadzi do widoku</span><span class="l3"><i></i>powrót wyżej (linia przerywana)</span><span class="tip">Najedź na widok, by zobaczyć jego połączenia, albo kliknij go, by je zaznaczyć na stałe (drugie kliknięcie lub Esc – odznacza). Kliknij miniaturę, by ją powiększyć.</span></div>
 <div id="app"></div>
 </div>
 <div class="box" id="box"><figure><img alt=""><figcaption></figcaption></figure></div>
@@ -94,8 +94,14 @@ const draw=()=>{const rb=app.getBoundingClientRect();svg.setAttribute("viewBox",
     h+=`<path class="${cls}" data-f="${e.from}" data-t="${e.to}" d="${d}" marker-end="url(#ah-${tab?"t":"g"})"/>`});
   svg.innerHTML=`<defs><marker id="ah-g" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#bf8165"/></marker><marker id="ah-t" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0d0d0d"/></marker></defs>`+h};
 draw();addEventListener("resize",draw);document.fonts&&document.fonts.ready.then(draw);app.querySelectorAll("img").forEach(im=>im.addEventListener("load",draw));setTimeout(draw,500);
-app.addEventListener("mouseover",ev=>{const n=ev.target.closest(".n");if(!n)return;const id=n.dataset.id;app.classList.add("hv");app.querySelectorAll(".n").forEach(x=>x.classList.remove("on","me"));n.classList.add("me");svg.querySelectorAll("path[data-f]").forEach(p=>{const on=p.dataset.f===id||p.dataset.t===id;p.classList.toggle("on",on);if(on){const o=app.querySelector(`[data-id="${p.dataset.f===id?p.dataset.t:p.dataset.f}"]`);o&&o.classList.add("on")}})});
-app.addEventListener("mouseleave",()=>{app.classList.remove("hv");svg.querySelectorAll("path.on").forEach(p=>p.classList.remove("on"))});
+let PIN=null;
+const hl=id=>{app.querySelectorAll(".n").forEach(x=>x.classList.remove("on","me","pin"));svg.querySelectorAll("path.on").forEach(p=>p.classList.remove("on"));if(!id){app.classList.remove("hv");return}
+  const n=app.querySelector(`[data-id="${id}"]`);app.classList.add("hv");n.classList.add("me");if(PIN===id)n.classList.add("pin");
+  svg.querySelectorAll("path[data-f]").forEach(p=>{const on=p.dataset.f===id||p.dataset.t===id;p.classList.toggle("on",on);if(on){const o=app.querySelector(`[data-id="${p.dataset.f===id?p.dataset.t:p.dataset.f}"]`);o&&o.classList.add("on")}})};
+app.addEventListener("mouseover",ev=>{if(PIN)return;const n=ev.target.closest(".n");if(n)hl(n.dataset.id)});
+app.addEventListener("mouseleave",()=>{if(!PIN)hl(null)});
+app.addEventListener("click",ev=>{const n=ev.target.closest(".n");if(ev.target.closest(".n img"))return;if(!n){PIN=null;hl(null);return}const id=n.dataset.id;PIN=PIN===id?null:id;hl(PIN||id)});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&PIN&&!box.classList.contains("on")){PIN=null;hl(null)}});
 const box=document.getElementById("box");
 app.addEventListener("click",e=>{const im=e.target.closest(".n img");if(!im)return;const n=im.closest(".n");box.querySelector("img").src=im.src;box.querySelector("figcaption").textContent=n.querySelector(".n-t").textContent;box.classList.add("on")});
 box.addEventListener("click",()=>box.classList.remove("on"));addEventListener("keydown",e=>{if(e.key==="Escape")box.classList.remove("on")});
