@@ -2810,14 +2810,14 @@ svg.hov .ag-seg.on{opacity:1}
 <main>
 <section class="orm"><div class="wrap">
   <div class="orm-l"><span class="kick">Składniki oceny modelu</span><h1>Ocena ryzyka<br><em>modelu</em></h1>
-    <div class="orm-go"><span>Zajrzyj do środka oceny</span><a class="orm-pill" href="#" data-lb="kj">Komponent jakościowy <i>→</i></a><span class="orm-go2"><a class="orm-pill" href="#" data-lb="ki">Komponent ilościowy <i>→</i></a></span></div>
+    <div class="orm-go"><span>Zajrzyj do środka oceny</span><a class="orm-pill" href="#" data-lb="rw">Proces walidacji <i>→</i></a><span class="orm-go2"><a class="orm-pill" href="#" data-lb="kj">Komponent jakościowy <i>→</i></a><a class="orm-pill" href="#" data-lb="ki">Komponent ilościowy <i>→</i></a></span></div>
     <div class="orm-frs">
       <div class="orm-fr"><b>Proces walidacji</b><p>Od planu do zaleceń.</p><a class="orm-pill" href="#" data-lb="rw">Zobacz <i>→</i></a></div>
       <div class="orm-fr"><b>Zarządzanie ryzykiem</b><p>Cały cykl życia modelu.</p><a class="orm-pill" href="#" data-lb="zr">Zobacz <i>→</i></a></div>
       <div class="orm-fr"><b>Właściciel modelu</b><p>Monitoring i jakość danych.</p><a class="orm-pill" href="#" data-lb="dq">Zobacz <i>→</i></a></div>
     </div>
   </div>
-  <div class="orm-r"><nav class="orm-tabs" aria-label="Ocena ryzyka modelu"><a class="on" href="#" data-lb="">Ryzyko modelu</a><a href="#" data-lb="kj">Komponent jakościowy</a><a href="#" data-lb="ki">Komponent ilościowy</a><a href="#" data-lb="rw">Proces walidacji</a></nav><p class="orm-d">Ocena modelu składa się z trzech ocen: jakościowej, ilościowej i jakości danych – każda w skali od 1 do 5. Ocena końcowa to ich średnia ważona, porównana z progiem akceptacji 3,0.</p></div>
+  <div class="orm-r"><nav class="orm-tabs" aria-label="Ocena ryzyka modelu"><a class="on" href="#" data-lb="">Ryzyko modelu</a><a href="#" data-lb="rw">Proces walidacji</a><a href="#" data-lb="kj">Komponent jakościowy</a><a href="#" data-lb="ki">Komponent ilościowy</a></nav><p class="orm-d">Ocena modelu składa się z trzech ocen: jakościowej, ilościowej i jakości danych – każda w skali od 1 do 5. Ocena końcowa to ich średnia ważona, porównana z progiem akceptacji 3,0.</p></div>
   <div class="orm-stage"><svg id="ag" viewBox="78 -8 844 408" preserveAspectRatio="xMidYMid meet" aria-label="Mapa ryzyka modelu"></svg></div>
 </div></section>
 
@@ -4241,7 +4241,7 @@ tabs.addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b)se
   /* prawa: skala, próg, decyzja */
   const rx0=fx+Math.round(fw*.6);h+=`<line x1="${rx0-14}" x2="${rx0-14}" y1="${fy+40}" y2="${fy+fh-12}" stroke="#ece3d6"/>`;
   const bx=rx0+12,by=fy+68;for(let k=1;k<=5;k++)h+=`<rect x="${bx+(k-1)*30}" y="${by-8}" width="28" height="9" rx="3" fill="${QC[k]}"/><text x="${bx+(k-1)*30+14}" y="${by+12}" text-anchor="middle" class="ag-lv">${k}</text>`;
-  const tx=bx+2*30-1;h+=`<line x1="${tx}" x2="${tx}" y1="${by-13}" y2="${by+3}" stroke="#0d0d0d" stroke-width="1.2"/><path d="M${(bx+(F-1)*30+14).toFixed(1)},${by-11} l-4,-6 h8z" fill="#0d0d0d"/>`;
+  const tx=bx+3*30-1;h+=`<line x1="${tx}" x2="${tx}" y1="${by-13}" y2="${by+3}" stroke="#0d0d0d" stroke-width="1.2"/><path d="M${(bx+(F-1)*30+14).toFixed(1)},${by-11} l-4,-6 h8z" fill="#0d0d0d"/>`;
   const ok=F>=3;h+=`<text x="${bx+162}" y="${fy+60}" class="ag-s">próg akceptacji 3,0</text><text x="${bx+162}" y="${fy+78}" class="ag-v" style="fill:${ok?"#5e7a52":"#9a3b25"}">${ok?"w apetycie na ryzyko":"poza apetytem na ryzyko"}</text>`;
   sv.innerHTML=h;
   const al=()=>{const d=document.querySelector(".orm-d"),c=sv.querySelector("rect[filter],g[filter] rect");if(!d||!c||innerWidth<=980){d&&(d.style.cssText="");return}sv.style.transform="";d.style.marginLeft="0";d.style.maxWidth="none";const cr=c.getBoundingClientRect(),dr=d.getBoundingClientRect();d.style.marginLeft=Math.round(cr.left-dr.left)+"px";const tb=document.querySelector(".orm-tabs").getBoundingClientRect();d.style.width=Math.round(tb.right-cr.left)+"px";const zb=[...document.querySelectorAll(".orm-fr .orm-pill")].pop(),dy=zb?Math.round(zb.getBoundingClientRect().bottom-cr.bottom):0;sv.style.transform=`translate(${Math.round((cr.left+tb.right)/2-(cr.left+cr.width/2))}px,${dy}px)`};
