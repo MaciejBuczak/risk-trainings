@@ -80,6 +80,7 @@
 svg.fl{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
 svg.fl path{fill:none;stroke-width:1.8;stroke-linecap:round}svg.fl path.f{stroke:#a8694c}svg.fl path.r{stroke:#4f7390}svg.fl path.x{stroke:#8a8173;stroke-dasharray:4 4}
 svg.fl.all path{opacity:.3}
+.bank.cap:not(.hv) .gr{opacity:.28;filter:grayscale(1)}.bank.cap .bl.gr{pointer-events:none}
 .bank.hv .bl,.bank.hv .ks,.bank.hv .q{opacity:.3}.bank.hv .bl.on,.bank.hv .ks.on,.bank.hv .q.on{opacity:1}
 .bank.hv .bl.cur{box-shadow:0 0 0 2px var(--ink)}
 .mkf{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.mkf>div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}.mkf b{display:block;font:600 10.5px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a8694c;margin-bottom:6px}.mkf p{margin:0;font-size:13px;line-height:1.55;color:#3e3730}
@@ -100,7 +101,7 @@ svg.fl.all path{opacity:.3}
 <a class="crumb" href="../#ks">← Bank · Kapitał krok po kroku</a>
 <h1>Mapa kapitału <em>na bilansie</em></h1>
 <p class="lead">Ten sam bank co na Mapie banku, oglądany przez kapitał. Pozycje z kwotą na ciemniejszym tle biorą udział w liczeniu funduszy własnych albo RWA. Kliknij taką pozycję, aby zobaczyć szczegóły, a najedź na nią, aby zobaczyć jej drogę do współczynników.</p>
-<div class="tb"><span class="lg"><i style="background:#bf8165"></i>fundusze własne – co bank ma</span><span class="lg"><i style="background:#4f7390"></i>RWA – miara ryzyka</span><span class="lg"><i style="background:#8a8173"></i>wpływ pośredni</span><em>Kwoty w mld zł, bank przykładowy.</em><span class="sp"></span><button type="button" id="b-all">Pokaż powiązania</button><button type="button" id="b-exp">Rozwiń wszystko</button></div>
+<div class="tb"><span class="lg"><i style="background:#bf8165"></i>fundusze własne – co bank ma</span><span class="lg"><i style="background:#4f7390"></i>RWA – miara ryzyka</span><span class="lg"><i style="background:#8a8173"></i>wpływ pośredni</span><em>Kwoty w mld zł, bank przykładowy.</em><span class="sp"></span><button type="button" id="b-map">Pokaż mapę kapitałów</button><button type="button" id="b-all">Pokaż powiązania</button><button type="button" id="b-exp">Rozwiń wszystko</button></div>
 <div class="bankw" id="bankw"><svg class="fl" id="fl"></svg><div class="bank" id="bank"></div></div>
 <div class="mkf"><div><b>Fundusze własne to część pasywów</b><p>Kapitał własny, obligacje AT1 i dług podporządkowany. Depozyty i zwykłe emisje kapitałem nie są – bank musi je oddać, więc nie pokryją strat.</p></div><div><b>Jakość kapitału</b><p>CET1 pokrywa straty od razu i bez terminu. AT1 – gdy CET1 spadnie poniżej progu. Tier 2 – dopiero przy upadłości. Dlatego część wymogów i wszystkie bufory muszą być w CET1.</p></div><div><b>Wynik łączy jedno z drugim</b><p>Odpisy ECL obniżają zysk, a zysk zatrzymany zasila CET1. Przychody tworzą wskaźnik biznesowy, a ten – RWA operacyjne. Aktywa nie są kapitałem, ale wyznaczają RWA.</p></div></div>
 </main>
@@ -165,8 +166,8 @@ const cmp=`<div class="cmp"><div class="cmp-h"><span>Porównanie</span><b>Ma ≥
  q("q_icaap","ICAAP","163%","fundusze 7,60 ≥ kapitał wewnętrzny 4,65",76,46.5)+q("q_wym","Wymóg łączny","5,40","RWA 40,0 × 13,5% (8% + P2R 1,5% + bufory 4%)",null,null,"w")+q("q_nad","Nadwyżka","2,20","fundusze 7,60 − wymóg 5,40",null,null,"n")+`</div></div>`;
 const bank=document.getElementById("bank");
 bank.innerHTML=col("c1","Bilans","Aktywa",A.map(b=>blk(b)).join("")+`<div class="cs"><span>Suma aktywów</span><b>66,80</b></div><p class="cn">Pozabilans nie wchodzi do sumy.</p>`)+
- col("c2","Bilans","Pasywa",PS.map(b=>blk(b)).join("")+`<div class="cs"><span>Suma pasywów</span><b>66,80</b></div><p class="cn">Jasne pozycje to cudze pieniądze – bank musi je oddać, więc nie pokryją strat.</p>`)+
- col("c3","Rachunek zysków i strat","Wynik",W.map(b=>blk(b)).join(""))+col("c4","Kapitał i wymogi (CRR)","Kapitał",kcol)+cmp;
+ col("c3","Rachunek zysków i strat","Wynik",W.map(b=>blk(b)).join(""))+
+ col("c2","Bilans","Pasywa",PS.map(b=>blk(b)).join("")+`<div class="cs"><span>Suma pasywów</span><b>66,80</b></div><p class="cn">Jasne pozycje to cudze pieniądze – bank musi je oddać, więc nie pokryją strat.</p>`)+col("c4","Kapitał i wymogi (CRR)","Kapitał",kcol)+cmp;
 /* krawędzie rysowane: [od, do, typ] */
 const E=[["r_zz","p_kw_z","f"],["r_oci","p_kw_o","f"],["p_kapital","k_cet1","f"],["p_at1","k_at1","f"],["p_t2","k_t2","f"],
  ["a_ecl","r_ecl","x"],["a_papiery","r_oci","x"],["a_ecl","k_cet1","x"],
@@ -181,9 +182,10 @@ const LG=[["p_kw_a","p_kapital"],["p_kw_g","p_kapital"],["p_kw_r","p_kapital"],[
 const G=E.map(e=>[e[0],e[1]]).concat(LG);
 const wrap=document.getElementById("bankw"),svg=document.getElementById("fl"),bAll=document.getElementById("b-all"),bExp=document.getElementById("b-exp");
 const vis=id=>{const e=document.getElementById(id);if(!e)return null;if(e.matches(".dr li")){const b=e.closest(".bl");return b.classList.contains("open")?e:b}return e};
-let cur=null,all=false;
+let cur=null,all=false,cap=false,was=[];
+const CAP=new Set(["a_ecl","r_ecl","r_netto","r_zz","r_oci","p_emisje","p_at1","p_t2","p_kapital","p_kw_a","p_kw_g","p_kw_r","p_kw_o","p_kw_z","k_cet1","k_at1","k_t2","k_t1","k_fw","k_rwa","k_wym","q_cet1","q_t1","q_tot","q_icaap","q_wym","q_nad"]);
 const draw=()=>{const wb=wrap.getBoundingClientRect();svg.setAttribute("viewBox",`0 0 ${wb.width} ${wb.height}`);const N=cur?path(cur):null;let h="";
- E.forEach(([f,t,c])=>{if(N&&!(N.has(f)&&N.has(t)))return;if(!N&&!all)return;const a=vis(f),b=vis(t);if(!a||!b)return;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();let d;
+ E.forEach(([f,t,c])=>{if(N&&!(N.has(f)&&N.has(t)))return;if(!N&&!all&&!(cap&&CAP.has(f)&&CAP.has(t)))return;const a=vis(f),b=vis(t);if(!a||!b)return;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();let d;
   const ay=A.top+A.height/2-wb.top,by=B.top+B.height/2-wb.top;
   if(b.classList.contains("q")){const x1=A.right-wb.left,xg=wb.width+14,tx=B.left+B.width/2-wb.left,ty=B.top-wb.top,yh=ty-9,r=8;d=`M${x1},${ay} H${xg-r} Q${xg},${ay} ${xg},${ay+r} V${yh-r} Q${xg},${yh} ${xg-r},${yh} H${tx+r} Q${tx},${yh} ${tx},${yh+r} V${ty}`}
   else if(B.left>A.right-4){const x1=A.right-wb.left,x2=B.left-wb.left,m=Math.max(24,(x2-x1)/2);d=`M${x1},${ay} C${x1+m},${ay} ${x2-m},${by} ${x2},${by}`}
@@ -204,6 +206,11 @@ bank.addEventListener("click",e=>{const b=e.target.closest(".bl.inv");if(!b)retu
 bank.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches(".bl.inv")){e.preventDefault();tog(e.target);redraw();syncExp()}});
 const syncExp=()=>{const L=[...bank.querySelectorAll(".bl.inv")],o=L.every(b=>b.classList.contains("open"));bExp.textContent=o?"Zwiń wszystko":"Rozwiń wszystko";bExp.classList.toggle("on",o)};
 bExp.addEventListener("click",()=>{const L=[...bank.querySelectorAll(".bl.inv")],o=!L.every(b=>b.classList.contains("open"));L.forEach(b=>tog(b,o));redraw();syncExp()});
+const bMap=document.getElementById("b-map");
+bMap.addEventListener("click",()=>{cap=!cap;bMap.classList.toggle("on",cap);bMap.textContent=cap?"Pokaż cały bank":"Pokaż mapę kapitałów";bank.classList.toggle("cap",cap);
+ const L=[...bank.querySelectorAll(".bl,.ks,.q")];L.forEach(x=>x.classList.toggle("gr",cap&&!CAP.has(x.id)));
+ const I=[...bank.querySelectorAll(".bl.inv")];if(cap){was=I.filter(b=>b.classList.contains("open"));I.forEach(b=>tog(b,CAP.has(b.id)&&!/^k_(at1|t2)$/.test(b.id)))}else I.forEach(b=>tog(b,was.includes(b)));
+ redraw();syncExp()});
 bAll.addEventListener("click",()=>{all=!all;bAll.classList.toggle("on",all);draw()});
 addEventListener("resize",draw);document.fonts&&document.fonts.ready.then(draw);setTimeout(draw,300);
 })();
