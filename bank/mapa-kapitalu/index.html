@@ -13,49 +13,79 @@
 .mkp{max-width:1380px;margin:0 auto;padding:28px 24px 60px}
 .mkp .crumb{font-size:13px;color:var(--ink2);text-decoration:none}
 .mkp h1{font-size:clamp(32px,3.6vw,48px);margin:12px 0 8px;letter-spacing:-.02em}.mkp h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d)}
-.mkp .lead{max-width:820px;font-size:16px;font-weight:300;color:var(--ink2);margin:0 0 18px}
-.mkl{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:#5c564d;margin-bottom:22px}.mkl i{display:inline-block;width:26px;border-top:2px solid;vertical-align:middle;margin-right:6px}.mkl .a i{border-color:#a8694c}.mkl .b i{border-color:#4f7390}.mkl .c i{border-color:#8a8173;border-top-style:dashed}
-.mkw{position:relative}
-.mkg{display:grid;grid-template-columns:1fr 1fr 1fr 1.05fr 1fr;gap:0 44px;position:relative;z-index:2}
-.mkh{font:600 11px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#8a8173;padding-bottom:8px;border-bottom:1px solid #cdbfa9;margin-bottom:14px}
-.mkh b{display:block;font:400 22px var(--display);letter-spacing:0;text-transform:none;color:#0d0d0d;margin-bottom:2px}
-.mkband{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin:22px 0 12px}.mkband span{font:600 11px var(--body);letter-spacing:.16em;text-transform:uppercase;padding:4px 12px;border-radius:999px;color:#fff}.mkband i{flex:1;border-top:1px dashed #cdbfa9}
-.mkband.a span{background:#a8694c}.mkband.b span{background:#4f7390}
-.mkc{display:flex;flex-direction:column;gap:12px}
-.mk{background:#fffdf9;border:1px solid #e0d6c6;border-radius:12px;padding:9px 12px;position:relative}
-.mk-t{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.mk b{font-size:13px;color:#0d0d0d;line-height:1.25}.mk strong{font-size:14px;color:#0d0d0d;white-space:nowrap}
-.mk small{display:block;font-size:11px;line-height:1.35;color:#6b645a;margin-top:2px}
-.mk.as{background:#f6ecd4}.mk.pa{background:#ebe7da}.mk.wy{background:#f9e3d3}.mk.ka{background:#efe3d6}
-.mk.no{opacity:.55;border-style:dashed;background:transparent}
-.mk.neg strong{color:#8a4f37}
-.mk.c1{background:#56514a;border-color:#56514a}.mk.c1 b,.mk.c1 strong{color:#fff}.mk.c1 small{color:#e6dfd5}
-.mk.c2{background:#8a8173;border-color:#8a8173}.mk.c2 b,.mk.c2 strong{color:#fff}.mk.c2 small{color:#efe9e0}
-.mk.c3{background:#d9cdb9}
-.mk.sum{background:#efe1d4;border-color:#d9b9a6}.mk.sum b,.mk.sum strong{color:#8a4f37}
-.mk.rw{background:#e8eef2;border-color:#c9d6df}.mk.rw strong{color:#33536b}
-.mk.rws{background:#d5e0e8;border-color:#9fb4c4}.mk.rws b,.mk.rws strong{color:#2b4a62}
-.mk.ok{background:#eef2e8;border-color:#c7d3b8}.mk.ok strong{color:#4e6b3c}
-.mkq{display:flex;align-items:center;gap:6px;font:600 9px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#8a8173;margin:-4px 0 -4px}.mkq i{flex:1;height:6px;border-radius:3px;background:linear-gradient(90deg,#56514a,#b29e84,#e6d8c3)}
-.mkn{font-size:11px;line-height:1.45;color:#5c564d;margin:0}
-.mkx{font-style:normal;text-align:center;color:#a8694c;font:600 14px var(--body);margin:-6px 0}
-svg.mke{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}
-svg.mke path{fill:none;stroke-width:1.4;opacity:.75}svg.mke path.a{stroke:#a8694c}svg.mke path.b{stroke:#4f7390}svg.mke path.c{stroke:#8a8173;stroke-dasharray:4 4}
-.mkw.hv svg.mke path{opacity:.08}.mkw.hv svg.mke path.on{opacity:1;stroke-width:2.2}.mkw.hv .mk{opacity:.35}.mkw.hv .mk.on{opacity:1}
+.mkp .lead{max-width:860px;font-size:16px;font-weight:300;color:var(--ink2);margin:0 0 18px}
+.tb{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:0 0 22px;font-size:12px;color:var(--muted)}
+.tb .lg{display:flex;align-items:center;gap:6px}.tb .lg i{width:9px;height:9px;border-radius:2px}
+.tb .sp{flex:1}
+.tb button{font:500 12px var(--body);border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:999px;padding:6px 14px;cursor:pointer}.tb button:hover{border-color:#a99d8b}.tb button.on{background:#ad6b4e;border-color:#ad6b4e;color:#fff}
+.tb em{font-family:var(--serif);color:#8a8173}
+.bankw{position:relative}
+.bank{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 30px;position:relative}
+.col{position:relative;border-radius:24px;padding:18px 14px 14px}
+.col+.col::before{content:"→";position:absolute;left:-24px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--tan)}
+.c1{background:#f3e4c4}.c2{background:#e0dccb}.c3{background:#f9d5bd}.c4{background:#e7d4c4}
+.col h3{font-family:var(--body);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin:0 0 10px;padding:0 4px}
+.col h3 b{display:block;font-family:var(--display);font-weight:400;font-size:21px;letter-spacing:0;text-transform:none;color:var(--ink);margin-top:3px}
+.cb{display:flex;flex-direction:column;gap:6px}
+.grh{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);opacity:.75;margin:6px 4px -1px}
+.bl{position:relative;z-index:2;display:block;width:100%;text-align:left;color:var(--ink);background:#fffdf9;border:1px solid rgba(13,13,13,.08);border-radius:14px;padding:8px 11px;transition:opacity .25s,border-color .25s,box-shadow .25s,background .25s;outline:none}
+.bl .hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.bl b{display:block;font-size:13px;font-weight:600;line-height:1.3}
+.bl .hd+small{display:block;font-size:11px;color:var(--muted);line-height:1.35;margin-top:2px}
+.bl .v{font-style:normal;font-weight:600;font-size:13px;white-space:nowrap;display:flex;align-items:center;gap:6px;color:#5c564d}
+.bl.inv .v{color:var(--ink)}
+.bl .v i{width:7px;height:7px;border-radius:2px;flex:none}.bl .v i.f{background:#bf8165}.bl .v i.r{background:#4f7390}.bl .v i.x{background:#8a8173}
+.bl .cv{font-size:9px;color:var(--muted);transition:transform .25s;display:inline-block}.bl.open .cv{transform:rotate(180deg)}
+.bl.inv{background:#f3ebdf;border-color:rgba(13,13,13,.16);cursor:pointer}
+.bl.inv:hover,.bl.inv:focus-visible{border-color:#a99d8b}
+.bl.dark,.bl.dark.inv{background:var(--ink);border-color:var(--ink);color:var(--paper)}.bl.dark small{color:#b9b0a2}.bl.dark .v{color:#fff}.bl.dark .cv{color:#b9b0a2}
+.bl.sum{background:transparent;border-color:transparent;border-top:1.5px solid rgba(13,13,13,.55);border-radius:0}
+.bl.sum.inv{background:rgba(255,253,249,.45);border-radius:0 0 12px 12px}
+.dt{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.dt>div{overflow:hidden}
+.bl.open .dt{grid-template-rows:1fr}
+.dt>div>:first-child{margin-top:8px}
+.dt p{font-size:11px;line-height:1.45;color:var(--muted);margin:6px 0 0}.bl.dark .dt p{color:#cfc6b8}
+.dr{list-style:none;margin:0;padding:8px 0 0;border-top:1px dashed rgba(13,13,13,.18);display:flex;flex-direction:column;gap:3px}
+.bl.dark .dr{border-top-color:rgba(255,255,255,.25)}
+.dr li{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#fffdf9;border-radius:7px;padding:4px 7px;border-left:3px solid #ddd3c4;margin:0}
+.dr li::before{display:none!important;content:none!important}
+.dr li span{display:flex;flex-direction:column;min-width:0}.dr li b{font-size:11px;line-height:1.25}.dr li small{display:block;font-size:9.5px;line-height:1.3;color:var(--muted)}
+.dr li strong{font-size:12px;white-space:nowrap}
+.dr li.f{border-left-color:#bf8165}.dr li.r{border-left-color:#4f7390}.dr li.off{opacity:.62}
+.dr li.s{background:transparent;border-left-color:transparent;border-radius:0;border-top:1px solid rgba(13,13,13,.4);padding-top:5px}
+.dr li.hl{background:#f9e3d3}
+.bl.dark .dr li{background:rgba(255,255,255,.09);color:#fff}.bl.dark .dr li small{color:#b9b0a2}.bl.dark .dr li.hl{background:rgba(191,129,101,.35)}.bl.dark .dr li.s{background:transparent;border-top-color:rgba(255,255,255,.4)}
+.kp{border-radius:16px;padding:10px 8px 8px;display:flex;flex-direction:column;gap:6px}
+.kav{background:rgba(255,253,249,.55);border:1.5px solid rgba(13,13,13,.75)}.krq{background:rgba(255,253,249,.35);border:1.5px dashed var(--terra-d)}
+.kph{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;padding:0 4px 2px}.kph b{font-size:12.5px;font-weight:600}.kph small{font-size:11px;color:var(--muted)}
+.kg{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:start}.kg .bl{padding:7px 9px;min-width:0}.kg .bl b{font-size:12.5px}.kg .bl.open{grid-column:1/-1}.kg .bl .hd{gap:4px}.kg .bl .v{gap:4px;font-size:12.5px}.kg .bl .cv{font-size:8px}
+.kvs{display:flex;justify-content:center;margin:-2px 0}.kvs span{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--terra-d);border-radius:999px;padding:3px 10px}.kvs span::before{content:"↑";margin-right:5px}
+.kft{font-size:11px;color:var(--ink2);text-align:center;margin-top:4px;font-weight:500}
+.ks{position:relative;z-index:2;display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:600;margin:0 4px;padding:5px 4px 0;border-top:1.5px solid rgba(13,13,13,.55);transition:opacity .25s}.ks small{font-weight:400;color:var(--muted);font-size:11px}
+.krq .ks{color:#2b4a62;border-top-color:#4f7390}
+.cs{display:flex;justify-content:space-between;font:600 10.5px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);border-top:1.5px solid rgba(13,13,13,.55);margin:4px 4px 0;padding-top:6px}.cs b{font-size:13px;letter-spacing:0}
+.cn{font-size:11px;line-height:1.45;color:var(--muted);margin:2px 4px 0}
+.cmp{grid-column:1/-1;border-radius:24px;background:#ece4d6;padding:18px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;position:relative;margin-top:6px}
+.cmp::before{content:"↓";position:absolute;left:87%;top:-24px;transform:translateX(-50%);font-size:18px;color:var(--tan)}
+.cmp-h span{display:block;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+.cmp-h b{display:block;font-family:var(--display);font-weight:400;font-size:21px;line-height:1.15;margin:4px 0 8px}
+.cmp-h small{display:block;font-size:12px;color:var(--muted);line-height:1.45}
+.cmp-g{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.q{position:relative;z-index:2;background:#fffdf9;border:1px solid rgba(13,13,13,.08);border-radius:14px;padding:9px 11px;transition:opacity .25s}
+.q .hd{display:flex;justify-content:space-between;align-items:baseline;gap:6px}.q b{font-size:12.5px;font-weight:600}.q strong{font-size:15px;color:#4e6b3c}
+.q small{display:block;font-size:10.5px;color:var(--muted);line-height:1.35;margin-top:3px}
+.q.w strong{color:#2b4a62}.q.n{background:#eef2e8;border-color:#c7d3b8}
+.qb{position:relative;height:6px;border-radius:3px;background:#e6dfd3;margin:9px 0 2px}.qb i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:#6f7f58}.qb u{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--terra-d);border-radius:1px}
+svg.fl{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+svg.fl path{fill:none;stroke-width:1.8;stroke-linecap:round}svg.fl path.f{stroke:#a8694c}svg.fl path.r{stroke:#4f7390}svg.fl path.x{stroke:#8a8173;stroke-dasharray:4 4}
+svg.fl.all path{opacity:.3}
+.bank.hv .bl,.bank.hv .ks,.bank.hv .q{opacity:.3}.bank.hv .bl.on,.bank.hv .ks.on,.bank.hv .q.on{opacity:1}
+.bank.hv .bl.cur{box-shadow:0 0 0 2px var(--ink)}
 .mkf{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.mkf>div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}.mkf b{display:block;font:600 10.5px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a8694c;margin-bottom:6px}.mkf p{margin:0;font-size:13px;line-height:1.55;color:#3e3730}
-@media(max-width:1100px){.mkg{grid-template-columns:1fr 1fr}svg.mke{display:none}}
-.mkx{display:block}
-.mkoff3{padding-top:150px}.mkoff4{padding-top:226px}.mkc .mkoff3,.mkc.mkoff4{}
-.mkghost{border-style:dashed}
-.mku{list-style:none;margin:5px 0 0;padding:0;display:flex;flex-direction:column;gap:2px}.mku li{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#5c564d;border-top:1px dashed #e6d4b0;padding-top:2px}.mku li b{font-size:11.5px}
-.mkkw{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:3px}
-.mkkw li{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#f6f3ea;border-radius:7px;padding:4px 7px;border-left:3px solid #b29e84}
-.mkkw li span{display:flex;flex-direction:column}.mkkw li b{font-size:11px;line-height:1.2}.mkkw li small{margin:0;font-size:9.5px}.mkkw li strong{font-size:12px}
-.mkkw li.kw-wkł{border-left-color:#56514a}.mkkw li.kw-zysk{border-left-color:#bf8165}.mkkw li.kw-oci{border-left-color:#8a8173}
-.mkkw li:last-child{background:#f9e3d3}
-.mk.pw{background:#fff;border-color:#e3dacb}.mk.pa{background:#e6dfcf;border-color:#d6cbb6}
-.mkkw li.em-off{background:#fff;border:1px solid #ece4d6;border-left:3px solid #ddd3c4}.mkkw li.em-off b{color:#5c564d}
-.mkkw li.em-on{background:#e6dfcf;border-left-color:#8a8173}#p-em .mkkw li:last-child{background:#e6dfcf}
-.mkps{display:flex;justify-content:space-between;font:600 11px var(--body);letter-spacing:.12em;text-transform:uppercase;color:#8a8173;border-top:1px solid #cdbfa9;padding:6px 4px 0}.mkps b{font-size:13px;color:#0d0d0d;letter-spacing:0}
+@media(max-width:1180px){.cmp-g{grid-template-columns:repeat(3,minmax(0,1fr))}.kg{grid-template-columns:1fr}}
+@media(max-width:1000px){.bank{grid-template-columns:1fr 1fr}.col+.col::before,.cmp::before{display:none}svg.fl{display:none}.cmp{grid-template-columns:1fr}.mkf{grid-template-columns:1fr}}
+@media(max-width:560px){.bank{grid-template-columns:1fr}.cmp-g{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -69,26 +99,9 @@ svg.mke path{fill:none;stroke-width:1.4;opacity:.75}svg.mke path.a{stroke:#a8694
 <main class="mkp">
 <a class="crumb" href="../#ks">← Bank · Kapitał krok po kroku</a>
 <h1>Mapa kapitału <em>na bilansie</em></h1>
-<p class="lead">Skąd biorą się fundusze własne i skąd RWA. Kapitał pochodzi z pasywów i wyniku, RWA – z aktywów i działalności. Na końcu jedno dzielimy przez drugie i porównujemy z wymogami.</p>
-<div class="mkl"><span class="a"><i></i>fundusze własne – co bank ma</span><span class="b"><i></i>RWA – miara ryzyka</span><span class="c"><i></i>wpływ pośredni</span><span style="font-style:italic;font-family:var(--serif);color:#8a8173">Najedź na element, by zobaczyć jego drogę. Kwoty w mld zł, bank przykładowy.</span></div>
-<div class="mkw" id="mkw"><svg class="mke" id="mke"></svg>
-<div class="mkg">
- <div class="mkh"><b>Aktywa</b>bilans</div><div class="mkh"><b>Wynik</b>rachunek zysków i strat</div><div class="mkh"><b>Pasywa</b>bilans</div><div class="mkh"><b>Kapitał</b>CRR · fundusze własne i RWA</div><div class="mkh"><b>Porównanie</b>ma ≥ musi</div>
-
- <div class="mkband a"><span>Skąd są fundusze własne</span><i></i></div>
- <div class="mkc"><div class="mk as neg" id="a-ecl"><div class="mk-t"><b>Odpisy ECL (−)</b><strong>−3,80</strong></div><small>pomniejszają aktywa; koszt w wyniku</small></div><p class="mkn">Aktywa nie są kapitałem – ale odpisy na nich obniżają zysk, a więc i kapitał.</p></div>
- <div class="mkc"><div class="mk wy neg" id="w-ecl"><div class="mk-t"><b>Odpisy ECL – koszt ryzyka (−)</b><strong>−0,38</strong></div><small>zmiana stanu odpisów w roku</small></div><i class="mkx">↓</i><div class="mk wy" id="w-zn"><div class="mk-t"><b>Zysk netto</b><strong>0,95</strong></div><small>po kosztach, odpisach i podatku</small></div><i class="mkx">↓</i><div class="mk wy neg" id="w-dyw"><div class="mk-t"><b>Dywidenda (−)</b><strong>−0,45</strong></div><small>wypłata dla akcjonariuszy</small></div><i class="mkx">↓</i><div class="mk wy" id="w-zz"><div class="mk-t"><b>Zysk zatrzymany</b><strong>0,50</strong></div><small>zwiększa kapitał własny</small></div><div class="mk wy" id="w-oci"><div class="mk-t"><b>OCI</b><strong>−0,05</strong></div><small>wycena papierów przez kapitał</small></div></div>
- <div class="mkc"><div class="mk pa" id="p-kw"><div class="mk-t"><b>Kapitał własny</b><strong>7,40</strong></div><small>wkład akcjonariuszy + zyski zostawione w banku</small><ul class="mkkw"><li id="p-kw-a" class="kw-wkł"><span><b>kapitał zakładowy</b><small>akcje · wkład akcjonariuszy</small></span><strong>1,50</strong></li><li id="p-kw-g" class="kw-wkł"><span><b>kapitał zapasowy z emisji</b><small>nadwyżka ceny akcji ponad nominał (agio)</small></span><strong>1,20</strong></li><li id="p-kw-r" class="kw-zysk"><span><b>zyski zatrzymane z lat ubiegłych</b><small>kapitał zapasowy i rezerwowy</small></span><strong>4,25</strong></li><li id="p-kw-o" class="kw-oci"><span><b>skumulowane OCI</b><small>wycena papierów przez kapitał</small></span><strong>−0,05</strong></li><li id="p-kw-z" class="kw-zysk"><span><b>zysk bieżący zatrzymany</b><small>zysk netto po dywidendzie</small></span><strong>0,50</strong></li></ul></div><div class="mk pw" id="p-em"><div class="mk-t"><b>Emisje i dług podporządkowany</b><strong>4,68</strong></div><small>obligacje, listy zastawne</small><ul class="mkkw"><li class="em-off"><span><b>obligacje i listy zastawne</b><small>zwykły dług – trzeba spłacić</small></span><strong>3,40</strong></li><li id="p-at1" class="em-on"><span><b>obligacje wieczyste AT1</b><small>bez terminu wykupu, odpis lub konwersja</small></span><strong>0,38</strong></li><li id="p-t2" class="em-on"><span><b>dług podporządkowany</b><small>zapadalność ≥ 5 lat, spłacany po depozytach</small></span><strong>0,90</strong></li></ul></div><div class="mk pw no2" id="p-bk"><div class="mk-t"><b>Zobowiązania wobec banków</b><strong>4,00</strong></div><small>rynek międzybankowy, repo</small></div><div class="mk pw no2" id="p-dk"><div class="mk-t"><b>Depozyty klientów</b><strong>47,00</strong></div><small>bieżące, oszczędnościowe, terminowe</small></div><div class="mk pw no2" id="p-hd"><div class="mk-t"><b>Zobowiązania handlowe</b><strong>1,30</strong></div><small>pochodne o ujemnej wycenie</small></div><div class="mk pw no2" id="p-rz"><div class="mk-t"><b>Rezerwy</b><strong>0,62</strong></div><small>ECL od pozabilansu, sprawy sądowe</small></div><div class="mkps"><span>Suma pasywów</span><b>65,00</b></div><p class="mkn">Białe pozycje to cudze pieniądze – bank musi je oddać, więc nie są kapitałem. Ciemniejsze tło: pozycje, które wchodzą do funduszy własnych.</p></div>
- <div class="mkc"><div class="mk pa mkghost" id="k-kw"><div class="mk-t"><b>Kapitał własny</b><strong>7,40</strong></div><small>z pasywów</small></div><i class="mkx">↓</i><div class="mk ka neg" id="k-odl"><div class="mk-t"><b>Odliczenia (−)</b><strong>−1,08</strong></div><small>wartości niematerialne, aktywa podatkowe, niedobór rezerw IRB</small></div><i class="mkx">↓</i><div class="mkq">jakość<i></i></div><div class="mk c1" id="k-cet1"><div class="mk-t"><b>CET1</b><strong>6,32</strong></div><small>kapitał własny − odliczenia · najwyższa jakość</small></div><div class="mk c2" id="k-at1"><div class="mk-t"><b>AT1</b><strong>0,38</strong></div><small>+ obligacje wieczyste</small></div><div class="mk sum" id="k-t1"><div class="mk-t"><b>= Tier 1</b><strong>6,70</strong></div></div><div class="mk c3" id="k-t2"><div class="mk-t"><b>Tier 2</b><strong>0,90</strong></div><small>+ dług podporządkowany · najniższa jakość</small></div><div class="mk sum" id="k-fw"><div class="mk-t"><b>= Fundusze własne</b><strong>7,60</strong></div></div></div>
- <div class="mkc"><div class="mk ok" id="c-cet1"><div class="mk-t"><b>CET1 ÷ RWA</b><strong>15,8%</strong></div><small>6,32 ÷ 40,0 · wymóg 9,3%</small></div><div class="mk ok" id="c-t1"><div class="mk-t"><b>Tier 1 ÷ RWA</b><strong>16,8%</strong></div><small>6,70 ÷ 40,0 · wymóg 11,1%</small></div><div class="mk ok" id="c-tot"><div class="mk-t"><b>Fundusze ÷ RWA</b><strong>19,0%</strong></div><small>7,60 ÷ 40,0 · wymóg 13,5%</small></div><div class="mk ok" id="c-icaap"><div class="mk-t"><b>ICAAP</b><strong>163%</strong></div><small>fundusze własne 7,60 ≥ kapitał wewnętrzny 4,65</small></div></div>
-
- <div class="mkband b"><span>Skąd jest RWA</span><i></i></div>
- <div class="mkc"><div class="mk as" id="a-kr"><div class="mk-t"><b>Ekspozycje kredytowe</b><strong>70,6</strong></div><ul class="mku"><li><span>kredyty dla klientów (netto)</span><b>48,2</b></li><li><span>należności od banków i papiery</span><b>14,4</b></li><li><span>pozabilans: limity i gwarancje × CCF</span><b>8,0</b></li></ul></div><div class="mk as" id="a-hd"><div class="mk-t"><b>Aktywa handlowe</b><strong>1,9</strong></div><small>pochodne, papiery do obrotu; wraz z zobowiązaniami handlowymi (pochodne o ujemnej wycenie)</small></div></div>
- <div class="mkc"><div class="mk wy" id="w-bi"><div class="mk-t"><b>Przychody: odsetki, prowizje, handel</b></div><small>z trzech lat → wskaźnik biznesowy 4,0</small></div></div>
- <div class="mkc"></div>
- <div class="mkc"><div class="mk rw" id="r-kr"><div class="mk-t"><b>RWA kredytowe</b><strong>31,0</strong></div><small>ekspozycja × waga (SA) lub formuła IRB</small></div><div class="mk rw" id="r-cc"><div class="mk-t"><b>RWA kontrahenta i CVA</b><strong>1,0</strong></div><small>pochodne · SA-CCR, SA-CVA</small></div><div class="mk rw" id="r-ry"><div class="mk-t"><b>RWA rynkowe</b><strong>2,0</strong></div><small>portfel handlowy · FRTB</small></div><div class="mk rw" id="r-op"><div class="mk-t"><b>RWA operacyjne</b><strong>6,0</strong></div><small>BI 4,0 × 12% × 12,5</small></div><div class="mk rws" id="r-sum"><div class="mk-t"><b>= RWA</b><strong>40,0</strong></div><small>miara ryzyka – mianownik</small></div></div>
- <div class="mkc"><div class="mk rws" id="c-wym"><div class="mk-t"><b>Wymóg łączny</b><strong>5,40</strong></div><small>RWA 40,0 × 13,5% (8% + P2R 1,5% + bufory 4%)</small></div><div class="mk ok" id="c-nad"><div class="mk-t"><b>Nadwyżka</b><strong>2,20</strong></div><small>fundusze 7,60 − wymóg 5,40</small></div></div>
-</div></div>
+<p class="lead">Ten sam bank co na Mapie banku, oglądany przez kapitał. Pozycje z kwotą na ciemniejszym tle biorą udział w liczeniu funduszy własnych albo RWA. Kliknij taką pozycję, aby zobaczyć szczegóły, a najedź na nią, aby zobaczyć jej drogę do współczynników.</p>
+<div class="tb"><span class="lg"><i style="background:#bf8165"></i>fundusze własne – co bank ma</span><span class="lg"><i style="background:#4f7390"></i>RWA – miara ryzyka</span><span class="lg"><i style="background:#8a8173"></i>wpływ pośredni</span><em>Kwoty w mld zł, bank przykładowy.</em><span class="sp"></span><button type="button" id="b-all">Pokaż powiązania</button><button type="button" id="b-exp">Rozwiń wszystko</button></div>
+<div class="bankw" id="bankw"><svg class="fl" id="fl"></svg><div class="bank" id="bank"></div></div>
 <div class="mkf"><div><b>Fundusze własne to część pasywów</b><p>Kapitał własny, obligacje AT1 i dług podporządkowany. Depozyty i zwykłe emisje kapitałem nie są – bank musi je oddać, więc nie pokryją strat.</p></div><div><b>Jakość kapitału</b><p>CET1 pokrywa straty od razu i bez terminu. AT1 – gdy CET1 spadnie poniżej progu. Tier 2 – dopiero przy upadłości. Dlatego część wymogów i wszystkie bufory muszą być w CET1.</p></div><div><b>Wynik łączy jedno z drugim</b><p>Odpisy ECL obniżają zysk, a zysk zatrzymany zasila CET1. Przychody tworzą wskaźnik biznesowy, a ten – RWA operacyjne. Aktywa nie są kapitałem, ale wyznaczają RWA.</p></div></div>
 </main>
 <footer class="foot">
@@ -100,23 +113,99 @@ svg.mke path{fill:none;stroke-width:1.4;opacity:.75}svg.mke path.a{stroke:#a8694
   </div>
 </footer>
 <script>
-(()=>{const E=[["a-ecl","w-ecl","c"],["w-zz","p-kw-z","a"],["w-oci","p-kw-o","a"],["p-kw","k-kw","a"],["p-at1","k-at1","a"],["p-t2","k-t2","a"],["k-cet1","c-cet1","a"],["k-t1","c-t1","a"],["k-fw","c-tot","a"],["k-fw","c-nad","a"],
- ["a-kr","r-kr","b"],["a-hd","r-cc","b"],["a-hd","r-ry","b"],["w-bi","r-op","b"],["r-sum","c-wym","b"],["c-wym","c-nad","b"],["r-sum","c-tot","b"]];
-const LG=[["p-em","p-at1"],["p-em","p-t2"],["p-kw-z","p-kw"],["p-kw-o","p-kw"],["p-kw-a","p-kw"],["p-kw-g","p-kw"],["p-kw-r","p-kw"],["w-ecl","w-zn"],["w-zn","w-dyw"],["w-dyw","w-zz"],["k-kw","k-odl"],["k-odl","k-cet1"],["k-cet1","k-t1"],["k-at1","k-t1"],["k-t1","k-fw"],["k-t2","k-fw"],["r-kr","r-sum"],["r-cc","r-sum"],["r-ry","r-sum"],["r-op","r-sum"],["r-sum","c-cet1"],["r-sum","c-t1"],["k-fw","c-icaap"]];
-const W=document.getElementById("mkw"),S=document.getElementById("mke");
-const draw=()=>{const wb=W.getBoundingClientRect();S.setAttribute("viewBox",`0 0 ${wb.width} ${wb.height}`);let h="";E.forEach(([f,t,c])=>{const a=document.getElementById(f),b=document.getElementById(t);if(!a||!b)return;const A=a.getBoundingClientRect(),Bb=b.getBoundingClientRect();let d;
-  if(Math.abs(A.left-Bb.left)<20){const x=A.right-wb.left,y1=A.top+A.height/2-wb.top,y2=Bb.top+Bb.height/2-wb.top;d=`M${x},${y1} C${x+26},${y1} ${x+26},${y2} ${x},${y2}`}
-  else if(Bb.left>A.left){const x1=A.right-wb.left,y1=A.top+A.height/2-wb.top,x2=Bb.left-wb.left,y2=Bb.top+Bb.height/2-wb.top,m=(x2-x1)/2;d=`M${x1},${y1} C${x1+m},${y1} ${x2-m},${y2} ${x2},${y2}`}
-  else{const x1=A.left-wb.left,y1=A.top+A.height/2-wb.top,x2=Bb.right-wb.left,y2=Bb.top+Bb.height/2-wb.top,m=(x1-x2)/2;d=`M${x1},${y1} C${x1-m},${y1} ${x2+m},${y2} ${x2},${y2}`}
-  h+=`<path class="${c}" data-f="${f}" data-t="${t}" d="${d}" marker-end="url(#m${c})"/>`});
- S.innerHTML=`<defs>${["a","b","c"].map(k=>`<marker id="m${k}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="${({a:"#a8694c",b:"#4f7390",c:"#8a8173"})[k]}"/></marker>`).join("")}</defs>`+h};
-const al=()=>{[["p-kw","k-kw"],["p-em","k-at1","p-at1"],["a-hd","r-cc"],["w-bi","r-op"]].forEach(([a,b,r])=>{const A=document.getElementById(a),B=document.getElementById(b),R=document.getElementById(r||a);A.style.marginTop="";const d=(B.getBoundingClientRect().top+B.offsetHeight/2)-(R.getBoundingClientRect().top+R.offsetHeight/2);if(d>0)A.style.marginTop=d+"px"});draw()};
-draw();al();addEventListener("resize",al);setTimeout(al,500);document.fonts&&document.fonts.ready.then(draw);setTimeout(draw,400);
-const path=id=>{const on=new Set([id]),P=new Set();let ch=true;while(ch){ch=false;E.forEach(([f,t],i)=>{if((on.has(f)||on.has(t))&&!P.has(i)){if(on.has(f)&&!on.has(t)&&[...on].some(x=>x===id||E.some(e=>e[1]===f&&on.has(e[0]))||f===id)){}}})}
-  // proste: przodkowie i potomkowie
-  const up=new Set([id]),dn=new Set([id]);let c=true;while(c){c=false;E.concat(LG).forEach(([f,t])=>{if(dn.has(f)&&!dn.has(t)){dn.add(t);c=true}if(up.has(t)&&!up.has(f)){up.add(f);c=true}})}return new Set([...up,...dn])};
-W.addEventListener("mouseover",e=>{const m=e.target.closest(".mk");if(!m){return}const N=path(m.id);W.classList.add("hv");W.querySelectorAll(".mk").forEach(x=>x.classList.toggle("on",N.has(x.id)));S.querySelectorAll("path[data-f]").forEach(p=>p.classList.toggle("on",N.has(p.dataset.f)&&N.has(p.dataset.t)))});
-W.addEventListener("mouseleave",()=>W.classList.remove("hv"));W.addEventListener("mouseover",e=>{if(!e.target.closest(".mk"))W.classList.remove("hv")});
+(()=>{
+const R=(a)=>`<ul class="dr">${a.map(([l,v,c,sm,id])=>`<li${id?` id="${id}"`:""}${c?` class="${c}"`:""}><span><b>${l}</b>${sm?`<small>${sm}</small>`:""}</span><strong>${v||""}</strong></li>`).join("")}</ul>`;
+const P=t=>`<p>${t}</p>`;
+/* [id, nazwa, opis, kwota, typ (f/r/x/""), min-wys, opcje, szczegóły] */
+const A=[
+ ["a_kasa","Kasa i bank centralny","bufor płynności","2,30","r",40,"",R([["ekspozycja wobec banku centralnego","2,30"],["× waga ryzyka 0%","RWA 0,0","r"]])+P("Jest w RWA kredytowym, ale z wagą zero – nie zużywa kapitału.")],
+ ["a_banki","Należności od banków","","6,00","r",40,"",R([["lokaty i rachunki w innych bankach","6,00","r","waga SA 20–50% – zależnie od ratingu banku"]])+P("Trafia do RWA kredytowego.")],
+ ["a_handl","Aktywa handlowe","pochodne, papiery – wycena rynkowa","1,90","r",48,"",R([["pochodne o dodatniej wycenie","1,10","r","→ ryzyko kontrahenta i CVA","a_handl_d"],["papiery do obrotu","0,80","r","→ ryzyko rynkowe (FRTB)","a_handl_p"]])+P("Pochodne o ujemnej wycenie (pasywa) też liczą się w ekspozycji kontrahenta – po nettingu.")],
+ ["a_papiery","Papiery inwestycyjne","obligacje: AC lub OCI","8,40","r",48,"",R([["obligacje skarbowe","5,20","r","waga 0%"],["obligacje banków i firm","3,20","r","waga wg ratingu"]])+P("Do RWA kredytowego. Zmiana wyceny papierów w OCI trafia wprost do kapitału własnego.")],
+ ["a_kredyty","Kredyty dla klientów","hipoteczne, konsumpcyjne, firmowe – wartość brutto","52,00","r",128,"",R([["wartość brutto","52,00"],["odpisy ECL (−)","−3,80","off"],["= ekspozycja netto","48,20","s r"]])+P("Ekspozycja × waga (metoda standardowa) albo formuła IRB → RWA kredytowe.")],
+ ["a_ecl","Odpisy na oczekiwane straty (−)","ECL, MSSF 9 – koszyki 1, 2, 3","−3,80","x",52,"",R([["stan odpisów – koszyki 1, 2, 3","−3,80"],["zmiana w roku → koszt ryzyka","−0,38","x"]])+P("Odpisy nie są kapitałem, ale ich zmiana obniża zysk, a więc kapitał. Przy IRB niedobór rezerw wobec straty oczekiwanej odejmuje się od CET1.")],
+ ["z_pozab","Pozabilans: limity i gwarancje","ekspozycja przez współczynnik CCF","8,00","r",40,"",R([["limity i gwarancje – nominał","16,00"],["× CCF – ile klient wykorzysta","50%"],["= ekspozycja","8,00","s r"]])+P("Nie ma go w bilansie, ale jest w RWA kredytowym.")]];
+const PS=[
+ ["p_banki","Zobowiązania wobec banków","","4,00","",40],
+ ["p_depozyty","Depozyty klientów","bieżące, oszczędnościowe, terminowe","48,80","",150],
+ ["p_handl","Zobowiązania handlowe","pochodne o ujemnej wycenie","1,30","",40],
+ ["p_emisje","Emisje i dług podporządkowany","obligacje, listy zastawne","4,68","f",48,"",R([["obligacje i listy zastawne","3,40","off","zwykły dług – trzeba spłacić"],["obligacje wieczyste AT1","0,38","f","bez terminu wykupu, odpis lub konwersja","p_at1"],["dług podporządkowany","0,90","f","zapadalność ≥ 5 lat, spłacany po depozytach","p_t2"]])+P("Do funduszy własnych wchodzi tylko dług, który może pokryć straty.")],
+ ["p_rezerwy","Rezerwy","ECL od pozabilansu, sprawy sądowe","0,62","",52],
+ ["p_kapital","Kapitał własny","zyski zatrzymane, OCI","7,40","f",56,"dark",R([["kapitał zakładowy","1,50","f","akcje · wkład akcjonariuszy","p_kw_a"],["kapitał zapasowy z emisji","1,20","f","nadwyżka ceny akcji ponad nominał (agio)","p_kw_g"],["zyski zatrzymane z lat ubiegłych","4,25","f","kapitał zapasowy i rezerwowy","p_kw_r"],["skumulowane OCI","−0,05","f","wycena papierów przez kapitał","p_kw_o"],["zysk bieżący zatrzymany","0,50","f hl","zysk netto po dywidendzie","p_kw_z"]])+P("Wkład akcjonariuszy i zyski zostawione w banku. Cały wchodzi do CET1 – po odliczeniach.")]];
+const W=[
+ ["r_przych","Przychody odsetkowe","od kredytów i papierów","4,00","r",40,"",P("Razem z kosztami odsetkowymi tworzą składnik odsetkowy wskaźnika biznesowego (BI), z którego liczy się RWA operacyjne.")],
+ ["r_koszt","Koszty odsetkowe (−)","od depozytów i emisji","−1,50","r",40,"",P("W BI liczy się wynik odsetkowy – różnica przychodów i kosztów.")],
+ ["r_nii","= Wynik odsetkowy","","2,50","",34,"sum"],
+ ["r_handl","Wynik na instrumentach","handlowy, wycena","0,30","r",48,"",P("Składnik finansowy BI – razem z prowizjami, tu pominiętymi.")],
+ ["r_koszty","Koszty działania (−)","w tym straty operacyjne","−1,20","",48],
+ ["r_ecl","Odpisy ECL – koszt ryzyka (−)","zmiana stanu odpisów","−0,38","f",56,"",R([["zmiana stanu odpisów w roku","−0,38","x","stan w aktywach: −3,80"]])+P("Obniża zysk netto, a więc zysk zatrzymany i CET1.")],
+ ["r_prawne","Koszty ryzyka prawnego (−)","np. kredyty CHF","−0,05","",40],
+ ["r_netto","= Zysk netto","","0,95","f",34,"sum",R([["zysk brutto","1,17"],["podatek (−)","−0,22","off"],["= zysk netto","0,95","s"],["dywidenda (−)","−0,45","off","wypłata dla akcjonariuszy"],["= zysk zatrzymany","0,50","s f hl","zwiększa kapitał własny","r_zz"]])],
+ ["r_oci","Inne całkowite dochody (OCI)","wycena papierów, zabezpieczenia","−0,05","f",40,"",P("Omija zysk – trafia wprost do kapitału własnego jako skumulowane OCI.")]];
+const K={
+ k_cet1:["CET1 – kapitał podstawowy","kapitał własny − odliczenia","6,32","f",40,"dark",R([["kapitał własny","7,40","f"],["odliczenia (−)","−1,08","off","wartości niematerialne, aktywa podatkowe, niedobór rezerw IRB"],["= CET1","6,32","s f"]])+P("Najwyższa jakość – pokrywa straty od razu i bez terminu.")],
+ k_at1:["AT1","dodatkowy Tier 1","0,38","f",40,"",P("Obligacje wieczyste – odpis lub konwersja na akcje, gdy CET1 spadnie poniżej progu.")],
+ k_t2:["Tier 2","dług podporządkowany","0,90","f",40,"",P("Pokrywa straty dopiero przy upadłości – najniższa jakość.")],
+ k_rwa_k:["Kredytowe","SA lub IRB","31,0","r",40,"",R([["kredyty dla klientów","24,1","r"],["banki i papiery","3,4","r"],["pozabilans","3,5","r"],["× 8% = wymóg","2,48","s"]])],
+ k_rwa_cva:["CVA","kontrahent, wycena","1,0","r",40,"",R([["SA-CCR i SA-CVA","1,0","r","pochodne"],["× 8% = wymóg","0,08","s"]])],
+ k_rwa_r:["Rynkowe","SA lub VaR / ES","2,0","r",40,"",R([["portfel handlowy · FRTB","2,0","r"],["× 8% = wymóg","0,16","s"]])],
+ k_rwa_o:["Operacyjne","BIC, dawniej AMA","6,0","r",40,"",R([["wskaźnik biznesowy BI","4,00","","średnia z 3 lat"],["× 12% × 12,5","6,0","r"],["× 8% = wymóg","0,48","s"]])],
+ k_p2:["Filar 2","P2R / ICAAP","1,5%","r",40,"",R([["P2R – narzut nadzorcy","0,60","r","1,5% RWA"],["ICAAP – kapitał wewnętrzny","4,65","","własna ocena ryzyk"]])],
+ k_buf:["Bufory","CCyB, systemowe, P2G","4,0%","r",40,"",R([["konserwacyjny","2,5%"],["systemowy O-SII","1,0%"],["antycykliczny CCyB","0,5%"],["= 4,0% RWA, w CET1","1,60","s r"]])]};
+const blk=(b,kc)=>{const [id,n,s,v,t,h,o,d]=kc?[b,...K[b]]:b;const inv=!!t&&!!d;
+ return`<div class="bl${inv?" inv":""}${/dark/.test(o||"")?" dark":""}${/sum/.test(o||"")?" sum":""}" id="${id}"${inv?' tabindex="0" role="button" aria-expanded="false"':""} style="min-height:${h}px"><div class="hd"><b>${n}</b><em class="v">${t?`<i class="${t}"></i>`:""}${v}${inv?'<span class="cv">▼</span>':""}</em></div>${s?`<small>${s}</small>`:""}${inv?`<div class="dt"><div>${d}</div></div>`:""}</div>`};
+const col=(c,k,t,body)=>`<div class="col ${c}"><h3>${k}<b>${t}</b></h3><div class="cb">${body}</div></div>`;
+const kcol=`<div class="kp kav"><div class="kph"><b>Kapitał dostępny</b><small>fundusze własne</small></div>${blk("k_cet1",1)}<div class="kg">${blk("k_at1",1)}${blk("k_t2",1)}</div><div class="ks" id="k_t1"><span>= Tier 1 <small>CET1 + AT1</small></span><span>6,70</span></div><div class="ks" id="k_fw"><span>= Fundusze własne <small>Tier 1 + Tier 2</small></span><span>7,60</span></div></div>
+<div class="kvs"><span>musi pokryć</span></div>
+<div class="kp krq"><div class="kph"><b>Kapitał wymagany</b><small>Filar 1: RWA × 8%</small></div><div class="kg">${blk("k_rwa_k",1)}${blk("k_rwa_cva",1)}</div><div class="kg">${blk("k_rwa_r",1)}${blk("k_rwa_o",1)}</div><div class="ks" id="k_rwa"><span>= RWA <small>× 8% = 3,20</small></span><span>40,0</span></div><div class="grh">Ponad Filar 1</div><div class="kg">${blk("k_p2",1)}${blk("k_buf",1)}</div><div class="ks" id="k_wym"><span>= Wymóg łączny <small>13,5% RWA</small></span><span>5,40</span></div></div>
+<div class="kft">fundusze własne ÷ RWA → współczynniki ↓</div>`;
+const q=(id,n,v,s,ma,mu,cls)=>`<div class="q${cls?" "+cls:""}" id="${id}"><div class="hd"><b>${n}</b><strong>${v}</strong></div><small>${s}</small>${ma!=null?`<div class="qb"><i style="width:${ma}%"></i><u style="left:${mu}%"></u></div>`:""}</div>`;
+const cmp=`<div class="cmp"><div class="cmp-h"><span>Porównanie</span><b>Ma ≥ musi</b><small>fundusze własne ÷ RWA, porównane z wymogami. Kreska na pasku to wymóg.</small></div><div class="cmp-g">`+
+ q("q_cet1","CET1 ÷ RWA","15,8%","6,32 ÷ 40,0 · wymóg 9,3%",63.2,37.2)+q("q_t1","Tier 1 ÷ RWA","16,8%","6,70 ÷ 40,0 · wymóg 11,1%",67.2,44.4)+q("q_tot","Fundusze ÷ RWA","19,0%","7,60 ÷ 40,0 · wymóg 13,5%",76,54)+
+ q("q_icaap","ICAAP","163%","fundusze 7,60 ≥ kapitał wewnętrzny 4,65",76,46.5)+q("q_wym","Wymóg łączny","5,40","RWA 40,0 × 13,5% (8% + P2R 1,5% + bufory 4%)",null,null,"w")+q("q_nad","Nadwyżka","2,20","fundusze 7,60 − wymóg 5,40",null,null,"n")+`</div></div>`;
+const bank=document.getElementById("bank");
+bank.innerHTML=col("c1","Bilans","Aktywa",A.map(b=>blk(b)).join("")+`<div class="cs"><span>Suma aktywów</span><b>66,80</b></div><p class="cn">Pozabilans nie wchodzi do sumy.</p>`)+
+ col("c2","Bilans","Pasywa",PS.map(b=>blk(b)).join("")+`<div class="cs"><span>Suma pasywów</span><b>66,80</b></div><p class="cn">Jasne pozycje to cudze pieniądze – bank musi je oddać, więc nie pokryją strat.</p>`)+
+ col("c3","Rachunek zysków i strat","Wynik",W.map(b=>blk(b)).join(""))+col("c4","Kapitał i wymogi (CRR)","Kapitał",kcol)+cmp;
+/* krawędzie rysowane: [od, do, typ] */
+const E=[["r_zz","p_kw_z","f"],["r_oci","p_kw_o","f"],["p_kapital","k_cet1","f"],["p_at1","k_at1","f"],["p_t2","k_t2","f"],
+ ["a_ecl","r_ecl","x"],["a_papiery","r_oci","x"],["a_ecl","k_cet1","x"],
+ ["a_kasa","k_rwa_k","r"],["a_banki","k_rwa_k","r"],["a_papiery","k_rwa_k","r"],["a_kredyty","k_rwa_k","r"],["z_pozab","k_rwa_k","r"],["a_handl_d","k_rwa_cva","r"],["a_handl_p","k_rwa_r","r"],
+ ["r_przych","k_rwa_o","r"],["r_koszt","k_rwa_o","r"],["r_handl","k_rwa_o","r"],
+ ["k_fw","q_tot","f"],["k_fw","q_icaap","f"],["k_wym","q_wym","r"]];
+/* powiązania logiczne (tylko podświetlenie) */
+const LG=[["p_kw_a","p_kapital"],["p_kw_g","p_kapital"],["p_kw_r","p_kapital"],["p_kw_o","p_kapital"],["p_kw_z","p_kapital"],["p_emisje","p_at1"],["p_emisje","p_t2"],["a_handl","a_handl_d"],["a_handl","a_handl_p"],["r_netto","r_zz"],
+ ["r_przych","r_nii"],["r_koszt","r_nii"],["r_nii","r_netto"],["r_handl","r_netto"],["r_koszty","r_netto"],["r_ecl","r_netto"],["r_prawne","r_netto"],
+ ["k_cet1","k_t1"],["k_at1","k_t1"],["k_t1","k_fw"],["k_t2","k_fw"],["k_rwa_k","k_rwa"],["k_rwa_cva","k_rwa"],["k_rwa_r","k_rwa"],["k_rwa_o","k_rwa"],["k_rwa","k_wym"],["k_p2","k_wym"],["k_buf","k_wym"],
+ ["k_cet1","q_cet1"],["k_t1","q_t1"],["k_rwa","q_cet1"],["k_rwa","q_t1"],["k_rwa","q_tot"],["k_p2","q_icaap"],["q_wym","q_nad"],["k_fw","q_nad"]];
+const G=E.map(e=>[e[0],e[1]]).concat(LG);
+const wrap=document.getElementById("bankw"),svg=document.getElementById("fl"),bAll=document.getElementById("b-all"),bExp=document.getElementById("b-exp");
+const vis=id=>{const e=document.getElementById(id);if(!e)return null;if(e.matches(".dr li")){const b=e.closest(".bl");return b.classList.contains("open")?e:b}return e};
+let cur=null,all=false;
+const draw=()=>{const wb=wrap.getBoundingClientRect();svg.setAttribute("viewBox",`0 0 ${wb.width} ${wb.height}`);const N=cur?path(cur):null;let h="";
+ E.forEach(([f,t,c])=>{if(N&&!(N.has(f)&&N.has(t)))return;if(!N&&!all)return;const a=vis(f),b=vis(t);if(!a||!b)return;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();let d;
+  const ay=A.top+A.height/2-wb.top,by=B.top+B.height/2-wb.top;
+  if(b.classList.contains("q")){const x1=A.right-wb.left,xg=wb.width+14,tx=B.left+B.width/2-wb.left,ty=B.top-wb.top,yh=ty-9,r=8;d=`M${x1},${ay} H${xg-r} Q${xg},${ay} ${xg},${ay+r} V${yh-r} Q${xg},${yh} ${xg-r},${yh} H${tx+r} Q${tx},${yh} ${tx},${yh+r} V${ty}`}
+  else if(B.left>A.right-4){const x1=A.right-wb.left,x2=B.left-wb.left,m=Math.max(24,(x2-x1)/2);d=`M${x1},${ay} C${x1+m},${ay} ${x2-m},${by} ${x2},${by}`}
+  else if(B.right<A.left+4){const x1=A.left-wb.left,x2=B.right-wb.left,m=Math.max(24,(x1-x2)/2);d=`M${x1},${ay} C${x1-m},${ay} ${x2+m},${by} ${x2},${by}`}
+  else{const x1=A.left+A.width/2-wb.left,y1=A.bottom-wb.top,x2=B.left+B.width/2-wb.left,y2=B.top-wb.top,m=Math.max(30,(y2-y1)/2);d=`M${x1},${y1} C${x1},${y1+m} ${x2},${y2-m} ${x2},${y2}`}
+  h+=`<path class="${c}" d="${d}" marker-end="url(#m${c})"/>`});
+ svg.classList.toggle("all",!N&&all);
+ svg.innerHTML=`<defs>${[["f","#a8694c"],["r","#4f7390"],["x","#8a8173"]].map(([k,c])=>`<marker id="m${k}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="${c}"/></marker>`).join("")}</defs>`+h};
+const path=id=>{const up=new Set([id]),dn=new Set([id]);let c=true;while(c){c=false;G.forEach(([f,t])=>{if(dn.has(f)&&!dn.has(t)){dn.add(t);c=true}if(up.has(t)&&!up.has(f)){up.add(f);c=true}})}
+ const el=document.getElementById(id);if(el)el.querySelectorAll("[id]").forEach(x=>{if(!up.has(x.id)){/* wiersze bloku */}});return new Set([...up,...dn])};
+const hl=()=>{const N=cur?path(cur):null;bank.classList.toggle("hv",!!N);
+ bank.querySelectorAll(".bl,.ks,.q").forEach(x=>{const on=N&&(N.has(x.id)||[...x.querySelectorAll(".dr li[id]")].some(l=>N.has(l.id)));x.classList.toggle("on",!!on);x.classList.toggle("cur",x.id===cur)});draw()};
+bank.addEventListener("mouseover",e=>{const m=e.target.closest(".bl,.ks,.q");const id=m?m.id:null;if(id!==cur){cur=id;hl()}});
+bank.addEventListener("mouseleave",()=>{cur=null;hl()});
+const redraw=()=>{let n=0;const t=setInterval(()=>{draw();if(++n>12)clearInterval(t)},30)};
+const tog=(b,o)=>{b.classList.toggle("open",o);b.setAttribute("aria-expanded",b.classList.contains("open"))};
+bank.addEventListener("click",e=>{const b=e.target.closest(".bl.inv");if(!b)return;tog(b);redraw();syncExp()});
+bank.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches(".bl.inv")){e.preventDefault();tog(e.target);redraw();syncExp()}});
+const syncExp=()=>{const L=[...bank.querySelectorAll(".bl.inv")],o=L.every(b=>b.classList.contains("open"));bExp.textContent=o?"Zwiń wszystko":"Rozwiń wszystko";bExp.classList.toggle("on",o)};
+bExp.addEventListener("click",()=>{const L=[...bank.querySelectorAll(".bl.inv")],o=!L.every(b=>b.classList.contains("open"));L.forEach(b=>tog(b,o));redraw();syncExp()});
+bAll.addEventListener("click",()=>{all=!all;bAll.classList.toggle("on",all);draw()});
+addEventListener("resize",draw);document.fonts&&document.fonts.ready.then(draw);setTimeout(draw,300);
 })();
 </script>
 <script src="../../rt.js"></script>
