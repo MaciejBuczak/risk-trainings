@@ -183,7 +183,7 @@ const G=E.map(e=>[e[0],e[1]]).concat(LG);
 const wrap=document.getElementById("bankw"),svg=document.getElementById("fl"),bAll=document.getElementById("b-all"),bExp=document.getElementById("b-exp");
 const vis=id=>{const e=document.getElementById(id);if(!e)return null;if(e.matches(".dr li")){const b=e.closest(".bl");return b.classList.contains("open")?e:b}return e};
 let cur=null,all=false,cap=false,was=[];
-const CAP=new Set(["a_ecl","r_ecl","r_netto","r_zz","r_oci","p_emisje","p_at1","p_t2","p_kapital","p_kw_a","p_kw_g","p_kw_r","p_kw_o","p_kw_z","k_cet1","k_at1","k_t2","k_t1","k_fw","k_rwa","k_wym","q_cet1","q_t1","q_tot","q_icaap","q_wym","q_nad"]);
+const CAP=new Set(["a_ecl","a_papiery","r_ecl","r_netto","r_zz","r_oci","p_emisje","p_at1","p_t2","p_kapital","p_kw_a","p_kw_g","p_kw_r","p_kw_o","p_kw_z","k_cet1","k_at1","k_t2","k_t1","k_fw","k_rwa","k_wym","q_cet1","q_t1","q_tot","q_icaap","q_wym","q_nad"]);
 const draw=()=>{const wb=wrap.getBoundingClientRect();svg.setAttribute("viewBox",`0 0 ${wb.width} ${wb.height}`);const N=cur?path(cur):null;let h="";
  E.forEach(([f,t,c])=>{if(N&&!(N.has(f)&&N.has(t)))return;if(!N&&!all&&!(cap&&CAP.has(f)&&CAP.has(t)))return;const a=vis(f),b=vis(t);if(!a||!b)return;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();let d;
   const ay=A.top+A.height/2-wb.top,by=B.top+B.height/2-wb.top;
