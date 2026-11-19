@@ -36,7 +36,7 @@
 .bl.inv .v{color:var(--ink)}
 .bl .v i{width:7px;height:7px;border-radius:2px;flex:none}.bl .v i.f{background:#bf8165}.bl .v i.r{background:#4f7390}.bl .v i.x{background:#8a8173}
 .bl .cv{font-size:9px;color:var(--muted);transition:transform .25s;display:inline-block}.bl.open .cv{transform:rotate(180deg)}
-.bl.inv{background:#f3ebdf;border-color:rgba(13,13,13,.16);cursor:pointer}
+.bl.inv{background:#f3ebdf;border-color:rgba(13,13,13,.16);cursor:pointer}.bl.inv.nv{background:#fffdf9}
 .bl.inv:hover,.bl.inv:focus-visible{border-color:#a99d8b}
 .bl.dark,.bl.dark.inv{background:var(--ink);border-color:var(--ink);color:var(--paper)}.bl.dark small{color:#b9b0a2}.bl.dark .v{color:#fff}.bl.dark .cv{color:#b9b0a2}
 .bl.sum{background:transparent;border-color:transparent;border-top:1.5px solid rgba(13,13,13,.55);border-radius:0}
@@ -449,7 +449,7 @@ const A=[
  ["z_pozab","Pozabilans: limity i gwarancje","ekspozycja przez współczynnik CCF","3,60","r",40,"",R([["limity detaliczne odwoływalne","1,00","r","10,00 × CCF 10%"],["niewykorzystane limity firmowe","1,60","r","4,00 × CCF 40%"],["gwarancje dobrego wykonania","1,00","r","2,00 × CCF 50%"],["= ekspozycja z nominału 16,00","3,60","s r"]])+P("Nie ma go w bilansie, ale jest w RWA kredytowym. CCF mówi, jaką część limitu klient wykorzysta przed defaultem.")]];
 const PS=[
  ["p_banki","Zobowiązania wobec banków","","4,00","",40],
- ["p_depozyty","Depozyty klientów","bieżące, oszczędnościowe, terminowe","48,80","",150],
+ ["p_depozyty","Depozyty klientów","bieżące, oszczędnościowe, terminowe","48,80","",150,"inv",R([["rachunki bieżące","22,00","","ROR i rachunki firm – pieniądz na co dzień"],["konta oszczędnościowe","15,80","","wypłata w każdej chwili"],["lokaty terminowe","11,00","","na określony czas, wyżej oprocentowane"],["= depozyty klientów","48,80","s"]])+P("Trzy produkty depozytowe – te same co w ramce Produkty. Depozyt to dług banku: nie daje RWA i nie jest kapitałem, ale wyznacza płynność (LCR, NSFR) i ryzyko stopy procentowej.")],
  ["p_handl","Zobowiązania handlowe","pochodne o ujemnej wycenie","1,30","",40],
  ["p_emisje","Emisje i dług podporządkowany","obligacje, listy zastawne","4,68","f",48,"",R([["obligacje i listy zastawne","3,40","off","zwykły dług – trzeba spłacić"],["obligacje wieczyste AT1","0,38","f","bez terminu wykupu, odpis lub konwersja","p_at1"],["dług podporządkowany","0,90","f","zapadalność ≥ 5 lat, spłacany po depozytach","p_t2"]])+P("Do funduszy własnych wchodzi tylko dług, który może pokryć straty.")+`<div class="fl-row"><button type="button" class="fl-t fl-go go-sat" data-t="at1p">Obligacje wieczyste ↓</button><button type="button" class="fl-t fl-go go-sat" data-t="t2p">Dług podporządkowany ↓</button></div>`],
  ["p_rezerwy","Rezerwy","ECL od pozabilansu, sprawy sądowe","0,62","",52],
@@ -485,8 +485,8 @@ const K={
  k_p2:["Filar 2 – P2R","wiążący narzut"+`<span class="kw">wymóg <b>${Z.p2r}</b></span>`,'<small class="vl">RWA ×</small>1,5%',"r",40,"",R([["P2R – narzut nadzorcy",Z.p2r,"r","1,5% RWA"],["ICAAP – kapitał wewnętrzny","4,65","","własna ocena ryzyk"]])+`<button type="button" class="fl-t fl-go go-sat" data-t="p2r">P2R – skąd się bierze ↓</button>`],
  k_p2g:["Filar 2 – P2G","zalecenie, nie wymóg"+`<span class="kw">kwota <b>${Z.p2g}</b></span>`,'<small class="vl">RWA ×</small>1,0%',"r",40,"",R([["zalecenie nadzorcy","1,0% RWA","r","zwykle z testów warunków skrajnych · tylko CET1"],["kwota",Z.p2g,"s r"]])+P("Liczy się ponad OCR. Poniżej P2G nadzorca oczekuje planu kapitałowego, ale nie ma automatycznych ograniczeń wypłat (MDA) – te działają dopiero poniżej OCR.")],
  k_buf:["Bufory (CBR)","konserwacyjny, systemowy, CCyB"+`<span class="kw">wymóg <b>${Z.buf}</b></span>`,'<small class="vl">RWA ×</small>4,0%',"r",40,"",R([["konserwacyjny","2,5%"],["systemowy O-SII","1,0%"],["antycykliczny CCyB","0,5%"],["= 4,0% RWA, w CET1",Z.buf,"s r"]])]};
-const blk=(b,kc)=>{const [id,n,s,v,t,h,o,d,bk]=kc?[b,...K[b]]:b;const inv=!!t&&!!d;
- return`<div class="bl${inv?" inv":""}${/dark/.test(o||"")?" dark":""}${/sum/.test(o||"")?" sum":""}" id="${id}"${inv?' tabindex="0" role="button" aria-expanded="false"':""} style="min-height:${h}px"><div class="hd"><b>${n}</b><em class="v">${t?`<i class="${t}"></i>`:""}${v}${inv?'<span class="cv">▼</span>':""}</em></div>${s?`<small>${s}</small>`:""}${inv?`<div class="dt"><div>${d}</div></div>`:""}${bk||""}</div>`};
+const blk=(b,kc)=>{const [id,n,s,v,t,h,o,d,bk]=kc?[b,...K[b]]:b;const inv=(!!t||/inv/.test(o||""))&&!!d;
+ return`<div class="bl${inv?" inv":""}${inv&&!t?" nv":""}${/dark/.test(o||"")?" dark":""}${/sum/.test(o||"")?" sum":""}" id="${id}"${inv?' tabindex="0" role="button" aria-expanded="false"':""} style="min-height:${h}px"><div class="hd"><b>${n}</b><em class="v">${t?`<i class="${t}"></i>`:""}${v}${inv?'<span class="cv">▼</span>':""}</em></div>${s?`<small>${s}</small>`:""}${inv?`<div class="dt"><div>${d}</div></div>`:""}${bk||""}</div>`};
 const col=(c,k,t,body)=>`<div class="col ${c}"><h3>${k}<b>${t}</b></h3><div class="cb">${body}</div></div>`;
 const kcol=`<div class="kp kav"><div class="kph"><b>Kapitał dostępny</b><small>fundusze własne</small></div><div class="kt"><div class="kt-h"><b>Tier 1</b><small>kapitał na czas działania</small></div>${blk("k_cet1",1)}${blk("k_at1",1)}<div class="ks" id="k_t1"><span>= Tier 1 <small>CET1 + AT1</small></span><span>${Z.t1}</span></div></div><div class="kt kt2"><div class="kt-h"><b>Tier 2</b><small>kapitał na wypadek upadłości</small></div>${blk("k_t2",1)}</div><div class="ks kfw" id="k_fw"><span>= Fundusze własne <small>Tier 1 + Tier 2</small></span><span>${Z.fw}</span></div></div>
 <div class="kvs"><span>musi pokryć</span></div>
