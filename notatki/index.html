@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Notatki robocze – Risk Trainings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap">
+<link rel="stylesheet" href="../rt.css">
+<style>
+[hidden]{display:none!important}
+.nb{padding:30px 0 60px}
+.nb h1{font-size:clamp(30px,4vw,46px);margin:6px 0 6px;letter-spacing:-.02em}
+.nb h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-d)}
+.nb .lead{color:var(--muted);font-size:14px;margin:0 0 22px}
+.ng{display:grid;grid-template-columns:380px minmax(0,1fr);gap:26px;align-items:start}
+.nf{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 20px;position:sticky;top:96px}
+.nf h2{font-size:16px;margin:0 0 12px}
+.nf label{display:block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-d);margin:12px 0 6px}
+.nf input,.nf textarea{width:100%;box-sizing:border-box;font:inherit;font-size:14px;border:1px solid var(--line);border-radius:12px;padding:9px 12px;background:#fff;color:var(--ink)}
+.nf textarea{min-height:150px;resize:vertical;line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font:inherit;font-size:13px;font-weight:500;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;cursor:pointer;color:var(--ink2)}
+.tag.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tag.own{border-style:dashed}
+.addtag{display:flex;gap:6px;margin-top:8px}
+.addtag input{flex:1;padding:6px 10px;font-size:13px}
+.btn{font:inherit;font-size:13px;font-weight:600;border:0;border-radius:999px;padding:8px 16px;cursor:pointer;background:var(--ink);color:var(--paper)}
+.btn.l{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.t{background:var(--terra-d)}
+.row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.flt{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;align-items:center}
+.flt b{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.nl{display:grid;gap:12px}
+.nt{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 18px}
+.nt.done{opacity:.55}
+.nt .hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.nt .tg{font-size:12px;font-weight:600;background:#e6d8c3;border-radius:999px;padding:3px 10px}
+.nt h3{font-size:17px;margin:0;flex:1;min-width:180px}
+.nt.done h3{text-decoration:line-through}
+.nt .dt{font-size:12px;color:var(--muted)}
+.nt p{white-space:pre-wrap;font-size:14.5px;line-height:1.6;margin:8px 0 6px;color:var(--ink2)}
+.nt .ac{display:flex;gap:6px}
+.nt .ac button{font:inherit;font-size:12px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;cursor:pointer}
+.empty{border:2px dashed var(--line);border-radius:18px;padding:30px;text-align:center;color:var(--muted)}
+.io{margin-top:22px;font-size:12.5px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.io input[type=file]{display:none}
+@media(max-width:900px){.ng{grid-template-columns:1fr}.nf{position:static}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="wrap">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav"><a href="../">Start</a><a href="../szkolenia/">Szkolenia</a><a href="../metoda/">Metoda</a><a href="../mapa-banku/">Mapa banku</a><a href="../model-ryzyka/">Model ryzyka</a><a href="../ocena-ryzyka-modelu/">Ryzyko modelu</a><a href="../bank/">Bank</a><a href="../o-mnie/">O mnie</a><a href="../eseje/">Eseje</a><a href="../okiem-praktyka/">Okiem praktyka</a><a href="../#kontakt">Kontakt</a><a class="sci" href="https://maciejbuczak.github.io/">Strona naukowa ↗</a><a class="sci" href="./" style="color:var(--ink)">Notatki</a></nav>
+    <a class="brand" href="../"><span><b>Risk Trainings</b><small>Maciej Buczak · Risk Research</small></span><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span></a>
+  </div>
+</header>
+<main class="wrap nb">
+<h1>Notatki <em>robocze</em></h1>
+<p class="lead">Co jest do zrobienia na stronie. Notatki zapisują się w tej przeglądarce – na innym urządzeniu przenieś je przez eksport i import.</p>
+<div class="ng">
+<form class="nf" id="f" autocomplete="off">
+<h2 id="fh">Nowa notatka</h2>
+<label>Tag</label>
+<div class="tags" id="tags"></div>
+<div class="addtag"><input id="nt" placeholder="własny tag…"><button type="button" class="btn l" id="addt">Dodaj tag</button></div>
+<label for="ti">Tytuł</label>
+<input id="ti" required placeholder="np. poprawić wykres na planszy 4.4">
+<label for="tx">Treść</label>
+<textarea id="tx" placeholder="szczegóły…"></textarea>
+<div class="row"><button class="btn t" type="submit" id="sv">Zapisz notatkę</button><button class="btn l" type="button" id="cn" hidden>Anuluj edycję</button></div>
+</form>
+<section>
+<div class="flt" id="flt"></div>
+<div class="nl" id="nl"></div>
+<div class="io"><button class="btn l" type="button" id="ex">Eksportuj notatki (plik)</button><label class="btn l" style="display:inline-block">Importuj z pliku<input type="file" id="im" accept=".json,application/json"></label><span id="info"></span></div>
+</section>
+</div>
+</main>
+<script src="../rt.js"></script>
+<script>
+(()=>{
+const BASE=["Start","Szkolenia","Metoda","Mapa banku","Model ryzyka","Ryzyko modelu","Bank","O mnie","Eseje","Okiem praktyka","Kontakt"];
+const K="rt-notatki-v1";
+const load=()=>{try{return JSON.parse(localStorage.getItem(K))||{notes:[],tags:[]}}catch(e){return {notes:[],tags:[]}}};
+let st=load(),sel=BASE[6],flt="",edit=null;
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(st))}catch(e){alertBox("Nie udało się zapisać w tej przeglądarce.")}};
+const $=id=>document.getElementById(id);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const allTags=()=>BASE.concat(st.tags);
+function alertBox(m){$("info").textContent=m;setTimeout(()=>{$("info").textContent=""},4000)}
+function drawTags(){
+ $("tags").innerHTML=allTags().map(t=>`<button type="button" class="tag${t===sel?" on":""}${BASE.includes(t)?"":" own"}" data-t="${esc(t)}">${esc(t)}</button>`).join("");
+ const used=[...new Set(st.notes.map(n=>n.tag))];
+ $("flt").innerHTML=`<b>Pokaż</b><button type="button" class="tag${flt===""?" on":""}" data-f="">wszystkie (${st.notes.length})</button>`+allTags().filter(t=>used.includes(t)).map(t=>`<button type="button" class="tag${t===flt?" on":""}" data-f="${esc(t)}">${esc(t)} (${st.notes.filter(n=>n.tag===t).length})</button>`).join("");
+}
+function drawList(){
+ const L=st.notes.filter(n=>!flt||n.tag===flt).sort((a,b)=>(a.done-b.done)||(b.t-a.t));
+ $("nl").innerHTML=L.length?L.map(n=>`<article class="nt${n.done?" done":""}"><div class="hd"><span class="tg">${esc(n.tag)}</span><h3>${esc(n.title)}</h3><span class="dt">${new Date(n.t).toLocaleString("pl-PL",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}</span></div>${n.body?`<p>${esc(n.body)}</p>`:""}<div class="ac"><button data-a="done" data-id="${n.id}">${n.done?"przywróć":"zrobione ✓"}</button><button data-a="edit" data-id="${n.id}">edytuj</button><button data-a="del" data-id="${n.id}">usuń</button></div></article>`).join(""):`<div class="empty">Brak notatek${flt?" z tym tagiem":""}.</div>`;
+}
+function draw(){drawTags();drawList()}
+function reset(){edit=null;$("ti").value="";$("tx").value="";$("fh").textContent="Nowa notatka";$("sv").textContent="Zapisz notatkę";$("cn").hidden=true}
+document.addEventListener("click",e=>{
+ const t=e.target.closest("[data-t]");if(t){sel=t.dataset.t;drawTags();return}
+ const fb=e.target.closest("[data-f]");if(fb){flt=fb.dataset.f;draw();return}
+ const a=e.target.closest("[data-a]");if(!a)return;const n=st.notes.find(x=>x.id===a.dataset.id);if(!n)return;
+ if(a.dataset.a==="done"){n.done=!n.done;save();draw()}
+ if(a.dataset.a==="del"){if(a.dataset.c){st.notes=st.notes.filter(x=>x!==n);save();draw()}else{a.dataset.c=1;a.textContent="na pewno usunąć?"}}
+ if(a.dataset.a==="edit"){edit=n.id;sel=n.tag;$("ti").value=n.title;$("tx").value=n.body;$("fh").textContent="Edycja notatki";$("sv").textContent="Zapisz zmiany";$("cn").hidden=false;drawTags();scrollTo({top:0,behavior:"smooth"})}
+});
+$("addt").addEventListener("click",()=>{const v=$("nt").value.trim();if(!v)return;if(!allTags().includes(v)){st.tags.push(v);save()}sel=v;$("nt").value="";drawTags()});
+$("nt").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("addt").click()}});
+$("cn").addEventListener("click",reset);
+$("f").addEventListener("submit",e=>{e.preventDefault();const title=$("ti").value.trim();if(!title)return;const body=$("tx").value.trim();
+ if(edit){const n=st.notes.find(x=>x.id===edit);if(n){n.title=title;n.body=body;n.tag=sel}}
+ else st.notes.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),tag:sel,title,body,t:Date.now(),done:false});
+ save();reset();draw()});
+$("ex").addEventListener("click",()=>{const b=new Blob([JSON.stringify(st,null,1)],{type:"application/json"});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download="notatki-risk-trainings.json";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)});
+$("im").addEventListener("change",e=>{const fl=e.target.files[0];if(!fl)return;fl.text().then(t=>{try{const d=JSON.parse(t);const ids=new Set(st.notes.map(n=>n.id));(d.notes||[]).forEach(n=>{if(!ids.has(n.id))st.notes.push(n)});(d.tags||[]).forEach(x=>{if(!allTags().includes(x))st.tags.push(x)});save();draw();alertBox("Zaimportowano.")}catch(err){alertBox("Nieprawidłowy plik.")}});e.target.value=""});
+draw();
+})();
+</script>
+</body>
+</html>

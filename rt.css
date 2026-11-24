@@ -110,4 +110,4 @@ section{padding:clamp(64px,9vw,120px) 0}
 .nav a{white-space:nowrap}
 @media(min-width:861px){.nav a{padding:8px 9px}.nav{gap:2px}.top .wrap{gap:20px}}@media(min-width:861px) and (max-width:1120px){.nav a{padding:7px 7px;font-size:13px}.nav .sci{display:none}}
 /* Strona naukowa – pod menu głównym, po lewej */
-@media(min-width:861px){.top .wrap{position:relative}.top .nav .sci{position:absolute;left:var(--sci-l,clamp(18px,4vw,40px));top:61px;margin:0;padding:0 0 0 14px;font-size:11px;line-height:1;background:none!important}.top .nav .sci:hover{color:var(--terra-d)}}
+@media(min-width:861px){.top .wrap{position:relative}.top .nav .sci{position:absolute;left:var(--sci-l,clamp(18px,4vw,40px));top:61px;margin:0;padding:0 0 0 14px;font-size:11px;line-height:1;background:none!important}.top .nav .sci:hover{color:var(--terra-d)}.top .nav .sci+.sci{left:calc(var(--sci-l,clamp(18px,4vw,40px)) + 112px)}.top .nav .sci+.sci::before{content:"·";margin-right:10px;color:var(--muted)}}
